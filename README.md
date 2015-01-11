@@ -81,5 +81,5 @@ pod install
 - iOS Target : >= iOS 6
 
 ## 4 版本历史
-- 1.0.0
+- 1.1.0
 	- 发布 CocoaPods 版本
