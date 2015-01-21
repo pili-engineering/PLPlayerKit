@@ -530,6 +530,7 @@
 					"\"QuartzCore\"",
 					"-framework",
 					"\"UIKit\"",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -573,6 +574,7 @@
 					"\"QuartzCore\"",
 					"-framework",
 					"\"UIKit\"",
+					"$(inherited)",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;

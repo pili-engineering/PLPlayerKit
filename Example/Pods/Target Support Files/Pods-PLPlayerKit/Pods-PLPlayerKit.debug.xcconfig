@@ -1,7 +1,7 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
 HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/PLPlayerKit" ${PODS_ROOT}/PLPlayerKit/PLPlayerKit/lib/include
-LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib"
+LIBRARY_SEARCH_PATHS = "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib" "$(PODS_ROOT)/../../Pod/Library/lib"
 OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/PLPlayerKit"
-OTHER_LDFLAGS = -ObjC -l"PLPlayerKit" -l"Pods-PLPlayerKit-PLPlayerKit" -l"avcodec" -l"avformat" -l"avutil" -l"iconv" -l"kxmovie" -l"swresample" -l"swscale" -l"z" -framework "Accelerate" -framework "AudioToolbox" -framework "CoreAudio" -framework "CoreGraphics" -framework "Foundation" -framework "MediaPlayer" -framework "OpenGLES" -framework "QuartzCore" -framework "UIKit"
+OTHER_LDFLAGS = -ObjC -l"PLPlayerKit" -l"Pods-PLPlayerKit-PLPlayerKit" -l"avcodec" -l"avformat" -l"avutil" -l"iconv" -l"swresample" -l"swscale" -l"z" -framework "Accelerate" -framework "AudioToolbox" -framework "CoreAudio" -framework "CoreGraphics" -framework "Foundation" -framework "MediaPlayer" -framework "OpenGLES" -framework "QuartzCore" -framework "UIKit"
 OTHER_LIBTOOLFLAGS = $(OTHER_LDFLAGS)
 PODS_ROOT = ${SRCROOT}/Pods
