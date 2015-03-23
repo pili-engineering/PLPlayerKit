@@ -81,6 +81,7 @@ pod install
 - iOS Target : >= iOS 6
 
 ## 4 版本历史
+
 - 1.1.2
 	- 拆分 Flat lib
 	- 添加了 x86_64 支持，便于在 iPhone 6 Plus 模拟器下调试使用
