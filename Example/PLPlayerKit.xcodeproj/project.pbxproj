@@ -506,10 +506,9 @@
 					"$(inherited)",
 					"\"$(PODS_ROOT)/../../Pod/Library/lib\"",
 				);
+				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-l\"Pods-PLPlayerKit-PLPlayerKit\"",
-					"-l\"PLPlayerKit\"",
 					"-l\"iconv\"",
 					"-l\"z\"",
 					"-framework",
@@ -552,8 +551,6 @@
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
-					"-l\"Pods-PLPlayerKit-PLPlayerKit\"",
-					"-l\"PLPlayerKit\"",
 					"-l\"iconv\"",
 					"-l\"z\"",
 					"-framework",

@@ -11,6 +11,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  PLPlayerKit: a369e6a89ad2412ec2b7ab1174223c75bfa5cdca
+  PLPlayerKit: 88a57e2aefee01dce304918a1b49246958d403dd
 
 COCOAPODS: 0.35.0

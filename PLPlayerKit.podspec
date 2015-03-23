@@ -32,8 +32,7 @@ Pod::Spec.new do |s|
 
   s.subspec "precompiled" do |ss|
     ss.preserve_paths         = "Pod/Library/include/**/*.h", 'Pod/Library/lib/*.a'
-    ss.vendored_libraries   = 'Pod/Library/lib/libavcodec.a', 'Pod/Library/lib/libavformat.a', 'Pod/Library/lib/libavutil.a', 'Pod/Library/lib/libswresample.a', 'Pod/Library/lib/libswscale.a', 'Pod/Library/lib/libavcodec.a'
-    ss.libraries = "PLPlayerKit"
+    ss.vendored_libraries   = 'Pod/Library/lib/arm64/libavcodec-arm64.a', 'Pod/Library/lib/arm64/libavformat-arm64.a', 'Pod/Library/lib/arm64/libavutil-arm64.a', 'Pod/Library/lib/arm64/libswresample-arm64.a', 'Pod/Library/lib/arm64/libswscale-arm64.a', 'Pod/Library/lib/arm64/libavcodec-arm64.a', 'Pod/Library/lib/arm64/libPLPlayerKit-arm64.a', 'Pod/Library/lib/armv7/libavcodec-armv7.a', 'Pod/Library/lib/armv7/libavformat-armv7.a', 'Pod/Library/lib/armv7/libavutil-armv7.a', 'Pod/Library/lib/armv7/libswresample-armv7.a', 'Pod/Library/lib/armv7/libswscale-armv7.a', 'Pod/Library/lib/armv7/libavcodec-armv7.a', 'Pod/Library/lib/armv7/libPLPlayerKit-armv7.a', 'Pod/Library/lib/i386/libavcodec-i386.a', 'Pod/Library/lib/i386/libavformat-i386.a', 'Pod/Library/lib/i386/libavutil-i386.a', 'Pod/Library/lib/i386/libswresample-i386.a', 'Pod/Library/lib/i386/libswscale-i386.a', 'Pod/Library/lib/i386/libavcodec-i386.a', 'Pod/Library/lib/i386/libPLPlayerKit-i386.a', 'Pod/Library/lib/x86_64/libavcodec-x86_64.a', 'Pod/Library/lib/x86_64/libavformat-x86_64.a', 'Pod/Library/lib/x86_64/libavutil-x86_64.a', 'Pod/Library/lib/x86_64/libswresample-x86_64.a', 'Pod/Library/lib/x86_64/libswscale-x86_64.a', 'Pod/Library/lib/x86_64/libavcodec-x86_64.a', 'Pod/Library/lib/x86_64/libPLPlayerKit-x86_64.a'
     ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
   end
 end
