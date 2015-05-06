@@ -1,6 +1,6 @@
 # PLPlayerKit
 
-PLPlayerKit 是为 **pili 流媒体云服务** 提供的一套播放直播流的 SDK, 旨在解决 iOS 端快速、轻松实现 iOS 设备播放直播流，便于 **pili 流媒体云服务** 的开发者专注于产品业务本身，而不必在技术细节上花费不必要的时间。
+PLPlayerKit 是为 **pili流媒体云服务** 提供的一套播放直播流的 SDK, 旨在解决 iOS 端快速、轻松实现 iOS 设备播放直播流，便于 **pili流媒体云服务** 的开发者专注于产品业务本身，而不必在技术细节上花费不必要的时间。
 
 
 ## 内容摘要
@@ -32,6 +32,8 @@ pod install
 
 ### 1.2 示例代码
 
+#### 1.2.1 直接可用的播放控件
+
 在需要的地方添加
 
 ```Objective-C
@@ -60,7 +62,6 @@ pod install
 ```
 
 播放操作，PLVideoPlayerViewController 会在展示时自动开始播放，当然，如果你需要自己在代码中控制播放逻辑，也可以调用以下方法轻松开始／暂停
-
 ```Objective-C
 	// 播放
 	[viewPlayerViewController play];
@@ -69,19 +70,18 @@ pod install
 	[viewPlayerViewController pause];
 ```
 
-如果你想自定义播放界面，那么你需要隐藏原有的播放控制，你可以这么做到
-
 ## 2 包含的第三方库
 
 - ffmpeg
-- kxmovie
 
 ## 3 系统要求
 
 - iOS Target : >= iOS 6
 
 ## 4 版本历史
-
+- 1.2.0 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.0.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.0.md))
+	- 极大缩小 lib 大小
+	- 增加可定制的播放控件 PLVideoPlayerController
 - 1.1.2
 	- 拆分 Flat lib
 	- 添加了 x86_64 支持，便于在 iPhone 6 Plus 模拟器下调试使用

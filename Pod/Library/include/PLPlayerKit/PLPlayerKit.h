@@ -10,5 +10,7 @@
 #define PLPlayerKit_PLPlayerKit_h
 
 #import "PLVideoPlayerViewController.h"
+#import "PLVideoPlayerController.h"
+#import "PLPlayerTypeDefines.h"
 
 #endif
