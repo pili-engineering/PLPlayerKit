@@ -32,7 +32,7 @@ pod install
 
 ### 1.2 示例代码
 
-#### 1.2.1 直接可用的播放控件
+#### 1.2.1 可定制的播放控件
 
 在需要的地方添加
 
@@ -43,11 +43,11 @@ pod install
 初始化
 
 ```Objective-C
-	// 初始化 VideoPlayerViewController
-	PLVideoPlayerViewController *viewPlayerViewController = [PLVideoPlayerViewController videoPlayerViewControllerWithContentURL:url parameters:parameters];
+	// 初始化 PLVideoPlayerController
+	PLVideoPlayerController *playerController = [PLVideoPlayerController videoPlayerControllerWithContentURL:url parameters:parameters];
 	
-	// 展示播放界面
-	[self presentViewController:viewPlayerViewController animated:YES completion:nil];
+	// 获取到播放界面
+	UIView *playerView = playerController.playerView;
 ```
 
 参数配置
@@ -61,13 +61,13 @@ pod install
 	}
 ```
 
-播放操作，PLVideoPlayerViewController 会在展示时自动开始播放，当然，如果你需要自己在代码中控制播放逻辑，也可以调用以下方法轻松开始／暂停
+开始／暂停操作
 ```Objective-C
 	// 播放
-	[viewPlayerViewController play];
+	[playerController play];
 	
 	// 停止
-	[viewPlayerViewController pause];
+	[playerController pause];
 ```
 
 ## 2 包含的第三方库
@@ -79,6 +79,10 @@ pod install
 - iOS Target : >= iOS 6
 
 ## 4 版本历史
+
+- 1.2.1 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.1.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.1.md))
+	- 添加 failue 情况下的回调，返回 NSError 对象
+	- 移除 PLVideoPlayerViewController，请直接使用 PLVideoPlayerController 进行定制
 - 1.2.0 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.0.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.0.md))
 	- 极大缩小 lib 大小
 	- 增加可定制的播放控件 PLVideoPlayerController

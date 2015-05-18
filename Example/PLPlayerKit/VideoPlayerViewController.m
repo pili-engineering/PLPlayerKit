@@ -10,6 +10,9 @@
 #import <PLPlayerKit/PLPlayerKit.h>
 
 @interface VideoPlayerViewController ()
+<
+PLVideoPlayerControllerDelegate
+>
 
 @property (nonatomic, strong) PLVideoPlayerController   *videoPlayerController;
 
@@ -35,6 +38,7 @@
     
     self.videoPlayerController = [PLVideoPlayerController videoPlayerControllerWithContentURL:self.url
                                                                                    parameters:nil];
+    self.videoPlayerController.delegate = self;
     self.videoPlayerController.playerView.frame = CGRectMake(0, 0, 200, 300);
     self.videoPlayerController.playerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     [self.view addSubview:self.videoPlayerController.playerView];
@@ -47,6 +51,20 @@
     
     [super viewWillDisappear:animated];
 }
+
+#pragma mark - <PLVideoPlayerControllerDelegate>
+
+- (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
+    // 你可以在这里处理
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Failure"
+                                                        message:error.localizedDescription
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Cancel"
+                                              otherButtonTitles:nil];
+    [alertView show];
+}
+
+#pragma mark - Action
 
 - (IBAction)actionButtonPressed:(id)sender {
     UIButton *button = (UIButton *)sender;

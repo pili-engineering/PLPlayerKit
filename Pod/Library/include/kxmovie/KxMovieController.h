@@ -14,10 +14,19 @@ extern NSString * const KxMovieParameterMinBufferedDuration;    // Float
 extern NSString * const KxMovieParameterMaxBufferedDuration;    // Float
 extern NSString * const KxMovieParameterDisableDeinterlacing;   // BOOL
 
+@class KxMovieController;
+@protocol KxMovieControllerDelegate <NSObject>
+
+- (void)movieController:(KxMovieController *)controller failureWithError:(NSError *)error;
+
+@end
+
 @interface KxMovieController : NSObject
 
 + (id)movieControllerWithContentPath:(NSString *)path
                           parameters:(NSDictionary *)parameters;
+
+@property (nonatomic, weak) id<KxMovieControllerDelegate> delegate;
 
 @property (nonatomic, readonly, strong) UIView    *playerView;
 @property (nonatomic, readonly, getter=isPlaying) BOOL playing;
