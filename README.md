@@ -80,6 +80,8 @@ pod install
 
 ## 4 版本历史
 
+- 1.2.2 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.2.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.2.md))
+	- 修复 lib 未更新导致的 crash
 - 1.2.1 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.1.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.1.md))
 	- 添加 failue 情况下的回调，返回 NSError 对象
 	- 移除 PLVideoPlayerViewController，请直接使用 PLVideoPlayerController 进行定制
