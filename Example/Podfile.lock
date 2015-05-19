@@ -1,7 +1,7 @@
 PODS:
-  - PLPlayerKit (1.2.2):
-    - PLPlayerKit/precompiled (= 1.2.2)
-  - PLPlayerKit/precompiled (1.2.2)
+  - PLPlayerKit (1.2.3):
+    - PLPlayerKit/precompiled (= 1.2.3)
+  - PLPlayerKit/precompiled (1.2.3)
 
 DEPENDENCIES:
   - PLPlayerKit (from `../`)
@@ -11,6 +11,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  PLPlayerKit: b509d5c0fe40fd4b263a6233b4121df679580a20
+  PLPlayerKit: b7b4efd1c717d4232c4a56c43147cc551c8e121e
 
 COCOAPODS: 0.35.0

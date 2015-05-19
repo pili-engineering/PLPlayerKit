@@ -88,21 +88,16 @@ UIAlertViewDelegate
     
     path = self.objects[indexPath.row];
     
-    // disable deinterlacing for iPhone, because it's complex operation can cause stuttering
+    // 在 iPhone 端禁用逐行扫描
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
         parameters[PLMovieParameterDisableDeinterlacing] = @(YES);
     }
     
-    // disable buffering
-    //parameters[KxMovieParameterMinBufferedDuration] = @(0.0f);
-    //parameters[KxMovieParameterMaxBufferedDuration] = @(0.0f);
+    // 取消缓存
+//    parameters[PLMovieParameterMinBufferedDuration] = @(0.0f);
+//    parameters[PLMovieParameterMaxBufferedDuration] = @(0.0f);
     
     NSURL *url = [NSURL URLWithString:path];
-    
-    // 使用已有控件
-//    PLVideoPlayerViewController *vc = [PLVideoPlayerViewController videoPlayerViewControllerWithContentURL:url
-//                                                                                                parameters:parameters];
-//    [self presentViewController:vc animated:YES completion:nil];
     
     // 使用自定义控件
     VideoPlayerViewController *vc = [[VideoPlayerViewController alloc] initWithURL:url];
