@@ -94,13 +94,13 @@ UIAlertViewDelegate
     }
     
     // 取消缓存
-//    parameters[PLMovieParameterMinBufferedDuration] = @(0.0f);
-//    parameters[PLMovieParameterMaxBufferedDuration] = @(0.0f);
+    parameters[PLMovieParameterMinBufferedDuration] = @(0.0f);
+    parameters[PLMovieParameterMaxBufferedDuration] = @(0.0f);
     
     NSURL *url = [NSURL URLWithString:path];
     
     // 使用自定义控件
-    VideoPlayerViewController *vc = [[VideoPlayerViewController alloc] initWithURL:url];
+    VideoPlayerViewController *vc = [[VideoPlayerViewController alloc] initWithURL:url parameters:parameters];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

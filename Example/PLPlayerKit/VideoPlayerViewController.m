@@ -20,10 +20,11 @@ PLVideoPlayerControllerDelegate
 
 @implementation VideoPlayerViewController
 
-- (instancetype)initWithURL:(NSURL *)url {
+- (instancetype)initWithURL:(NSURL *)url parameters:(NSDictionary *)parameters {
     self = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"videoPlayerVC"];
     if (self) {
         self.url = url;
+        self.parameters = parameters;
     }
     
     return self;
@@ -37,7 +38,7 @@ PLVideoPlayerControllerDelegate
     [super viewDidLoad];
     
     self.videoPlayerController = [PLVideoPlayerController videoPlayerControllerWithContentURL:self.url
-                                                                                   parameters:nil];
+                                                                                   parameters:self.parameters];
     self.videoPlayerController.delegate = self;
     self.videoPlayerController.playerView.frame = CGRectMake(0, 0, 200, 300);
     self.videoPlayerController.playerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));

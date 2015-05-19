@@ -11,7 +11,8 @@
 @interface VideoPlayerViewController : UIViewController
 
 @property (nonatomic, copy) NSURL   *url;
+@property (nonatomic, copy) NSDictionary    *parameters;
 
-- (instancetype)initWithURL:(NSURL *)url;
+- (instancetype)initWithURL:(NSURL *)url parameters:(NSDictionary *)parameters;
 
 @end

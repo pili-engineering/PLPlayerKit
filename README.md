@@ -70,6 +70,19 @@ pod install
 	[playerController pause];
 ```
 
+#### 1.2.2 配置参数
+
+```
+// 逐行扫描
+PLMovieParameterDisableDeinterlacing
+
+// 最小缓存时长
+PLMovieParameterMinBufferedDuration
+
+// 最大缓存时长
+PLMovieParameterMaxBufferedDuration
+```
+
 ## 2 包含的第三方库
 
 - ffmpeg
