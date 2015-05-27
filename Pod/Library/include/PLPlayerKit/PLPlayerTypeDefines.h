@@ -12,6 +12,7 @@
 extern NSString * const PLMovieParameterMinBufferedDuration;    // Float, default 0.2s for local video, 2.0s for streaming video
 extern NSString * const PLMovieParameterMaxBufferedDuration;    // Float, default 0.4s for local video, 4.0s for streaming video
 extern NSString * const PLMovieParameterDisableDeinterlacing;   // BOOL
+extern NSString * const PLMovieParameterFrameViewContentMode;   // default as UIViewContentModeScaleAspectFit.
 
 extern NSString * const PLPlayerErrorDomain;
 

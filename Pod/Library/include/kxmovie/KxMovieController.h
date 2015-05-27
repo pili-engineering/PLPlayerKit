@@ -13,6 +13,7 @@
 extern NSString * const KxMovieParameterMinBufferedDuration;    // Float
 extern NSString * const KxMovieParameterMaxBufferedDuration;    // Float
 extern NSString * const KxMovieParameterDisableDeinterlacing;   // BOOL
+extern NSString * const KxMovieParameterFrameViewContentMode;   // default as UIViewContentModeScaleAspectFit.
 
 @class KxMovieController;
 @protocol KxMovieControllerDelegate <NSObject>

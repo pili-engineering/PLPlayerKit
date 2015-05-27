@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "PLPlayerKit"
-  s.version          = "1.2.3"
+  s.version          = "1.2.4"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-io/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
@@ -31,7 +31,7 @@ Pod::Spec.new do |s|
   s.default_subspec = "precompiled"
 
   s.subspec "precompiled" do |ss|
-    ss.preserve_paths         = "Pod/Library/include/**/*.h", 'Pod/Library/lib/*.a'
+    ss.preserve_paths         = "Pod/Library/include/kxmovie/*.h", "Pod/Library/include/PLPlayerKit/*.h", 'Pod/Library/lib/*.a'
     ss.vendored_libraries   = 'Pod/Library/lib/*.a'
     ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
   end
