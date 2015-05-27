@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
   s.platform     = :ios, '6.0'
   s.requires_arc = true
 
-  s.public_header_files = 'Pod/Library/include/**/*.h'
+  s.public_header_files = "Pod/Library/include/kxmovie/*.h", "Pod/Library/include/PLPlayerKit/*.h"
   s.source_files = 'Pod/Library/include/**/*.h'
   s.resource_bundles = {
     'PLPlayerKit' => ['Pod/Assets/images.bundle/*.png']

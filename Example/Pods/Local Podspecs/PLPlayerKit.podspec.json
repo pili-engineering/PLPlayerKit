@@ -15,7 +15,10 @@
     "ios": "6.0"
   },
   "requires_arc": true,
-  "public_header_files": "Pod/Library/include/**/*.h",
+  "public_header_files": [
+    "Pod/Library/include/kxmovie/*.h",
+    "Pod/Library/include/PLPlayerKit/*.h"
+  ],
   "source_files": "Pod/Library/include/**/*.h",
   "resource_bundles": {
     "PLPlayerKit": [
