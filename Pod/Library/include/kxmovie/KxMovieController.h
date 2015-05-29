@@ -30,10 +30,19 @@ extern NSString * const KxMovieParameterFrameViewContentMode;   // default as UI
 @property (nonatomic, weak) id<KxMovieControllerDelegate> delegate;
 
 @property (nonatomic, readonly, strong) UIView    *playerView;
-@property (nonatomic, readonly, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign) BOOL userInteractionEnable;   // default as YES
+@property (nonatomic, assign, getter=isMuted) BOOL  muted;  // default as NO
+
+@property (nonatomic, readonly, getter=isPlaying) BOOL playing;
+@property (nonatomic, assign, readonly) CGFloat audioVolume;
+@property (nonatomic, assign, readonly) CGFloat duration;
+@property (nonatomic, assign, readonly) CGFloat position;
 
 - (void)play;
 - (void)pause;
+- (void)forward;
+- (void)rewind;
+
+- (void)setMoviePosition:(CGFloat)position;
 
 @end

@@ -24,7 +24,7 @@ extern NSString * const KxMovieParameterDisableDeinterlacing;   // BOOL
 
 @property (readonly) BOOL playing;
 
-- (void) play;
-- (void) pause;
+- (void)play;
+- (void)pause;
 
 @end

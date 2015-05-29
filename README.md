@@ -96,6 +96,13 @@ PLMovieParameterFrameViewContentMode
 
 ## 4 版本历史
 
+- 1.2.6 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.6.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.6.md))
+	- 添加设置播放位置的操作
+	- 添加了快进、快退的操作
+	- 添加总播放时长的属性
+	- 添加获取音量的属性
+	- 添加获取当前播放位置的属性
+	- 添加静音操作
 - 1.2.5 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.5.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.5.md))
 	- 修复与部分其他库头文件冲突的问题
 - 1.2.4 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.4.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.4.md))
