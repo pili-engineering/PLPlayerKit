@@ -87,7 +87,7 @@ pod install
 }
 
 - (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller {
-	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以紧紧实现 videoPlayerController:playerStateDidChange: 方法
+	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以仅仅实现 videoPlayerController:playerStateDidChange: 方法
 }
 
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
