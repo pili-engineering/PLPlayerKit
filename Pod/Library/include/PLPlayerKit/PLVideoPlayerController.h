@@ -12,6 +12,9 @@
 @class PLVideoPlayerController;
 @protocol PLVideoPlayerControllerDelegate <NSObject>
 
+@optional
+- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state;
+- (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller;
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error;
 
 @end
@@ -26,6 +29,7 @@
 @property (nonatomic, assign) BOOL userInteractionEnable;   // default as YES
 @property (nonatomic, assign, getter=isMuted) BOOL  muted;  // default as NO
 
+@property (nonatomic, assign, readonly) PLVideoPlayerState playerState;
 @property (nonatomic, readonly, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign, readonly) CGFloat audioVolume;
 @property (nonatomic, assign, readonly) CGFloat duration;

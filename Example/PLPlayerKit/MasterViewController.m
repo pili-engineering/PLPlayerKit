@@ -11,7 +11,7 @@
 #import "VideoPlayerViewController.h"
 
 #warning 更改为你的播放地址
-#define PLAY_URL    @"YOUR_PLAY_URL"
+#define PLAY_URL    @"rtmp://nal2bl.pub.z0.pili.qiniup.com/iostest/test"
 
 @interface MasterViewController ()
 <
@@ -96,6 +96,9 @@ UIAlertViewDelegate
     // 取消缓存
     parameters[PLMovieParameterMinBufferedDuration] = @(0.0f);
     parameters[PLMovieParameterMaxBufferedDuration] = @(0.0f);
+    
+    // 开启自动播放
+    parameters[PLMovidParameterAutoPlayEnable] = @(YES);
     
     NSURL *url = [NSURL URLWithString:path];
     

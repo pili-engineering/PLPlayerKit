@@ -25,6 +25,10 @@ pod 'PLPlayerKit'
 - 安装 CocoaPods 依赖
 
 ```
+pod update
+```
+or
+```
 pod install
 ```
 
@@ -40,6 +44,20 @@ pod install
 #import <PLPlayerKit/PLPlayerKit.h>
 ```
 
+参数配置
+
+```Objective-C
+	NSMutableDictionary *parameters = [@{} mutableCopy];
+	
+	// 对于 iPhone 建议关闭逐行扫描，默认是开启的
+	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
+		parameters[PLMovieParameterDisableDeinterlacing] = @(YES);
+	}
+	
+	// 当业务需要在播放器初始化完成后自动开始播放，可以在初始化参数中设定
+	parameters[PLMovidParameterAutoPlayEnable] = @(YES);
+```
+
 初始化
 
 ```Objective-C
@@ -50,24 +68,31 @@ pod install
 	UIView *playerView = playerController.playerView;
 ```
 
-参数配置
-
-```Objective-C
-	NSMutableDictionary *parameters = [@{} mutableCopy];
-	
-	// 对于 iPhone 建议关闭逐行扫描，默认是开启的
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-		parameters[PLMovieParameterDisableDeinterlacing] = @(YES);
-	}
-```
-
 开始／暂停操作
+
 ```Objective-C
 	// 播放
 	[playerController play];
 	
 	// 停止
 	[playerController pause];
+```
+
+播放器状态获取
+
+```
+// 实现 <PLVideoPlayerControllerDelegate> 来控制流状态的变更
+- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state {
+	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
+}
+
+- (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller {
+	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以紧紧实现 videoPlayerController:playerStateDidChange: 方法
+}
+
+- (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
+	// 当出现错误时，你会在这里收到回调，暂且只有解码器初始化错误会返回
+}
 ```
 
 #### 1.2.2 配置参数
@@ -84,6 +109,9 @@ PLMovieParameterMaxBufferedDuration
 
 // Player contentMode
 PLMovieParameterFrameViewContentMode
+
+// 初始化后是否自动开始播放
+PLMovidParameterAutoPlayEnable
 ```
 
 ## 2 包含的第三方库
@@ -96,6 +124,11 @@ PLMovieParameterFrameViewContentMode
 
 ## 4 版本历史
 
+- 1.2.7 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.7.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.7.md))
+	- 添加播放器状态属性
+	- 添加解码器初始化完成后回调
+	- 添加播放器状态回调
+	- 添加初始化后自动播放参数
 - 1.2.6 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.6.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.6.md))
 	- 添加设置播放位置的操作
 	- 添加了快进、快退的操作

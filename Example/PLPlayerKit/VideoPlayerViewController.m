@@ -9,12 +9,23 @@
 #import "VideoPlayerViewController.h"
 #import <PLPlayerKit/PLPlayerKit.h>
 
+static NSString *states[] = {
+    @"Unknow",
+    @"Preparing",
+    @"Ready",
+    @"Caching",
+    @"Playing",
+    @"Paused",
+    @"Ended"
+};
+
 @interface VideoPlayerViewController ()
 <
 PLVideoPlayerControllerDelegate
 >
 
 @property (nonatomic, strong) PLVideoPlayerController   *videoPlayerController;
+@property (nonatomic, strong) UIActivityIndicatorView   *indicatorView;
 
 @end
 
@@ -43,6 +54,15 @@ PLVideoPlayerControllerDelegate
     self.videoPlayerController.playerView.frame = CGRectMake(0, 0, 200, 300);
     self.videoPlayerController.playerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     [self.view addSubview:self.videoPlayerController.playerView];
+    
+    UISlider *slider = [[UISlider alloc] initWithFrame:(CGRect){0, CGRectGetMaxY(self.videoPlayerController.playerView.frame), CGRectGetWidth(self.view.bounds), 30}];
+    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:slider];
+    
+    self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
+    self.indicatorView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+    [self.view addSubview:self.indicatorView];
+    [self.indicatorView hidesWhenStopped];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -53,10 +73,40 @@ PLVideoPlayerControllerDelegate
     [super viewWillDisappear:animated];
 }
 
+- (void)sliderValueChanged:(id)sender {
+    CGFloat value = ((UISlider *)sender).value;
+    NSLog(@"%f, %f", value, self.videoPlayerController.duration);
+    [self.videoPlayerController setMoviePosition:value * self.videoPlayerController.duration];
+}
+
 #pragma mark - <PLVideoPlayerControllerDelegate>
 
+- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state {
+    NSLog(@"Stream State: %@", states[state]);
+    if (PLVideoPlayerStatePaused == state) {
+        [self.actionButton setTitle:@"Play" forState:UIControlStateNormal];
+    } else if (PLVideoPlayerStatePlaying == state) {
+        [self.actionButton setTitle:@"Pause" forState:UIControlStateNormal];
+    }
+    switch (state) {
+        case PLVideoPlayerStatePlaying:
+        case PLVideoPlayerStateEnded:
+        case PLVideoPlayerStatePaused:
+            [self.indicatorView stopAnimating];
+            break;
+        default:
+            [self.indicatorView startAnimating];
+            break;
+    }
+}
+
+- (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller {
+    NSLog(@"Decoder is ready.");
+}
+
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
-    // 你可以在这里处理
+    NSLog(@"Error: %@", error);
+    [self.indicatorView stopAnimating];
     UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Failure"
                                                         message:error.localizedDescription
                                                        delegate:nil

@@ -13,6 +13,7 @@ extern NSString * const PLMovieParameterMinBufferedDuration;    // Float, defaul
 extern NSString * const PLMovieParameterMaxBufferedDuration;    // Float, default 0.4s for local video, 4.0s for streaming video
 extern NSString * const PLMovieParameterDisableDeinterlacing;   // BOOL
 extern NSString * const PLMovieParameterFrameViewContentMode;   // default as UIViewContentModeScaleAspectFit.
+extern NSString * const PLMovidParameterAutoPlayEnable;         // BOOL, default as NO
 
 extern NSString * const PLPlayerErrorDomain;
 
@@ -27,6 +28,16 @@ typedef NS_ENUM(NSUInteger, PLPlayerError) {
     PLPlayerErroSetupScaler,
     PLPlayerErroReSampler,
     PLPlayerErroUnsupported
+};
+
+typedef NS_ENUM(NSUInteger, PLVideoPlayerState) {
+    PLVideoPlayerStateUnknow = 0,
+    PLVideoPlayerStatePreparing,
+    PLVideoPlayerStateReady,
+    PLVideoPlayerStateCaching,
+    PLVideoPlayerStatePlaying,
+    PLVideoPlayerStatePaused,
+    PLVideoPlayerStateEnded
 };
 
 #endif

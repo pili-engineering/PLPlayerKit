@@ -1,6 +1,6 @@
 {
   "name": "PLPlayerKit",
-  "version": "1.2.6",
+  "version": "1.2.7",
   "summary": "Pili iOS video player SDK, RTMP, HLS video streaming supported.",
   "homepage": "https://github.com/pili-io/PLPlayerKit",
   "license": "Apache License, Version 2.0",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/pili-io/PLPlayerKit.git",
-    "tag": "1.2.6"
+    "tag": "1.2.7"
   },
   "platforms": {
     "ios": "6.0"

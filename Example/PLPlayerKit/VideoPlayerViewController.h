@@ -12,6 +12,7 @@
 
 @property (nonatomic, copy) NSURL   *url;
 @property (nonatomic, copy) NSDictionary    *parameters;
+@property (weak, nonatomic) IBOutlet UIButton *actionButton;
 
 - (instancetype)initWithURL:(NSURL *)url parameters:(NSDictionary *)parameters;
 
