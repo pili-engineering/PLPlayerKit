@@ -33,6 +33,7 @@ typedef NS_ENUM(NSUInteger, KxMoviePlayerState) {
 - (void)movieController:(KxMovieController *)controller playerStateDidChange:(KxMoviePlayerState)status;
 - (void)movieControllerDecoderHasBeenReady:(KxMovieController *)controller;
 - (void)movieController:(KxMovieController *)controller failureWithError:(NSError *)error;
+- (void)movieController:(KxMovieController *)controller positionDidChange:(NSTimeInterval)position;
 
 @end
 
@@ -50,14 +51,14 @@ typedef NS_ENUM(NSUInteger, KxMoviePlayerState) {
 @property (nonatomic, assign, readonly) KxMoviePlayerState playerState;
 @property (nonatomic, readonly, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign, readonly) CGFloat audioVolume;
-@property (nonatomic, assign, readonly) CGFloat duration;
-@property (nonatomic, assign, readonly) CGFloat position;
+@property (nonatomic, assign, readonly) NSTimeInterval duration;
+@property (nonatomic, assign, readonly) NSTimeInterval position;
 
 - (void)play;
 - (void)pause;
 - (void)forward;
 - (void)rewind;
 
-- (void)setMoviePosition:(CGFloat)position;
+- (void)setMoviePosition:(NSTimeInterval)position;
 
 @end

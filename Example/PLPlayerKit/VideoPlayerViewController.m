@@ -26,6 +26,7 @@ PLVideoPlayerControllerDelegate
 
 @property (nonatomic, strong) PLVideoPlayerController   *videoPlayerController;
 @property (nonatomic, strong) UIActivityIndicatorView   *indicatorView;
+@property (nonatomic, strong) UISlider  *slider;
 
 @end
 
@@ -51,13 +52,14 @@ PLVideoPlayerControllerDelegate
     self.videoPlayerController = [PLVideoPlayerController videoPlayerControllerWithContentURL:self.url
                                                                                    parameters:self.parameters];
     self.videoPlayerController.delegate = self;
-    self.videoPlayerController.playerView.frame = CGRectMake(0, 0, 200, 300);
+    self.videoPlayerController.playerView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.bounds) * 0.8, CGRectGetHeight(self.view.bounds) * 0.8);
     self.videoPlayerController.playerView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     [self.view addSubview:self.videoPlayerController.playerView];
     
     UISlider *slider = [[UISlider alloc] initWithFrame:(CGRect){0, CGRectGetMaxY(self.videoPlayerController.playerView.frame), CGRectGetWidth(self.view.bounds), 30}];
-    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [slider addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventTouchUpInside | UIControlEventTouchUpOutside];
     [self.view addSubview:slider];
+    self.slider = slider;
     
     self.indicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite];
     self.indicatorView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
@@ -113,6 +115,10 @@ PLVideoPlayerControllerDelegate
                                               cancelButtonTitle:@"Cancel"
                                               otherButtonTitles:nil];
     [alertView show];
+}
+
+- (void)videoPlayerController:(PLVideoPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
+    self.slider.value = position / self.movieController.duration;
 }
 
 #pragma mark - Action

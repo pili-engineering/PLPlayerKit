@@ -87,12 +87,17 @@ pod install
 }
 
 - (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller {
-	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以仅仅实现 videoPlayerController:playerStateDidChange: 方法
+	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以紧紧实现 videoPlayerController:playerStateDidChange: 方法
 }
 
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
 	// 当出现错误时，你会在这里收到回调，暂且只有解码器初始化错误会返回
 }
+
+- (void)videoPlayerController:(PLVideoPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
+	// 视频进度变更时都会触发这个回调
+}
+
 ```
 
 #### 1.2.2 配置参数
@@ -124,6 +129,9 @@ PLMovidParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.8 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.8.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.8.md))
+	- 添加播放进度回调方法
+	- 修复 seekTo 后流状态不正确的问题
 - 1.2.7 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.7.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.7.md))
 	- 添加播放器状态属性
 	- 添加解码器初始化完成后回调
