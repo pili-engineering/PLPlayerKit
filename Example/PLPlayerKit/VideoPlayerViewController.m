@@ -118,7 +118,7 @@ PLVideoPlayerControllerDelegate
 }
 
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
-    self.slider.value = position / self.movieController.duration;
+    self.slider.value = position / self.videoPlayerController.duration;
 }
 
 #pragma mark - Action

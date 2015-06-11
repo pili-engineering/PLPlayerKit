@@ -11,7 +11,7 @@
 #import "VideoPlayerViewController.h"
 
 #warning 更改为你的播放地址
-#define PLAY_URL    @"http://7xjclq.com2.z0.glb.qiniucdn.com/lq6MgqE5HvVkcJPh43wG5PGHqzsa"
+#define PLAY_URL    @"PLAY_URL"
 
 @interface MasterViewController ()
 <
