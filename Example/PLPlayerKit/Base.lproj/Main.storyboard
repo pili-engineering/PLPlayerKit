@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--Master-->
@@ -73,7 +74,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFq-cY-33L">
-                                <rect key="frame" x="260" y="542" width="80" height="50"/>
+                                <rect key="frame" x="260" y="545" width="80" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="d1Q-ti-aEI"/>
                                     <constraint firstAttribute="width" constant="80" id="ksE-eU-52T"/>
@@ -85,11 +86,26 @@
                                     <action selector="actionButtonPressed:" destination="HQQ-4a-Qg0" eventType="touchUpInside" id="gjg-Wo-cOj"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K7n-Wj-HtQ">
+                                <rect key="frame" x="519" y="545" width="65" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="65" id="SrO-VM-E7t"/>
+                                    <constraint firstAttribute="height" constant="50" id="Zdk-Hp-UFn"/>
+                                </constraints>
+                                <state key="normal" title="Push test">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="qfD-R6-4L2" kind="show" id="XQM-0E-1FS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="K7n-Wj-HtQ" firstAttribute="trailing" secondItem="66d-Tq-eTF" secondAttribute="trailingMargin" id="CX2-jB-nRa"/>
                             <constraint firstAttribute="centerX" secondItem="jFq-cY-33L" secondAttribute="centerX" id="D5i-Xo-PSz"/>
-                            <constraint firstItem="yiD-te-kPf" firstAttribute="top" secondItem="jFq-cY-33L" secondAttribute="bottom" constant="8" id="mEQ-c1-9R5"/>
+                            <constraint firstItem="yiD-te-kPf" firstAttribute="top" secondItem="K7n-Wj-HtQ" secondAttribute="bottom" constant="5" id="f0f-zd-pnr"/>
+                            <constraint firstItem="yiD-te-kPf" firstAttribute="top" secondItem="jFq-cY-33L" secondAttribute="bottom" constant="5" id="mEQ-c1-9R5"/>
                         </constraints>
                     </view>
                     <connections>
@@ -99,6 +115,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XXR-aD-8oL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1412" y="-630"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="PjW-0o-tsk">
+            <objects>
+                <viewController id="qfD-R6-4L2" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vxF-2s-7IA"/>
+                        <viewControllerLayoutGuide type="bottom" id="QxM-fG-ZQI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dam-fU-Skz">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iqA-Rr-UTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2071" y="-630"/>
         </scene>
     </scenes>
 </document>

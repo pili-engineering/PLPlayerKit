@@ -67,6 +67,14 @@ PLVideoPlayerControllerDelegate
     [self.indicatorView hidesWhenStopped];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    if (!self.videoPlayerController.isPlaying) {
+        [self.videoPlayerController play];
+    }
+}
+
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.videoPlayerController.isPlaying) {
         [self.videoPlayerController pause];
