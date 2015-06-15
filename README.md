@@ -129,6 +129,9 @@ PLMovidParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.9 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.9.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.9.md))
+	- 修复进入后台后崩溃的问题
+	- 更新 example 中 player 代码，支持横竖屏旋转操作
 - 1.2.8 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.8.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.8.md))
 	- 添加播放进度回调方法
 	- 修复 seekTo 后流状态不正确的问题

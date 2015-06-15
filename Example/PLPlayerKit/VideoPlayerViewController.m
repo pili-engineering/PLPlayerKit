@@ -83,6 +83,23 @@ PLVideoPlayerControllerDelegate
     [super viewWillDisappear:animated];
 }
 
+#pragma mark - Orientation (OS version < iOS 8)
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+    UIView *playerView = self.videoPlayerController.playerView;
+    playerView.frame =  CGRectMake(0, 0, CGRectGetHeight(self.view.bounds) * 0.8, CGRectGetWidth(self.view.bounds) * 0.8);
+    playerView.center = CGPointMake(CGRectGetMidY(self.view.bounds), CGRectGetMidX(self.view.bounds));
+}
+
+#pragma mark - Orientation (OS version >= iOS 8)
+
+- (void)viewWillTransitionToSize:(CGSize)size withTransitionCoordinator:(id<UIViewControllerTransitionCoordinator>)coordinator {
+    UIView *playerView = self.videoPlayerController.playerView;
+    playerView.frame =  CGRectMake(0, 0, size.width * 0.8, size.height * 0.8);
+    playerView.center = CGPointMake(size.width * 0.5, size.height * 0.5);
+}
+
+
 - (void)sliderValueChanged:(id)sender {
     CGFloat value = ((UISlider *)sender).value;
     NSLog(@"%f, %f", value, self.videoPlayerController.duration);

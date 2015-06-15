@@ -29,6 +29,7 @@
 @property (nonatomic, readonly, strong) UIView    *playerView;
 @property (nonatomic, assign) BOOL userInteractionEnable;   // default as YES
 @property (nonatomic, assign, getter=isMuted) BOOL  muted;  // default as NO
+@property (nonatomic, assign) PLVideoPlayerBackgroundMode   backgroundMode; // default as PLVideoPlayerBackgroundModeAutoPause
 
 @property (nonatomic, assign, readonly) PLVideoPlayerState playerState;
 @property (nonatomic, readonly, getter=isPlaying) BOOL playing;

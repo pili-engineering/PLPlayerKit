@@ -40,4 +40,8 @@ typedef NS_ENUM(NSUInteger, PLVideoPlayerState) {
     PLVideoPlayerStateEnded
 };
 
+typedef NS_ENUM(NSUInteger, PLVideoPlayerBackgroundMode) {
+    PLVideoPlayerBackgroundModeAutoPause
+};
+
 #endif
