@@ -129,6 +129,10 @@ PLMovidParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.10 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.10.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.10.md))
+	- 添加音频外设更改时的通知
+	- 添加音量变更时的通知
+	- 添加打进电话等其他事件导致音频中断的通知
 - 1.2.9 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.9.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.9.md))
 	- 修复进入后台后崩溃的问题
 	- 更新 example 中 player 代码，支持横竖屏旋转操作

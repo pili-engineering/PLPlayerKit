@@ -27,6 +27,7 @@ PLVideoPlayerControllerDelegate
 @property (nonatomic, strong) PLVideoPlayerController   *videoPlayerController;
 @property (nonatomic, strong) UIActivityIndicatorView   *indicatorView;
 @property (nonatomic, strong) UISlider  *slider;
+@property (nonatomic, strong) NSArray   *observers;
 
 @end
 
@@ -40,10 +41,6 @@ PLVideoPlayerControllerDelegate
     }
     
     return self;
-}
-
-- (void)dealloc {
-    self.videoPlayerController = nil;
 }
 
 - (void)viewDidLoad {
@@ -65,6 +62,27 @@ PLVideoPlayerControllerDelegate
     self.indicatorView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
     [self.view addSubview:self.indicatorView];
     [self.indicatorView hidesWhenStopped];
+    
+    id observer1 = [[NSNotificationCenter defaultCenter] addObserverForName:PLAudioSessionCurrentHardwareOutputVolumeDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
+        NSDictionary *userInfo = notif.userInfo;
+        NSLog(@"Volume %.2f", [userInfo[PLAudioSessionCurrentHardwareOutputVolumeKey] floatValue]);
+    }];
+    
+    id observer2 = [[NSNotificationCenter defaultCenter] addObserverForName:PLAudioSessionRouteDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
+        NSDictionary *userInfo = notif.userInfo;
+        NSLog(@"Reason %d", [userInfo[PLAudioSessionRouteChangeReasonKey] intValue]);
+    }];
+    
+    self.observers = @[observer1, observer2];
+}
+
+- (void)dealloc {
+    self.videoPlayerController = nil;
+    
+    [self.observers enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        [[NSNotificationCenter defaultCenter] removeObserver:obj];
+    }];
+    self.observers = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {

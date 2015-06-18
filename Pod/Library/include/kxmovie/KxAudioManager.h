@@ -12,6 +12,16 @@
 
 #import <CoreFoundation/CoreFoundation.h>
 
+extern NSString *KxAudioSessionInterruptionStateKey;
+extern NSString *KxAudioSessionInterruptionTypeKey;
+extern NSString *KxAudioSessionDidInterrupteNotification;
+
+extern NSString *KxAudioSessionRouteChangeReasonKey;
+extern NSString *KxAudioSessionRouteDidChangeNotification;
+
+extern NSString *KxAudioSessionCurrentHardwareOutputVolumeKey;
+extern NSString *KxAudioSessionCurrentHardwareOutputVolumeDidChangeNotification;
+
 typedef void (^KxAudioManagerOutputBlock)(float *data, UInt32 numFrames, UInt32 numChannels);
 
 @protocol KxAudioManager <NSObject>

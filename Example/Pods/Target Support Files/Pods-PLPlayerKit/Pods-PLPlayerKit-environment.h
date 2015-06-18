@@ -10,11 +10,11 @@
 #define COCOAPODS_POD_AVAILABLE_PLPlayerKit
 #define COCOAPODS_VERSION_MAJOR_PLPlayerKit 1
 #define COCOAPODS_VERSION_MINOR_PLPlayerKit 2
-#define COCOAPODS_VERSION_PATCH_PLPlayerKit 8
+#define COCOAPODS_VERSION_PATCH_PLPlayerKit 10
 
 // PLPlayerKit/precompiled
 #define COCOAPODS_POD_AVAILABLE_PLPlayerKit_precompiled
 #define COCOAPODS_VERSION_MAJOR_PLPlayerKit_precompiled 1
 #define COCOAPODS_VERSION_MINOR_PLPlayerKit_precompiled 2
-#define COCOAPODS_VERSION_PATCH_PLPlayerKit_precompiled 8
+#define COCOAPODS_VERSION_PATCH_PLPlayerKit_precompiled 10
 
