@@ -129,6 +129,8 @@ PLMovidParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.11 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.11.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.11.md))
+	- 添加对应用状态的判断，减少因进入后台通知延时未能及时暂停播放导致的 crash
 - 1.2.10 ([Release Notes](https://github.com/pili-io/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.10.md) && [API Diffs](https://github.com/pili-io/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.10.md))
 	- 添加音频外设更改时的通知
 	- 添加音量变更时的通知
