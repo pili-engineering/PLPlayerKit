@@ -121,22 +121,22 @@ PLVideoPlayerControllerDelegate
 - (void)sliderValueChanged:(id)sender {
     CGFloat value = ((UISlider *)sender).value;
     NSLog(@"%f, %f", value, self.videoPlayerController.duration);
-    [self.videoPlayerController setMoviePosition:value * self.videoPlayerController.duration];
+    [self.videoPlayerController seekTo:value * self.videoPlayerController.duration];
 }
 
 #pragma mark - <PLVideoPlayerControllerDelegate>
 
-- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state {
+- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLPlayerState)state {
     NSLog(@"Stream State: %@", states[state]);
-    if (PLVideoPlayerStatePaused == state) {
+    if (PLPlayerStatePaused == state) {
         [self.actionButton setTitle:@"Play" forState:UIControlStateNormal];
-    } else if (PLVideoPlayerStatePlaying == state) {
+    } else if (PLPlayerStatePlaying == state) {
         [self.actionButton setTitle:@"Pause" forState:UIControlStateNormal];
     }
     switch (state) {
-        case PLVideoPlayerStatePlaying:
-        case PLVideoPlayerStateEnded:
-        case PLVideoPlayerStatePaused:
+        case PLPlayerStatePlaying:
+        case PLPlayerStateEnded:
+        case PLPlayerStatePaused:
             [self.indicatorView stopAnimating];
             break;
         default:

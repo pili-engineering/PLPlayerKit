@@ -13,7 +13,7 @@
 @protocol PLVideoPlayerControllerDelegate <NSObject>
 
 @optional
-- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state;
+- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLPlayerState)state;
 - (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller;
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error;
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController positionDidChange:(NSTimeInterval)position;
@@ -29,9 +29,9 @@
 @property (nonatomic, readonly, strong) UIView    *playerView;
 @property (nonatomic, assign) BOOL userInteractionEnable;   // default as YES
 @property (nonatomic, assign, getter=isMuted) BOOL  muted;  // default as NO
-@property (nonatomic, assign) PLVideoPlayerBackgroundMode   backgroundMode; // default as PLVideoPlayerBackgroundModeAutoPause
+@property (nonatomic, assign) PLPlayerBackgroundMode   backgroundMode; // default as PLVideoPlayerBackgroundModeAutoPause
 
-@property (nonatomic, assign, readonly) PLVideoPlayerState playerState;
+@property (nonatomic, assign, readonly) PLPlayerState playerState;
 @property (nonatomic, readonly, getter=isPlaying) BOOL playing;
 @property (nonatomic, assign, readonly) CGFloat audioVolume;
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
@@ -42,6 +42,7 @@
 - (void)forward;
 - (void)rewind;
 
-- (void)setMoviePosition:(NSTimeInterval)position;
+- (void)seekTo:(NSTimeInterval)position;
+- (void)setMoviePosition:(NSTimeInterval)position DEPRECATED_ATTRIBUTE;
 
 @end

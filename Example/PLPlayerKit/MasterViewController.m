@@ -90,15 +90,15 @@ UIAlertViewDelegate
     
     // 在 iPhone 端禁用逐行扫描
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        parameters[PLMovieParameterDisableDeinterlacing] = @(YES);
+        parameters[PLVideoParameterDisableDeinterlacing] = @(YES);
     }
     
     // 取消缓存
-    parameters[PLMovieParameterMinBufferedDuration] = @(0.0f);
-    parameters[PLMovieParameterMaxBufferedDuration] = @(0.0f);
+    parameters[PLPlayerParameterMinBufferedDuration] = @(0.0f);
+    parameters[PLPlayerParameterMaxBufferedDuration] = @(0.0f);
     
     // 开启自动播放
-    parameters[PLMovidParameterAutoPlayEnable] = @(YES);
+    parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
     
     NSURL *url = [NSURL URLWithString:path];
     

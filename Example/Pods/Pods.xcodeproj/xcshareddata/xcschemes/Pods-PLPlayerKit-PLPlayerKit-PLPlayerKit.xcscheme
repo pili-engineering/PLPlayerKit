@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F24D737C0D59F7FCCC906E66"
+               BlueprintIdentifier = "DBD93F03B980097863ED00EF"
                BuildableName = "PLPlayerKit.bundle"
                BlueprintName = "Pods-PLPlayerKit-PLPlayerKit-PLPlayerKit"
                ReferencedContainer = "container:Pods.xcodeproj">

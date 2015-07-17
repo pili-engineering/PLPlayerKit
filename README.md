@@ -44,7 +44,7 @@ pod install
 
 ### 1.2 示例代码
 
-#### 1.2.1 可定制的播放控件
+#### 1.2.1 视频播放控件
 
 在需要的地方添加
 
@@ -59,11 +59,11 @@ pod install
 	
 	// 对于 iPhone 建议关闭逐行扫描，默认是开启的
 	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-		parameters[PLMovieParameterDisableDeinterlacing] = @(YES);
+		parameters[PLVideoParameterDisableDeinterlacing] = @(YES);
 	}
 	
 	// 当业务需要在播放器初始化完成后自动开始播放，可以在初始化参数中设定
-	parameters[PLMovidParameterAutoPlayEnable] = @(YES);
+	parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
 ```
 
 初始化
@@ -72,6 +72,9 @@ pod install
 	// 初始化 PLVideoPlayerController
 	PLVideoPlayerController *playerController = [PLVideoPlayerController videoPlayerControllerWithContentURL:url parameters:parameters];
 	
+	// 设定 delegate
+    playerController.delegate = self;
+    
 	// 获取到播放界面
 	UIView *playerView = playerController.playerView;
 ```
@@ -90,12 +93,12 @@ pod install
 
 ```
 // 实现 <PLVideoPlayerControllerDelegate> 来控制流状态的变更
-- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state {
+- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLPlayerState)state {
 	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
 }
 
 - (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller {
-	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以紧紧实现 videoPlayerController:playerStateDidChange: 方法
+	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以仅仅实现 videoPlayerController:playerStateDidChange: 方法
 }
 
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
@@ -105,26 +108,87 @@ pod install
 - (void)videoPlayerController:(PLVideoPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
 	// 视频进度变更时都会触发这个回调
 }
-
 ```
 
-#### 1.2.2 配置参数
+#### 1.2.2 纯音频播放控件
+
+在需要的地方添加
+
+```Objective-C
+#import <PLPlayerKit/PLPlayerKit.h>
+```
+
+参数配置
+
+```Objective-C
+	NSMutableDictionary *parameters = [@{} mutableCopy];
+	
+	// 当业务需要在播放器初始化完成后自动开始播放，可以在初始化参数中设定
+	parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
+```
+
+初始化
+
+```Objective-C
+	// 初始化 PLAudioPlayerController
+	PLAudioPlayerController *playerController = [PLAudioPlayerController audioPlayerControllerWithContentURL:url parameters:parameters];
+	
+	// 设定 delegate
+    playerController.delegate = self;
+```
+
+开始／暂停操作
+
+```Objective-C
+	// 播放
+	[playerController play];
+	
+	// 停止
+	[playerController pause];
+```
+
+播放器状态获取
 
 ```
+// 实现 <PLAudioPlayerControllerDelegate> 来控制流状态的变更
+- (void)audioPlayerController:(PLAudioPlayerController *)controller playerStateDidChange:(PLPlayerState)state {
+	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
+}
+
+- (void)audioPlayerControllerDecoderHasBeenReady:(PLAudioPlayerController *)controller {
+	// 解码器初始化完成, 与 audioPlayerController:playerStateDidChange: 方法中返回 PLPlayerStateReady 状态属于同一情况，你可以仅仅实现 audioPlayerController:playerStateDidChange: 方法
+}
+
+- (void)audioPlayerController:(PLAudioPlayerController *)playerController failureWithError:(NSError *)error {
+	// 当出现错误时，你会在这里收到回调，暂且只有解码器初始化错误会返回
+}
+
+- (void)audioPlayerController:(PLAudioPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
+	// 视频进度变更时都会触发这个回调
+}
+```
+
+#### 1.2.3 配置参数
+
+```
+// 视频播放器参数
 // 逐行扫描
-PLMovieParameterDisableDeinterlacing
-
-// 最小缓存时长
-PLMovieParameterMinBufferedDuration
-
-// 最大缓存时长
-PLMovieParameterMaxBufferedDuration
+PLVideoParameterDisableDeinterlacing
 
 // Player contentMode
-PLMovieParameterFrameViewContentMode
+PLVideoParameterFrameViewContentMode
+```
 
-// 初始化后是否自动开始播放
-PLMovidParameterAutoPlayEnable
+```
+// 通用配置参数，音视频均可用
+// 最小缓存时长
+PLPlayerParameterMinBufferedDuration
+
+// 最大缓存时长
+PLPlayerParameterMaxBufferedDuration
+
+// 是否自动开始播放
+PLPlayerParameterAutoPlayEnable
 ```
 
 ## 2 包含的第三方库
@@ -137,6 +201,10 @@ PLMovidParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.13 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.13.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.13.md))
+    - 添加纯音频播放控件
+    - 更新参数字段及类型，确保通用类型可以在音频及视频播放器使用
+    - 更新类型名称，增加易读性，减少歧义
 - 1.2.12 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.12.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.12.md))
 	- 更改 repo 地址
 - 1.2.11 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.11.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.11.md))
