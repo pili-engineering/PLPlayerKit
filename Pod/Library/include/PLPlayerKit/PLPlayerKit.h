@@ -12,5 +12,6 @@
 #import "PLPlayerTypeDefines.h"
 #import "PLVideoPlayerController.h"
 #import "PLAudioPlayerController.h"
+#import "PLAudioManager.h"
 
 #endif

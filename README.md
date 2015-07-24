@@ -201,6 +201,8 @@ PLPlayerParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.14 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.14.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.14.md))
+    - 添加 AudioManager
 - 1.2.13 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.13.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.13.md))
     - 添加纯音频播放控件
     - 更新参数字段及类型，确保通用类型可以在音频及视频播放器使用

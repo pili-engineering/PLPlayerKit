@@ -2,8 +2,8 @@
 //  PLAudioPlayerController.h
 //  PLPlayerKit
 //
-//  Created by 0day on 15/7/17.
-//  Copyright (c) 2015年 qgenius. All rights reserved.
+//  Created on 15/7/17.
+//  Copyright (c) 2015年 Pili Engineering. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
