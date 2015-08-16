@@ -107,6 +107,8 @@ typedef BOOL(^KxMovieDecoderInterruptCallback)();
 @property (readonly, nonatomic) CGFloat startTime;
 @property (readwrite, nonatomic) BOOL disableDeinterlacing;
 @property (readwrite, nonatomic, strong) KxMovieDecoderInterruptCallback interruptCallback;
+@property (nonatomic, assign) NSTimeInterval    lastFrameTS;
+@property (nonatomic, assign) NSTimeInterval    timeout;
 
 + (id) movieDecoderWithContentPath: (NSString *) path
                              error: (NSError **) perror;

@@ -18,13 +18,12 @@ extern NSString * const KxMovieParameterFrameViewContentMode;   // default as UI
 
 
 typedef NS_ENUM(NSUInteger, KxPlayerState) {
-    KxPlayerStateUnknow = 0,
+    KxPlayerStateStopped = 0,
     KxPlayerStatePreparing,
     KxPlayerStateReady,
     KxPlayerStateCaching,
     KxPlayerStatePlaying,
-    KxPlayerStatePaused,
-    KxPlayerStateEnded
+    KxPlayerStatePaused
 };
 
 #endif

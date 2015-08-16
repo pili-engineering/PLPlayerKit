@@ -82,11 +82,23 @@ pod install
 开始／暂停操作
 
 ```Objective-C
+   // 准备播放
+   // 准备播放的方法主要完成流连接，解码器初始化等工作
+   [playerController prepareToPlayWithCompletion:^(BOOL success) {
+       if (success) {
+           [playerController play];
+       }
+   }];
+   
 	// 播放
+	// 如果你没有主动的调用 prepareToPlayWithCompletion 方法, 直接调用 play 方法也是没有问题, play 方法内部会自行调用 prepareToPlayWithCompletion 方法来完成解码器初始化工作
 	[playerController play];
 	
-	// 停止
+	// 暂停
 	[playerController pause];
+	
+	// 停止
+	[playerController stop];
 ```
 
 播放器状态获取
@@ -140,11 +152,23 @@ pod install
 开始／暂停操作
 
 ```Objective-C
+	// 准备播放
+   // 准备播放的方法主要完成流连接，解码器初始化等工作
+   [playerController prepareToPlayWithCompletion:^(BOOL success) {
+       if (success) {
+           [playerController play];
+       }
+   }];
+   
 	// 播放
+	// 如果你没有主动的调用 prepareToPlayWithCompletion 方法, 直接调用 play 方法也是没有问题, play 方法内部会自行调用 prepareToPlayWithCompletion 方法来完成解码器初始化工作
 	[playerController play];
 	
-	// 停止
+	// 暂停
 	[playerController pause];
+	
+	// 停止
+	[playerController stop];
 ```
 
 播放器状态获取
@@ -164,7 +188,15 @@ pod install
 }
 
 - (void)audioPlayerController:(PLAudioPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
-	// 视频进度变更时都会触发这个回调
+	// 音频进度变更时都会触发这个回调
+}
+
+- (void)audioPlayerControllerWillBeginBackgroundTask:(PLAudioPlayerController *)controller {
+    // 当开启了后台播放时, 进入后台时会出发后台任务的创建, 创建之前便会回调这个回调方法
+}
+
+- (void)audioPlayerController:(PLAudioPlayerController *)controller willEndBackgroundTask:(BOOL)isExpirationOccured {
+    // 当开启了后台播放时, 进入后台后创建的后台任务在超时或者回到前台时，会被销毁掉，便会调用这个回调方法
 }
 ```
 
@@ -201,6 +233,13 @@ PLPlayerParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.16 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.16.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.16.md))
+    - 添加了音频播放器后台播放的支持
+    - 添加了音频播放器后台播放任务开始和结束的回调
+    - 添加了音视频播放器超时时长的设定
+    - 添加了音视频播放器准备的方法
+    - 添加了音视频完全停止播放器的方法
+    - 修复播放器不可释放的问题
 - 1.2.15 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.15.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.15.md))
     - 修复 AudioPlayer 无法播放带有视频流的 RTMP 流的问题
 - 1.2.14 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.14.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.14.md))

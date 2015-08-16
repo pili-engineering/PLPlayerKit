@@ -38,8 +38,13 @@
 @property (nonatomic, assign, readonly) NSTimeInterval duration;
 @property (nonatomic, assign, readonly) NSTimeInterval position;
 
+/// 超时时长，默认为 3s
+@property (nonatomic, assign) NSTimeInterval    timeout;
+
+- (void)prepareToPlayWithCompletion:(void (^)(BOOL success))handler;
 - (void)play;
 - (void)pause;
+- (void)stop;
 - (void)forward;
 - (void)rewind;
 

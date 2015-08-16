@@ -14,6 +14,7 @@
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
 		6003F59E195388D20070C39A /* PLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* PLAppDelegate.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
+		762690581B80CEBC00B1C115 /* AudioPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 762690571B80CEBC00B1C115 /* AudioPlayerViewController.m */; };
 		767C20511AFA847B0026FFDB /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767C204E1AFA847B0026FFDB /* MasterViewController.m */; };
 		767C20521AFA847B0026FFDB /* VideoPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767C20501AFA847B0026FFDB /* VideoPlayerViewController.m */; };
 		767C20571AFA84940026FFDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767C20531AFA84940026FFDB /* LaunchScreen.xib */; };
@@ -44,6 +45,8 @@
 		6003F5B9195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F5BB195388D20070C39A /* Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tests.m; sourceTree = "<group>"; };
 		606FC2411953D9B200FFA9A0 /* Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Tests-Prefix.pch"; sourceTree = "<group>"; };
+		762690561B80CEBC00B1C115 /* AudioPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AudioPlayerViewController.h; sourceTree = "<group>"; };
+		762690571B80CEBC00B1C115 /* AudioPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AudioPlayerViewController.m; sourceTree = "<group>"; };
 		767C204D1AFA847B0026FFDB /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
 		767C204E1AFA847B0026FFDB /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		767C204F1AFA847B0026FFDB /* VideoPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VideoPlayerViewController.h; sourceTree = "<group>"; };
@@ -123,6 +126,8 @@
 				767C204E1AFA847B0026FFDB /* MasterViewController.m */,
 				767C204F1AFA847B0026FFDB /* VideoPlayerViewController.h */,
 				767C20501AFA847B0026FFDB /* VideoPlayerViewController.m */,
+				762690561B80CEBC00B1C115 /* AudioPlayerViewController.h */,
+				762690571B80CEBC00B1C115 /* AudioPlayerViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -273,6 +278,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				762690581B80CEBC00B1C115 /* AudioPlayerViewController.m in Sources */,
 				6003F59E195388D20070C39A /* PLAppDelegate.m in Sources */,
 				767C20521AFA847B0026FFDB /* VideoPlayerViewController.m in Sources */,
 				767C20511AFA847B0026FFDB /* MasterViewController.m in Sources */,

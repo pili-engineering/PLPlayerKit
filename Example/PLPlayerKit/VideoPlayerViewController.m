@@ -10,13 +10,12 @@
 #import <PLPlayerKit/PLPlayerKit.h>
 
 static NSString *states[] = {
-    @"Unknow",
+    @"Stopped",
     @"Preparing",
     @"Ready",
     @"Caching",
     @"Playing",
     @"Paused",
-    @"Ended"
 };
 
 @interface VideoPlayerViewController ()
@@ -85,17 +84,9 @@ PLVideoPlayerControllerDelegate
     self.observers = nil;
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
-    if (!self.videoPlayerController.isPlaying) {
-        [self.videoPlayerController play];
-    }
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     if (self.videoPlayerController.isPlaying) {
-        [self.videoPlayerController pause];
+        [self.videoPlayerController stop];
     }
     
     [super viewWillDisappear:animated];
