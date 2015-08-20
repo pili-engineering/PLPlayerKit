@@ -12,7 +12,7 @@
 #import "AudioPlayerViewController.h"
 
 #warning 更改为你的播放地址
-#define PLAY_URL    @"rtmp://115.231.182.72/dayzh_staging/test"
+#define PLAY_URL    @"YOUR_PLAY_URL"
 
 @interface MasterViewController ()
 <
