@@ -207,6 +207,15 @@
 				CLASSPREFIX = PL;
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = 0dayZh;
+				TargetAttributes = {
+					6003F589195388D20070C39A = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+				};
 			};
 			buildConfigurationList = 6003F585195388D10070C39A /* Build configuration list for PBXProject "PLPlayerKit" */;
 			compatibilityVersion = "Xcode 3.2";

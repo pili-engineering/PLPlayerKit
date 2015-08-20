@@ -9,9 +9,10 @@
 #import "MasterViewController.h"
 #import <PLPlayerKit/PLPlayerKit.h>
 #import "VideoPlayerViewController.h"
+#import "AudioPlayerViewController.h"
 
 #warning 更改为你的播放地址
-#define PLAY_URL    @"PLAY_URL"
+#define PLAY_URL    @"rtmp://115.231.182.72/dayzh_staging/test"
 
 @interface MasterViewController ()
 <

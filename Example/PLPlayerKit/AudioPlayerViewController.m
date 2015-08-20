@@ -30,7 +30,7 @@ PLAudioPlayerControllerDelegate
 @implementation AudioPlayerViewController
 
 - (instancetype)initWithURL:(NSURL *)url parameters:(NSDictionary *)parameters {
-    self = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"videoPlayerVC"];
+    self = [super init];
     if (self) {
         self.url = url;
         self.parameters = parameters;
@@ -45,6 +45,7 @@ PLAudioPlayerControllerDelegate
     self.audioPlayerController = [PLAudioPlayerController audioPlayerControllerWithContentURL:self.url
                                                                                    parameters:self.parameters];
     self.audioPlayerController.delegate = self;
+//    self.audioPlayerController.backgroundPlayEnable = YES;
     
     [[NSNotificationCenter defaultCenter] addObserverForName:PLAudioSessionRouteDidChangeNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
         NSLog(@"Recieved: %@", PLAudioSessionRouteDidChangeNotification);
@@ -64,6 +65,14 @@ PLAudioPlayerControllerDelegate
 
 - (void)audioPlayerController:(PLAudioPlayerController *)controller playerStateDidChange:(PLPlayerState)status {
     NSLog(@"%@", states[status]);
+}
+
+- (void)audioPlayerControllerWillBeginBackgroundTask:(PLAudioPlayerController *)controller {
+    NSLog(@"Will begin background task");
+}
+
+- (void)audioPlayerController:(PLAudioPlayerController *)controller willEndBackgroundTask:(BOOL)isExpirationOccured {
+    NSLog(@"Will end background task");
 }
 
 @end
