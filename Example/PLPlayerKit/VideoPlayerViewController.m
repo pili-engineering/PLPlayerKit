@@ -126,7 +126,7 @@ PLVideoPlayerControllerDelegate
     }
     switch (state) {
         case PLPlayerStatePlaying:
-        case PLPlayerStateEnded:
+        case PLPlayerStateStopped:
         case PLPlayerStatePaused:
             [self.indicatorView stopAnimating];
             break;
