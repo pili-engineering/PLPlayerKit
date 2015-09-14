@@ -60,24 +60,13 @@ typedef NS_ENUM(NSUInteger, PLPlayerError) {
  * Player State
  */
 typedef NS_ENUM(NSUInteger, PLPlayerState) {
-    PLPlayerStateUnknow = 0,
+    PLPlayerStateStopped = 0,
     PLPlayerStatePreparing,
     PLPlayerStateReady,
     PLPlayerStateCaching,
     PLPlayerStatePlaying,
-    PLPlayerStatePaused,
-    PLPlayerStateEnded
+    PLPlayerStatePaused
 };
-
-typedef NS_ENUM(NSUInteger, PLVideoPlayerState) {
-    PLVideoPlayerStateUnknow = PLPlayerStateUnknow,
-    PLVideoPlayerStatePreparing = PLPlayerStatePreparing,
-    PLVideoPlayerStateReady = PLPlayerStateReady,
-    PLVideoPlayerStateCaching = PLPlayerStateCaching,
-    PLVideoPlayerStatePlaying = PLPlayerStatePlaying,
-    PLVideoPlayerStatePaused = PLPlayerStatePaused,
-    PLVideoPlayerStateEnded = PLPlayerStateEnded
-} DEPRECATED_ATTRIBUTE;
 
 /**
  * Others

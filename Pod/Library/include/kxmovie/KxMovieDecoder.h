@@ -11,6 +11,10 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
+#include "libavformat/avformat.h"
+#include "libswscale/swscale.h"
+#include "libswresample/swresample.h"
+#include "libavutil/pixdesc.h"
 
 extern NSString * kxmovieErrorDomain;
 
@@ -84,10 +88,16 @@ typedef enum {
 
 typedef BOOL(^KxMovieDecoderInterruptCallback)();
 
+@class KxMovieDecoder;
+@protocol KxMovieDecoderDelegate <NSObject>
+
+- (void)movieDecoderDidInterrupt:(KxMovieDecoder *)decoder;
+
+@end
+
 @interface KxMovieDecoder : NSObject
 
 @property (readonly, nonatomic, strong) NSString *path;
-@property (readonly, nonatomic) BOOL isEOF;
 @property (readwrite,nonatomic) CGFloat position;
 @property (readonly, nonatomic) CGFloat duration;
 @property (readonly, nonatomic) CGFloat fps;
@@ -109,6 +119,19 @@ typedef BOOL(^KxMovieDecoderInterruptCallback)();
 @property (readwrite, nonatomic, strong) KxMovieDecoderInterruptCallback interruptCallback;
 @property (nonatomic, assign) NSTimeInterval    lastFrameTS;
 @property (nonatomic, assign) NSTimeInterval    timeout;
+@property (nonatomic, weak) id<KxMovieDecoderDelegate>  delegate;
+
+@property (nonatomic, assign) AVFormatContext     *formatCtx;
+@property (nonatomic, assign) AVCodecContext      *videoCodecCtx;
+@property (nonatomic, assign) AVCodecContext      *audioCodecCtx;
+@property (nonatomic, assign) AVCodecContext      *subtitleCodecCtx;
+@property (nonatomic, assign) AVFrame             *videoFrame;
+@property (nonatomic, assign) AVFrame             *audioFrame;
+@property (nonatomic, assign) NSInteger           videoStream;
+@property (nonatomic, assign) NSInteger           audioStream;
+@property (nonatomic, assign) NSInteger           subtitleStream;
+@property (nonatomic, assign) NSUInteger          artworkStream;
+@property (nonatomic, assign) BOOL isEOF;
 
 + (id) movieDecoderWithContentPath: (NSString *) path
                              error: (NSError **) perror;
