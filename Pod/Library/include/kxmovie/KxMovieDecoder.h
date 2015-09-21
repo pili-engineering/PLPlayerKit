@@ -121,6 +121,9 @@ typedef BOOL(^KxMovieDecoderInterruptCallback)();
 @property (nonatomic, assign) NSTimeInterval    timeout;
 @property (nonatomic, weak) id<KxMovieDecoderDelegate>  delegate;
 
+@property (nonatomic, assign) BOOL      hasStartDurationSet;
+@property (nonatomic, assign) CGFloat   startDuration;
+
 @property (nonatomic, assign) AVFormatContext     *formatCtx;
 @property (nonatomic, assign) AVCodecContext      *videoCodecCtx;
 @property (nonatomic, assign) AVCodecContext      *audioCodecCtx;

@@ -234,6 +234,10 @@ PLPlayerParameterAutoPlayEnable
 
 ## 4 版本历史
 
+- 1.2.19 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.19.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.19.md))
+    - 修复播放无返回状态的问题（针对无直播的流、hls 回放）
+    - 修复 hls 回放结束时无 stopped 回调的问题
+    - 修复 hls 回放开始的 duration 不为 0 的问题
 - 1.2.18 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.18.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.18.md))
     - 修复在 prepare 状态前释放 player 导致的音频仍然会播放的问题
     - 修复 player 状态返回的类型不正确的问题

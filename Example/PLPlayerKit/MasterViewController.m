@@ -36,7 +36,9 @@ UIAlertViewDelegate
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    self.objects = [@[PLAY_URL] mutableCopy];
+    self.objects = [@[@"http://hlstime2.plu.cn/longzhu/55f24ae4fb16df6181000060.m3u8?start=1442543867&end=1442544826",
+                      @"http://hlstime2.plu.cn/longzhu/55f24ae4fb16df6181000060.m3u8?start=1442542332&end=1442542454",
+                      @"http://hlstime2.plu.cn/longzhu/55f24ae4fb16df6181000060.m3u8?start=1442541742&end=1442541837"] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning {
