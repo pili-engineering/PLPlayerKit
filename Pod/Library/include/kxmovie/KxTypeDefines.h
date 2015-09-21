@@ -23,7 +23,8 @@ typedef NS_ENUM(NSUInteger, KxPlayerState) {
     KxPlayerStateReady,
     KxPlayerStateCaching,
     KxPlayerStatePlaying,
-    KxPlayerStatePaused
+    KxPlayerStatePaused,
+    KxPlayerStateSeeking
 };
 
 #endif
