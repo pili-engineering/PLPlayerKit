@@ -11,9 +11,6 @@
 #import "VideoPlayerViewController.h"
 #import "AudioPlayerViewController.h"
 
-#warning 更改为你的播放地址
-#define PLAY_URL    @"rtmp://fcx0xh.live1-rtmp.z1.pili.qiniucdn.com/dayzh_staging/test"
-
 @interface MasterViewController ()
 <
 UIAlertViewDelegate
@@ -36,9 +33,7 @@ UIAlertViewDelegate
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    self.objects = [@[@"http://hlstime2.plu.cn/longzhu/55f24ae4fb16df6181000060.m3u8?start=1442543867&end=1442544826",
-                      @"http://hlstime2.plu.cn/longzhu/55f24ae4fb16df6181000060.m3u8?start=1442542332&end=1442542454",
-                      @"http://hlstime2.plu.cn/longzhu/55f24ae4fb16df6181000060.m3u8?start=1442541742&end=1442541837"] mutableCopy];
+    self.objects = [@[@"YOUR_PLAY_URL"] mutableCopy];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -102,6 +97,8 @@ UIAlertViewDelegate
     
     // 开启自动播放
     parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
+    
+    parameters[PLVideoParameterFrameViewContentMode] = @(UIViewContentModeScaleAspectFill);
     
     NSURL *url = [NSURL URLWithString:path];
     
