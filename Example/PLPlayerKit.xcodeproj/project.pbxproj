@@ -191,6 +191,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				09D9ED479663772B6350A21D /* Copy Pods Resources */,
+				80C94E7BB5A66D5CD803F751 /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -267,6 +268,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		80C94E7BB5A66D5CD803F751 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		CB439C9D41560BB02C82168D /* Check Pods Manifest.lock */ = {
