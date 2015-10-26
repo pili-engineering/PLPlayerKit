@@ -8,8 +8,7 @@
 
 #import "MasterViewController.h"
 #import <PLPlayerKit/PLPlayerKit.h>
-#import "VideoPlayerViewController.h"
-#import "AudioPlayerViewController.h"
+#import "PLPlayerViewController.h"
 
 @interface MasterViewController ()
 <
@@ -81,29 +80,10 @@ UIAlertViewDelegate
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSString *path;
-    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
-    
-    path = self.objects[indexPath.row];
-    
-    // 在 iPhone 端禁用逐行扫描
-    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-        parameters[PLVideoParameterDisableDeinterlacing] = @(YES);
-    }
-    
-    // 取消缓存
-    parameters[PLPlayerParameterMinBufferedDuration] = @(0.0f);
-    parameters[PLPlayerParameterMaxBufferedDuration] = @(0.0f);
-    
-    // 开启自动播放
-    parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
-    
-    parameters[PLVideoParameterFrameViewContentMode] = @(UIViewContentModeScaleAspectFill);
-    
-    NSURL *url = [NSURL URLWithString:path];
+    NSString *path = self.objects[indexPath.row];
     
     // 使用自定义控件
-    VideoPlayerViewController *vc = [[VideoPlayerViewController alloc] initWithURL:url parameters:parameters];
+    PLPlayerViewController *vc = [[PLPlayerViewController alloc] initWithURL:[NSURL URLWithString:path]];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

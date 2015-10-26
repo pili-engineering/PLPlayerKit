@@ -1,29 +1,26 @@
 # PLPlayerKit
 
-PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP 和 HLS 直播流媒体播放，并且支持常见音视频文件例如 MP4/M4A 的播放。
+PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP 和 HLS 直播流媒体播放。
 
 功能特性
 
 - [x] RTMP 直播流播放
 - [x] HLS 播放
 - [x] 高可定制
-- [x] 渲染逐行扫描支持
-- [x] 缓存时长可定制
-- [x] 支持本地及线上音视频文件直接播放
 - [x] 音频后台播放
+- [x] 无 ffmpeg 依赖
 
 ## 内容摘要
 
-- [1 快速开始](#1-快速开始)
-	- [1.1 配置工程](#1.1-配置工程)
-	- [1.2 示例代码](#1.2-示例代码)
-- [2 第三方库](#2-第三方库)
-- [3 系统要求](#3-系统要求)
-- [4 版本历史](#4-版本历史)
+- [快速开始](#1-快速开始)
+	- [配置工程](#配置工程)
+	- [示例代码](#示例代码)
+- [关于 2.0 版本](#关于2.0版本)
+- [版本历史](#版本历史)
 
-## 1 快速开始
+## 快速开始
 
-### 1.1 配置工程
+### 配置工程
 
 - 配置你的 Podfile 文件，添加如下配置信息
 
@@ -43,197 +40,78 @@ pod install
 
 - Done! 运行你工程的 workspace
 
-### 1.2 示例代码
-
-#### 1.2.1 视频播放控件
+### 示例代码
 
 在需要的地方添加
 
 ```Objective-C
-#import <PLPlayerKit/PLPlayerKit.h>
-```
-
-参数配置
-
-```Objective-C
-	NSMutableDictionary *parameters = [@{} mutableCopy];
-	
-	// 对于 iPhone 建议关闭逐行扫描，默认是开启的
-	if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone) {
-		parameters[PLVideoParameterDisableDeinterlacing] = @(YES);
-	}
-	
-	// 当业务需要在播放器初始化完成后自动开始播放，可以在初始化参数中设定
-	parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
+#import <PLPlayerKit/PLPlayer.h>
 ```
 
 初始化
 
 ```Objective-C
-	// 初始化 PLVideoPlayerController
-	PLVideoPlayerController *playerController = [PLVideoPlayerController videoPlayerControllerWithContentURL:url parameters:parameters];
-	
-	// 设定 delegate
-    playerController.delegate = self;
-    
-	// 获取到播放界面
-	UIView *playerView = playerController.playerView;
+// 初始化 Player
+PLPlayer *player = [PLPlayer playerWithURL:self.url];
+
+// 设定代理 (optional)
+player.delegate = self;
 ```
 
 开始／暂停操作
 
 ```Objective-C
-   // 准备播放
-   // 准备播放的方法主要完成流连接，解码器初始化等工作
-   [playerController prepareToPlayWithCompletion:^(BOOL success) {
-       if (success) {
-           [playerController play];
-       }
-   }];
+// 准备播放器
+__weak typeof(self) wself = self;
+[self.player prepareToPlayWithCompletion:^(NSError *error) {
+    if (!error) {
+        __strong typeof(wself) strongSelf = wself;
+        UIView *playerView = strongSelf.player.playerView;
+        [strongSelf.view addSubview:playerView];
+    }
+}];
    
-	// 播放
-	// 如果你没有主动的调用 prepareToPlayWithCompletion 方法, 直接调用 play 方法也是没有问题, play 方法内部会自行调用 prepareToPlayWithCompletion 方法来完成解码器初始化工作
-	[playerController play];
+// 播放
+[self.player play];
 	
-	// 暂停
-	[playerController pause];
+// 暂停
+[self.player pause];
 	
-	// 停止
-	[playerController stop];
+// 停止
+[self.player stop];
 ```
 
 播放器状态获取
 
 ```
-// 实现 <PLVideoPlayerControllerDelegate> 来控制流状态的变更
-- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLPlayerState)state {
+// 实现 <PLPlayerDelegate> 来控制流状态的变更
+- (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
 	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
+	// 除了 Error 状态，其他状态都会回调这个方法
 }
 
-- (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller {
-	// 解码器初始化完成, 与 videoPlayerController:playerStateDidChange: 方法中返回 PLVideoPlayerStateReady 状态属于同一情况，你可以仅仅实现 videoPlayerController:playerStateDidChange: 方法
-}
-
-- (void)videoPlayerController:(PLVideoPlayerController *)playerController failureWithError:(NSError *)error {
-	// 当出现错误时，你会在这里收到回调，暂且只有解码器初始化错误会返回
-}
-
-- (void)videoPlayerController:(PLVideoPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
-	// 视频进度变更时都会触发这个回调
+- (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
+	// 当发生错误时，会回调这个方法
 }
 ```
 
-#### 1.2.2 纯音频播放控件
+## 关于 2.0 版本
 
-在需要的地方添加
+从 2.0 版本开始，API 整体更新，不再向下兼容，弃用了 KxMovie 及 ffmpeg 依赖库。
+如果你需要 2.0 以下的版本，可以根据后面的版本历史找寻你需要的版本在 Podfile 中指定安装。
 
-```Objective-C
-#import <PLPlayerKit/PLPlayerKit.h>
-```
+## 版本历史
 
-参数配置
-
-```Objective-C
-	NSMutableDictionary *parameters = [@{} mutableCopy];
-	
-	// 当业务需要在播放器初始化完成后自动开始播放，可以在初始化参数中设定
-	parameters[PLPlayerParameterAutoPlayEnable] = @(YES);
-```
-
-初始化
-
-```Objective-C
-	// 初始化 PLAudioPlayerController
-	PLAudioPlayerController *playerController = [PLAudioPlayerController audioPlayerControllerWithContentURL:url parameters:parameters];
-	
-	// 设定 delegate
-    playerController.delegate = self;
-```
-
-开始／暂停操作
-
-```Objective-C
-	// 准备播放
-   // 准备播放的方法主要完成流连接，解码器初始化等工作
-   [playerController prepareToPlayWithCompletion:^(BOOL success) {
-       if (success) {
-           [playerController play];
-       }
-   }];
-   
-	// 播放
-	// 如果你没有主动的调用 prepareToPlayWithCompletion 方法, 直接调用 play 方法也是没有问题, play 方法内部会自行调用 prepareToPlayWithCompletion 方法来完成解码器初始化工作
-	[playerController play];
-	
-	// 暂停
-	[playerController pause];
-	
-	// 停止
-	[playerController stop];
-```
-
-播放器状态获取
-
-```
-// 实现 <PLAudioPlayerControllerDelegate> 来控制流状态的变更
-- (void)audioPlayerController:(PLAudioPlayerController *)controller playerStateDidChange:(PLPlayerState)state {
-	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
-}
-
-- (void)audioPlayerControllerDecoderHasBeenReady:(PLAudioPlayerController *)controller {
-	// 解码器初始化完成, 与 audioPlayerController:playerStateDidChange: 方法中返回 PLPlayerStateReady 状态属于同一情况，你可以仅仅实现 audioPlayerController:playerStateDidChange: 方法
-}
-
-- (void)audioPlayerController:(PLAudioPlayerController *)playerController failureWithError:(NSError *)error {
-	// 当出现错误时，你会在这里收到回调，暂且只有解码器初始化错误会返回
-}
-
-- (void)audioPlayerController:(PLAudioPlayerController *)playerController positionDidChange:(NSTimeInterval)position {
-	// 音频进度变更时都会触发这个回调
-}
-
-- (void)audioPlayerControllerWillBeginBackgroundTask:(PLAudioPlayerController *)controller {
-    // 当开启了后台播放时, 进入后台时会出发后台任务的创建, 创建之前便会回调这个回调方法
-}
-
-- (void)audioPlayerController:(PLAudioPlayerController *)controller willEndBackgroundTask:(BOOL)isExpirationOccured {
-    // 当开启了后台播放时, 进入后台后创建的后台任务在超时或者回到前台时，会被销毁掉，便会调用这个回调方法
-}
-```
-
-#### 1.2.3 配置参数
-
-```
-// 视频播放器参数
-// 逐行扫描
-PLVideoParameterDisableDeinterlacing
-
-// Player contentMode
-PLVideoParameterFrameViewContentMode
-```
-
-```
-// 通用配置参数，音视频均可用
-// 最小缓存时长
-PLPlayerParameterMinBufferedDuration
-
-// 最大缓存时长
-PLPlayerParameterMaxBufferedDuration
-
-// 是否自动开始播放
-PLPlayerParameterAutoPlayEnable
-```
-
-## 2 包含的第三方库
-
-- ffmpeg
-
-## 3 系统要求
-
-- iOS Target : >= iOS 6
-
-## 4 版本历史
-
+- 2.0.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.19.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.19.md))
+    - 添加全新的 PLPlayer 音视频播放控件
+    - RTMP 直播流后台模式支持
+    	- 后台 播放 RTMP 音视频流时，进入后台后声音继续播放，返回前台追帧显示最新视频帧
+    - 针对 RTMP 直播彻底优化
+    	- 首屏秒开
+    	- 最小化缓存延时确保直播实时性
+    - 去除 ffmpeg 依赖
+    	- 总体积减少 83%，由 67.2MB 缩减到 11.5MB(包括 armv7, armv7s, arm64, i386, x86_64，工程占用非编译后占用)
+    - 优化资源占用，比 1.x 版本内存占用减少 50% 以上
 - 1.2.22 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.22.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.22.md))
     - 修复因收到内存警告而引起的崩溃问题
     - 修复停止播放时，可能进入错误 play state 的问题
