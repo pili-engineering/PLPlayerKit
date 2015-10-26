@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
   s.author           = { "0dayZh" => "0day.zh@gmail.com" }
-  s.source           = { :git => "https://github.com/pili-engineering/PLPlayerKit.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/pili-engineering/PLPlayerKit.git", :tag => "v#{s.version}" }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
   s.public_header_files = "Pod/Library/include/PLPlayerKit/*.h"
   s.source_files = 'Pod/Library/include/**/*.h'
 
-  s.frameworks = "UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"
+  s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
   s.libraries = "c++", "z"
 
   s.default_subspec = "precompiled"

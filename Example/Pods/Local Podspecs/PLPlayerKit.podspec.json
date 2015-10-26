@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/pili-engineering/PLPlayerKit.git",
-    "tag": "2.0.0"
+    "tag": "v2.0.0"
   },
   "platforms": {
     "ios": "7.0"
