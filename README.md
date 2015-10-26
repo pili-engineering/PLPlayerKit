@@ -6,7 +6,7 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 
 - [x] RTMP 直播流播放
 - [x] HLS 播放
-- [x] 高可定制
+- [x] 轻量简单
 - [x] 音频后台播放
 - [x] 无 ffmpeg 依赖
 
@@ -15,7 +15,9 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [快速开始](#1-快速开始)
 	- [配置工程](#配置工程)
 	- [示例代码](#示例代码)
-- [关于 2.0 版本](#关于2.0版本)
+- [系统要求](#系统要求)
+- [关于 v2.0.0 版本](#关于v2.0.0版本)
+    - [对 1.x 版本兼容性说明](#对1.x版本兼容性说明)
 - [版本历史](#版本历史)
 
 ## 快速开始
@@ -41,6 +43,9 @@ pod install
 - Done! 运行你工程的 workspace
 
 ### 示例代码
+
+所有你需要知道的方法一目了然
+
 
 在需要的地方添加
 
@@ -70,13 +75,13 @@ __weak typeof(self) wself = self;
         [strongSelf.view addSubview:playerView];
     }
 }];
-   
-// 播放
+
+// 播放, 必须在 - (void)prepareToPlayWithCompletion: 方法调用且回调执行完后调用才有效
 [self.player play];
-	
+
 // 暂停
 [self.player pause];
-	
+
 // 停止
 [self.player stop];
 ```
@@ -94,8 +99,15 @@ __weak typeof(self) wself = self;
 	// 当发生错误时，会回调这个方法
 }
 ```
+##系统要求
 
-## 关于 2.0 版本
+系统版本要求
+
+- 不低于 iOS 7
+
+## 关于 2.0.0 版本
+
+### 对 1.x 版本兼容性说明
 
 从 2.0 版本开始，API 整体更新，不再向下兼容，弃用了 KxMovie 及 ffmpeg 依赖库。
 如果你需要 2.0 以下的版本，可以根据后面的版本历史找寻你需要的版本在 Podfile 中指定安装。

@@ -2,8 +2,8 @@
 //  PLPlayer.h
 //  PLPlayerKit
 //
-//  Created by 0dayZh on 15/10/15.
-//  Copyright © 2015年 qgenius. All rights reserved.
+//  Created on 15/10/15.
+//  Copyright © 2015年 Pili Engineering. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
