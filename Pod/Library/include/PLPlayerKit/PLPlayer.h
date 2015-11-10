@@ -14,6 +14,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
     PLPlayerStatusUnknow = 0,
     PLPlayerStatusPreparing,
     PLPlayerStatusReady,
+    PLPlayerStatusCaching,
     PLPlayerStatusPlaying,
     PLPlayerStatusPaused,
     PLPlayerStatusStopped,

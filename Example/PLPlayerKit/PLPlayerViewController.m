@@ -13,6 +13,7 @@ static NSString *status[] = {
     @"PLPlayerStatusUnknow",
     @"PLPlayerStatusPreparing",
     @"PLPlayerStatusReady",
+    @"PLPlayerStatusCaching",
     @"PLPlayerStatusPlaying",
     @"PLPlayerStatusPaused",
     @"PLPlayerStatusStopped",
@@ -39,6 +40,7 @@ PLPlayerDelegate
 }
 
 - (void)dealloc {
+    [self.player stop];
     self.player = nil;
 }
 
@@ -58,6 +60,10 @@ PLPlayerDelegate
             [playerView addGestureRecognizer:tap];
             
             [strongSelf.view addSubview:playerView];
+            
+            if (strongSelf.isViewLoaded && PLPlayerStatusReady == strongSelf.player.status) {
+                [strongSelf.player play];
+            }
         }
     }];
 }
@@ -65,7 +71,9 @@ PLPlayerDelegate
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.player play];
+    if (PLPlayerStatusReady == self.player.status) {
+        [self.player play];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

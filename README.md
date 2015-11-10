@@ -6,22 +6,16 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 
 - [x] RTMP 直播流播放
 - [x] HLS 播放
-- [x] 轻量简单
+- [x] 高可定制
 - [x] 音频后台播放
 - [x] 无 ffmpeg 依赖
-
-保持简单，所有你需要知道的方法一目了然
-
-![](./interface.png)
 
 ## 内容摘要
 
 - [快速开始](#1-快速开始)
 	- [配置工程](#配置工程)
 	- [示例代码](#示例代码)
-- [系统要求](#系统要求)
-- [关于 v2.0.0 版本](#关于v2.0.0版本)
-    - [对 1.x 版本兼容性说明](#对1.x版本兼容性说明)
+- [关于 2.0 版本](#关于2.0版本)
 - [版本历史](#版本历史)
 
 ## 快速开始
@@ -76,13 +70,13 @@ __weak typeof(self) wself = self;
         [strongSelf.view addSubview:playerView];
     }
 }];
-
-// 播放, 必须在 - (void)prepareToPlayWithCompletion: 方法调用且回调执行完后调用才有效
+   
+// 播放
 [self.player play];
-
+	
 // 暂停
 [self.player pause];
-
+	
 // 停止
 [self.player stop];
 ```
@@ -100,30 +94,25 @@ __weak typeof(self) wself = self;
 	// 当发生错误时，会回调这个方法
 }
 ```
-##系统要求
 
-系统版本要求
-
-- 不低于 iOS 7
-
-## 关于 2.0.0 版本
-
-### 对 1.x 版本兼容性说明
+## 关于 2.0 版本
 
 从 2.0 版本开始，API 整体更新，不再向下兼容，弃用了 KxMovie 及 ffmpeg 依赖库。
 如果你需要 2.0 以下的版本，可以根据后面的版本历史找寻你需要的版本在 Podfile 中指定安装。
 
 ## 版本历史
 
-- 2.0.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.19.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.19.md))
-    - 添加全新的 PLPlayer 音视频播放控件
-    - RTMP 直播流后台模式支持
-    	- 后台 播放 RTMP 音视频流时，进入后台后声音继续播放，返回前台追帧显示最新视频帧
-    - 针对 RTMP 直播彻底优化
-    	- 首屏秒开
-    	- 最小化缓存延时确保直播实时性
-    - 去除 ffmpeg 依赖
-    	- 总体积减少 83%，由 67.2MB 缩减到 11.5MB(包括 armv7, armv7s, arm64, i386, x86_64，工程占用非编译后占用)
+- 2.0.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.1.md))
+    - 修复 `contentMode` 设置无效的问题
+    - 修复 rtmp 无法播放或播放超时时无 error 抛出的问题
+    - 修复 rtmp 播放失败时触发的 cpu 飙升问题
+    - 修复 stop 可能触发的 crash 问题
+    - 更新 demo 确保在 iOS 9.1 下运行正常
+- 2.0.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.0.md))
+    - 添加全新的 `PLPlayer`，弃用 `PLVideoPlayerController` 和 `PLAudioPlayerController`
+    - 播放 RTMP 音视频流时，进入后台后声音继续播放，不会断开，返回前台追帧显示最新视频帧
+    - 针对 RTMP 直播彻底优化，首屏秒开，最小化缓存
+    - 完全无 ffmpeg 依赖，包体积再次缩小
     - 优化资源占用，比 1.x 版本内存占用减少 50% 以上
 - 1.2.22 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.22.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.22.md))
     - 修复因收到内存警告而引起的崩溃问题
