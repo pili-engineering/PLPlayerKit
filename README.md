@@ -102,6 +102,13 @@ __weak typeof(self) wself = self;
 
 ## 版本历史
 
+- 2.0.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.2.md))
+    - 添加 RTMP Cache 机制
+    - 添加数据超时属性
+    - 修复 RTMP 播放内存 leak
+    - 修复 RTMP 播放音频错误问题
+    - 修复 RTMP 播放主线程卡死问题
+    - 优化架构，减少内存和 cpu 占用
 - 2.0.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.1.md))
     - 修复 `contentMode` 设置无效的问题
     - 修复 rtmp 无法播放或播放超时时无 error 抛出的问题

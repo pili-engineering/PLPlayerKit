@@ -25,6 +25,7 @@ static NSString *status[] = {
 PLPlayerDelegate
 >
 @property (nonatomic, strong) PLPlayer  *player;
+@property (nonatomic, weak) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
@@ -44,6 +45,29 @@ PLPlayerDelegate
     self.player = nil;
 }
 
+- (void)startPlayer {
+    __weak typeof(self) wself = self;
+    [self.player prepareToPlayWithCompletion:^(NSError *error) {
+        if (!error) {
+            __strong typeof(wself) strongSelf = wself;
+            
+            // [optional] set time out interval in seconds
+            strongSelf.player.timeoutIntervalForMediaPackets = 8;
+            
+            // add player view
+            UIView *playerView = strongSelf.player.playerView;
+            playerView.contentMode = UIViewContentModeScaleAspectFill;
+            playerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+            [strongSelf.view addSubview:playerView];
+            
+            if (strongSelf.isViewLoaded && PLPlayerStatusReady == strongSelf.player.status) {
+                [strongSelf addActivityIndicatorView];
+                [strongSelf.player play];
+            }
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -51,20 +75,21 @@ PLPlayerDelegate
     player.delegate = self;
     self.player = player;
     
+    [self startPlayer];
+    
     __weak typeof(self) wself = self;
-    [self.player prepareToPlayWithCompletion:^(NSError *error) {
-        if (!error) {
-            __strong typeof(wself) strongSelf = wself;
-            UIView *playerView = strongSelf.player.playerView;
-            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:strongSelf action:@selector(tap:)];
-            [playerView addGestureRecognizer:tap];
-            
-            [strongSelf.view addSubview:playerView];
-            
-            if (strongSelf.isViewLoaded && PLPlayerStatusReady == strongSelf.player.status) {
-                [strongSelf.player play];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
+        __strong typeof(wself) strongSelf = wself;
+        if (strongSelf.player.isPlaying) {
+            [strongSelf.player stop];
+            if (strongSelf.player.playerView.superview) {
+                [strongSelf.player.playerView removeFromSuperview];
             }
         }
+    }];
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
+        __strong typeof(wself) strongSelf = wself;
+        [strongSelf startPlayer];
     }];
 }
 
@@ -72,6 +97,7 @@ PLPlayerDelegate
     [super viewDidAppear:animated];
     
     if (PLPlayerStatusReady == self.player.status) {
+        [self addActivityIndicatorView];
         [self.player play];
     }
 }
@@ -86,17 +112,31 @@ PLPlayerDelegate
 
 #pragma mark -
 
-- (void)tap:(UITapGestureRecognizer *)tap {
-    self.player.isPlaying ? [self.player pause] : [self.player resume];
+- (void)addActivityIndicatorView {
+    if (self.activityIndicatorView) {
+        return;
+    }
+    UIActivityIndicatorView *activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityIndicatorView.center = CGPointMake(CGRectGetMidX(self.view.bounds), CGRectGetMidY(self.view.bounds));
+    [self.view addSubview:activityIndicatorView];
+    [activityIndicatorView stopAnimating];
+    
+    self.activityIndicatorView = activityIndicatorView;
 }
 
 #pragma mark - <PLPlayerDelegate>
 
 - (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
     NSLog(@"%@", status[state]);
+    if (PLPlayerStatusCaching == state) {
+        [self.activityIndicatorView startAnimating];
+    } else {
+        [self.activityIndicatorView stopAnimating];
+    }
 }
 
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
+    [self.activityIndicatorView stopAnimating];
     NSLog(@"%@", error);
 }
 

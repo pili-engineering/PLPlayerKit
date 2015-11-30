@@ -33,13 +33,16 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 
 @property (nonatomic, strong, nonnull) NSURL    *url;
 @property (nonatomic, assign, nullable) id<PLPlayerDelegate>    delegate;
+/// 接收/发送数据包超时时间间隔, 默认为 10s.
+/// 注意: 当前, 该属性在 - (void)prepareToPlayWithCompletion: 的 completion block 中执行才会有效
+@property (nonatomic, assign) NSTimeInterval    timeoutIntervalForMediaPackets;
 
 @property (nonatomic, strong, nullable) NSError   *error;
 @property (nonatomic, assign) PLPlayerStatus   status;
 @property (nonatomic, assign, getter=isPlaying) BOOL  playing;
 
 // render
-/// 注意：playerView 必须在调用完 - (void)prepareToPlayWithCompletion: 后才能访问到正常的值
+/// 注意: playerView 必须在调用完 - (void)prepareToPlayWithCompletion: 后才能访问到正常的值
 @property (nonatomic, strong, nullable) UIView    *playerView;
 
 + (nullable instancetype)playerWithURL:(nullable NSURL *)url;
