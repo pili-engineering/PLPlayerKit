@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "PLPlayerKit"
-  s.version          = "2.0.2"
+  s.version          = "2.0.3"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'

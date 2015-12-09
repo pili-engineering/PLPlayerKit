@@ -95,13 +95,42 @@ __weak typeof(self) wself = self;
 }
 ```
 
-## 关于 2.0 版本
+## 音频部分的特别说明
 
-从 2.0 版本开始，API 整体更新，不再向下兼容，弃用了 KxMovie 及 ffmpeg 依赖库。
-如果你需要 2.0 以下的版本，可以根据后面的版本历史找寻你需要的版本在 Podfile 中指定安装。
+因为 iOS 的音频资源被设计为单例资源，所以如果在 player 中做的任何修改，对外都可能造成影响，并且带来不能预估的各种问题。
+
+为了应对这一情况，PLPlayerKit 采取的方式是检查是否可以播放及是否可以进入后台，而在内部不做任何设置。具体是通过扩展 `AVAudioSession` 来做到的，提供了两个方法，如下：
+
+```
+/*!
+ * @description 检查当前 AVAudioSession 的 category 配置是否可以播放音频. 当为 AVAudioSessionCategoryAmbient,
+ * AVAudioSessionCategorySoloAmbient, AVAudioSessionCategoryPlayback, AVAudioSessionCategoryPlayAndRecord 
+ * 中的一种时为 YES, 否则为 NO.
+ */
++ (BOOL)isPlayable;
+
+/*!
+ * @description 检查当前 AVAudioSession 的 category 配置是否可以后台播放. 当为 AVAudioSessionCategoryPlayback,
+ * AVAudioSessionCategoryPlayAndRecord 中的一种时为 YES, 否则为 NO.
+ */
++ (BOOL)canPlayInBackground;
+```
+
+分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
+
+## 已知 issues
+
+- 当时间戳错乱时，player 当前处理有待优化，可能会因时间戳导致音频有卡顿现象。可以触发这一问题的行为有：
+    - 推流端推流开始后，切换推流质量
+    - Android 推流 SDK 切换前后至摄像头
 
 ## 版本历史
 
+- 2.0.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.3.md))
+    - 解决 RTMP 播放没有声音
+    - 解决 RTMP 无法播放导致内存急增最终 App crash
+    - 解决 RTMP 无法播放画面只有声音
+    - 解决播放 RTMP 时相关的 crash 问题
 - 2.0.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.2.md))
     - 添加 RTMP Cache 机制
     - 添加数据超时属性
