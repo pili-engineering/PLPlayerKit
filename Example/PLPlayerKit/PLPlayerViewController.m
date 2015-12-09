@@ -68,6 +68,20 @@ PLPlayerDelegate
     }];
 }
 
+- (void)restart {
+    __weak typeof(self) wself = self;
+    [self.player prepareToPlayWithCompletion:^(NSError *error) {
+        if (!error) {
+            __strong typeof(wself) strongSelf = wself;
+            
+            if (strongSelf.isViewLoaded && PLPlayerStatusReady == strongSelf.player.status) {
+                [strongSelf addActivityIndicatorView];
+                [strongSelf.player play];
+            }
+        }
+    }];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -138,6 +152,9 @@ PLPlayerDelegate
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
     [self.activityIndicatorView stopAnimating];
     NSLog(@"%@", error);
+    
+    // 你可以在这个回调中尝试重新播放
+    [self restart];
 }
 
 @end
