@@ -83,7 +83,7 @@ __weak typeof(self) wself = self;
 
 播放器状态获取
 
-```
+```Objective-C
 // 实现 <PLPlayerDelegate> 来控制流状态的变更
 - (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
 	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
@@ -101,7 +101,7 @@ __weak typeof(self) wself = self;
 
 为了应对这一情况，PLPlayerKit 采取的方式是检查是否可以播放及是否可以进入后台，而在内部不做任何设置。具体是通过扩展 `AVAudioSession` 来做到的，提供了两个方法，如下：
 
-```
+```Objective-C
 /*!
  * @description 检查当前 AVAudioSession 的 category 配置是否可以播放音频. 当为 AVAudioSessionCategoryAmbient,
  * AVAudioSessionCategorySoloAmbient, AVAudioSessionCategoryPlayback, AVAudioSessionCategoryPlayAndRecord 
