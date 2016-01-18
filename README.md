@@ -1,3 +1,11 @@
+**重要说明**
+
+因完成 PLPlayerKit 2.x 版本整体重构工作还需要较长时间，该 repo 的版本仍存在不少待解决的问题，会影响可用性。
+
+在这样的情况下，为了满足直播播放器需求，我们整合 ijk player，调优参数额外提供一个稳定可用的版本以 zip 包形式提供，其中包含了 ijk 版本的 README 文档，example，`/deps` 目录下的两个 framework，下载链接如下（1月6日 release 版）:
+
+http://7xpnwz.dl1.z0.glb.clouddn.com/PLIJKPlayerDemo-2016-01-06.zip
+
 # PLPlayerKit
 
 PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP 和 HLS 直播流媒体播放。
