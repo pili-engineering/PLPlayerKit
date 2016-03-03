@@ -1,5 +1,5 @@
-# source 'https://github.com/CocoaPods/Specs.git'
-source 'https://gitcafe.com/0dayZh/Specs.git'
+source 'https://github.com/CocoaPods/Specs.git'
+# source 'https://gitcafe.com/0dayZh/Specs.git'
 
 target 'PLPlayerKit', :exclusive => true do
   pod "PLPlayerKit", :path => "../"

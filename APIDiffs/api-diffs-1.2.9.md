@@ -2,10 +2,11 @@
 
 ## General Headers
 
-```PLPlayerTypeDefines.h```
-
+```
+PLPlayerTypeDefines.h
+```
 - *Add* type ```PLVideoPlayerBackgroundMode```
-
-```PLVideoPlayerController.h```
-
+```
+PLVideoPlayerController.h
+```
 - *Add* property ```@property (nonatomic, assign) PLVideoPlayerBackgroundMode   backgroundMode;```

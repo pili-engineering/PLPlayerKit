@@ -2,5 +2,5 @@
 
 ## General Headers
 
-- *Added* Class ```VideoPlayerViewController```
-- *Added* Header ```PLPlayerTypeDefines.h```
+- *Added* Class `VideoPlayerViewController`
+- *Added* Header `PLPlayerTypeDefines.h`

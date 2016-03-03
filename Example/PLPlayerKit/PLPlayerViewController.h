@@ -10,8 +10,8 @@
 
 @interface PLPlayerViewController : UIViewController
 
-@property (nonatomic, strong) NSURL *url;
+@property (nonatomic, strong) NSURL *URL;
 
-- (instancetype)initWithURL:(NSURL *)url;
+- (instancetype)initWithURL:(NSURL *)URL;
 
 @end

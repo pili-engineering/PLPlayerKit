@@ -2,6 +2,7 @@
 
 ## General Headers
 
-```PLPlayer.h```
-
+```
+PLPlayer.h
+```
 - *Added* `@property (nonatomic, assign) NSTimeInterval    timeoutIntervalForMediaPackets;`

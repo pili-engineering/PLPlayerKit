@@ -2,6 +2,7 @@
 
 ## General Headers
 
-```PLAudioManager.h```
-
+```
+PLAudioManager.h
+```
 - *Added* class `PLAudioManager`

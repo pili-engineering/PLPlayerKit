@@ -2,15 +2,16 @@
 
 ## General Headers
 
-```PLPlayerTypeDefines.h```
+```
+PLPlayerTypeDefines.h
+```
+- *Add* type `PLVideoPlayerState`
+- *Add* const `extern NSString * const PLMovidParameterAutoPlayEnable;`
 
-- *Add* type ```PLVideoPlayerState```
-- *Add* const ```extern NSString * const PLMovidParameterAutoPlayEnable;```
-
-```PLVideoPlayerController.h```
-
+```
+PLVideoPlayerController.h
+```
 - *Modified* protocol ```PLVideoPlayerControllerDelegate```
-	- *Add* method ```- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state;``` to 
-	- *Add* method ```(void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller;```
-	
+	- *Add* method ```- (void)videoPlayerController:(PLVideoPlayerController *)controller playerStateDidChange:(PLVideoPlayerState)state;```
+	- *Add* method ```- (void)videoPlayerControllerDecoderHasBeenReady:(PLVideoPlayerController *)controller;```
 - *Add* property ```@property (nonatomic, assign, readonly) PLVideoPlayerState playerState;```

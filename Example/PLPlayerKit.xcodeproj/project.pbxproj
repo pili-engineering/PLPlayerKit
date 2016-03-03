@@ -12,11 +12,11 @@
 		6003F592195388D20070C39A /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6003F591195388D20070C39A /* UIKit.framework */; };
 		6003F598195388D20070C39A /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6003F596195388D20070C39A /* InfoPlist.strings */; };
 		6003F59A195388D20070C39A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F599195388D20070C39A /* main.m */; };
-		6003F59E195388D20070C39A /* PLAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6003F59D195388D20070C39A /* PLAppDelegate.m */; };
 		6003F5A9195388D20070C39A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6003F5A8195388D20070C39A /* Images.xcassets */; };
 		767C20511AFA847B0026FFDB /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767C204E1AFA847B0026FFDB /* MasterViewController.m */; };
 		767C20571AFA84940026FFDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767C20531AFA84940026FFDB /* LaunchScreen.xib */; };
 		767C20581AFA84940026FFDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767C20551AFA84940026FFDB /* Main.storyboard */; };
+		B624E68E1C85A2FE009B2F4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B624E68D1C85A2FE009B2F4B /* AppDelegate.m */; };
 		C5C31BF4A568D181D707DEAC /* libPods-PLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1117E27DDA7B4D87DCF825 /* libPods-PLPlayerKit.a */; };
 		E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */; };
 		E9A58B741BC8B264004780C5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A58B731BC8B264004780C5 /* Launch Screen.storyboard */; };
@@ -37,8 +37,6 @@
 		6003F597195388D20070C39A /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6003F599195388D20070C39A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		6003F59B195388D20070C39A /* PLPlayerKit-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PLPlayerKit-Prefix.pch"; sourceTree = "<group>"; };
-		6003F59C195388D20070C39A /* PLAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLAppDelegate.h; sourceTree = "<group>"; };
-		6003F59D195388D20070C39A /* PLAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PLAppDelegate.m; sourceTree = "<group>"; };
 		6003F5A8195388D20070C39A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6003F5AF195388D20070C39A /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		6003F5B7195388D20070C39A /* Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Tests-Info.plist"; sourceTree = "<group>"; };
@@ -50,6 +48,9 @@
 		767C20541AFA84940026FFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		767C20561AFA84940026FFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76833868582AFAFB2F2D10C3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
+		B624E68C1C85A2FE009B2F4B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		B624E68D1C85A2FE009B2F4B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		B6C2447A1C85A657006E233F /* MacroDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefines.h; sourceTree = "<group>"; };
 		DB4C6DAD0C15394D6467EC68 /* Pods-Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tests/Pods-Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		E7CF2F2A076018BA14EB641C /* PLPlayerKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PLPlayerKit.podspec; path = ../PLPlayerKit.podspec; sourceTree = "<group>"; };
 		E94A8F781BDE8A7A00129A70 /* PLPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerViewController.h; sourceTree = "<group>"; };
@@ -119,8 +120,9 @@
 		6003F593195388D20070C39A /* PLPlayerKit */ = {
 			isa = PBXGroup;
 			children = (
-				6003F59C195388D20070C39A /* PLAppDelegate.h */,
-				6003F59D195388D20070C39A /* PLAppDelegate.m */,
+				B6C2447A1C85A657006E233F /* MacroDefines.h */,
+				B624E68C1C85A2FE009B2F4B /* AppDelegate.h */,
+				B624E68D1C85A2FE009B2F4B /* AppDelegate.m */,
 				767C204D1AFA847B0026FFDB /* MasterViewController.h */,
 				767C204E1AFA847B0026FFDB /* MasterViewController.m */,
 				E94A8F781BDE8A7A00129A70 /* PLPlayerViewController.h */,
@@ -208,6 +210,7 @@
 				ORGANIZATIONNAME = 0dayZh;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
+						DevelopmentTeam = GDFHW66V92;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -302,7 +305,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6003F59E195388D20070C39A /* PLAppDelegate.m in Sources */,
+				B624E68E1C85A2FE009B2F4B /* AppDelegate.m in Sources */,
 				767C20511AFA847B0026FFDB /* MasterViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
 				E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */,
@@ -425,7 +428,8 @@
 			baseConfigurationReference = 2E479104D02F64329464E25D /* Pods-PLPlayerKit.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLPlayerKit/PLPlayerKit-Prefix.pch";
 				INFOPLIST_FILE = "PLPlayerKit/PLPlayerKit-Info.plist";
@@ -461,6 +465,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
@@ -471,7 +476,8 @@
 			baseConfigurationReference = 14B3DEC80E341402D4216FD4 /* Pods-PLPlayerKit.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLPlayerKit/PLPlayerKit-Prefix.pch";
 				INFOPLIST_FILE = "PLPlayerKit/PLPlayerKit-Info.plist";
@@ -506,6 +512,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.demo.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 				WRAPPER_EXTENSION = app;
 			};
