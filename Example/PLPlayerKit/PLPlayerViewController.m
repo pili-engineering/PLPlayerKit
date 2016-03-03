@@ -7,7 +7,8 @@
 //
 
 #import "PLPlayerViewController.h"
-#import <PLPlayerKit/PLPlayer.h>
+#import <PLPlayerKit/PLPlayerKit.h>
+#import "MacroDefines.h"
 
 static NSString *status[] = {
     @"PLPlayerStatusUnknow",
@@ -22,7 +23,8 @@ static NSString *status[] = {
 
 @interface PLPlayerViewController ()
 <
-PLPlayerDelegate
+PLPlayerDelegate,
+UITextViewDelegate
 >
 @property (nonatomic, strong) PLPlayer  *player;
 @property (nonatomic, weak) UIActivityIndicatorView *activityIndicatorView;
@@ -31,77 +33,103 @@ PLPlayerDelegate
 
 @implementation PLPlayerViewController
 
-- (instancetype)initWithURL:(NSURL *)url {
+- (instancetype)initWithURL:(NSURL *)URL {
     self = [super init];
     if (self) {
-        self.url = url;
+        self.URL = URL;
     }
     
     return self;
 }
 
 - (void)dealloc {
-    [self.player stop];
     self.player = nil;
 }
 
-- (void)startPlayer {
-    __weak typeof(self) wself = self;
-    [self.player prepareToPlayWithCompletion:^(NSError *error) {
-        if (!error) {
-            __strong typeof(wself) strongSelf = wself;
-            
-            // [optional] set time out interval in seconds
-            strongSelf.player.timeoutIntervalForMediaPackets = 8;
-            
-            // add player view
-            UIView *playerView = strongSelf.player.playerView;
-            playerView.contentMode = UIViewContentModeScaleAspectFill;
-            playerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
-            [strongSelf.view addSubview:playerView];
-            
-            if (strongSelf.isViewLoaded && PLPlayerStatusReady == strongSelf.player.status) {
-                [strongSelf addActivityIndicatorView];
-                [strongSelf.player play];
-            }
-        }
-    }];
+#pragma mark - <UITextViewDelegate>
+
+- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    return YES;
 }
 
-- (void)restart {
-    __weak typeof(self) wself = self;
-    [self.player prepareToPlayWithCompletion:^(NSError *error) {
-        if (!error) {
-            __strong typeof(wself) strongSelf = wself;
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    return YES;
+}
+
+- (void)tap:(id)sender {
+    [self.view endEditing:YES];
+}
+
+- (void)setupUI {
+    if (self.player.status != PLPlayerStatusError) {
+        // add player view
+        UIView *playerView = self.player.playerView;
+        if (!playerView.superview) {
+            playerView.contentMode = UIViewContentModeScaleAspectFill;
+            playerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+            [self.view addSubview:playerView];
             
-            if (strongSelf.isViewLoaded && PLPlayerStatusReady == strongSelf.player.status) {
-                [strongSelf addActivityIndicatorView];
-                [strongSelf.player play];
-            }
+            // test input
+            UITextView *textView = [[UITextView alloc] initWithFrame:CGRectMake(15, 80, CGRectGetWidth(self.view.bounds) - 30, 150)];
+            textView.delegate = self;
+            textView.backgroundColor = [UIColor colorWithWhite:0 alpha:0.2];
+            textView.textColor = [UIColor colorWithWhite:1 alpha:0.8];
+            textView.text = @"我是 TextView";
+            [self.view addSubview:textView];
+            
+            // button
+            UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+            button.frame = CGRectMake(15, 400, 320, 44);
+            [button setTitle:@"Jump to safari" forState:UIControlStateNormal];
+            [button addTarget:self action:@selector(buttonPressed:) forControlEvents:UIControlEventTouchUpInside];
+            [self.view addSubview:button];
+            
+            UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+            [self.view addGestureRecognizer:tap];
         }
-    }];
+    }
+    
+}
+
+- (void)startPlayer {
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        if (self.isViewLoaded) {
+            [self addActivityIndicatorView];
+            [UIApplication sharedApplication].idleTimerDisabled = YES;
+            [self.player play];
+        }
+    });
+}
+
+- (void)buttonPressed:(id)sender {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.baidu.com"]];
+    });
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    PLPlayer *player = [PLPlayer playerWithURL:self.url];
-    player.delegate = self;
-    self.player = player;
+    [[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+    
+    PLPlayerOption *option = [PLPlayerOption defaultOption];
+    [option setOptionValue:@15 forKey:PLPlayerOptionKeyTimeoutIntervalForMediaPackets];
+
+    self.player = [PLPlayer playerWithURL:self.URL option:option];
+    self.player.delegate = self;
+    
+    [self setupUI];
     
     [self startPlayer];
     
     __weak typeof(self) wself = self;
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidEnterBackgroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillResignActiveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
         __strong typeof(wself) strongSelf = wself;
         if (strongSelf.player.isPlaying) {
             [strongSelf.player stop];
-            if (strongSelf.player.playerView.superview) {
-                [strongSelf.player.playerView removeFromSuperview];
-            }
         }
     }];
-    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationWillEnterForegroundNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
+    [[NSNotificationCenter defaultCenter] addObserverForName:UIApplicationDidBecomeActiveNotification object:nil queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notif) {
         __strong typeof(wself) strongSelf = wself;
         [strongSelf startPlayer];
     }];
@@ -109,9 +137,8 @@ PLPlayerDelegate
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    if (PLPlayerStatusReady == self.player.status) {
-        [self addActivityIndicatorView];
+    [self addActivityIndicatorView];
+    if (self.player.status != PLPlayerStatusError) {
         [self.player play];
     }
 }
@@ -120,11 +147,9 @@ PLPlayerDelegate
     if (self.player.isPlaying) {
         [self.player stop];
     }
-    
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     [super viewWillDisappear:animated];
 }
-
-#pragma mark -
 
 - (void)addActivityIndicatorView {
     if (self.activityIndicatorView) {
@@ -138,23 +163,45 @@ PLPlayerDelegate
     self.activityIndicatorView = activityIndicatorView;
 }
 
+#pragma mark -
+
+//- (void)tap:(UITapGestureRecognizer *)tap {
+//    self.player.isPlaying ? [self.player pause] : [self.player resume];
+//}
+
 #pragma mark - <PLPlayerDelegate>
 
 - (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
-    NSLog(@"%@", status[state]);
     if (PLPlayerStatusCaching == state) {
         [self.activityIndicatorView startAnimating];
     } else {
         [self.activityIndicatorView stopAnimating];
     }
+    NSLog(@"%@", status[state]);
 }
 
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
     [self.activityIndicatorView stopAnimating];
+    if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8.0")) {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Error"
+                                                                       message:error.localizedDescription
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        __weak typeof(self) wself = self;
+        UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"OK"
+                                                         style:UIAlertActionStyleCancel
+                                                       handler:^(UIAlertAction *action) {
+                                                           __strong typeof(wself) strongSelf = wself;
+                                                           [strongSelf.navigationController performSelectorOnMainThread:@selector(popViewControllerAnimated:) withObject:@(YES) waitUntilDone:NO];
+                                                       }];
+        [alert addAction:cancel];
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+    }
+    [UIApplication sharedApplication].idleTimerDisabled = NO;
     NSLog(@"%@", error);
-    
-    // 你可以在这个回调中尝试重新播放
-    [self restart];
 }
 
 @end

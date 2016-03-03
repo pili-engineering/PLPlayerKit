@@ -10,5 +10,6 @@
 #define PLPlayerKit_PLPlayerKit_h
 
 #import "PLPlayer.h"
+#import "PLPlayerOption.h"
 
 #endif

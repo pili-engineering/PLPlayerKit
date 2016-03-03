@@ -10,6 +10,4 @@
 
 @interface MasterViewController : UITableViewController
 
-
 @end
-

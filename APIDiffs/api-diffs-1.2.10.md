@@ -5,16 +5,13 @@
 ```
 PLPlayerTypeDefines.h
 ```
-
-- *Add* notifications 
-	```
-	extern NSString *PLAudioSessionInterruptionStateKey;
-	extern NSString *PLAudioSessionInterruptionTypeKey;
-	extern NSString *PLAudioSessionDidInterrupteNotification;
-	
-	extern NSString *PLAudioSessionRouteChangeReasonKey;
-	extern NSString *PLAudioSessionRouteDidChangeNotification;
-	
-	extern NSString *PLAudioSessionCurrentHardwareOutputVolumeKey;
-	extern NSString *PLAudioSessionCurrentHardwareOutputVolumeDidChangeNotification;
-	```
+- *Add* notifications
+```
+extern NSString *PLAudioSessionInterruptionStateKey;
+extern NSString *PLAudioSessionInterruptionTypeKey;
+extern NSString *PLAudioSessionDidInterrupteNotification;
+extern NSString *PLAudioSessionRouteChangeReasonKey;
+extern NSString *PLAudioSessionRouteDidChangeNotification;
+extern NSString *PLAudioSessionCurrentHardwareOutputVolumeKey;
+extern NSString *PLAudioSessionCurrentHardwareOutputVolumeDidChangeNotification;
+```

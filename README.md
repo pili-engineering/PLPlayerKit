@@ -1,11 +1,3 @@
-**重要说明**
-
-因完成 PLPlayerKit 2.x 版本整体重构工作还需要较长时间，该 repo 的版本仍存在不少待解决的问题，会影响可用性。
-
-在这样的情况下，为了满足直播播放器需求，我们整合 ijk player，调优参数额外提供一个稳定可用的版本以 zip 包形式提供，其中包含了 ijk 版本的 README 文档，example，`/deps` 目录下的两个 framework，下载链接如下（1月6日 release 版）:
-
-http://7xpnwz.dl1.z0.glb.clouddn.com/PLIJKPlayerDemo-2016-01-06.zip
-
 # PLPlayerKit
 
 PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP 和 HLS 直播流媒体播放。
@@ -56,42 +48,50 @@ pod install
 #import <PLPlayerKit/PLPlayer.h>
 ```
 
-初始化
+初始化 PLPlayerOption
 
 ```Objective-C
-// 初始化 Player
-PLPlayer *player = [PLPlayer playerWithURL:self.url];
+// 初始化 PLPlayerOption 对象
+PLPlayerOption *option = [PLPlayerOption defaultOption];
+
+// 更改需要修改的 option 属性键所对应的值
+[option setOptionValue:@15 forKey:PLPlayerOptionKeyTimeoutIntervalForMediaPackets];
+
+```
+
+初始化 PLPlayer
+
+```Objective-C
+// 初始化 PLPlayer
+self.player = [PLPlayer playerWithURL:self.URL option:option];
 
 // 设定代理 (optional)
-player.delegate = self;
+self.player.delegate = self;
+```
+
+获取播放器的视频输出的 UIView 对象并添加为到当前 UIView 对象的 Subview
+```Objective-C
+//获取视频输出视图并添加为到当前 UIView 对象的 Subview
+[self.view addSubview:player.playerView];
 ```
 
 开始／暂停操作
 
 ```Objective-C
-// 准备播放器
-__weak typeof(self) wself = self;
-[self.player prepareToPlayWithCompletion:^(NSError *error) {
-    if (!error) {
-        __strong typeof(wself) strongSelf = wself;
-        UIView *playerView = strongSelf.player.playerView;
-        [strongSelf.view addSubview:playerView];
-    }
-}];
-   
+
 // 播放
 [self.player play];
-	
+
 // 暂停
 [self.player pause];
-	
+
 // 停止
 [self.player stop];
 ```
 
 播放器状态获取
 
-```
+```Objective-C
 // 实现 <PLPlayerDelegate> 来控制流状态的变更
 - (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
 	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
@@ -109,10 +109,10 @@ __weak typeof(self) wself = self;
 
 为了应对这一情况，PLPlayerKit 采取的方式是检查是否可以播放及是否可以进入后台，而在内部不做任何设置。具体是通过扩展 `AVAudioSession` 来做到的，提供了两个方法，如下：
 
-```
+```Objective-C
 /*!
  * @description 检查当前 AVAudioSession 的 category 配置是否可以播放音频. 当为 AVAudioSessionCategoryAmbient,
- * AVAudioSessionCategorySoloAmbient, AVAudioSessionCategoryPlayback, AVAudioSessionCategoryPlayAndRecord 
+ * AVAudioSessionCategorySoloAmbient, AVAudioSessionCategoryPlayback, AVAudioSessionCategoryPlayAndRecord
  * 中的一种时为 YES, 否则为 NO.
  */
 + (BOOL)isPlayable;
@@ -133,66 +133,76 @@ __weak typeof(self) wself = self;
     - Android 推流 SDK 切换前后至摄像头
 
 ## 版本历史
-
+- 2.1.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.1.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.1.0.md))
+	- 此次更新为重大版本升级，更改了大量 API 并重构了包括解码渲染在内的多项内容，建议所有用户进行升级，并且根据[快速开始](#快速开始)使用新版 API 对工程重新进行配置。
+	- 更改了播放器的音频解码和渲染方式
+	- 更改了播放器的时钟同步机制
+	- 重构了内部逻辑，使播放器更稳定
+	- 重构了播放器 API ，使播放器的使用更加简单明了，去除了使用起来不方便的部分 API
+	- 解决了播放过程中可能出现声音消失的问题
+	- 解决了退后台返回后音视频无法正常同步的问题
+	- 修改播放器音视频同步机制
+	- 解决持续播放过程中出现部分内存没有正确释放的问题
+	- 解决了 iOS 版本小于 8.0 时 Demo 出现的crash问题
 - 2.0.4 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.4.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.4.md))
-    - 解决 RTMP 播放时可能黑屏的问题
+  - 解决 RTMP 播放时可能黑屏的问题
 - 2.0.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.3.md))
-    - 解决 RTMP 播放没有声音
-    - 解决 RTMP 无法播放导致内存急增最终 App crash
-    - 解决 RTMP 无法播放画面只有声音
-    - 解决播放 RTMP 时相关的 crash 问题
+  - 解决 RTMP 播放没有声音
+  - 解决 RTMP 无法播放导致内存急增最终 App crash
+  - 解决 RTMP 无法播放画面只有声音
+  - 解决播放 RTMP 时相关的 crash 问题
 - 2.0.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.2.md))
-    - 添加 RTMP Cache 机制
-    - 添加数据超时属性
-    - 修复 RTMP 播放内存 leak
-    - 修复 RTMP 播放音频错误问题
-    - 修复 RTMP 播放主线程卡死问题
-    - 优化架构，减少内存和 cpu 占用
+  - 添加 RTMP Cache 机制
+  - 添加数据超时属性
+  - 修复 RTMP 播放内存 leak
+  - 修复 RTMP 播放音频错误问题
+  - 修复 RTMP 播放主线程卡死问题
+  - 优化架构，减少内存和 cpu 占用
 - 2.0.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.1.md))
-    - 修复 `contentMode` 设置无效的问题
-    - 修复 rtmp 无法播放或播放超时时无 error 抛出的问题
-    - 修复 rtmp 播放失败时触发的 cpu 飙升问题
-    - 修复 stop 可能触发的 crash 问题
-    - 更新 demo 确保在 iOS 9.1 下运行正常
+  - 修复 `contentMode` 设置无效的问题
+  - 修复 rtmp 无法播放或播放超时时无 error 抛出的问题
+  - 修复 rtmp 播放失败时触发的 cpu 飙升问题
+  - 修复 stop 可能触发的 crash 问题
+  - 更新 demo 确保在 iOS 9.1 下运行正常
 - 2.0.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.0.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.0.0.md))
-    - 添加全新的 `PLPlayer`，弃用 `PLVideoPlayerController` 和 `PLAudioPlayerController`
-    - 播放 RTMP 音视频流时，进入后台后声音继续播放，不会断开，返回前台追帧显示最新视频帧
-    - 针对 RTMP 直播彻底优化，首屏秒开，最小化缓存
-    - 完全无 ffmpeg 依赖，包体积再次缩小
-    - 优化资源占用，比 1.x 版本内存占用减少 50% 以上
+  - 添加全新的 `PLPlayer`，弃用 `PLVideoPlayerController` 和 `PLAudioPlayerController`
+  - 播放 RTMP 音视频流时，进入后台后声音继续播放，不会断开，返回前台追帧显示最新视频帧
+  - 针对 RTMP 直播彻底优化，首屏秒开，最小化缓存
+  - 完全无 ffmpeg 依赖，包体积再次缩小
+  - 优化资源占用，比 1.x 版本内存占用减少 50% 以上
 - 1.2.22 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.22.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.22.md))
-    - 修复因收到内存警告而引起的崩溃问题
-    - 修复停止播放时，可能进入错误 play state 的问题
+  - 修复因收到内存警告而引起的崩溃问题
+  - 修复停止播放时，可能进入错误 play state 的问题
 - 1.2.21 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.21.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.21.md))
-    - 修复 `PLVideoParameterFrameViewContentMode` 与 `PLVideoParameterDisableDeinterlacing` 设置无效的问题
+  - 修复 `PLVideoParameterFrameViewContentMode` 与 `PLVideoParameterDisableDeinterlacing` 设置无效的问题
 - 1.2.20 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.20.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.20.md))
-    - 修复 `seekTo:` 不准确的问题
-    - 添加 `PLPlayerStateSeeking` 类型
+  - 修复 `seekTo:` 不准确的问题
+  - 添加 `PLPlayerStateSeeking` 类型
 - 1.2.19 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.19.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.19.md))
-    - 修复播放无返回状态的问题（针对无直播的流、hls 回放）
-    - 修复 hls 回放结束时无 stopped 回调的问题
-    - 修复 hls 回放开始的 duration 不为 0 的问题
+  - 修复播放无返回状态的问题（针对无直播的流、hls 回放）
+  - 修复 hls 回放结束时无 stopped 回调的问题
+  - 修复 hls 回放开始的 duration 不为 0 的问题
 - 1.2.18 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.18.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.18.md))
-    - 修复在 prepare 状态前释放 player 导致的音频仍然会播放的问题
-    - 修复 player 状态返回的类型不正确的问题
-    - 优化推出时资源释放
+  - 修复在 prepare 状态前释放 player 导致的音频仍然会播放的问题
+  - 修复 player 状态返回的类型不正确的问题
+  - 优化推出时资源释放
 - 1.2.17 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.17.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.17.md))
-    - 修复超时时导致的崩溃的问题
+  - 修复超时时导致的崩溃的问题
 - 1.2.16 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.17.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.16.md))
-    - 添加了音频播放器后台播放的支持
-    - 添加了音频播放器后台播放任务开始和结束的回调
-    - 添加了音视频播放器超时时长的设定
-    - 添加了音视频播放器准备的方法
-    - 添加了音视频完全停止播放器的方法
-    - 修复播放器不可释放的问题
+  - 添加了音频播放器后台播放的支持
+  - 添加了音频播放器后台播放任务开始和结束的回调
+  - 添加了音视频播放器超时时长的设定
+  - 添加了音视频播放器准备的方法
+  - 添加了音视频完全停止播放器的方法
+  - 修复播放器不可释放的问题
 - 1.2.15 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.15.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.15.md))
-    - 修复 AudioPlayer 无法播放带有视频流的 RTMP 流的问题
+  - 修复 AudioPlayer 无法播放带有视频流的 RTMP 流的问题
 - 1.2.14 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.14.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.14.md))
-    - 添加 AudioManager
+  - 添加 AudioManager
 - 1.2.13 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.13.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.13.md))
-    - 添加纯音频播放控件
-    - 更新参数字段及类型，确保通用类型可以在音频及视频播放器使用
-    - 更新类型名称，增加易读性，减少歧义
+  - 添加纯音频播放控件
+  - 更新参数字段及类型，确保通用类型可以在音频及视频播放器使用
+  - 更新类型名称，增加易读性，减少歧义
 - 1.2.12 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.12.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.12.md))
 	- 更改 repo 地址
 - 1.2.11 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-1.2.11.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-1.2.11.md))

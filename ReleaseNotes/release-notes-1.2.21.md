@@ -5,7 +5,7 @@
 - [简介](#简介)
 - [问题反馈](#问题反馈)
 - [记录](#记录)
-	
+
 ## 简介
 
 PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
@@ -16,6 +16,8 @@ PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
 
 [通过这里查看已有的 issues 和提交 Bug](https://github.com/pili-engineering/PLPlayerKit/issues)
 
-## Bug
+## 记录
+
+### Bug
 
 - 修复 `PLVideoParameterFrameViewContentMode` 与 `PLVideoParameterDisableDeinterlacing` 设置无效的问题

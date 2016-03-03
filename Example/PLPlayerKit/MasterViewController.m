@@ -27,12 +27,13 @@ UIAlertViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    self.title = @"点击右边 + 输入地址播放";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
-
+    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
     
-    self.objects = [@[@"YOUR_PLAY_URL"] mutableCopy];
+    self.objects = [NSMutableArray new];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -97,7 +98,7 @@ UIAlertViewDelegate
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
-
+    
     NSString *urlString = self.objects[indexPath.row];
     cell.textLabel.text = urlString;
     return cell;

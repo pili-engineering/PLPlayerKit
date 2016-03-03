@@ -2,17 +2,22 @@
 
 ## General Headers
 
-```PLPlayerKit.h```
+```
+PLPlayerKit.h
+```
 - *Added* `#import "PLAudioPlayerController.h"`
-
-```PLAudioPlayerController.h```
+`PLAudioPlayerController.h`
 - *Added* Class `PLAudioPlayerController`
 
-```PLVideoPlayerController.h```
+```
+PLVideoPlayerController.h
+```
 - *Added* `- (void)seekTo:(NSTimeInterval)position;`
 - *Deprecated* `- (void)setMoviePosition:(NSTimeInterval)position;`
 
-```PLPlayerTypeDefines.h```
+```
+PLPlayerTypeDefines.h
+```
 - *Added* `PLPlayerParameterMinBufferedDuration`
 - *Added* `PLPlayerParameterMaxBufferedDuration`
 - *Added* `PLPlayerParameterAutoPlayEnable`

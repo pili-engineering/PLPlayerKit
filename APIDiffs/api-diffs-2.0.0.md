@@ -2,7 +2,9 @@
 
 ## General Headers
 
-```PLPlayer.h```
+```
+PLPlayer.h
+```
 
 - *Added* Class `PLPlayer`
     - *Added* Type `PLPlayerStatus`

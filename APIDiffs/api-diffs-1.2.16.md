@@ -2,14 +2,16 @@
 
 ## General Headers
 
-```PLVideoPlayerController.h```
-
+```
+PLVideoPlayerController.h
+```
 - *Added* property `@property (nonatomic, assign) NSTimeInterval    timeout;`
 - *Added* method `- (void)prepareToPlayWithCompletion:(void (^)(BOOL success))handler;`
 - *Added* method `- (void)stop;`
 
-```PLAudioPlayerController.h```
-
+```
+PLAudioPlayerController.h
+```
 - *Modified* protocol `PLAudioPlayerControllerDelegate`
     - *Added* `- (void)audioPlayerControllerWillBeginBackgroundTask:(PLAudioPlayerController *)controller;`
     - *Added* `- (void)audioPlayerController:(PLAudioPlayerController *)controller willEndBackgroundTask:(BOOL)isExpirationOccured;`
@@ -17,4 +19,3 @@
 - *Added* property `@property (nonatomic, assign) NSTimeInterval    timeout;`
 - *Added* method `- (void)prepareToPlayWithCompletion:(void (^)(BOOL success))handler;`
 - *Added* method `- (void)stop;`
-
