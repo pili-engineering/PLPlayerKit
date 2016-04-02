@@ -2,9 +2,9 @@
 
 ## General Headers
 
-- *Removed*  ```VideoPlayerViewController.h```
-- *Modified* ```PLPlayerTypeDefines.h```
-	- *Added* PLPlayerErrorDomain
-	- *Added* PLPlayerError
-- *Modified* ```PLVideoPlayerController.h```
-	- *Added* PLVideoPlayerControllerDelegate
+- *Removed* `VideoPlayerViewController.h`
+- *Modified* `PLPlayerTypeDefines.h`
+	- *Added* `PLPlayerErrorDomain`
+	- *Added* `PLPlayerError`
+- *Modified* `PLVideoPlayerController.h`
+	- *Added* `PLVideoPlayerControllerDelegate`
