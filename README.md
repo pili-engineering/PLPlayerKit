@@ -12,10 +12,10 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 
 ## 内容摘要
 
-- [快速开始](#快速开始)
+- [快速开始](#1-快速开始)
 	- [配置工程](#配置工程)
 	- [示例代码](#示例代码)
-- [音频部分的特别说明](#音频部分的特别说明)
+- [关于 2.0 版本](#关于2.0版本)
 - [版本历史](#版本历史)
 
 ## 快速开始
@@ -82,11 +82,14 @@ self.player.delegate = self;
 // 播放
 [self.player play];
 
+// 停止
+[self.player stop];
+
 // 暂停
 [self.player pause];
 
-// 停止
-[self.player stop];
+// 继续播放
+[self.player resume];
 ```
 
 播放器状态获取
@@ -126,8 +129,19 @@ self.player.delegate = self;
 
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
-## 版本历史
+## 已知 issues
 
+- 当前播放器在首次连接或中途断开重连的初期的前2~3秒可能出现视频快进播放，主线程卡顿的现象
+- 当播放器在弱网环境下运行后恢复正常网络也可能会出现视频快进播放效果，主线程卡顿的现象
+
+## 版本历史
+- 2.1.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.1.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.1.1.md))
+	- 首屏开启速度优化，在网络状况良好的情况下能实现秒开效果
+	- 弱网情况下的累积延迟问题优化，较好控制累积延迟在数秒以内
+	- 解决了上一版遇到的无法设置 playerView.contentMode 以及 playerOption 的问题
+	- 解决了不标准流可能出现的音频断续，播放器内存异常增长问题
+	- 后台播放体验优化，修复了后台播放被其他音频打断后出现的一系列问题
+	- 解决了应用切换时出现的 UI 卡死问题
 - 2.1.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.1.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.1.0.md))
 	- 此次更新为重大版本升级，更改了大量 API 并重构了包括解码渲染在内的多项内容，建议所有用户进行升级，并且根据[快速开始](#快速开始)使用新版 API 对工程重新进行配置。
 	- 更改了播放器的音频解码和渲染方式
