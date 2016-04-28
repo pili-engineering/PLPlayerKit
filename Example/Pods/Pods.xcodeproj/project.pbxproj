@@ -12,22 +12,23 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		0D3F637B1E5544AE755ED1529126DD9D /* PLPlayerKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerKit.h; sourceTree = "<group>"; };
 		12C19CB7BB1DE3E550A129FEB7941C7A /* libPods-PLPlayerKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PLPlayerKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		17DE14C9783A07D54FBEE2BFCE6C265E /* Pods-PLPlayerKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PLPlayerKit-resources.sh"; sourceTree = "<group>"; };
 		1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PLPlayerKit-dummy.m"; sourceTree = "<group>"; };
+		29D9BC68A7EA5D8174CD72B5881205FC /* PLPlayerOption.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
 		3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.release.xcconfig"; sourceTree = "<group>"; };
 		392822C027144E25B2588B3F72E0D143 /* Pods-PLPlayerKit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PLPlayerKit-frameworks.sh"; sourceTree = "<group>"; };
 		392B7C455543271AD245DA351AE2AC4A /* Pods-PLPlayerKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PLPlayerKit-acknowledgements.markdown"; sourceTree = "<group>"; };
+		3B6029370DFB88DB6ADB8722D39A176D /* PLPlayerError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerError.h; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		5851EE05EDF3E11DB4EBC1319359DDB5 /* libcommon.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libcommon.a; path = Pod/Library/lib/libcommon.a; sourceTree = "<group>"; };
-		5AEE7DB4150050F5798922F5E5F94158 /* PLPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
-		71BA9BE9699BC580F61724716A2BC7BB /* PLPlayerOption.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
 		96D11010CA18957D0BC4475565F193A8 /* Pods-PLPlayerKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PLPlayerKit-acknowledgements.plist"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
 		C31A725624C34EC6F963C663EBAB99FD /* libPLPlayerKit.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libPLPlayerKit.a; path = Pod/Library/lib/libPLPlayerKit.a; sourceTree = "<group>"; };
 		C5363631302E461FA361078F0830BED1 /* libdecoder.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libdecoder.a; path = Pod/Library/lib/libdecoder.a; sourceTree = "<group>"; };
+		D40A3CB45A004E9D2E4F58B88BC3F6D7 /* PLPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
+		F9BB15E79CD37988CCA10DA6D98803CA /* PLPlayerKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerKit.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,14 +43,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		035EF46E63CA254C79B2E7150E2C31BC /* include */ = {
-			isa = PBXGroup;
-			children = (
-				B7B72BD564B281D7CD25FBFED569FE8E /* PLPlayerKit */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
 		11DA9EDF66BDE496A32F48B568F69BF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -58,6 +51,25 @@
 				C31A725624C34EC6F963C663EBAB99FD /* libPLPlayerKit.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		26345AEFE56ABC7842D7CAED51C0E7DA /* include */ = {
+			isa = PBXGroup;
+			children = (
+				42EB5EC617B5B4B6323285B2DB09FD1D /* PLPlayerKit */,
+			);
+			path = include;
+			sourceTree = "<group>";
+		};
+		42EB5EC617B5B4B6323285B2DB09FD1D /* PLPlayerKit */ = {
+			isa = PBXGroup;
+			children = (
+				D40A3CB45A004E9D2E4F58B88BC3F6D7 /* PLPlayer.h */,
+				3B6029370DFB88DB6ADB8722D39A176D /* PLPlayerError.h */,
+				F9BB15E79CD37988CCA10DA6D98803CA /* PLPlayerKit.h */,
+				29D9BC68A7EA5D8174CD72B5881205FC /* PLPlayerOption.h */,
+			);
+			path = PLPlayerKit;
 			sourceTree = "<group>";
 		};
 		51C23EB55ABA1494C21F7CFF51AF5059 /* Pod */ = {
@@ -123,19 +135,9 @@
 		A017E7B8D2449321E6957C6EF7362D21 /* Library */ = {
 			isa = PBXGroup;
 			children = (
-				035EF46E63CA254C79B2E7150E2C31BC /* include */,
+				26345AEFE56ABC7842D7CAED51C0E7DA /* include */,
 			);
 			path = Library;
-			sourceTree = "<group>";
-		};
-		B7B72BD564B281D7CD25FBFED569FE8E /* PLPlayerKit */ = {
-			isa = PBXGroup;
-			children = (
-				5AEE7DB4150050F5798922F5E5F94158 /* PLPlayer.h */,
-				0D3F637B1E5544AE755ED1529126DD9D /* PLPlayerKit.h */,
-				71BA9BE9699BC580F61724716A2BC7BB /* PLPlayerOption.h */,
-			);
-			path = PLPlayerKit;
 			sourceTree = "<group>";
 		};
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {

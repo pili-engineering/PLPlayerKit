@@ -103,7 +103,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  
  @param player              调用该方法的 PLPlayer 对象
  
- @since v1.0.0
+ @since v2.1.1
  */
 - (void)playerWillEndBackgroundTask:(nonnull PLPlayer *)player;
 
@@ -195,6 +195,27 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 @property (nonatomic, strong, nullable, readonly) UIView *  playerView;
 
 /**
+ 是否需要静音 PLPlayer，默认值为NO
+ 
+ @since v2.1.2
+ */
+@property (nonatomic, assign, getter=isMute) BOOL mute;
+
+/**
+ PLPlayer 的当前播放时间，仅回放状态下有效，只播放状态下将返回 CMTime(0,30)
+ 
+ @since v2.1.2
+ */
+@property (nonatomic, assign, readonly) CMTime  currentTime;
+
+/**
+ PLPlayer 的总播放时间，仅回放状态下有效，只播放状态下将返回 CMTime(0,30)
+ 
+ @since v2.1.2
+ */
+@property (nonatomic, assign, readonly) CMTime  totalDuration;
+
+/**
  使用 url 和 option 生成一个 PLPlayer 对象
  
  @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
@@ -233,7 +254,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 - (void)resume;
 
 /**
- 暂停播放器
+ 当播放器处于 playing 或 caching 状态时调用该方法可以暂停播放器
  
  @since v1.0.0
  */
@@ -245,6 +266,15 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  @since v1.0.0
  */
 - (void)stop;
+
+/**
+ 快速定位到指定播放时间点，该方法仅在回放时起作用，直播场景下该方法直接返回
+ 
+ @param time 需要
+ 
+ @since v2.1.2
+ */
+- (void)seekTo:(CMTime)time;
 
 @end
 
