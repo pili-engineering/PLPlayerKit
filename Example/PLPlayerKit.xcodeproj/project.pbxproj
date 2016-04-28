@@ -20,7 +20,6 @@
 		C5C31BF4A568D181D707DEAC /* libPods-PLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5C1117E27DDA7B4D87DCF825 /* libPods-PLPlayerKit.a */; };
 		E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */; };
 		E9A58B741BC8B264004780C5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A58B731BC8B264004780C5 /* Launch Screen.storyboard */; };
-		F373B14EA631A05BFF95E4A3 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 38A42C49440F1172FB16E86E /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,7 +68,6 @@
 				6003F592195388D20070C39A /* UIKit.framework in Frameworks */,
 				6003F58E195388D20070C39A /* Foundation.framework in Frameworks */,
 				C5C31BF4A568D181D707DEAC /* libPods-PLPlayerKit.a in Frameworks */,
-				F373B14EA631A05BFF95E4A3 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
