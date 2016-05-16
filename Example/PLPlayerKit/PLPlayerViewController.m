@@ -55,7 +55,12 @@ UITextViewDelegate
         UIView *playerView = self.player.playerView;
         if (!playerView.superview) {
             playerView.contentMode = UIViewContentModeScaleAspectFit;
-            playerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleWidth;
+            playerView.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin
+            | UIViewAutoresizingFlexibleTopMargin
+            | UIViewAutoresizingFlexibleLeftMargin
+            | UIViewAutoresizingFlexibleRightMargin
+            | UIViewAutoresizingFlexibleWidth
+            | UIViewAutoresizingFlexibleHeight;
             [self.view addSubview:playerView];
             
             // test input

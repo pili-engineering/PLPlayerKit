@@ -7,50 +7,110 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		50743E230AE9D6F25BCAAB09F88E64DD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		63F7B816ADE5A83FFDF6F9E31C7C1BE2 /* Pods-PLPlayerKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */; };
+		01434075420B08CC4232C4AB1051C309 /* pili-librtmp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3358D6C3DAB57CFDFC405CD5BB2A7F85 /* pili-librtmp-dummy.m */; };
+		08464F74EEB7A877C5C5493F8E7BB504 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B64B600E6D2273848842652DCB0E03 /* parseurl.c */; };
+		1D310FC6C5F145244DDC2F25F5F4C52D /* dh.h in Headers */ = {isa = PBXBuildFile; fileRef = 5900D7E23ECDF769963DE407FE294851 /* dh.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		38374B9DFAA3A02B4CDD4FA207C7DBCA /* amf.h in Headers */ = {isa = PBXBuildFile; fileRef = 021F47A5C7E74F4F9992C7C0C08B55F1 /* amf.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4482FA087AB33DD3B710C5509F13A82E /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CF84F9FE6FCE209FE00F784DF1C214 /* error.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		449677A54DC9CDB8C8A47BEE12BB0A2E /* hashswf.c in Sources */ = {isa = PBXBuildFile; fileRef = AEA9B711117EDFEFA14D6793B2431E49 /* hashswf.c */; };
+		60892BF198661251DBC42987B773266C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		614172618531148E73F7587C132D3325 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FB19C3C3313EEDB86BA52A9E611E /* rtmp.c */; };
+		66E84AFE041AE92454B80B3A416E12DF /* rtmp_sys.h in Headers */ = {isa = PBXBuildFile; fileRef = F1BDF3AC407AB29124AD9640A953F908 /* rtmp_sys.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		81D9621463A7404DAC77839259365800 /* rtmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 993E6D38B4EC2CD834FB49CB8B3E5C6A /* rtmp.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8B7B75BDDA8FB5F466A5CB10D5811A26 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 12CD67817424552840C9E89E0CA00DC4 /* log.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		999BC088CF01F4A8C4FD5343E02BE09B /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = 79FBB3110EF6CAE3A54CD11CEAF0FE08 /* amf.c */; };
+		A0E36C5F85EDC1EF9FB0766C915B08B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		A2ECFC4C875986590F85E7159FB34AFC /* handshake.h in Headers */ = {isa = PBXBuildFile; fileRef = 656014D3973279CB8762CEFC244EFC03 /* handshake.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A86197F4F3C92350321F83ED2B8599DE /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 963F16CDDCD202A8E278E554163E43C5 /* error.c */; };
+		B814AB108E3DB51D7C04F0C3328957AD /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = E81D4708CAD05F624719A907213900D7 /* log.c */; };
+		BD76816F240F479C8F7A4713CCD2255A /* Pods-PLPlayerKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */; };
+		BE67171473D6DAD09D361975E0C990E5 /* bytes.h in Headers */ = {isa = PBXBuildFile; fileRef = B04B958070E7FF6B5C3D10D6D2704BF1 /* bytes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D975D7F93AF184BB1E68E5F43A3EB85F /* dhgroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B621EB3AA9F7CDFC2815BCCC2927BB /* dhgroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F3237AE4E59B9A821591349BC1AC417B /* http.h in Headers */ = {isa = PBXBuildFile; fileRef = FEBA5FBF0DD5BFC4CB12F875B719C6BD /* http.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		E54B9885ADF060D56C70CE42D93F96A3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2BAC7CF49C86172B8F10A9ADFC08EF59;
+			remoteInfo = "pili-librtmp";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-		12C19CB7BB1DE3E550A129FEB7941C7A /* libPods-PLPlayerKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PLPlayerKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		021F47A5C7E74F4F9992C7C0C08B55F1 /* amf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amf.h; path = "Pod/Classes/pili-librtmp/amf.h"; sourceTree = "<group>"; };
+		07B621EB3AA9F7CDFC2815BCCC2927BB /* dhgroups.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dhgroups.h; path = "Pod/Classes/pili-librtmp/dhgroups.h"; sourceTree = "<group>"; };
+		12CD67817424552840C9E89E0CA00DC4 /* log.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = log.h; path = "Pod/Classes/pili-librtmp/log.h"; sourceTree = "<group>"; };
+		15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "pili-librtmp.xcconfig"; sourceTree = "<group>"; };
 		17DE14C9783A07D54FBEE2BFCE6C265E /* Pods-PLPlayerKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PLPlayerKit-resources.sh"; sourceTree = "<group>"; };
 		1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PLPlayerKit-dummy.m"; sourceTree = "<group>"; };
 		29D9BC68A7EA5D8174CD72B5881205FC /* PLPlayerOption.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
+		3358D6C3DAB57CFDFC405CD5BB2A7F85 /* pili-librtmp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "pili-librtmp-dummy.m"; sourceTree = "<group>"; };
 		3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.release.xcconfig"; sourceTree = "<group>"; };
 		392822C027144E25B2588B3F72E0D143 /* Pods-PLPlayerKit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PLPlayerKit-frameworks.sh"; sourceTree = "<group>"; };
 		392B7C455543271AD245DA351AE2AC4A /* Pods-PLPlayerKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PLPlayerKit-acknowledgements.markdown"; sourceTree = "<group>"; };
 		3B6029370DFB88DB6ADB8722D39A176D /* PLPlayerError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerError.h; sourceTree = "<group>"; };
 		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5851EE05EDF3E11DB4EBC1319359DDB5 /* libcommon.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libcommon.a; path = Pod/Library/lib/libcommon.a; sourceTree = "<group>"; };
+		5900D7E23ECDF769963DE407FE294851 /* dh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dh.h; path = "Pod/Classes/pili-librtmp/dh.h"; sourceTree = "<group>"; };
+		656014D3973279CB8762CEFC244EFC03 /* handshake.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = handshake.h; path = "Pod/Classes/pili-librtmp/handshake.h"; sourceTree = "<group>"; };
+		79FBB3110EF6CAE3A54CD11CEAF0FE08 /* amf.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = amf.c; path = "Pod/Classes/pili-librtmp/amf.c"; sourceTree = "<group>"; };
+		7C005116FE87041F2A65400E638C6291 /* libPods-PLPlayerKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PLPlayerKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		82CF84F9FE6FCE209FE00F784DF1C214 /* error.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = error.h; path = "Pod/Classes/pili-librtmp/error.h"; sourceTree = "<group>"; };
+		963F16CDDCD202A8E278E554163E43C5 /* error.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = error.c; path = "Pod/Classes/pili-librtmp/error.c"; sourceTree = "<group>"; };
+		96B64B600E6D2273848842652DCB0E03 /* parseurl.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = parseurl.c; path = "Pod/Classes/pili-librtmp/parseurl.c"; sourceTree = "<group>"; };
 		96D11010CA18957D0BC4475565F193A8 /* Pods-PLPlayerKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PLPlayerKit-acknowledgements.plist"; sourceTree = "<group>"; };
+		993E6D38B4EC2CD834FB49CB8B3E5C6A /* rtmp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rtmp.h; path = "Pod/Classes/pili-librtmp/rtmp.h"; sourceTree = "<group>"; };
+		AEA9B711117EDFEFA14D6793B2431E49 /* hashswf.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = hashswf.c; path = "Pod/Classes/pili-librtmp/hashswf.c"; sourceTree = "<group>"; };
+		B04B958070E7FF6B5C3D10D6D2704BF1 /* bytes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bytes.h; path = "Pod/Classes/pili-librtmp/bytes.h"; sourceTree = "<group>"; };
+		B5D3FB19C3C3313EEDB86BA52A9E611E /* rtmp.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = rtmp.c; path = "Pod/Classes/pili-librtmp/rtmp.c"; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
-		C31A725624C34EC6F963C663EBAB99FD /* libPLPlayerKit.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libPLPlayerKit.a; path = Pod/Library/lib/libPLPlayerKit.a; sourceTree = "<group>"; };
-		C5363631302E461FA361078F0830BED1 /* libdecoder.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libdecoder.a; path = Pod/Library/lib/libdecoder.a; sourceTree = "<group>"; };
 		D40A3CB45A004E9D2E4F58B88BC3F6D7 /* PLPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
+		DD38BC2D4C984CC94990C4707D890AC5 /* pili-librtmp-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "pili-librtmp-prefix.pch"; sourceTree = "<group>"; };
+		E7D890890BC26A5AE4EC74D1672F1D10 /* libPLPlayerKit.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libPLPlayerKit.a; path = Pod/Library/lib/libPLPlayerKit.a; sourceTree = "<group>"; };
+		E81D4708CAD05F624719A907213900D7 /* log.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = log.c; path = "Pod/Classes/pili-librtmp/log.c"; sourceTree = "<group>"; };
+		F0B0A1E7F7F3B4C81B9D3D81097500CC /* libpili-librtmp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpili-librtmp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F1BDF3AC407AB29124AD9640A953F908 /* rtmp_sys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rtmp_sys.h; path = "Pod/Classes/pili-librtmp/rtmp_sys.h"; sourceTree = "<group>"; };
 		F9BB15E79CD37988CCA10DA6D98803CA /* PLPlayerKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerKit.h; sourceTree = "<group>"; };
+		FEBA5FBF0DD5BFC4CB12F875B719C6BD /* http.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = http.h; path = "Pod/Classes/pili-librtmp/http.h"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		8682B4F0215E9AE0AAEE301A1437AC8A /* Frameworks */ = {
+		1ADAE427C9CD06DE36C0A2899C31369C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50743E230AE9D6F25BCAAB09F88E64DD /* Foundation.framework in Frameworks */,
+				60892BF198661251DBC42987B773266C /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		319237805A59574EC1B6C321CDA6F183 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A0E36C5F85EDC1EF9FB0766C915B08B9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		11DA9EDF66BDE496A32F48B568F69BF8 /* Frameworks */ = {
+		172BE8ECDEC93AE18D64CE02A4627031 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				5851EE05EDF3E11DB4EBC1319359DDB5 /* libcommon.a */,
-				C5363631302E461FA361078F0830BED1 /* libdecoder.a */,
-				C31A725624C34EC6F963C663EBAB99FD /* libPLPlayerKit.a */,
+				E7D890890BC26A5AE4EC74D1672F1D10 /* libPLPlayerKit.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		19449A754B6DE9D437AA10FE823110E1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				93B4F05A17F8E6313EDDDF2D783178D7 /* pili-librtmp */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		26345AEFE56ABC7842D7CAED51C0E7DA /* include */ = {
@@ -59,6 +119,17 @@
 				42EB5EC617B5B4B6323285B2DB09FD1D /* PLPlayerKit */,
 			);
 			path = include;
+			sourceTree = "<group>";
+		};
+		356C1EAC819D76A4B7511CA8F0802198 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */,
+				3358D6C3DAB57CFDFC405CD5BB2A7F85 /* pili-librtmp-dummy.m */,
+				DD38BC2D4C984CC94990C4707D890AC5 /* pili-librtmp-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/pili-librtmp";
 			sourceTree = "<group>";
 		};
 		42EB5EC617B5B4B6323285B2DB09FD1D /* PLPlayerKit */ = {
@@ -107,10 +178,19 @@
 			isa = PBXGroup;
 			children = (
 				51C23EB55ABA1494C21F7CFF51AF5059 /* Pod */,
-				E0B5006E6D77FCCF576590B13C108710 /* precompiled */,
+				EB2C4EDC1C7D33E96E4DB2873B480861 /* precompiled */,
 			);
 			name = PLPlayerKit;
 			path = ../..;
+			sourceTree = "<group>";
+		};
+		7D3A6C4F4716B61C753CAA6470ACD574 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F0B0A1E7F7F3B4C81B9D3D81097500CC /* libpili-librtmp.a */,
+				7C005116FE87041F2A65400E638C6291 /* libPods-PLPlayerKit.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
@@ -119,7 +199,8 @@
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
 				68CFBB7F5BFB233EB69A2C76859F788F /* Development Pods */,
 				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				F7F103CCF389D25C8D79148B49923915 /* Products */,
+				19449A754B6DE9D437AA10FE823110E1 /* Pods */,
+				7D3A6C4F4716B61C753CAA6470ACD574 /* Products */,
 				834F8E5467B2240519B1326FE092BB49 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -130,6 +211,30 @@
 				726CEFEF00A6E9EF5860C348A7B356F2 /* Pods-PLPlayerKit */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		93B4F05A17F8E6313EDDDF2D783178D7 /* pili-librtmp */ = {
+			isa = PBXGroup;
+			children = (
+				79FBB3110EF6CAE3A54CD11CEAF0FE08 /* amf.c */,
+				021F47A5C7E74F4F9992C7C0C08B55F1 /* amf.h */,
+				B04B958070E7FF6B5C3D10D6D2704BF1 /* bytes.h */,
+				5900D7E23ECDF769963DE407FE294851 /* dh.h */,
+				07B621EB3AA9F7CDFC2815BCCC2927BB /* dhgroups.h */,
+				963F16CDDCD202A8E278E554163E43C5 /* error.c */,
+				82CF84F9FE6FCE209FE00F784DF1C214 /* error.h */,
+				656014D3973279CB8762CEFC244EFC03 /* handshake.h */,
+				AEA9B711117EDFEFA14D6793B2431E49 /* hashswf.c */,
+				FEBA5FBF0DD5BFC4CB12F875B719C6BD /* http.h */,
+				E81D4708CAD05F624719A907213900D7 /* log.c */,
+				12CD67817424552840C9E89E0CA00DC4 /* log.h */,
+				96B64B600E6D2273848842652DCB0E03 /* parseurl.c */,
+				B5D3FB19C3C3313EEDB86BA52A9E611E /* rtmp.c */,
+				993E6D38B4EC2CD834FB49CB8B3E5C6A /* rtmp.h */,
+				F1BDF3AC407AB29124AD9640A953F908 /* rtmp_sys.h */,
+				356C1EAC819D76A4B7511CA8F0802198 /* Support Files */,
+			);
+			path = "pili-librtmp";
 			sourceTree = "<group>";
 		};
 		A017E7B8D2449321E6957C6EF7362D21 /* Library */ = {
@@ -156,39 +261,69 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		E0B5006E6D77FCCF576590B13C108710 /* precompiled */ = {
+		EB2C4EDC1C7D33E96E4DB2873B480861 /* precompiled */ = {
 			isa = PBXGroup;
 			children = (
-				11DA9EDF66BDE496A32F48B568F69BF8 /* Frameworks */,
+				172BE8ECDEC93AE18D64CE02A4627031 /* Frameworks */,
 			);
 			name = precompiled;
 			sourceTree = "<group>";
 		};
-		F7F103CCF389D25C8D79148B49923915 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				12C19CB7BB1DE3E550A129FEB7941C7A /* libPods-PLPlayerKit.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		F8A697119F2E37C79911F060F89E551D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				38374B9DFAA3A02B4CDD4FA207C7DBCA /* amf.h in Headers */,
+				BE67171473D6DAD09D361975E0C990E5 /* bytes.h in Headers */,
+				1D310FC6C5F145244DDC2F25F5F4C52D /* dh.h in Headers */,
+				D975D7F93AF184BB1E68E5F43A3EB85F /* dhgroups.h in Headers */,
+				4482FA087AB33DD3B710C5509F13A82E /* error.h in Headers */,
+				A2ECFC4C875986590F85E7159FB34AFC /* handshake.h in Headers */,
+				F3237AE4E59B9A821591349BC1AC417B /* http.h in Headers */,
+				8B7B75BDDA8FB5F466A5CB10D5811A26 /* log.h in Headers */,
+				81D9621463A7404DAC77839259365800 /* rtmp.h in Headers */,
+				66E84AFE041AE92454B80B3A416E12DF /* rtmp_sys.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		FCD535E6E0CA3C8A795360BA549CA0FE /* Pods-PLPlayerKit */ = {
+		2BAC7CF49C86172B8F10A9ADFC08EF59 /* pili-librtmp */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D76928591568F6EA77479D9035A5DC3 /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */;
+			buildConfigurationList = ED21AC54188497033489F8CBB898F51E /* Build configuration list for PBXNativeTarget "pili-librtmp" */;
 			buildPhases = (
-				5D82E45226D7E08A9941DDFF690814E9 /* Sources */,
-				8682B4F0215E9AE0AAEE301A1437AC8A /* Frameworks */,
+				5913A557A824E36148BA5D027DF390AE /* Sources */,
+				319237805A59574EC1B6C321CDA6F183 /* Frameworks */,
+				F8A697119F2E37C79911F060F89E551D /* Headers */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
+			name = "pili-librtmp";
+			productName = "pili-librtmp";
+			productReference = F0B0A1E7F7F3B4C81B9D3D81097500CC /* libpili-librtmp.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		3DC90167D2CFF350CB58D35014604FB8 /* Pods-PLPlayerKit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D44F8EBCCE445A15B056C29918B4390D /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */;
+			buildPhases = (
+				11C384242F0F18074B52CC73202EA9E1 /* Sources */,
+				1ADAE427C9CD06DE36C0A2899C31369C /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3BD7564DE525C2EC7F76EF3EE2504244 /* PBXTargetDependency */,
+			);
 			name = "Pods-PLPlayerKit";
 			productName = "Pods-PLPlayerKit";
-			productReference = 12C19CB7BB1DE3E550A129FEB7941C7A /* libPods-PLPlayerKit.a */;
+			productReference = 7C005116FE87041F2A65400E638C6291 /* libPods-PLPlayerKit.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 /* End PBXNativeTarget section */
@@ -208,25 +343,49 @@
 				en,
 			);
 			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = F7F103CCF389D25C8D79148B49923915 /* Products */;
+			productRefGroup = 7D3A6C4F4716B61C753CAA6470ACD574 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				FCD535E6E0CA3C8A795360BA549CA0FE /* Pods-PLPlayerKit */,
+				2BAC7CF49C86172B8F10A9ADFC08EF59 /* pili-librtmp */,
+				3DC90167D2CFF350CB58D35014604FB8 /* Pods-PLPlayerKit */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		5D82E45226D7E08A9941DDFF690814E9 /* Sources */ = {
+		11C384242F0F18074B52CC73202EA9E1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63F7B816ADE5A83FFDF6F9E31C7C1BE2 /* Pods-PLPlayerKit-dummy.m in Sources */,
+				BD76816F240F479C8F7A4713CCD2255A /* Pods-PLPlayerKit-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5913A557A824E36148BA5D027DF390AE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				999BC088CF01F4A8C4FD5343E02BE09B /* amf.c in Sources */,
+				A86197F4F3C92350321F83ED2B8599DE /* error.c in Sources */,
+				449677A54DC9CDB8C8A47BEE12BB0A2E /* hashswf.c in Sources */,
+				B814AB108E3DB51D7C04F0C3328957AD /* log.c in Sources */,
+				08464F74EEB7A877C5C5493F8E7BB504 /* parseurl.c in Sources */,
+				01434075420B08CC4232C4AB1051C309 /* pili-librtmp-dummy.m in Sources */,
+				614172618531148E73F7587C132D3325 /* rtmp.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3BD7564DE525C2EC7F76EF3EE2504244 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "pili-librtmp";
+			target = 2BAC7CF49C86172B8F10A9ADFC08EF59 /* pili-librtmp */;
+			targetProxy = E54B9885ADF060D56C70CE42D93F96A3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		052A17875CB827423D627183396CEB60 /* Release */ = {
@@ -263,7 +422,43 @@
 			};
 			name = Release;
 		};
-		79B218E2A4D1521892B9859A94EDE9DC /* Debug */ = {
+		194AD0D8F17D89D54534FB3BF2067057 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/pili-librtmp/pili-librtmp-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		6CBB8C1D469C58F19ADC861B76BAC4D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/pili-librtmp/pili-librtmp-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		6E2E524ED07FB19B805A464DB3982413 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */;
 			buildSettings = {
@@ -279,23 +474,6 @@
 				SKIP_INSTALL = YES;
 			};
 			name = Debug;
-		};
-		81F6D5722B3804192991F042B9780324 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
 		};
 		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -336,6 +514,23 @@
 			};
 			name = Debug;
 		};
+		F6722A10B5574B918DEA7EBCA5278C03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -348,11 +543,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D76928591568F6EA77479D9035A5DC3 /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */ = {
+		D44F8EBCCE445A15B056C29918B4390D /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				79B218E2A4D1521892B9859A94EDE9DC /* Debug */,
-				81F6D5722B3804192991F042B9780324 /* Release */,
+				6E2E524ED07FB19B805A464DB3982413 /* Debug */,
+				F6722A10B5574B918DEA7EBCA5278C03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ED21AC54188497033489F8CBB898F51E /* Build configuration list for PBXNativeTarget "pili-librtmp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				194AD0D8F17D89D54534FB3BF2067057 /* Debug */,
+				6CBB8C1D469C58F19ADC861B76BAC4D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
