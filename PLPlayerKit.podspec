@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
 
   s.dependency 'pili-librtmp'
   s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
-  s.libraries = "c++", "z"
+  s.libraries = "c++", "z", "bz2", "iconv"
 
   s.default_subspec = "precompiled"
 
