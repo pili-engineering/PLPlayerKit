@@ -8,9 +8,9 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] HLS 播放
 - [x] 高可定制
 - [x] 音频后台播放
-- [x] 无 ffmpeg 依赖
 - [x] RTMP 直播首屏秒开支持
 - [x] RTMP 直播累积延迟消除技术
+
 
 ## 内容摘要
 
@@ -132,6 +132,11 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 版本历史
+- 2.1.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.1.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.1.3.md))
+	- 修复播放 OBS 及 FFmpeg 推的流黑屏的问题
+	- 修复播放结束后无法重播的问题
+	- 修复播放过程中内存暴增的问题
+	- 拆分 pili-librtmp 为公共依赖，解决模拟器环境下与 PLStreamingKit 冲突的问题
 - 2.1.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.1.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.1.2.md))
 	- 增加确切的错误枚举，方便定位错误类型
 	- 增加 mute, currentTime, totalDuration, seekTo 等接口
