@@ -7,7 +7,7 @@
 //
 
 #import "MasterViewController.h"
-#import <PLPlayerKit/PLPlayerKit.h>
+#import <PLPlayerKit_Beta/PLPlayerKit.h>
 #import "PLPlayerViewController.h"
 
 @interface MasterViewController ()

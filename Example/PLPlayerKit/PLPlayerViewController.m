@@ -7,7 +7,7 @@
 //
 
 #import "PLPlayerViewController.h"
-#import <PLPlayerKit/PLPlayerKit.h>
+#import <PLPlayerKit_Beta/PLPlayerKit.h>
 #import "MacroDefines.h"
 
 #define enableBackgroundPlay    1

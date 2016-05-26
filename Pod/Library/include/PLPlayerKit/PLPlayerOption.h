@@ -38,6 +38,17 @@ extern NSString  * _Nonnull PLPlayerOptionKeyMaxL1BufferDuration;
 extern NSString  * _Nonnull PLPlayerOptionKeyMaxL2BufferDuration;
 
 /**
+ @abstract 是否使用 video toolbox 硬解码。
+ 
+ @discussion 使用 video toolbox Player 将尝试硬解码，失败后，将切换回软解码。
+ 
+ @waring 该参数仅对 rtmp 生效, 默认不使用。支持 iOS 8.0 及更高版本。
+ 
+ @since v2.1.4
+ */
+extern NSString  * _Nonnull PLPlayerOptionKeyVideoToolbox;
+
+/**
  PLPlayer 的可选配置类，在初始化 PLPlayer 对象的时候传入其实例进行 PLPlayer 的可选项配置
  
  @since v1.0.0

@@ -8,13 +8,13 @@
 #
 
 Pod::Spec.new do |s|
-  s.name             = "PLPlayerKit"
-  s.version          = "2.1.3"
+  s.name             = "PLPlayerKit_Beta"
+  s.version          = "2.1.3.1"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
-  s.author           = { "0dayZh" => "0day.zh@gmail.com" }
-  s.source           = { :git => "https://github.com/pili-engineering/PLPlayerKit.git", :tag => "v#{s.version}" }
+  s.author           = { "hzwangsiyu" => "hzwangsiyu@gmail.com" }
+  s.source           = { :git => "https://github.com/pili-engineering/PLPlayerKit.git", :branch => "Beta", :tag => "v#{s.version}" }
 
   s.platform     = :ios, '7.0'
   s.requires_arc = true
