@@ -785,8 +785,55 @@ int PILI_RTMP_SetupURL(PILI_RTMP *r, const char *url, RTMPError *error)
   return TRUE;
 }
 
+//static int
+//add_addr_info(PILI_RTMP *r, struct sockaddr_in *service, AVal *host, int port, RTMPError *error)
+//{
+//  char *hostname;
+//  int ret = TRUE;
+//  if (host->av_val[host->av_len])
+//    {
+//      hostname = malloc(host->av_len+1);
+//      memcpy(hostname, host->av_val, host->av_len);
+//      hostname[host->av_len] = '\0';
+//    }
+//  else
+//    {
+//      hostname = host->av_val;
+//    }
+//
+//  service->sin_addr.s_addr = inet_addr(hostname);
+//  if (service->sin_addr.s_addr == INADDR_NONE)
+//    {
+//      struct hostent *host = gethostbyname(hostname);
+//      if (host == NULL || host->h_addr == NULL)
+//	{
+//        if (error) {
+//            char msg[100];
+//            memset(msg, 0, 100);
+//            strcat(msg, "Problem accessing the DNS. addr: ");
+//            strcat(msg, hostname);
+//            
+//            RTMPError_Alloc(error, strlen(msg));
+//            error->code = RTMPErrorAccessDNSFailed;
+//            strcpy(error->message, msg);
+//        }
+//        
+//        RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
+//        ret = FALSE;
+//        goto finish;
+//	}
+//      service->sin_addr = *(struct in_addr *)host->h_addr;
+//    }
+//
+//  service->sin_port = htons(port);
+//finish:
+//  if (hostname != host->av_val)
+//    free(hostname);
+//  return ret;
+//}
+
 static int
-add_addr_info(PILI_RTMP *r, struct sockaddr_in *service, AVal *host, int port, RTMPError *error)
+add_addr_info(PILI_RTMP *r, struct addrinfo* hints, struct addrinfo** ai, AVal *host, int port, RTMPError *error)
 {
   char *hostname;
   int ret = TRUE;
@@ -800,49 +847,46 @@ add_addr_info(PILI_RTMP *r, struct sockaddr_in *service, AVal *host, int port, R
     {
       hostname = host->av_val;
     }
-
-  service->sin_addr.s_addr = inet_addr(hostname);
-  if (service->sin_addr.s_addr == INADDR_NONE)
-    {
-      struct hostent *host = gethostbyname(hostname);
-      if (host == NULL || host->h_addr == NULL)
-	{
-        if (error) {
-            char msg[100];
-            memset(msg, 0, 100);
-            strcat(msg, "Problem accessing the DNS. addr: ");
-            strcat(msg, hostname);
-            
-            RTMPError_Alloc(error, strlen(msg));
-            error->code = RTMPErrorAccessDNSFailed;
-            strcpy(error->message, msg);
-        }
+    
+    struct addrinfo *cur_ai;
+    char portstr[10];
+    snprintf(portstr, sizeof(portstr), "%d", port);
+    int addrret = getaddrinfo(hostname, portstr, hints, ai);
+    if (addrret != 0) {
+        char msg[100];
+        memset(msg, 0, 100);
+        strcat(msg, "Problem accessing the DNS. addr: ");
+        strcat(msg, hostname);
         
+        RTMPError_Alloc(error, strlen(msg));
+        error->code = RTMPErrorAccessDNSFailed;
+        strcpy(error->message, msg);
         RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
         ret = FALSE;
-        goto finish;
-	}
-      service->sin_addr = *(struct in_addr *)host->h_addr;
     }
+    
+    if (hostname != host->av_val){
+        free(hostname);
+    }
+    return ret;
 
-  service->sin_port = htons(port);
-finish:
-  if (hostname != host->av_val)
-    free(hostname);
-  return ret;
 }
 
 int
-PILI_RTMP_Connect0(PILI_RTMP *r, struct sockaddr * service, RTMPError *error)
+PILI_RTMP_Connect0(PILI_RTMP *r, struct addrinfo *ai, unsigned short port, RTMPError *error)
 {
   r->m_sb.sb_timedout = FALSE;
   r->m_pausing = 0;
   r->m_fDuration = 0.0;
 
-  r->m_sb.sb_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    r->m_sb.sb_socket = socket(ai->ai_family, ai->ai_socktype, ai->ai_protocol);
+    if (ai->ai_family == AF_INET6) {
+        struct sockaddr_in6 *in6 = (struct sockaddr_in6 *)ai->ai_addr;
+        in6->sin6_port = htons(port);
+    }
   if (r->m_sb.sb_socket != -1)
     {
-      if (connect(r->m_sb.sb_socket, service, sizeof(struct sockaddr)) < 0)
+      if (connect(r->m_sb.sb_socket, ai->ai_addr, ai->ai_addrlen) < 0)
 	{
         int err = GetSockError();
         
@@ -1030,32 +1074,39 @@ PILI_RTMP_Connect1(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error)
 int
 PILI_RTMP_Connect(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error)
 {
-  struct sockaddr_in service;
   struct PILI_CONNECTION_TIME conn_time;
   if (!r->Link.hostname.av_len)
     return FALSE;
 
-  memset(&service, 0, sizeof(struct sockaddr_in));
-  service.sin_family = AF_INET;
-
+    struct addrinfo hints = { 0 }, *ai, *cur_ai;
+    hints.ai_family = PF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    hints.ai_flags = AI_DEFAULT;
+    unsigned short port;
   if (r->Link.socksport)
     {
+        port = r->Link.socksport;
       /* Connect via SOCKS */
-        if (!add_addr_info(r, &service, &r->Link.sockshost, r->Link.socksport, error)) {
+        if (!add_addr_info(r, &hints, &ai, &r->Link.sockshost, r->Link.socksport, error)) {
             return FALSE;
         }
     }
   else
     {
+        port = r->Link.port;
       /* Connect directly */
-        if (!add_addr_info(r, &service, &r->Link.hostname, r->Link.port, error)) {
+        if (!add_addr_info(r, &hints, &ai, &r->Link.hostname, r->Link.port, error)) {
             return FALSE;
         }
     }
-    r->ip = service.sin_addr.s_addr;
+    r->ip = 0; //useless for ipv6
+    cur_ai = ai;
+    
    int t1  = PILI_RTMP_GetTime();
-  if (!PILI_RTMP_Connect0(r, (struct sockaddr *)&service, error))
-    return FALSE;
+    if (!PILI_RTMP_Connect0(r, cur_ai, port, error)){
+        freeaddrinfo(ai);
+        return FALSE;
+    }
     conn_time.connect_time = PILI_RTMP_GetTime() - t1;
   r->m_bSendCounter = TRUE;
 
@@ -1066,44 +1117,47 @@ PILI_RTMP_Connect(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error)
     if (r->m_connCallback != NULL) {
         r->m_connCallback(&conn_time, r->m_userData);
     }
+    freeaddrinfo(ai);
     return ret;
 }
 
+//useless
 static int
 SocksNegotiate(PILI_RTMP *r, RTMPError *error)
 {
-  unsigned long addr;
-  struct sockaddr_in service;
-  memset(&service, 0, sizeof(struct sockaddr_in));
-
-  add_addr_info(r, &service, &r->Link.hostname, r->Link.port, error);
-  addr = htonl(service.sin_addr.s_addr);
-
-  {
-    char packet[] = {
-      4, 1,			/* SOCKS 4, connect */
-      (r->Link.port >> 8) & 0xFF,
-      (r->Link.port) & 0xFF,
-      (char)(addr >> 24) & 0xFF, (char)(addr >> 16) & 0xFF,
-      (char)(addr >> 8) & 0xFF, (char)addr & 0xFF,
-      0
-    };				/* NULL terminate */
-
-    WriteN(r, packet, sizeof packet, error);
-
-    if (ReadN(r, packet, 8) != 8)
-      return FALSE;
-
-    if (packet[0] == 0 && packet[1] == 90)
-      {
-        return TRUE;
-      }
-    else
-      {
-        RTMP_Log(RTMP_LOGERROR, "%s, SOCKS returned error code %d", packet[1]);
-        return FALSE;
-      }
-  }
+//  unsigned long addr;
+//  struct sockaddr_in service;
+//  memset(&service, 0, sizeof(struct sockaddr_in));
+//
+//  add_addr_info(r, &service, &r->Link.hostname, r->Link.port, error);
+//  addr = htonl(service.sin_addr.s_addr);
+//
+//  {
+//    char packet[] = {
+//      4, 1,			/* SOCKS 4, connect */
+//      (r->Link.port >> 8) & 0xFF,
+//      (r->Link.port) & 0xFF,
+//      (char)(addr >> 24) & 0xFF, (char)(addr >> 16) & 0xFF,
+//      (char)(addr >> 8) & 0xFF, (char)addr & 0xFF,
+//      0
+//    };				/* NULL terminate */
+//
+//    WriteN(r, packet, sizeof packet, error);
+//
+//    if (ReadN(r, packet, 8) != 8)
+//      return FALSE;
+//
+//    if (packet[0] == 0 && packet[1] == 90)
+//      {
+//        return TRUE;
+//      }
+//    else
+//      {
+//        RTMP_Log(RTMP_LOGERROR, "%s, SOCKS returned error code %d", packet[1]);
+//        return FALSE;
+//      }
+//  }
+    return 0;
 }
 
 int

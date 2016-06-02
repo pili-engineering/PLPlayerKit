@@ -1,567 +1,1490 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		01434075420B08CC4232C4AB1051C309 /* pili-librtmp-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3358D6C3DAB57CFDFC405CD5BB2A7F85 /* pili-librtmp-dummy.m */; };
-		08464F74EEB7A877C5C5493F8E7BB504 /* parseurl.c in Sources */ = {isa = PBXBuildFile; fileRef = 96B64B600E6D2273848842652DCB0E03 /* parseurl.c */; };
-		1D310FC6C5F145244DDC2F25F5F4C52D /* dh.h in Headers */ = {isa = PBXBuildFile; fileRef = 5900D7E23ECDF769963DE407FE294851 /* dh.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		38374B9DFAA3A02B4CDD4FA207C7DBCA /* amf.h in Headers */ = {isa = PBXBuildFile; fileRef = 021F47A5C7E74F4F9992C7C0C08B55F1 /* amf.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4482FA087AB33DD3B710C5509F13A82E /* error.h in Headers */ = {isa = PBXBuildFile; fileRef = 82CF84F9FE6FCE209FE00F784DF1C214 /* error.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		449677A54DC9CDB8C8A47BEE12BB0A2E /* hashswf.c in Sources */ = {isa = PBXBuildFile; fileRef = AEA9B711117EDFEFA14D6793B2431E49 /* hashswf.c */; };
-		60892BF198661251DBC42987B773266C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		614172618531148E73F7587C132D3325 /* rtmp.c in Sources */ = {isa = PBXBuildFile; fileRef = B5D3FB19C3C3313EEDB86BA52A9E611E /* rtmp.c */; };
-		66E84AFE041AE92454B80B3A416E12DF /* rtmp_sys.h in Headers */ = {isa = PBXBuildFile; fileRef = F1BDF3AC407AB29124AD9640A953F908 /* rtmp_sys.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		81D9621463A7404DAC77839259365800 /* rtmp.h in Headers */ = {isa = PBXBuildFile; fileRef = 993E6D38B4EC2CD834FB49CB8B3E5C6A /* rtmp.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8B7B75BDDA8FB5F466A5CB10D5811A26 /* log.h in Headers */ = {isa = PBXBuildFile; fileRef = 12CD67817424552840C9E89E0CA00DC4 /* log.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		999BC088CF01F4A8C4FD5343E02BE09B /* amf.c in Sources */ = {isa = PBXBuildFile; fileRef = 79FBB3110EF6CAE3A54CD11CEAF0FE08 /* amf.c */; };
-		A0E36C5F85EDC1EF9FB0766C915B08B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
-		A2ECFC4C875986590F85E7159FB34AFC /* handshake.h in Headers */ = {isa = PBXBuildFile; fileRef = 656014D3973279CB8762CEFC244EFC03 /* handshake.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A86197F4F3C92350321F83ED2B8599DE /* error.c in Sources */ = {isa = PBXBuildFile; fileRef = 963F16CDDCD202A8E278E554163E43C5 /* error.c */; };
-		B814AB108E3DB51D7C04F0C3328957AD /* log.c in Sources */ = {isa = PBXBuildFile; fileRef = E81D4708CAD05F624719A907213900D7 /* log.c */; };
-		BD76816F240F479C8F7A4713CCD2255A /* Pods-PLPlayerKit-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */; };
-		BE67171473D6DAD09D361975E0C990E5 /* bytes.h in Headers */ = {isa = PBXBuildFile; fileRef = B04B958070E7FF6B5C3D10D6D2704BF1 /* bytes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		D975D7F93AF184BB1E68E5F43A3EB85F /* dhgroups.h in Headers */ = {isa = PBXBuildFile; fileRef = 07B621EB3AA9F7CDFC2815BCCC2927BB /* dhgroups.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		F3237AE4E59B9A821591349BC1AC417B /* http.h in Headers */ = {isa = PBXBuildFile; fileRef = FEBA5FBF0DD5BFC4CB12F875B719C6BD /* http.h */; settings = {ATTRIBUTES = (Public, ); }; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		E54B9885ADF060D56C70CE42D93F96A3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 2BAC7CF49C86172B8F10A9ADFC08EF59;
-			remoteInfo = "pili-librtmp";
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		021F47A5C7E74F4F9992C7C0C08B55F1 /* amf.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = amf.h; path = "Pod/Classes/pili-librtmp/amf.h"; sourceTree = "<group>"; };
-		07B621EB3AA9F7CDFC2815BCCC2927BB /* dhgroups.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dhgroups.h; path = "Pod/Classes/pili-librtmp/dhgroups.h"; sourceTree = "<group>"; };
-		12CD67817424552840C9E89E0CA00DC4 /* log.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = log.h; path = "Pod/Classes/pili-librtmp/log.h"; sourceTree = "<group>"; };
-		15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "pili-librtmp.xcconfig"; sourceTree = "<group>"; };
-		17DE14C9783A07D54FBEE2BFCE6C265E /* Pods-PLPlayerKit-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PLPlayerKit-resources.sh"; sourceTree = "<group>"; };
-		1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-PLPlayerKit-dummy.m"; sourceTree = "<group>"; };
-		29D9BC68A7EA5D8174CD72B5881205FC /* PLPlayerOption.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerOption.h; sourceTree = "<group>"; };
-		3358D6C3DAB57CFDFC405CD5BB2A7F85 /* pili-librtmp-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "pili-librtmp-dummy.m"; sourceTree = "<group>"; };
-		3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.release.xcconfig"; sourceTree = "<group>"; };
-		392822C027144E25B2588B3F72E0D143 /* Pods-PLPlayerKit-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-PLPlayerKit-frameworks.sh"; sourceTree = "<group>"; };
-		392B7C455543271AD245DA351AE2AC4A /* Pods-PLPlayerKit-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-PLPlayerKit-acknowledgements.markdown"; sourceTree = "<group>"; };
-		3B6029370DFB88DB6ADB8722D39A176D /* PLPlayerError.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerError.h; sourceTree = "<group>"; };
-		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		5900D7E23ECDF769963DE407FE294851 /* dh.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = dh.h; path = "Pod/Classes/pili-librtmp/dh.h"; sourceTree = "<group>"; };
-		656014D3973279CB8762CEFC244EFC03 /* handshake.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = handshake.h; path = "Pod/Classes/pili-librtmp/handshake.h"; sourceTree = "<group>"; };
-		79FBB3110EF6CAE3A54CD11CEAF0FE08 /* amf.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = amf.c; path = "Pod/Classes/pili-librtmp/amf.c"; sourceTree = "<group>"; };
-		7C005116FE87041F2A65400E638C6291 /* libPods-PLPlayerKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PLPlayerKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		82CF84F9FE6FCE209FE00F784DF1C214 /* error.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = error.h; path = "Pod/Classes/pili-librtmp/error.h"; sourceTree = "<group>"; };
-		963F16CDDCD202A8E278E554163E43C5 /* error.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = error.c; path = "Pod/Classes/pili-librtmp/error.c"; sourceTree = "<group>"; };
-		96B64B600E6D2273848842652DCB0E03 /* parseurl.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = parseurl.c; path = "Pod/Classes/pili-librtmp/parseurl.c"; sourceTree = "<group>"; };
-		96D11010CA18957D0BC4475565F193A8 /* Pods-PLPlayerKit-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-PLPlayerKit-acknowledgements.plist"; sourceTree = "<group>"; };
-		993E6D38B4EC2CD834FB49CB8B3E5C6A /* rtmp.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rtmp.h; path = "Pod/Classes/pili-librtmp/rtmp.h"; sourceTree = "<group>"; };
-		AEA9B711117EDFEFA14D6793B2431E49 /* hashswf.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = hashswf.c; path = "Pod/Classes/pili-librtmp/hashswf.c"; sourceTree = "<group>"; };
-		B04B958070E7FF6B5C3D10D6D2704BF1 /* bytes.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = bytes.h; path = "Pod/Classes/pili-librtmp/bytes.h"; sourceTree = "<group>"; };
-		B5D3FB19C3C3313EEDB86BA52A9E611E /* rtmp.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = rtmp.c; path = "Pod/Classes/pili-librtmp/rtmp.c"; sourceTree = "<group>"; };
-		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
-		D40A3CB45A004E9D2E4F58B88BC3F6D7 /* PLPlayer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayer.h; sourceTree = "<group>"; };
-		DD38BC2D4C984CC94990C4707D890AC5 /* pili-librtmp-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "pili-librtmp-prefix.pch"; sourceTree = "<group>"; };
-		E7D890890BC26A5AE4EC74D1672F1D10 /* libPLPlayerKit.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libPLPlayerKit.a; path = Pod/Library/lib/libPLPlayerKit.a; sourceTree = "<group>"; };
-		E81D4708CAD05F624719A907213900D7 /* log.c */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.c; name = log.c; path = "Pod/Classes/pili-librtmp/log.c"; sourceTree = "<group>"; };
-		F0B0A1E7F7F3B4C81B9D3D81097500CC /* libpili-librtmp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libpili-librtmp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		F1BDF3AC407AB29124AD9640A953F908 /* rtmp_sys.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = rtmp_sys.h; path = "Pod/Classes/pili-librtmp/rtmp_sys.h"; sourceTree = "<group>"; };
-		F9BB15E79CD37988CCA10DA6D98803CA /* PLPlayerKit.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = PLPlayerKit.h; sourceTree = "<group>"; };
-		FEBA5FBF0DD5BFC4CB12F875B719C6BD /* http.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = http.h; path = "Pod/Classes/pili-librtmp/http.h"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		1ADAE427C9CD06DE36C0A2899C31369C /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				60892BF198661251DBC42987B773266C /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		319237805A59574EC1B6C321CDA6F183 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A0E36C5F85EDC1EF9FB0766C915B08B9 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		172BE8ECDEC93AE18D64CE02A4627031 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				E7D890890BC26A5AE4EC74D1672F1D10 /* libPLPlayerKit.a */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		19449A754B6DE9D437AA10FE823110E1 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				93B4F05A17F8E6313EDDDF2D783178D7 /* pili-librtmp */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		26345AEFE56ABC7842D7CAED51C0E7DA /* include */ = {
-			isa = PBXGroup;
-			children = (
-				42EB5EC617B5B4B6323285B2DB09FD1D /* PLPlayerKit */,
-			);
-			path = include;
-			sourceTree = "<group>";
-		};
-		356C1EAC819D76A4B7511CA8F0802198 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */,
-				3358D6C3DAB57CFDFC405CD5BB2A7F85 /* pili-librtmp-dummy.m */,
-				DD38BC2D4C984CC94990C4707D890AC5 /* pili-librtmp-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/pili-librtmp";
-			sourceTree = "<group>";
-		};
-		42EB5EC617B5B4B6323285B2DB09FD1D /* PLPlayerKit */ = {
-			isa = PBXGroup;
-			children = (
-				D40A3CB45A004E9D2E4F58B88BC3F6D7 /* PLPlayer.h */,
-				3B6029370DFB88DB6ADB8722D39A176D /* PLPlayerError.h */,
-				F9BB15E79CD37988CCA10DA6D98803CA /* PLPlayerKit.h */,
-				29D9BC68A7EA5D8174CD72B5881205FC /* PLPlayerOption.h */,
-			);
-			path = PLPlayerKit;
-			sourceTree = "<group>";
-		};
-		51C23EB55ABA1494C21F7CFF51AF5059 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				A017E7B8D2449321E6957C6EF7362D21 /* Library */,
-			);
-			path = Pod;
-			sourceTree = "<group>";
-		};
-		68CFBB7F5BFB233EB69A2C76859F788F /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				75E80F230A42BE03FA30656D078E8CE9 /* PLPlayerKit */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		726CEFEF00A6E9EF5860C348A7B356F2 /* Pods-PLPlayerKit */ = {
-			isa = PBXGroup;
-			children = (
-				392B7C455543271AD245DA351AE2AC4A /* Pods-PLPlayerKit-acknowledgements.markdown */,
-				96D11010CA18957D0BC4475565F193A8 /* Pods-PLPlayerKit-acknowledgements.plist */,
-				1CAB674A299350D22F56F0486F508C78 /* Pods-PLPlayerKit-dummy.m */,
-				392822C027144E25B2588B3F72E0D143 /* Pods-PLPlayerKit-frameworks.sh */,
-				17DE14C9783A07D54FBEE2BFCE6C265E /* Pods-PLPlayerKit-resources.sh */,
-				BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */,
-				3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */,
-			);
-			name = "Pods-PLPlayerKit";
-			path = "Target Support Files/Pods-PLPlayerKit";
-			sourceTree = "<group>";
-		};
-		75E80F230A42BE03FA30656D078E8CE9 /* PLPlayerKit */ = {
-			isa = PBXGroup;
-			children = (
-				51C23EB55ABA1494C21F7CFF51AF5059 /* Pod */,
-				EB2C4EDC1C7D33E96E4DB2873B480861 /* precompiled */,
-			);
-			name = PLPlayerKit;
-			path = ../..;
-			sourceTree = "<group>";
-		};
-		7D3A6C4F4716B61C753CAA6470ACD574 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				F0B0A1E7F7F3B4C81B9D3D81097500CC /* libpili-librtmp.a */,
-				7C005116FE87041F2A65400E638C6291 /* libPods-PLPlayerKit.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				68CFBB7F5BFB233EB69A2C76859F788F /* Development Pods */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				19449A754B6DE9D437AA10FE823110E1 /* Pods */,
-				7D3A6C4F4716B61C753CAA6470ACD574 /* Products */,
-				834F8E5467B2240519B1326FE092BB49 /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		834F8E5467B2240519B1326FE092BB49 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				726CEFEF00A6E9EF5860C348A7B356F2 /* Pods-PLPlayerKit */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		93B4F05A17F8E6313EDDDF2D783178D7 /* pili-librtmp */ = {
-			isa = PBXGroup;
-			children = (
-				79FBB3110EF6CAE3A54CD11CEAF0FE08 /* amf.c */,
-				021F47A5C7E74F4F9992C7C0C08B55F1 /* amf.h */,
-				B04B958070E7FF6B5C3D10D6D2704BF1 /* bytes.h */,
-				5900D7E23ECDF769963DE407FE294851 /* dh.h */,
-				07B621EB3AA9F7CDFC2815BCCC2927BB /* dhgroups.h */,
-				963F16CDDCD202A8E278E554163E43C5 /* error.c */,
-				82CF84F9FE6FCE209FE00F784DF1C214 /* error.h */,
-				656014D3973279CB8762CEFC244EFC03 /* handshake.h */,
-				AEA9B711117EDFEFA14D6793B2431E49 /* hashswf.c */,
-				FEBA5FBF0DD5BFC4CB12F875B719C6BD /* http.h */,
-				E81D4708CAD05F624719A907213900D7 /* log.c */,
-				12CD67817424552840C9E89E0CA00DC4 /* log.h */,
-				96B64B600E6D2273848842652DCB0E03 /* parseurl.c */,
-				B5D3FB19C3C3313EEDB86BA52A9E611E /* rtmp.c */,
-				993E6D38B4EC2CD834FB49CB8B3E5C6A /* rtmp.h */,
-				F1BDF3AC407AB29124AD9640A953F908 /* rtmp_sys.h */,
-				356C1EAC819D76A4B7511CA8F0802198 /* Support Files */,
-			);
-			path = "pili-librtmp";
-			sourceTree = "<group>";
-		};
-		A017E7B8D2449321E6957C6EF7362D21 /* Library */ = {
-			isa = PBXGroup;
-			children = (
-				26345AEFE56ABC7842D7CAED51C0E7DA /* include */,
-			);
-			path = Library;
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		EB2C4EDC1C7D33E96E4DB2873B480861 /* precompiled */ = {
-			isa = PBXGroup;
-			children = (
-				172BE8ECDEC93AE18D64CE02A4627031 /* Frameworks */,
-			);
-			name = precompiled;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		F8A697119F2E37C79911F060F89E551D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				38374B9DFAA3A02B4CDD4FA207C7DBCA /* amf.h in Headers */,
-				BE67171473D6DAD09D361975E0C990E5 /* bytes.h in Headers */,
-				1D310FC6C5F145244DDC2F25F5F4C52D /* dh.h in Headers */,
-				D975D7F93AF184BB1E68E5F43A3EB85F /* dhgroups.h in Headers */,
-				4482FA087AB33DD3B710C5509F13A82E /* error.h in Headers */,
-				A2ECFC4C875986590F85E7159FB34AFC /* handshake.h in Headers */,
-				F3237AE4E59B9A821591349BC1AC417B /* http.h in Headers */,
-				8B7B75BDDA8FB5F466A5CB10D5811A26 /* log.h in Headers */,
-				81D9621463A7404DAC77839259365800 /* rtmp.h in Headers */,
-				66E84AFE041AE92454B80B3A416E12DF /* rtmp_sys.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		2BAC7CF49C86172B8F10A9ADFC08EF59 /* pili-librtmp */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = ED21AC54188497033489F8CBB898F51E /* Build configuration list for PBXNativeTarget "pili-librtmp" */;
-			buildPhases = (
-				5913A557A824E36148BA5D027DF390AE /* Sources */,
-				319237805A59574EC1B6C321CDA6F183 /* Frameworks */,
-				F8A697119F2E37C79911F060F89E551D /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "pili-librtmp";
-			productName = "pili-librtmp";
-			productReference = F0B0A1E7F7F3B4C81B9D3D81097500CC /* libpili-librtmp.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		3DC90167D2CFF350CB58D35014604FB8 /* Pods-PLPlayerKit */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D44F8EBCCE445A15B056C29918B4390D /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */;
-			buildPhases = (
-				11C384242F0F18074B52CC73202EA9E1 /* Sources */,
-				1ADAE427C9CD06DE36C0A2899C31369C /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				3BD7564DE525C2EC7F76EF3EE2504244 /* PBXTargetDependency */,
-			);
-			name = "Pods-PLPlayerKit";
-			productName = "Pods-PLPlayerKit";
-			productReference = 7C005116FE87041F2A65400E638C6291 /* libPods-PLPlayerKit.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
-			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 7D3A6C4F4716B61C753CAA6470ACD574 /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				2BAC7CF49C86172B8F10A9ADFC08EF59 /* pili-librtmp */,
-				3DC90167D2CFF350CB58D35014604FB8 /* Pods-PLPlayerKit */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		11C384242F0F18074B52CC73202EA9E1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BD76816F240F479C8F7A4713CCD2255A /* Pods-PLPlayerKit-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5913A557A824E36148BA5D027DF390AE /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				999BC088CF01F4A8C4FD5343E02BE09B /* amf.c in Sources */,
-				A86197F4F3C92350321F83ED2B8599DE /* error.c in Sources */,
-				449677A54DC9CDB8C8A47BEE12BB0A2E /* hashswf.c in Sources */,
-				B814AB108E3DB51D7C04F0C3328957AD /* log.c in Sources */,
-				08464F74EEB7A877C5C5493F8E7BB504 /* parseurl.c in Sources */,
-				01434075420B08CC4232C4AB1051C309 /* pili-librtmp-dummy.m in Sources */,
-				614172618531148E73F7587C132D3325 /* rtmp.c in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		3BD7564DE525C2EC7F76EF3EE2504244 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "pili-librtmp";
-			target = 2BAC7CF49C86172B8F10A9ADFC08EF59 /* pili-librtmp */;
-			targetProxy = E54B9885ADF060D56C70CE42D93F96A3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		052A17875CB827423D627183396CEB60 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		194AD0D8F17D89D54534FB3BF2067057 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/pili-librtmp/pili-librtmp-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		6CBB8C1D469C58F19ADC861B76BAC4D3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 15EB4B298C4EC3B3489FDB6482E3865B /* pili-librtmp.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/pili-librtmp/pili-librtmp-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		6E2E524ED07FB19B805A464DB3982413 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				ONLY_ACTIVE_ARCH = YES;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		F6722A10B5574B918DEA7EBCA5278C03 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				B37F0F91F85060E28F1DAAB522DC7EC1 /* Debug */,
-				052A17875CB827423D627183396CEB60 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D44F8EBCCE445A15B056C29918B4390D /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E2E524ED07FB19B805A464DB3982413 /* Debug */,
-				F6722A10B5574B918DEA7EBCA5278C03 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		ED21AC54188497033489F8CBB898F51E /* Build configuration list for PBXNativeTarget "pili-librtmp" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				194AD0D8F17D89D54534FB3BF2067057 /* Debug */,
-				6CBB8C1D469C58F19ADC861B76BAC4D3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>01434075420B08CC4232C4AB1051C309</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3358D6C3DAB57CFDFC405CD5BB2A7F85</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>021F47A5C7E74F4F9992C7C0C08B55F1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>amf.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/amf.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>052A17875CB827423D627183396CEB60</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>RELEASE=1</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>07B621EB3AA9F7CDFC2815BCCC2927BB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>dhgroups.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/dhgroups.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>08464F74EEB7A877C5C5493F8E7BB504</key>
+		<dict>
+			<key>fileRef</key>
+			<string>96B64B600E6D2273848842652DCB0E03</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>11C384242F0F18074B52CC73202EA9E1</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>BD76816F240F479C8F7A4713CCD2255A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>12CD67817424552840C9E89E0CA00DC4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>log.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/log.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>15EB4B298C4EC3B3489FDB6482E3865B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>pili-librtmp.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>172BE8ECDEC93AE18D64CE02A4627031</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>E7D890890BC26A5AE4EC74D1672F1D10</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>17DE14C9783A07D54FBEE2BFCE6C265E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>19449A754B6DE9D437AA10FE823110E1</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>93B4F05A17F8E6313EDDDF2D783178D7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>194AD0D8F17D89D54534FB3BF2067057</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>15EB4B298C4EC3B3489FDB6482E3865B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/pili-librtmp/pili-librtmp-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>1ADAE427C9CD06DE36C0A2899C31369C</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>60892BF198661251DBC42987B773266C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>1CAB674A299350D22F56F0486F508C78</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1D310FC6C5F145244DDC2F25F5F4C52D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5900D7E23ECDF769963DE407FE294851</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>26345AEFE56ABC7842D7CAED51C0E7DA</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>42EB5EC617B5B4B6323285B2DB09FD1D</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>include</string>
+			<key>path</key>
+			<string>include</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>29D9BC68A7EA5D8174CD72B5881205FC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>PLPlayerOption.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2BAC7CF49C86172B8F10A9ADFC08EF59</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>ED21AC54188497033489F8CBB898F51E</string>
+			<key>buildPhases</key>
+			<array>
+				<string>5913A557A824E36148BA5D027DF390AE</string>
+				<string>319237805A59574EC1B6C321CDA6F183</string>
+				<string>F8A697119F2E37C79911F060F89E551D</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>pili-librtmp</string>
+			<key>productName</key>
+			<string>pili-librtmp</string>
+			<key>productReference</key>
+			<string>F0B0A1E7F7F3B4C81B9D3D81097500CC</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>B37F0F91F85060E28F1DAAB522DC7EC1</string>
+				<string>052A17875CB827423D627183396CEB60</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>319237805A59574EC1B6C321CDA6F183</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A0E36C5F85EDC1EF9FB0766C915B08B9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>3358D6C3DAB57CFDFC405CD5BB2A7F85</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>pili-librtmp-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>356C1EAC819D76A4B7511CA8F0802198</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>15EB4B298C4EC3B3489FDB6482E3865B</string>
+				<string>3358D6C3DAB57CFDFC405CD5BB2A7F85</string>
+				<string>DD38BC2D4C984CC94990C4707D890AC5</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/pili-librtmp</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3591DFE78E3526A594F41EC2234726D7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>38374B9DFAA3A02B4CDD4FA207C7DBCA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>021F47A5C7E74F4F9992C7C0C08B55F1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>392822C027144E25B2588B3F72E0D143</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>392B7C455543271AD245DA351AE2AC4A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3B6029370DFB88DB6ADB8722D39A176D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>PLPlayerError.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3BD7564DE525C2EC7F76EF3EE2504244</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>pili-librtmp</string>
+			<key>target</key>
+			<string>2BAC7CF49C86172B8F10A9ADFC08EF59</string>
+			<key>targetProxy</key>
+			<string>E54B9885ADF060D56C70CE42D93F96A3</string>
+		</dict>
+		<key>3DC90167D2CFF350CB58D35014604FB8</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>D44F8EBCCE445A15B056C29918B4390D</string>
+			<key>buildPhases</key>
+			<array>
+				<string>11C384242F0F18074B52CC73202EA9E1</string>
+				<string>1ADAE427C9CD06DE36C0A2899C31369C</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>3BD7564DE525C2EC7F76EF3EE2504244</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-PLPlayerKit</string>
+			<key>productName</key>
+			<string>Pods-PLPlayerKit</string>
+			<key>productReference</key>
+			<string>7C005116FE87041F2A65400E638C6291</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>3E4E89230EF59BC255123B67864ACF77</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>42EB5EC617B5B4B6323285B2DB09FD1D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D40A3CB45A004E9D2E4F58B88BC3F6D7</string>
+				<string>3B6029370DFB88DB6ADB8722D39A176D</string>
+				<string>F9BB15E79CD37988CCA10DA6D98803CA</string>
+				<string>29D9BC68A7EA5D8174CD72B5881205FC</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>PLPlayerKit</string>
+			<key>path</key>
+			<string>PLPlayerKit</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4482FA087AB33DD3B710C5509F13A82E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>82CF84F9FE6FCE209FE00F784DF1C214</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>449677A54DC9CDB8C8A47BEE12BB0A2E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AEA9B711117EDFEFA14D6793B2431E49</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>51C23EB55ABA1494C21F7CFF51AF5059</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>A017E7B8D2449321E6957C6EF7362D21</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pod</string>
+			<key>path</key>
+			<string>Pod</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5900D7E23ECDF769963DE407FE294851</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>dh.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/dh.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5913A557A824E36148BA5D027DF390AE</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>999BC088CF01F4A8C4FD5343E02BE09B</string>
+				<string>A86197F4F3C92350321F83ED2B8599DE</string>
+				<string>449677A54DC9CDB8C8A47BEE12BB0A2E</string>
+				<string>B814AB108E3DB51D7C04F0C3328957AD</string>
+				<string>08464F74EEB7A877C5C5493F8E7BB504</string>
+				<string>01434075420B08CC4232C4AB1051C309</string>
+				<string>614172618531148E73F7587C132D3325</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>60892BF198661251DBC42987B773266C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E4E89230EF59BC255123B67864ACF77</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>614172618531148E73F7587C132D3325</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B5D3FB19C3C3313EEDB86BA52A9E611E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>656014D3973279CB8762CEFC244EFC03</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>handshake.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/handshake.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>66E84AFE041AE92454B80B3A416E12DF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F1BDF3AC407AB29124AD9640A953F908</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>68CFBB7F5BFB233EB69A2C76859F788F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>75E80F230A42BE03FA30656D078E8CE9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Development Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6CBB8C1D469C58F19ADC861B76BAC4D3</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>15EB4B298C4EC3B3489FDB6482E3865B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/pili-librtmp/pili-librtmp-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>6E2E524ED07FB19B805A464DB3982413</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>BDD1FF9AF7F6A22B37C979901B91C02B</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>726CEFEF00A6E9EF5860C348A7B356F2</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>392B7C455543271AD245DA351AE2AC4A</string>
+				<string>96D11010CA18957D0BC4475565F193A8</string>
+				<string>1CAB674A299350D22F56F0486F508C78</string>
+				<string>392822C027144E25B2588B3F72E0D143</string>
+				<string>17DE14C9783A07D54FBEE2BFCE6C265E</string>
+				<string>BDD1FF9AF7F6A22B37C979901B91C02B</string>
+				<string>3591DFE78E3526A594F41EC2234726D7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-PLPlayerKit</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-PLPlayerKit</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>75E80F230A42BE03FA30656D078E8CE9</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>51C23EB55ABA1494C21F7CFF51AF5059</string>
+				<string>EB2C4EDC1C7D33E96E4DB2873B480861</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>PLPlayerKit</string>
+			<key>path</key>
+			<string>../..</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>79FBB3110EF6CAE3A54CD11CEAF0FE08</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>amf.c</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/amf.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7C005116FE87041F2A65400E638C6291</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods-PLPlayerKit.a</string>
+			<key>path</key>
+			<string>libPods-PLPlayerKit.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>7D3A6C4F4716B61C753CAA6470ACD574</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F0B0A1E7F7F3B4C81B9D3D81097500CC</string>
+				<string>7C005116FE87041F2A65400E638C6291</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
+				<string>68CFBB7F5BFB233EB69A2C76859F788F</string>
+				<string>BC3CA7F9E30CC8F7E2DD044DD34432FC</string>
+				<string>19449A754B6DE9D437AA10FE823110E1</string>
+				<string>7D3A6C4F4716B61C753CAA6470ACD574</string>
+				<string>834F8E5467B2240519B1326FE092BB49</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>81D9621463A7404DAC77839259365800</key>
+		<dict>
+			<key>fileRef</key>
+			<string>993E6D38B4EC2CD834FB49CB8B3E5C6A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>82CF84F9FE6FCE209FE00F784DF1C214</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>error.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/error.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>834F8E5467B2240519B1326FE092BB49</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>726CEFEF00A6E9EF5860C348A7B356F2</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8B7B75BDDA8FB5F466A5CB10D5811A26</key>
+		<dict>
+			<key>fileRef</key>
+			<string>12CD67817424552840C9E89E0CA00DC4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>93B4F05A17F8E6313EDDDF2D783178D7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>79FBB3110EF6CAE3A54CD11CEAF0FE08</string>
+				<string>021F47A5C7E74F4F9992C7C0C08B55F1</string>
+				<string>B04B958070E7FF6B5C3D10D6D2704BF1</string>
+				<string>5900D7E23ECDF769963DE407FE294851</string>
+				<string>07B621EB3AA9F7CDFC2815BCCC2927BB</string>
+				<string>963F16CDDCD202A8E278E554163E43C5</string>
+				<string>82CF84F9FE6FCE209FE00F784DF1C214</string>
+				<string>656014D3973279CB8762CEFC244EFC03</string>
+				<string>AEA9B711117EDFEFA14D6793B2431E49</string>
+				<string>FEBA5FBF0DD5BFC4CB12F875B719C6BD</string>
+				<string>E81D4708CAD05F624719A907213900D7</string>
+				<string>12CD67817424552840C9E89E0CA00DC4</string>
+				<string>96B64B600E6D2273848842652DCB0E03</string>
+				<string>B5D3FB19C3C3313EEDB86BA52A9E611E</string>
+				<string>993E6D38B4EC2CD834FB49CB8B3E5C6A</string>
+				<string>F1BDF3AC407AB29124AD9640A953F908</string>
+				<string>356C1EAC819D76A4B7511CA8F0802198</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>pili-librtmp</string>
+			<key>path</key>
+			<string>pili-librtmp</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>963F16CDDCD202A8E278E554163E43C5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>error.c</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/error.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>96B64B600E6D2273848842652DCB0E03</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>parseurl.c</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/parseurl.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>96D11010CA18957D0BC4475565F193A8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>993E6D38B4EC2CD834FB49CB8B3E5C6A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>rtmp.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/rtmp.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>999BC088CF01F4A8C4FD5343E02BE09B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>79FBB3110EF6CAE3A54CD11CEAF0FE08</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A017E7B8D2449321E6957C6EF7362D21</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>26345AEFE56ABC7842D7CAED51C0E7DA</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Library</string>
+			<key>path</key>
+			<string>Library</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A0E36C5F85EDC1EF9FB0766C915B08B9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E4E89230EF59BC255123B67864ACF77</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A2ECFC4C875986590F85E7159FB34AFC</key>
+		<dict>
+			<key>fileRef</key>
+			<string>656014D3973279CB8762CEFC244EFC03</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A86197F4F3C92350321F83ED2B8599DE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>963F16CDDCD202A8E278E554163E43C5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AEA9B711117EDFEFA14D6793B2431E49</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>hashswf.c</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/hashswf.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B04B958070E7FF6B5C3D10D6D2704BF1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>bytes.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/bytes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B37F0F91F85060E28F1DAAB522DC7EC1</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>B5D3FB19C3C3313EEDB86BA52A9E611E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>rtmp.c</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/rtmp.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B814AB108E3DB51D7C04F0C3328957AD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E81D4708CAD05F624719A907213900D7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>name</key>
+			<string>Podfile</string>
+			<key>path</key>
+			<string>../Podfile</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.ruby</string>
+		</dict>
+		<key>BC3CA7F9E30CC8F7E2DD044DD34432FC</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BF6342C8B29F4CEEA088EFF7AB4DE362</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BD76816F240F479C8F7A4713CCD2255A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1CAB674A299350D22F56F0486F508C78</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>BDD1FF9AF7F6A22B37C979901B91C02B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-PLPlayerKit.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BE67171473D6DAD09D361975E0C990E5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B04B958070E7FF6B5C3D10D6D2704BF1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>BF6342C8B29F4CEEA088EFF7AB4DE362</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3E4E89230EF59BC255123B67864ACF77</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D40A3CB45A004E9D2E4F58B88BC3F6D7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>PLPlayer.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D41D8CD98F00B204E9800998ECF8427E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0700</string>
+				<key>LastUpgradeCheck</key>
+				<string>0700</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>7DB346D0F39D3F0E887471402A8071AB</string>
+			<key>productRefGroup</key>
+			<string>7D3A6C4F4716B61C753CAA6470ACD574</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>2BAC7CF49C86172B8F10A9ADFC08EF59</string>
+				<string>3DC90167D2CFF350CB58D35014604FB8</string>
+			</array>
+		</dict>
+		<key>D44F8EBCCE445A15B056C29918B4390D</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>6E2E524ED07FB19B805A464DB3982413</string>
+				<string>F6722A10B5574B918DEA7EBCA5278C03</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>D975D7F93AF184BB1E68E5F43A3EB85F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>07B621EB3AA9F7CDFC2815BCCC2927BB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>DD38BC2D4C984CC94990C4707D890AC5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>pili-librtmp-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E54B9885ADF060D56C70CE42D93F96A3</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>2BAC7CF49C86172B8F10A9ADFC08EF59</string>
+			<key>remoteInfo</key>
+			<string>pili-librtmp</string>
+		</dict>
+		<key>E7D890890BC26A5AE4EC74D1672F1D10</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>archive.ar</string>
+			<key>name</key>
+			<string>libPLPlayerKit.a</string>
+			<key>path</key>
+			<string>Pod/Library/lib/libPLPlayerKit.a</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E81D4708CAD05F624719A907213900D7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>log.c</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/log.c</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB2C4EDC1C7D33E96E4DB2873B480861</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>172BE8ECDEC93AE18D64CE02A4627031</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>precompiled</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>ED21AC54188497033489F8CBB898F51E</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>194AD0D8F17D89D54534FB3BF2067057</string>
+				<string>6CBB8C1D469C58F19ADC861B76BAC4D3</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>F0B0A1E7F7F3B4C81B9D3D81097500CC</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libpili-librtmp.a</string>
+			<key>path</key>
+			<string>libpili-librtmp.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>F1BDF3AC407AB29124AD9640A953F908</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>rtmp_sys.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/rtmp_sys.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F3237AE4E59B9A821591349BC1AC417B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FEBA5FBF0DD5BFC4CB12F875B719C6BD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>F6722A10B5574B918DEA7EBCA5278C03</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>3591DFE78E3526A594F41EC2234726D7</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>7.0</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>F8A697119F2E37C79911F060F89E551D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>38374B9DFAA3A02B4CDD4FA207C7DBCA</string>
+				<string>BE67171473D6DAD09D361975E0C990E5</string>
+				<string>1D310FC6C5F145244DDC2F25F5F4C52D</string>
+				<string>D975D7F93AF184BB1E68E5F43A3EB85F</string>
+				<string>4482FA087AB33DD3B710C5509F13A82E</string>
+				<string>A2ECFC4C875986590F85E7159FB34AFC</string>
+				<string>F3237AE4E59B9A821591349BC1AC417B</string>
+				<string>8B7B75BDDA8FB5F466A5CB10D5811A26</string>
+				<string>81D9621463A7404DAC77839259365800</string>
+				<string>66E84AFE041AE92454B80B3A416E12DF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F9BB15E79CD37988CCA10DA6D98803CA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>PLPlayerKit.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FEBA5FBF0DD5BFC4CB12F875B719C6BD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>http.h</string>
+			<key>path</key>
+			<string>Pod/Classes/pili-librtmp/http.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>D41D8CD98F00B204E9800998ECF8427E</string>
+</dict>
+</plist>

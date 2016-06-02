@@ -86,13 +86,13 @@ HTTP_get(struct HTTP_ctx *http, const char *url, HTTP_read_callback *cb)
   int rc, i;
   int len_known;
   HTTPResult ret = HTTPRES_OK;
-  struct sockaddr_in sa;
+//  struct sockaddr_in sa;
   PILI_RTMPSockBuf sb = {0};
 
   http->status = -1;
 
-  memset(&sa, 0, sizeof(struct sockaddr_in));
-  sa.sin_family = AF_INET;
+//  memset(&sa, 0, sizeof(struct sockaddr_in));
+//  sa.sin_family = AF_INET;
 
   /* we only handle http here */
   if (strncasecmp(url, "http", 4))
@@ -127,28 +127,48 @@ HTTP_get(struct HTTP_ctx *http, const char *url, HTTP_read_callback *cb)
       port = atoi(p1);
     }
 
-  sa.sin_addr.s_addr = inet_addr(host);
-  if (sa.sin_addr.s_addr == INADDR_NONE)
-    {
-      struct hostent *hp = gethostbyname(host);
-      if (!hp || !hp->h_addr)
-	return HTTPRES_LOST_CONNECTION;
-      sa.sin_addr = *(struct in_addr *)hp->h_addr;
+//  sa.sin_addr.s_addr = inet_addr(host);
+//  if (sa.sin_addr.s_addr == INADDR_NONE)
+//    {
+//      struct hostent *hp = gethostbyname(host);
+//      if (!hp || !hp->h_addr)
+//	return HTTPRES_LOST_CONNECTION;
+//      sa.sin_addr = *(struct in_addr *)hp->h_addr;
+//    }
+//  sa.sin_port = htons(port);
+    struct addrinfo hints = { 0 }, *ai, *cur_ai;
+    char portstr[10];
+    hints.ai_family = AF_UNSPEC;
+    hints.ai_socktype = SOCK_STREAM;
+    snprintf(portstr, sizeof(portstr), "%d", port);
+    ret = getaddrinfo(host, portstr, &hints, &ai);
+    if (ret != 0) {
+        return HTTPRES_LOST_CONNECTION;
     }
-  sa.sin_port = htons(port);
-  sb.sb_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-  if (sb.sb_socket == -1)
-    return HTTPRES_LOST_CONNECTION;
-  i =
-    sprintf(sb.sb_buf,
+    
+    cur_ai = ai;
+    
+    sb.sb_socket = socket(cur_ai->ai_family,
+                   cur_ai->ai_socktype,
+                   cur_ai->ai_protocol);
+//  sb.sb_socket = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (sb.sb_socket == -1){
+        freeaddrinfo(ai);
+        return HTTPRES_LOST_CONNECTION;
+    }
+  i = sprintf(sb.sb_buf,
 	    "GET %s HTTP/1.0\r\nUser-Agent: %s\r\nHost: %s\r\nReferrer: %.*s\r\n",
 	    path, AGENT, host, (int)(path - url + 1), url);
   if (http->date[0])
     i += sprintf(sb.sb_buf + i, "If-Modified-Since: %s\r\n", http->date);
   i += sprintf(sb.sb_buf + i, "\r\n");
+    
+    if (cur_ai->ai_family == AF_INET6) {
+        struct sockaddr_in6 *in6 = (struct sockaddr_in6 *)cur_ai->ai_addr;
+        in6->sin6_port = htons(port);
+    }
 
-  if (connect
-      (sb.sb_socket, (struct sockaddr *)&sa, sizeof(struct sockaddr)) < 0)
+  if (connect(sb.sb_socket, cur_ai->ai_addr, cur_ai->ai_addrlen) < 0)
     {
       ret = HTTPRES_LOST_CONNECTION;
       goto leave;
@@ -279,6 +299,7 @@ HTTP_get(struct HTTP_ctx *http, const char *url, HTTP_read_callback *cb)
 
 leave:
   PILI_RTMPSockBuf_Close(&sb);
+  freeaddrinfo(ai);
   return ret;
 }
 
