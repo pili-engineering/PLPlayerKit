@@ -1,9 +1,9 @@
 PODS:
-  - pili-librtmp (1.0.1)
-  - PLPlayerKit (2.1.3):
+  - pili-librtmp (1.0.2)
+  - PLPlayerKit (2.2.0):
     - pili-librtmp
-    - PLPlayerKit/precompiled (= 2.1.3)
-  - PLPlayerKit/precompiled (2.1.3):
+    - PLPlayerKit/precompiled (= 2.2.0)
+  - PLPlayerKit/precompiled (2.2.0):
     - pili-librtmp
 
 DEPENDENCIES:
@@ -14,7 +14,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  pili-librtmp: 8f2b969a1890e881715a90ab98d4d52baf53c514
-  PLPlayerKit: 7ab6b4339abc656fb56872a17f770618a775194d
+  pili-librtmp: 97dc6774ac4ebb9935f04d5f35f3f6d8c4a4f37c
+  PLPlayerKit: 1cef24f72d517519c74e797581fccc2db8db1a2e
 
 COCOAPODS: 0.39.0

@@ -273,7 +273,7 @@ extern "C"
     void *m_userData;
     int m_is_closing;
     int m_tcp_nodelay;
-      uint32_t ip;
+    uint32_t ip;
   } PILI_RTMP;
 
   int PILI_RTMP_ParseURL(const char *url, int *protocol, AVal *host,
@@ -304,7 +304,7 @@ extern "C"
 
   int PILI_RTMP_Connect(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error);
   struct sockaddr;
-  int PILI_RTMP_Connect0(PILI_RTMP *r, struct sockaddr *svc, RTMPError *error);
+  int PILI_RTMP_Connect0(PILI_RTMP *r, struct addrinfo *ai, unsigned short port, RTMPError *error);
   int PILI_RTMP_Connect1(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error);
   int PILI_RTMP_Serve(PILI_RTMP *r, RTMPError *error);
 

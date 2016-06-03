@@ -131,16 +131,21 @@ self.player.delegate = self;
 
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
-## 手动导入 SDK
-我们建议使用 CocoaPods 导入，如果由于特殊原因需要手动导入，可以按照如下步骤进行：
-
-- 将 Pod 目录下的文件加入到工程中；
-- - 将 https://github.com/pili-engineering/pili-librtmp Pod 目录下的所有文件加入到工程中；
-- 在工程对应 TARGET 中，右侧 Tab 选择 "Build Phases"，在 "Link Binary With Libraries" 中加入 CoreGraphics、 MediaPlayer、CoreAudio、AudioToolbox、Accelerate、QuartzCore、OpenGLES、AVFoundation 这些 framework，并加入 libc++.tdb、libz.tdb、libbz2.tbd 及 libiconv.tbd；
-- 在工程对应 TARGET 中，右侧 Tab 选择 "Build Settings"，在 "Other Linker Flags" 中加入 "-ObjC" 选项；
-
 ## 版本历史
+- 2.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.0.md))
+- 功能
+	- 新增硬解功能
+	- 新增 http-flv 支持
+	- 新增 iOS9 下的纯 IPV6 环境支持
+
+- 缺陷
+	- 修复快速进入退出黑屏
+
+- 优化
+	- 追帧策略优化
+	- 退出后台停止视频解码
 - 2.1.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.1.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.1.3.md))
+	- 增加设置一级缓存和二级缓存的选项，便于控制卡顿率
 	- 修复播放 OBS 及 FFmpeg 推的流黑屏的问题
 	- 修复播放结束后无法重播的问题
 	- 修复播放过程中内存暴增的问题
