@@ -8,8 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSUInteger {
+    kPLLogWarning,
+    kPLLogInfo,
+    kPLLogVerbose,
+} PLLogLevel;
+
 /**
- 接收/发送数据包超时时间间隔所对应的键值，单位为 s ，默认配置为 10s
+ @abstract 接收/发送数据包超时时间间隔所对应的键值，单位为 s ，默认配置为 10s
+ 
+ @warning 建议设置正数。设置的值小于等于 0 时，表示禁用超时，播放卡住时，将无超时回调。
  
  @since v1.0.0
  */
@@ -47,6 +55,29 @@ extern NSString  * _Nonnull PLPlayerOptionKeyMaxL2BufferDuration;
  @since v2.1.4
  */
 extern NSString  * _Nonnull PLPlayerOptionKeyVideoToolbox;
+
+/**
+ @abstract 配置 log 级别
+ 
+ @discussion release 建议使用 kPLLogWarning, debug 建议使用 kPLLogInfo.
+ 
+ @waring 取值范围: PLLogLevel
+ 
+ @since v2.2.1
+ */
+extern NSString * _Nonnull PLPlayerOptionKeyLogLevel;
+
+/**
+ @abstract 自定义 dns dnsmanager 查询，使用 HappyDNS
+ 
+ @discussion 使用 HappyDNS 做 dns 解析，如果你期望自己配置 dns 解析的规则，可以通过传递自己定义的 dns manager 来做 dns 查询。
+ 如果你对 dns 解析部分不清楚，建议使用默认规则。
+ 
+ @waring 值类型为 QNDnsManager
+ 
+ @since v2.2.1
+ */
+extern NSString * _Nonnull PLPlayerOptionKeyDNSManager;
 
 /**
  PLPlayer 的可选配置类，在初始化 PLPlayer 对象的时候传入其实例进行 PLPlayer 的可选项配置
