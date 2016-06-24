@@ -23,6 +23,7 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Library/include/**/*.h'
 
   s.dependency 'pili-librtmp'
+  s.dependency 'HappyDNS'
   s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
   s.libraries = "c++", "z", "bz2", "iconv"
 
