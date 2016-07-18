@@ -25,8 +25,8 @@ PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
   - 新增 SDK 自动重连功能，默认不开启
 - 缺陷
   - 修复长时间播放偶发解码 crash
-	- 修复 pause/resmue 调用导致 crash
+  - 修复 pause/resmue 快速调用导致 crash
   - 修复重连未更换服务器 IP
-	- 修复 rtmp 硬解播放视频抖动
-	- 修复 flv 开始播放偶发黑屏
-	- 修复 flv 超时机制失效
+  - 修复 rtmp 硬解播放视频抖动
+  - 修复 flv 开始播放偶发黑屏
+  - 修复 flv 超时机制失效

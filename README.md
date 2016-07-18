@@ -144,11 +144,11 @@ self.player.delegate = self;
   - 新增 SDK 自动重连功能，默认不开启
 - 缺陷
   - 修复长时间播放偶发解码 crash
-	- 修复 pause/resmue 调用导致 crash
+  - 修复 pause/resmue 快速调用导致 crash
   - 修复重连未更换服务器 IP
-	- 修复 rtmp 硬解播放视频抖动
-	- 修复 flv 开始播放偶发黑屏
-	- 修复 flv 超时机制失效
+  - 修复 rtmp 硬解播放视频抖动
+  - 修复 flv 开始播放偶发黑屏
+  - 修复 flv 超时机制失效
 - 2.2.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.1.md))
 - 功能
   - 支持 SDK 日志级别设置
