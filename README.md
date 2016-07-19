@@ -138,14 +138,25 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 版本历史
-- 2.2.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.1.md))
+- 2.2.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.2.md))
+- 功能
+  - 新增 AAC HEV2 音频支持
+  - 新增 SDK 自动重连功能，默认不开启
+- 缺陷
+  - 修复长时间播放偶发解码 crash
+  - 修复 pause/resmue 快速调用导致 crash
+  - 修复重连未更换服务器 IP
+  - 修复 rtmp 硬解播放视频抖动
+  - 修复 flv 开始播放偶发黑屏
+  - 修复 flv 超时机制失效
+- 2.2.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.1.md))
 - 功能
   - 支持 SDK 日志级别设置
   - 新增 HappyDNS 支持
 - 缺陷
   - 修复回看状态不准确问题
-  - 修复跳转第三方应用，出现内存增加。
-  - 修复播放卡住 caching 状态。
+  - 修复跳转第三方应用，出现内存增加
+  - 修复播放卡住 caching 状态
 - 2.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.0.md))
 - 功能
 	- 新增硬解功能

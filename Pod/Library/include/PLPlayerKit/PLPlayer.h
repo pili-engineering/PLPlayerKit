@@ -75,7 +75,13 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
      
      @since v1.0.0
      */
-    PLPlayerStatusError
+    PLPlayerStatusError,
+    
+    /**
+     *  PLPlayer 自动重连的状态
+     */
+    PLPlayerStateAutoReconnecting
+    
 };
 
 @class PLPlayer;
@@ -216,6 +222,14 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 @property (nonatomic, assign, readonly) CMTime  totalDuration;
 
 /**
+ *  是否开启重连，默认为 NO
+ *
+ * @since v2.2.2
+ */
+@property (nonatomic,assign,getter = isAutoReconnectEnable) BOOL autoReconnectEnable;
+
+
+/**
  使用 url 和 option 生成一个 PLPlayer 对象
  
  @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
@@ -238,6 +252,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  @since v2.1.0
  */
 - (nullable instancetype)initWithURL:(nullable NSURL *)URL option:(nullable PLPlayerOption *)option;
+
 
 /**
  开始播放
