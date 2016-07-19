@@ -10,6 +10,7 @@
 #import "QNDomain.h"
 #import "QNHosts.h"
 #import "QNIP.h"
+#import "QNLruCache.h"
 #import "QNNetworkInfo.h"
 #import "QNRecord.h"
 #import "QNResolverDelegate.h"
@@ -20,7 +21,7 @@ const int kQNDomainSeverError = -7003;
 
 @interface QNDnsManager ()
 
-@property (nonatomic, strong) NSCache *cache;
+@property (nonatomic, strong) QNLruCache *cache;
 @property (atomic) QNNetworkInfo *curNetwork;
 @property (nonatomic) NSArray *resolvers;
 @property (atomic) UInt32 resolverStatus;
@@ -66,7 +67,7 @@ static inline UInt32 bits_leadingZeros(UInt32 x) {
     return n - x;
 }
 
-static NSArray *trimCname(NSArray *records) {
+static NSMutableArray *trimCname(NSArray *records) {
     NSMutableArray *array = [[NSMutableArray alloc] init];
     for (QNRecord *r in records) {
         if (r.type == kQNTypeA || r.type == kQNTypeAAAA) {
@@ -84,23 +85,15 @@ static NSArray *records2Ips(NSArray *records) {
     return array;
 }
 
-@interface Shuffle : NSObject <QNIpSorter>
+@interface DummySorter : NSObject <QNIpSorter>
 
 @end
 
-@implementation Shuffle
+@implementation DummySorter
 
+//sorted already
 - (NSArray *)sort:(NSArray *)ips {
-    if (ips == nil || ips.count <= 1) {
-        return ips;
-    }
-    int skip = arc4random() % ips.count;
-    NSMutableArray *ret = [[NSMutableArray alloc] initWithCapacity:ips.count];
-    for (int i = 0; i < ips.count; i++) {
-        NSString *ip = [ips objectAtIndex:((i + skip) % ips.count)];
-        [ret addObject:ip];
-    }
-    return ret;
+    return ips;
 }
 
 @end
@@ -114,6 +107,9 @@ static NSArray *records2Ips(NSArray *records) {
     if (domain.domain == nil) {
         return nil;
     }
+    if ([QNIP mayBeIpV4:domain.domain]) {
+        return [NSArray arrayWithObject:domain.domain];
+    }
     NSArray *ips = [self queryInternalWithDomain:domain];
     return [_sorter sort:ips];
 }
@@ -125,13 +121,18 @@ static NSArray *records2Ips(NSArray *records) {
             return ret;
         }
     }
-    NSArray *result;
+    NSMutableArray *result;
     @synchronized(_cache) {
         if ([_curNetwork isEqualToInfo:[QNNetworkInfo normal]] && [QNNetworkInfo isNetworkChanged]) {
             [_cache removeAllObjects];
             _resolverStatus = 0;
         } else {
             result = [_cache objectForKey:domain.domain];
+            if (result != nil && result.count > 1) {
+                QNRecord *first = [result firstObject];
+                [result removeObjectAtIndex:0];
+                [result addObject:first];
+            }
         }
     }
 
@@ -163,7 +164,7 @@ static NSArray *records2Ips(NSArray *records) {
                 _resolverStatus = bits_set(_resolverStatus, pos);
             }
         } else {
-            NSArray *ret = trimCname(records);
+            NSMutableArray *ret = trimCname(records);
             if (_curNetwork == previousNetwork && [previousIp isEqualToString:[QNNetworkInfo getIp]]) {
                 @synchronized(_cache) {
                     [_cache setObject:ret forKey:domain.domain];
@@ -185,13 +186,12 @@ static NSArray *records2Ips(NSArray *records) {
 
 - (instancetype)init:(NSArray *)resolvers networkInfo:(QNNetworkInfo *)netInfo sorter:(id<QNIpSorter>)sorter {
     if (self = [super init]) {
-        _cache = [[NSCache alloc] init];
-        _cache.countLimit = 1024;
+        _cache = [[QNLruCache alloc] init:1024];
         _curNetwork = netInfo;
         _resolvers = [[NSArray alloc] initWithArray:resolvers];
         _hosts = [[QNHosts alloc] init];
         if (sorter == nil) {
-            _sorter = [[Shuffle alloc] init];
+            _sorter = [[DummySorter alloc] init];
         } else {
             _sorter = sorter;
         }

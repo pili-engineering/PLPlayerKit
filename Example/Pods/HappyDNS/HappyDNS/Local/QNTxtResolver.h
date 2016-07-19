@@ -17,5 +17,7 @@
  *
  *    @param address DNS 服务器地址，nil 表示系统的
  */
-- (instancetype)initWithAddres:(NSString *)address;
+- (instancetype)initWithAddress:(NSString *)address;
+
+- (instancetype)initWithAddress:(NSString *)address timeout:(NSUInteger)time;
 @end

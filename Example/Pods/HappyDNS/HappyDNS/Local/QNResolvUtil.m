@@ -29,15 +29,18 @@ BOOL isV6(NSString *address) {
     return strchr(address.UTF8String, ':') != NULL;
 }
 
-int setup_dns_server(void *_res_state, NSString *dns_server) {
+int setup_dns_server(void *_res_state, NSString *dns_server, NSUInteger timeout) {
     res_state res = (res_state)_res_state;
     int r = res_ninit(res);
     if (r != 0) {
         return r;
     }
+    res->retrans = (int)timeout;
+    res->retry = 1;
     if (dns_server == nil) {
         return 0;
     }
+    res->options |= RES_IGNTC;
 
     union res_sockaddr_union server = {0};
 
@@ -46,7 +49,7 @@ int setup_dns_server(void *_res_state, NSString *dns_server) {
     hints.ai_socktype = SOCK_STREAM;
     int ret = getaddrinfo(dns_server.UTF8String, "53", &hints, &ai);
     if (ret != 0) {
-        return -1;
+        return ret;
     }
     int family = ai->ai_family;
 
@@ -57,7 +60,6 @@ int setup_dns_server(void *_res_state, NSString *dns_server) {
         server.sin = *((struct sockaddr_in *)ai->ai_addr);
     }
 
-#ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
     if (![QNIP isIpV6FullySupported] && family == AF_INET) {
         if ([QNIP isV6]) {
             freeaddrinfo(ai);
@@ -75,7 +77,6 @@ int setup_dns_server(void *_res_state, NSString *dns_server) {
             server.sin6 = *((struct sockaddr_in6 *)ai->ai_addr);
         }
     }
-#endif
 
     freeaddrinfo(ai);
     res_setservers(res, &server, 1);

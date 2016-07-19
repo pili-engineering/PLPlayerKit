@@ -209,4 +209,23 @@ int qn_localIp(char *buf, int buf_size) {
 #endif
     return YES;
 }
+
++ (BOOL)mayBeIpV4:(NSString *)domain {
+    NSUInteger l = domain.length;
+    if (l > 15 || l < 7) {
+        return NO;
+    }
+    const char *str = domain.UTF8String;
+    if (str == nil) {
+        return NO;
+    }
+
+    for (const char *p = str; p < str + l; p++) {
+        if ((*p < '0' || *p > '9') && *p != '.') {
+            return NO;
+        }
+    }
+    return YES;
+}
+
 @end

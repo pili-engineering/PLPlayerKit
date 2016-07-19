@@ -137,11 +137,12 @@ parsehost:
     if (domainName != NULL && ques != NULL) {
         char *domain = strstr(ques, "domain=");
         if (domain) {
+            end = domain - 1;
             domain += 7; //skip "domain="
-            char *end = strchr(domain, '&');
+            char *domain_end = strchr(domain, '&');
             int host_len = 0;
-            if (end) {
-                host_len = end - domain;
+            if (domain_end) {
+                host_len = domain_end - domain;
             } else {
                 host_len = strlen(domain);
             }

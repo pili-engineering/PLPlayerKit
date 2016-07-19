@@ -11,6 +11,6 @@
 
 extern BOOL isV6(NSString *address);
 
-extern int setup_dns_server(void *res, NSString *dns_server);
+extern int setup_dns_server(void *res, NSString *dns_server, NSUInteger timeout);
 
 #endif /* QNResolv_h */
