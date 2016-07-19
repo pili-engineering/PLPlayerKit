@@ -25,4 +25,7 @@ extern void qn_nat64(char *buf, int buf_size, uint32_t ipv4_addr);
 + (NSString *)nat64:(NSString *)ip;
 
 + (BOOL)isIpV6FullySupported;
+
++ (BOOL)mayBeIpV4:(NSString *)domain;
+
 @end

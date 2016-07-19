@@ -19,9 +19,10 @@ const int kQN_ENCRYPT_FAILED = -10001;
 const int kQN_DECRYPT_FAILED = -10002;
 
 @interface QNDnspodEnterprise ()
-
+@property (readonly, strong) NSString *server;
 @property (nonatomic, strong) NSString *userId;
 @property (nonatomic, strong) QNDes *des;
+@property (nonatomic) NSUInteger timeout;
 
 @end
 
@@ -35,10 +36,18 @@ const int kQN_DECRYPT_FAILED = -10002;
 - (instancetype)initWithId:(NSString *)userId
                        key:(NSString *)key
                     server:(NSString *)server {
+    return [self initWithId:userId key:key server:@"119.29.29.29" timeout:QN_DNS_DEFAULT_TIMEOUT];
+}
+
+- (instancetype)initWithId:(NSString *)userId
+                       key:(NSString *)key
+                    server:(NSString *)server
+                   timeout:(NSUInteger)time {
     if (self = [super init]) {
         _server = server;
         _userId = userId;
         _des = [[QNDes alloc] init:[key dataUsingEncoding:NSUTF8StringEncoding]];
+        _timeout = time;
     }
     return self;
 }
@@ -74,7 +83,7 @@ const int kQN_DECRYPT_FAILED = -10002;
         return nil;
     }
     NSString *url = [NSString stringWithFormat:@"http://%@/d?ttl=1&dn=%@&id=%@", [QNIP ipHost:_server], encrypt, _userId];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url]];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:_timeout];
     NSHTTPURLResponse *response = nil;
     NSError *httpError = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest

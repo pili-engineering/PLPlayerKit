@@ -60,6 +60,11 @@ static NSArray *filter(NSArray *input, int provider) {
     if (x == nil || x.count == 0) {
         return nil;
     }
+    if (x.count >= 2) {
+        QNHostsValue *first = [x firstObject];
+        [x removeObjectAtIndex:0];
+        [x addObject:first];
+    }
     return filter(x, netInfo.provider);
 }
 

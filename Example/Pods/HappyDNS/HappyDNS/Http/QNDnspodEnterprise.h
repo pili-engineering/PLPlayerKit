@@ -13,7 +13,6 @@ extern const int kQN_ENCRYPT_FAILED;
 extern const int kQN_DECRYPT_FAILED;
 
 @interface QNDnspodEnterprise : NSObject <QNResolverDelegate>
-@property (readonly, strong) NSString *server;
 
 - (instancetype)initWithId:(NSString *)userId
                        key:(NSString *)key;
@@ -21,6 +20,11 @@ extern const int kQN_DECRYPT_FAILED;
 - (instancetype)initWithId:(NSString *)userId
                        key:(NSString *)key
                     server:(NSString *)server;
+
+- (instancetype)initWithId:(NSString *)userId
+                       key:(NSString *)key
+                    server:(NSString *)server
+                   timeout:(NSUInteger)time;
 
 - (NSArray *)query:(QNDomain *)domain networkInfo:(QNNetworkInfo *)netInfo error:(NSError *__autoreleasing *)error;
 @end
