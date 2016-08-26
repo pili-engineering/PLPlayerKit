@@ -9,10 +9,11 @@
 #import "MasterViewController.h"
 #import <PLPlayerKit/PLPlayerKit.h>
 #import "PLPlayerViewController.h"
+#import "PLScanViewController.h"
 
 @interface MasterViewController ()
 <
-UIAlertViewDelegate
+PLScanViewControlerDelegate
 >
 
 @property NSMutableArray *objects;
@@ -27,7 +28,7 @@ UIAlertViewDelegate
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    self.title = @"点击右边 + 输入地址播放";
+    self.title = @"点击右边 + 扫二维码输入地址播放";
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
@@ -46,34 +47,9 @@ UIAlertViewDelegate
         self.objects = [[NSMutableArray alloc] init];
     }
     
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"输入待播放地址"
-                                                        message:nil
-                                                       delegate:self
-                                              cancelButtonTitle:@"取消"
-                                              otherButtonTitles:@"确定", nil];
-    alertView.alertViewStyle = UIAlertViewStylePlainTextInput;
-    [alertView show];
-}
-
-#pragma mark - UIAlertViewDelegate
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == alertView.firstOtherButtonIndex) {
-        UITextField *textField = [alertView textFieldAtIndex:0];
-        NSString *urlString = textField.text;
-        if (urlString.length > 0) {
-            [self.objects insertObject:urlString atIndex:0];
-            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-            [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        } else {
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"网址为空"
-                                                                message:@"添加失败"
-                                                               delegate:nil
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-            [alertView show];
-        }
-    }
+    PLScanViewController *vc = [PLScanViewController new];
+    vc.delegate = self;
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 #pragma mark - Table View
@@ -115,6 +91,23 @@ UIAlertViewDelegate
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view.
+    }
+}
+
+#pragma mark -- PLScanViewControllerDelegate
+- (void)scanQRResult:(NSString *)qrString {
+    NSURL *url = [NSURL URLWithString:qrString];
+    if (url) {
+        [self.objects insertObject:qrString atIndex:0];
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+        [self.tableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    } else {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"scan url error"
+                                                            message:qrString
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"知道了"
+                                                  otherButtonTitles:nil];
+        [alertView show];
     }
 }
 
