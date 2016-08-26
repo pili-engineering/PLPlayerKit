@@ -10,6 +10,7 @@ typedef struct RTMPError {
 
 void RTMPError_Alloc(RTMPError *error, size_t msg_size);
 void RTMPError_Free(RTMPError *error);
+void RTMPError_Message(RTMPError *error, int code, const char *message);
 
 // error defines
 enum {

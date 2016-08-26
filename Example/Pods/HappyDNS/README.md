@@ -22,12 +22,36 @@ pod "HappyDNS"
 
 
 ## 使用方法
-
-
-## 测试
-
-
-### 所有测试
+＊ 返回IP列表
+```
+ NSMutableArray *array = [[NSMutableArray alloc] init];
+[array addObject:[QNResolver systemResolver]];
+[array addObject:[[QNResolver alloc] initWithAddress:@"119.29.29.29"]];
+QNDnsManager *dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
+NSArray *ips = [dns query:@"www.qiniu.com"];
+```
+＊ url 请求，返回一个IP 替换URL 里的domain
+```
+NSMutableArray *array = [[NSMutableArray alloc] init];
+[array addObject:[QNResolver systemResolver]];
+[array addObject:[[QNResolver alloc] initWithAddress:@"119.29.29.29"]];
+QNDnsManager *dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
+NSURL *u = [[NSURL alloc] initWithString:@"rtmp://www.qiniu.com/abc?q=1"];
+NSURL *u2 = [dns queryAndReplaceWithIP:u];
+```
+* 兼容 getaddrinfo, 方便底层C代码接入
+```
+static QNDnsManager *dns = nil;
+dns = [[QNDnsManager alloc] init:@[ [QNResolver systemResolver] ] networkInfo:nil];
+[QNDnsManager setGetAddrInfoBlock:^NSArray *(NSString *host) {
+        return [dns query:host];
+    }];
+struct addrinfo hints = {0};
+struct addrinfo *ai = NULL;
+int x = qn_getaddrinfo(host, "http", &hints, &ai);
+qn_freeaddrinfo(ai); // 也可以用系统的freeaddrinfo, 代码一致，不过最好用这个
+```
+### 运行测试
 
 ``` bash
 $ xctool -workspace HappyDNS.xcworkspace -scheme "HappyDNS_Mac" -sdk macosx -configuration Release test -test-sdk macosx
@@ -43,7 +67,22 @@ $ xctool -workspace HappyDNS.xcworkspace -scheme "HappyDNS_Mac" -sdk macosx -con
 ## 常见问题
 
 - 如果碰到其他编译错误，请参考 CocoaPods 的 [troubleshooting](http://guides.cocoapods.org/using/troubleshooting.html)
-- httpdns 在ios8 时不支持 nat64 模式下 IP 直接访问url，原因是 NSUrlConnection 不支持。无论是用http://119.29.29.29/d 还是http://[64:ff9b::771d:1d1d]/d 都不行，此时可以使用localdns方式。
+- httpdns 在**ios8** 时不支持 nat64 模式下 IP 直接访问url，原因是 NSUrlConnection 不支持。无论是用http://119.29.29.29/d 还是http://[64:ff9b::771d:1d1d]/d 都不行，此时可以使用localdns方式。
+- 如果软件有国外的使用情况时，建议初始化程序采取这样的方式
+```Objective-C
+QNDnsManager *dns;
+if([QNDnsManager needHttpDns]){
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [array addObject:[[QNResolver alloc] initWithAddress:@"119.29.29.29"]];
+    [array addObject:[QNResolver systemResolver]];
+    dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
+}else{
+    NSMutableArray *array = [[NSMutableArray alloc] init];
+    [array addObject:[QNResolver systemResolver]];
+    [array addObject:[[QNResolver alloc] initWithAddress:@"8.8.8.8"]];
+    dns = [[QNDnsManager alloc] init:array networkInfo:[QNNetworkInfo normal]];
+}
+```
 
 ## 代码贡献
 

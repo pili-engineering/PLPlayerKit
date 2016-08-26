@@ -22,8 +22,8 @@ Pod::Spec.new do |s|
   s.public_header_files = "Pod/Library/include/PLPlayerKit/*.h"
   s.source_files = 'Pod/Library/include/**/*.h'
 
-  s.dependency 'pili-librtmp', '= 1.0.3.1'
-  s.dependency 'HappyDNS'
+  s.dependency 'pili-librtmp', '= 1.0.4'
+  s.dependency 'HappyDNS', '~> 0.3.10'
   s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
   s.libraries = "c++", "z", "bz2", "iconv"
 

@@ -1,0 +1,1 @@
+../../../HappyDNS/HappyDNS/Assessment/QNAssessment.h
