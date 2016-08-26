@@ -45,6 +45,19 @@ pod install
 
 ### 示例代码
 
+在 `AppDelegate.m` 中进行 SDK 初始化
+
+```Objective-C
+#import <PLPlayerKit/PLPlayerEnv.h>
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [PLPlayerEnv initEnv];
+    // Override point for customization after application launch.
+    return YES;
+}
+```
+
 在需要的地方添加
 
 ```Objective-C
@@ -140,7 +153,7 @@ self.player.delegate = self;
 ## 版本历史
 - 2.2.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.3.md))
 - 功能
-  - 新增 QOS 功能
+  - 新增 QoS 功能
   - 新增渲染数据回调
   - 新增截图功能
   - 新增 MP3 后台播放
