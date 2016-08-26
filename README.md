@@ -138,6 +138,18 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 版本历史
+- 2.2.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.3.md))
+- 功能
+  - 新增 QOS 功能
+  - 新增渲染数据回调
+  - 新增截图功能
+  - 新增 MP3 后台播放
+- 缺陷
+  - 修复后台播放时，触发超时重连，丢失 sps/pps，回到前台画面停住，声音正常的问题
+  - 修复 RTMP 扩展时间戳的问题
+  - 修复播放器释放阻塞主线程的问题
+  - 优化音视频同步机制
+  - 优化 caching 状态检查
 - 2.2.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.2.md))
 - 功能
   - 新增 AAC HEV2 音频支持

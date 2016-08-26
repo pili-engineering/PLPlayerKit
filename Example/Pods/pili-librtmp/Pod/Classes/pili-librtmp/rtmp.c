@@ -24,12 +24,15 @@
  */
 
 #include <assert.h>
+#include <fcntl.h>
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/select.h>
 
 #include "log.h"
 #include "rtmp_sys.h"
+#include "time.h"
 
 #ifdef CRYPTO
 #ifdef USE_POLARSSL
@@ -49,6 +52,7 @@ TLS_CTX RTMP_TLS_ctx;
 static const int packetSize[] = {12, 8, 4, 1};
 
 int PILI_RTMP_ctrlC;
+static char reqid[30];
 
 const char PILI_RTMPProtocolStrings[][7] = {
     "RTMP",
@@ -750,7 +754,7 @@ static int add_addr_info(PILI_RTMP *r, struct addrinfo *hints, struct addrinfo *
         RTMPError_Alloc(error, strlen(msg));
         error->code = RTMPErrorAccessDNSFailed;
         strcpy(error->message, msg);
-        RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. (addr: %s)", hostname);
+        RTMP_Log(RTMP_LOGERROR, "Problem accessing the DNS. %d (addr: %s) (port: %s)", addrret, hostname, portstr);
         ret = FALSE;
     }
 
@@ -771,24 +775,81 @@ int PILI_RTMP_Connect0(PILI_RTMP *r, struct addrinfo *ai, unsigned short port, R
         in6->sin6_port = htons(port);
     }
     if (r->m_sb.sb_socket != -1) {
+#ifdef RTMP_FEATURE_NONBLOCK
+        /* set socket non block */
+        {
+            RTMP_Log(RTMP_LOGCRIT, "%s set socket non block", __FUNCTION__);
+            int flags = fcntl(r->m_sb.sb_socket, F_GETFL, 0);
+            if (fcntl(r->m_sb.sb_socket, F_SETFL, flags | O_NONBLOCK) < 0) {
+                RTMP_Log(RTMP_LOGERROR, "%s, set socket non block failed", __FUNCTION__);
+                PILI_RTMP_Close(r, NULL);
+                return FALSE;
+            }
+        }
+#endif
         if (connect(r->m_sb.sb_socket, ai->ai_addr, ai->ai_addrlen) < 0) {
             int err = GetSockError();
+#ifdef RTMP_FEATURE_NONBLOCK
+            if ((err == EINTR && !PILI_RTMP_ctrlC) ||
+                err == EINPROGRESS) {
+                SET_RCVTIMEO(tv, r->Link.timeout);
+                fd_set wfds;
+                while (1) {
+                    FD_ZERO(&wfds);
+                    FD_SET(r->m_sb.sb_socket, &wfds);
+                    int ret = select(r->m_sb.sb_socket + 1, NULL, &wfds, NULL, &tv);
+                    if (ret < 0) {
+                        int sockerr = GetSockError();
+                        RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP connect select error %d, %s", __FUNCTION__,
+                                 sockerr, strerror(sockerr));
+                        if (sockerr == EINTR && !PILI_RTMP_ctrlC)
+                            continue;
 
-            if (error) {
-                char msg[100];
-                memset(msg, 0, 100);
-                strcat(msg, "Failed to connect socket. ");
-                strcat(msg, strerror(err));
-                RTMPError_Alloc(error, strlen(msg));
-                error->code = RTMPErrorFailedToConnectSocket;
-                strcpy(error->message, msg);
+                        char msg[100];
+                        memset(msg, 0, 100);
+                        strcat(msg, "PILI_RTMP connect select error. ");
+                        strcat(msg, strerror(sockerr));
+                        RTMPError_Message(error, RTMPErrorFailedToConnectSocket, msg);
+                        PILI_RTMP_Close(r, error);
+                        RTMPError_Free(error);
+                        return FALSE;
+                    } else if (ret == 0) {
+                        RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP connect error select timeout", __FUNCTION__);
+                        RTMPError_Message(error, RTMPErrorSocketTimeout, "PILI_RTMP connect error. select timeout: ");
+                        PILI_RTMP_Close(r, error);
+                        RTMPError_Free(error);
+                        return FALSE;
+                    } else if (!FD_ISSET(r->m_sb.sb_socket, &wfds)) {
+                        PILI_RTMP_Close(r, error);
+                        RTMPError_Message(error, RTMPErrorFailedToConnectSocket, "PILI_RTMP connect error");
+                        RTMPError_Free(error);
+                        return FALSE;
+                    } else {
+                        RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP connect success", __FUNCTION__);
+                        break;
+                    }
+                }
+            } else {
+#endif
+
+                if (error) {
+                    char msg[100];
+                    memset(msg, 0, 100);
+                    strcat(msg, "Failed to connect socket. ");
+                    strcat(msg, strerror(err));
+                    RTMPError_Alloc(error, strlen(msg));
+                    error->code = RTMPErrorFailedToConnectSocket;
+                    strcpy(error->message, msg);
+                }
+
+                RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
+                         __FUNCTION__, err, strerror(err));
+
+                PILI_RTMP_Close(r, NULL);
+                return FALSE;
+#ifdef RTMP_FEATURE_NONBLOCK
             }
-
-            RTMP_Log(RTMP_LOGERROR, "%s, failed to connect socket. %d (%s)",
-                     __FUNCTION__, err, strerror(err));
-
-            PILI_RTMP_Close(r, NULL);
-            return FALSE;
+#endif
         }
 
         if (r->Link.socksport) {
@@ -826,6 +887,9 @@ int PILI_RTMP_Connect0(PILI_RTMP *r, struct addrinfo *ai, unsigned short port, R
         return FALSE;
     }
 
+#if RTMP_FEATURE_NONBLOCK
+
+#else
     /* set receive timeout */
     {
         SET_RCVTIMEO(tv, r->Link.timeout);
@@ -846,6 +910,7 @@ int PILI_RTMP_Connect0(PILI_RTMP *r, struct addrinfo *ai, unsigned short port, R
                      __FUNCTION__, r->Link.timeout);
         }
     }
+#endif
 
     /* ignore sigpipe */
     int kOne = 1;
@@ -939,14 +1004,33 @@ int PILI_RTMP_Connect1(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error) {
 }
 
 int PILI_RTMP_Connect(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error) {
+    //获取hub
+    char hub[5] = {0};
+    if (r->Link.app.av_len>4) {
+        strncpy(hub, r->Link.app.av_val,4);
+    }else if(r->Link.app.av_len>0){
+        strncpy(hub, r->Link.app.av_val,r->Link.app.av_len);
+    }
+    
+    if (strlen(hub)>0) {
+        time_t nowtime;
+        time ( &nowtime );
+        char tempTime[20]={0};
+        sprintf(tempTime,"%ld",nowtime);
+        reqid[0] = '\0';
+        strncat(reqid, hub, strlen(hub));
+        strncat(reqid, tempTime, strlen(tempTime));
+    }
+
     struct PILI_CONNECTION_TIME conn_time;
     if (!r->Link.hostname.av_len)
         return FALSE;
 
     struct addrinfo hints = {0}, *ai, *cur_ai;
-    hints.ai_family = PF_UNSPEC;
+
+    hints.ai_family = AF_UNSPEC;
     hints.ai_socktype = SOCK_STREAM;
-    hints.ai_flags = AI_DEFAULT;
+
     unsigned short port;
     if (r->Link.socksport) {
         port = r->Link.socksport;
@@ -1301,7 +1385,7 @@ static int
                 if (r->m_sb.sb_size < 144) {
                     if (!r->m_unackd)
                         HTTP_Post(r, RTMPT_IDLE, "", 1);
-                    if (PILI_RTMPSockBuf_Fill(&r->m_sb) < 1) {
+                    if (PILI_RTMPSockBuf_Fill(&r->m_sb, r->Link.timeout) < 1) {
                         if (!r->m_sb.sb_timedout) {
                             PILI_RTMP_Close(r, NULL);
                         } else {
@@ -1325,14 +1409,14 @@ static int
                 HTTP_read(r, 0);
             }
             if (r->m_resplen && !r->m_sb.sb_size)
-                PILI_RTMPSockBuf_Fill(&r->m_sb);
+                PILI_RTMPSockBuf_Fill(&r->m_sb, r->Link.timeout);
             avail = r->m_sb.sb_size;
             if (avail > r->m_resplen)
                 avail = r->m_resplen;
         } else {
             avail = r->m_sb.sb_size;
             if (avail == 0) {
-                if (PILI_RTMPSockBuf_Fill(&r->m_sb) < 1) {
+                if (PILI_RTMPSockBuf_Fill(&r->m_sb, r->Link.timeout) < 1) {
                     if (!r->m_sb.sb_timedout) {
                         PILI_RTMP_Close(r, NULL);
                     } else {
@@ -1421,7 +1505,47 @@ static int
     }
 #endif
 
+#ifdef RTMP_FEATURE_NONBLOCK
+    SET_RCVTIMEO(tv, r->Link.timeout);
+    fd_set wfds;
+#endif
     while (n > 0) {
+
+#ifdef RTMP_FEATURE_NONBLOCK
+        FD_ZERO(&wfds);
+        FD_SET(r->m_sb.sb_socket, &wfds);
+        int ret = select(r->m_sb.sb_socket + 1, NULL, &wfds, NULL, &tv);
+        if (ret < 0) {
+            int sockerr = GetSockError();
+            RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP send select error %d, %s", __FUNCTION__,
+                     sockerr, strerror(sockerr));
+            if (sockerr == EINTR && !PILI_RTMP_ctrlC)
+                continue;
+
+            char msg[100];
+            memset(msg, 0, 100);
+            strcat(msg, "PILI_RTMP send select error. ");
+            strcat(msg, strerror(sockerr));
+            RTMPError_Message(error, RTMPErrorSendFailed, msg);
+            PILI_RTMP_Close(r, error);
+            RTMPError_Free(error);
+            n = 1;
+            break;
+        } else if (ret == 0) {
+            RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP send error select timeout", __FUNCTION__);
+            RTMPError_Message(error, RTMPErrorSocketTimeout, "PILI_RTMP send error. select timeout: ");
+            PILI_RTMP_Close(r, error);
+            RTMPError_Free(error);
+            n = 1;
+            break;
+        } else if (!FD_ISSET(r->m_sb.sb_socket, &wfds)) {
+            PILI_RTMP_Close(r, error);
+            RTMPError_Message(error, RTMPErrorSendFailed, "PILI_RTMP send error socket can not write");
+            RTMPError_Free(error);
+            n = 1;
+            break;
+        }
+#endif
         int nBytes;
 
         if (r->Link.protocol & RTMP_FEATURE_HTTP)
@@ -1435,10 +1559,28 @@ static int
             RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP send error %d, %s, (%d bytes)", __FUNCTION__,
                      sockerr, strerror(sockerr), n);
 
+            /*
+              Specify the receiving or sending timeouts until reporting an error.
+              The argument is a struct timeval.
+              If an input or output function blocks for this period of time,
+              and data has been sent or received,
+              the return value of that function will be the amount of data transferred;
+              if no data has been transferred and the timeout has been reached then -1 is returned
+              with errno set to EAGAIN or EWOULDBLOCK, or EINPROGRESS (for connect(2)) just as if the socket was specified to be nonblocking.
+               If the timeout is set to zero (the default) then the operation will never timeout.
+               Timeouts only have effect for system calls that perform socket I/O (e.g., read(2), recvmsg(2), send(2), sendmsg(2));
+               timeouts have no effect for select(2), poll(2), epoll_wait(2), and so on.
+            */
             if (sockerr == EINTR && !PILI_RTMP_ctrlC)
                 continue;
 
+#ifdef RTMP_FEATURE_NONBLOCK
+            if (sockerr == EWOULDBLOCK || sockerr == EAGAIN) {
+                continue;
+            } else if (error) {
+#else
             if (error) {
+#endif
                 char msg[100];
                 memset(msg, 0, 100);
                 strcat(msg, "PILI_RTMP send error. socket error: ");
@@ -1489,6 +1631,7 @@ SAVC(secureToken);
 SAVC(secureTokenResponse);
 SAVC(type);
 SAVC(nonprivate);
+SAVC(xreqid);
 
 static int
     SendConnectPacket(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error) {
@@ -1515,6 +1658,16 @@ static int
     enc = AMF_EncodeNamedString(enc, pend, &av_app, &r->Link.app);
     if (!enc)
         return FALSE;
+    AVal requestId;
+    requestId.av_val = reqid;
+    requestId.av_len = (int)strlen(reqid);
+        
+    if (requestId.av_len){
+        enc = AMF_EncodeNamedString(enc,pend,&av_xreqid,&requestId);
+        if (!enc)
+            return FALSE;
+    }
+
     if (r->Link.protocol & RTMP_FEATURE_WRITE) {
         enc = AMF_EncodeNamedString(enc, pend, &av_type, &av_nonprivate);
         if (!enc)
@@ -2880,6 +3033,7 @@ int PILI_RTMP_ReadPacket(PILI_RTMP *r, PILI_RTMPPacket *packet) {
 
     if (nSize >= 3) {
         packet->m_nTimeStamp = AMF_DecodeInt24(header);
+        packet->m_useExtTimestamp = FALSE;
 
         /*RTMP_Log(RTMP_LOGDEBUG, "%s, reading PILI_RTMP packet chunk on channel %x, headersz %i, timestamp %i, abs timestamp %i", __FUNCTION__, packet.m_nChannel, nSize, packet.m_nTimeStamp, packet.m_hasAbsTimestamp); */
 
@@ -2902,8 +3056,17 @@ int PILI_RTMP_ReadPacket(PILI_RTMP *r, PILI_RTMPPacket *packet) {
                 return FALSE;
             }
             packet->m_nTimeStamp = AMF_DecodeInt32(header + nSize);
+            packet->m_useExtTimestamp = TRUE;
             hSize += 4;
         }
+    } else if (packet->m_nTimeStamp >= 0xffffff){
+        if (ReadN(r, header + nSize, 4) != 4) {
+            RTMP_Log(RTMP_LOGERROR, "%s, failed to read extended timestamp",
+                     __FUNCTION__);
+            return FALSE;
+        }
+        packet->m_nTimeStamp = AMF_DecodeInt32(header + nSize);
+        hSize += 4;
     }
 
     RTMP_LogHexString(RTMP_LOGDEBUG2, (uint8_t *)hbuf, hSize);
@@ -3369,6 +3532,7 @@ void PILI_RTMP_Close(PILI_RTMP *r, RTMPError *error) {
     if (r->Link.lFlags & RTMP_LF_FTCU) {
         free(r->Link.tcUrl.av_val);
         r->Link.tcUrl.av_val = NULL;
+        r->Link.tcUrl.av_len = 0;
         r->Link.lFlags ^= RTMP_LF_FTCU;
     }
 
@@ -3388,13 +3552,43 @@ void PILI_RTMP_Close(PILI_RTMP *r, RTMPError *error) {
 #endif
 }
 
-int PILI_RTMPSockBuf_Fill(PILI_RTMPSockBuf *sb) {
+int PILI_RTMPSockBuf_Fill(PILI_RTMPSockBuf *sb, int timeout) {
     int nBytes;
 
     if (!sb->sb_size)
         sb->sb_start = sb->sb_buf;
 
+#ifdef RTMP_FEATURE_NONBLOCK
+    SET_RCVTIMEO(tv, timeout);
+    fd_set rfds;
+#endif
     while (1) {
+#ifdef RTMP_FEATURE_NONBLOCK
+        FD_ZERO(&rfds);
+        FD_SET(sb->sb_socket, &rfds);
+        int ret = select(sb->sb_socket + 1, &rfds, NULL, NULL, &tv);
+        if (ret < 0) {
+            int sockerr = GetSockError();
+            RTMP_Log(RTMP_LOGDEBUG, "%s, recv select error. GetSockError(): %d (%s)",
+                     __FUNCTION__, sockerr, strerror(sockerr));
+            if (sockerr == EINTR && !PILI_RTMP_ctrlC)
+                continue;
+
+            sb->sb_timedout = TRUE;
+            nBytes = 0;
+            break;
+        } else if (ret == 0) {
+            RTMP_Log(RTMP_LOGERROR, "%s, PILI_RTMP recv error select timeout %d", __FUNCTION__, timeout);
+            sb->sb_timedout = TRUE;
+            nBytes = 0;
+            break;
+        } else if (!FD_ISSET(sb->sb_socket, &rfds)) {
+            sb->sb_timedout = TRUE;
+            nBytes = 0;
+            break;
+        }
+#endif
+
         nBytes = sizeof(sb->sb_buf) - sb->sb_size - (sb->sb_start - sb->sb_buf);
 #if defined(CRYPTO) && !defined(NO_SSL)
         if (sb->sb_ssl) {
@@ -3414,8 +3608,12 @@ int PILI_RTMPSockBuf_Fill(PILI_RTMPSockBuf *sb) {
                 continue;
 
             if (sockerr == EWOULDBLOCK || sockerr == EAGAIN) {
+#ifdef RTMP_FEATURE_NONBLOCK
+                continue;
+#else
                 sb->sb_timedout = TRUE;
                 nBytes = 0;
+#endif
             }
         }
         break;
@@ -3546,7 +3744,7 @@ static int
     int hlen;
 
     if (fill)
-        PILI_RTMPSockBuf_Fill(&r->m_sb);
+        PILI_RTMPSockBuf_Fill(&r->m_sb, r->Link.timeout);
     if (r->m_sb.sb_size < 144)
         return -1;
     if (strncmp(r->m_sb.sb_start, "HTTP/1.1 200 ", 13))
@@ -4133,4 +4331,12 @@ int PILI_RTMP_Write(PILI_RTMP *r, const char *buf, int size, RTMPError *error) {
         }
     }
     return size + s2;
+}
+
+int PILI_RTMP_Version() {
+    return MAJOR * 100 * 100 + MINOR * 100 + PATCH;
+}
+
+const char * PILI_RTMP_GetReqId(){
+    return reqid;
 }

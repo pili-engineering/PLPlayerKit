@@ -208,7 +208,7 @@ HTTPResult
 
     sb.sb_size = 0;
     sb.sb_timedout = FALSE;
-    if (PILI_RTMPSockBuf_Fill(&sb) < 1) {
+    if (PILI_RTMPSockBuf_Fill(&sb, HTTP_TIMEOUT) < 1) {
         ret = HTTPRES_LOST_CONNECTION;
         goto leave;
     }
@@ -258,7 +258,7 @@ HTTPResult
         sb.sb_size -= p2 - sb.sb_start;
         sb.sb_start = p2;
         if (sb.sb_size < 1) {
-            if (PILI_RTMPSockBuf_Fill(&sb) < 1) {
+            if (PILI_RTMPSockBuf_Fill(&sb, HTTP_TIMEOUT) < 1) {
                 ret = HTTPRES_LOST_CONNECTION;
                 goto leave;
             }
@@ -267,7 +267,7 @@ HTTPResult
 
     len_known = flen > 0;
     while ((!len_known || flen > 0) &&
-           (sb.sb_size > 0 || PILI_RTMPSockBuf_Fill(&sb) > 0)) {
+           (sb.sb_size > 0 || PILI_RTMPSockBuf_Fill(&sb, HTTP_TIMEOUT) > 0)) {
         cb(sb.sb_start, 1, sb.sb_size, http->data);
         if (len_known)
             flen -= sb.sb_size;

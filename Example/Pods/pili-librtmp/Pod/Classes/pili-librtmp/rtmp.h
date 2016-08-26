@@ -50,6 +50,7 @@ extern "C" {
 #define RTMP_FEATURE_MFP 0x08 /* not yet supported */
 #define RTMP_FEATURE_WRITE 0x10 /* publish, not play */
 #define RTMP_FEATURE_HTTP2 0x20 /* server-side rtmpt */
+//#define RTMP_FEATURE_NONBLOCK 0x40 /* non block socket */
 
 #define RTMP_PROTOCOL_UNDEFINED -1
 #define RTMP_PROTOCOL_RTMP 0
@@ -102,6 +103,7 @@ typedef struct PILI_RTMPPacket {
     uint32_t m_nBytesRead;
     PILI_RTMPChunk *m_chunk;
     char *m_body;
+    int m_useExtTimestamp;
 } PILI_RTMPPacket;
 
 typedef struct PILI_RTMPSockBuf {
@@ -333,7 +335,7 @@ int PILI_RTMP_Pause(PILI_RTMP *r, int DoPause, RTMPError *error);
 int PILI_RTMP_FindFirstMatchingProperty(AMFObject *obj, const AVal *name,
                                         AMFObjectProperty *p);
 
-int PILI_RTMPSockBuf_Fill(PILI_RTMPSockBuf *sb);
+int PILI_RTMPSockBuf_Fill(PILI_RTMPSockBuf *sb, int timeout);
 int PILI_RTMPSockBuf_Send(PILI_RTMPSockBuf *sb, const char *buf, int len);
 int PILI_RTMPSockBuf_Close(PILI_RTMPSockBuf *sb);
 
@@ -344,6 +346,14 @@ int PILI_RTMP_SendClientBW(PILI_RTMP *r, RTMPError *error);
 void PILI_RTMP_DropRequest(PILI_RTMP *r, int i, int freeit);
 int PILI_RTMP_Read(PILI_RTMP *r, char *buf, int size);
 int PILI_RTMP_Write(PILI_RTMP *r, const char *buf, int size, RTMPError *error);
+
+#define MAJOR 1
+#define MINOR 0
+#define PATCH 4
+
+int PILI_RTMP_Version();
+
+const char * PILI_RTMP_GetReqId();
 
 /* hashswf.c */
 int PILI_RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,

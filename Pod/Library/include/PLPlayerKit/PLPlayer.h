@@ -84,6 +84,13 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
     
 };
 
+/**
+ 返回播放器 SDK 的版本信息的字符串。
+ 
+ @since     v2.2.3
+ */
+extern NSString * _Nonnull playerVersion();
+
 @class PLPlayer;
 
 /**
@@ -133,7 +140,32 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  */
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error;
 
+/**
+ 回调将要渲染的帧数据
+ 该功能只支持直播
+ 
+ @param player 调用该方法的 PLPlayer 对象
+ @param frame  将要渲染帧 YUV 数据。
+ CVPixelBufferGetPixelFormatType 获取 YUV 的类型。
+ 软解为 kCVPixelFormatType_420YpCbCr8Planar.
+ 硬解为 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.
+ 
+ @since v2.2.3
+ */
+- (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame;
+
 @end
+
+
+/**
+ getScreenShotWithCompletionHandler 截图操作为异步，
+ 完成后将通过 ScreenShotWithCompletionHandler 类型的 block 回调返回 UIImage 类型图片数据。
+ 
+ @since v2.2.3
+ */
+
+typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
+
 
 /**
  PLPlayer 是 PLPlayerKit 中负责播放控制的核心类
@@ -228,9 +260,20 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  */
 @property (nonatomic,assign,getter = isAutoReconnectEnable) BOOL autoReconnectEnable;
 
+/**
+ 使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
+ 
+ @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
+ 
+ @return 生成的PLPlayer 对象
+ 
+ @since v2.2.3
+ */
++ (nullable instancetype)playerLiveWithURL:(nullable NSURL *)URL option:(nullable PLPlayerOption *)option;
 
 /**
- 使用 url 和 option 生成一个 PLPlayer 对象
+ 使用 url 和 option 生成一个 PLPlayer 对象，点播使用此接口
  
  @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
@@ -290,6 +333,36 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  @since v2.1.2
  */
 - (void)seekTo:(CMTime)time;
+
+/**
+ *  设置音量，范围是0-1.0，默认是1.0
+ *
+ *  @param volume 音量
+ *
+ *  @since v2.2.3
+ */
+- (void)setVolume:(float)volume;
+
+/**
+ *  获取音量
+ *
+ *  @since v2.2.3
+ *
+ *  @return 音量
+ */
+- (float)getVolume;
+
+/**
+ *  截图
+ *  @param handle 类型 ScreenShotWithCompletionHandler block 。
+ *  
+ *  @discussion 截图操作为异步，完成后将通过 handle 回调返回 UIImage 类型图片数据。
+ *              该功能只支持直播
+ *
+ *  @since v2.2.3
+ *
+ */
+- (void)getScreenShotWithCompletionHandler:(nullable ScreenShotWithCompletionHandler)handle;
 
 @end
 

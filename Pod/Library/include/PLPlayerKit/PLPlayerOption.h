@@ -8,9 +8,35 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ 设置控制台 log 的级别，log 级别在 kPLLogInfo 及以上，则会缓存日志文件，
+ 日志文件存放的位置为 APP Container/Library/Caches/Pili/PlayerLogs
+ 
+ */
 typedef enum : NSUInteger {
+    /**
+     *  No logs
+     */
+    kPLLogNone,
+    /**
+     *  Error logs only
+     */
+    kPLLogError,
+    /**
+     *  Error and warning logs
+     */
     kPLLogWarning,
+    /**
+     *  Error, warning and info logs
+     */
     kPLLogInfo,
+    /**
+     *  Error, warning, info and debug logs
+     */
+    kPLLogDebug,
+    /**
+     *  Error, warning, info, debug and verbose logs
+     */
     kPLLogVerbose,
 } PLLogLevel;
 
