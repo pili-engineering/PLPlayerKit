@@ -20,6 +20,7 @@
 		B624E68E1C85A2FE009B2F4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B624E68D1C85A2FE009B2F4B /* AppDelegate.m */; };
 		E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */; };
 		E9A58B741BC8B264004780C5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A58B731BC8B264004780C5 /* Launch Screen.storyboard */; };
+		ECF0A28A1D702F6F00D13DA6 /* PLScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF0A2891D702F6F00D13DA6 /* PLScanViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +54,8 @@
 		E94A8F781BDE8A7A00129A70 /* PLPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerViewController.h; sourceTree = "<group>"; };
 		E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLPlayerViewController.m; sourceTree = "<group>"; };
 		E9A58B731BC8B264004780C5 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		ECF0A2881D702F6F00D13DA6 /* PLScanViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLScanViewController.h; sourceTree = "<group>"; };
+		ECF0A2891D702F6F00D13DA6 /* PLScanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLScanViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +124,8 @@
 				767C204E1AFA847B0026FFDB /* MasterViewController.m */,
 				E94A8F781BDE8A7A00129A70 /* PLPlayerViewController.h */,
 				E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */,
+				ECF0A2881D702F6F00D13DA6 /* PLScanViewController.h */,
+				ECF0A2891D702F6F00D13DA6 /* PLScanViewController.m */,
 				6003F5A8195388D20070C39A /* Images.xcassets */,
 				6003F594195388D20070C39A /* Supporting Files */,
 			);
@@ -302,6 +307,7 @@
 				B624E68E1C85A2FE009B2F4B /* AppDelegate.m in Sources */,
 				767C20511AFA847B0026FFDB /* MasterViewController.m in Sources */,
 				6003F59A195388D20070C39A /* main.m in Sources */,
+				ECF0A28A1D702F6F00D13DA6 /* PLScanViewController.m in Sources */,
 				E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
