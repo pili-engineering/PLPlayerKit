@@ -1,11 +1,11 @@
 PODS:
   - HappyDNS (0.3.10)
   - pili-librtmp (1.0.4)
-  - PLPlayerKit (2.2.3.1):
+  - PLPlayerKit (2.2.4):
     - HappyDNS (~> 0.3.10)
     - pili-librtmp (= 1.0.4)
-    - PLPlayerKit/precompiled (= 2.2.3.1)
-  - PLPlayerKit/precompiled (2.2.3.1):
+    - PLPlayerKit/precompiled (= 2.2.4)
+  - PLPlayerKit/precompiled (2.2.4):
     - HappyDNS (~> 0.3.10)
     - pili-librtmp (= 1.0.4)
 
@@ -19,8 +19,6 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
   pili-librtmp: bc768bc3971edad732fd5e66f0ee991fa1a0a257
-  PLPlayerKit: 1864f16c0647bb9a43e766e2d465c30d7ab8bf0f
+  PLPlayerKit: 30e419fa90e84df34922e6dd5d5833d7e4348bf4
 
-PODFILE CHECKSUM: d20fd3c1a75d3d4f8346b3b33f0b42e59b6ab3ab
-
-COCOAPODS: 1.0.1
+COCOAPODS: 0.39.0

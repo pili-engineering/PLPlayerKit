@@ -1,4 +1,4 @@
-# PLPlayerKit Release Notes for 2.2.3.1
+# PLPlayerKit Release Notes for 2.2.4
 
 ## 内容
 
