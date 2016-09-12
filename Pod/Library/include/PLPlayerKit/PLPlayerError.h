@@ -12,11 +12,23 @@
 typedef NS_ENUM(NSInteger, PLPlayerError) {
     
     // PLPlayer error
-    PLPlayerErrorUnknow = -1,  // "Unknow error"
+    PLPlayerErrorUnknow = 0,  // "Unknow error"
+    
+    PLPlayerErrorEOF = -1, // End of file
     
     PLPlayerErrorURLNotSupported = -2000,  // "URL to play is not supported."
     
     PLPlayerErrorAudioSessionNotSupportToPlay = -2001,   // "AVAudioSession's category doesn't support audio play."
+    
+    PLPlayerErrorAudioFormatNotSupport = -2002, // "RTMP/FLV live audio only support AAC."
+    
+    PLPlayerErrorVideoFormatNotSupport = -2003, // "RTMP/FLV live video only support H264."
+    
+    PLPlayerErrorStreamFormatNotSupport = -2004, // FFMPEG can not open stream, or can not find stream info.'
+    
+    PLPlayerErrorInputTimeout = -2100, // "Input read data timeout."
+    
+    PLPLayerErrorInputReadError = -2101, // "Input read data error."
     
     // RTMP error
     PLPlayerErrorRTMPErrorUnknowOption = -999, // "Unknown option %s"

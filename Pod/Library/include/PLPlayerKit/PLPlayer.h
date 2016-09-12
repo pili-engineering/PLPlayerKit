@@ -13,6 +13,21 @@
 @class UIView;
 
 /**
+ @brief 播放画面旋转模式 
+ 
+ @since v2.3.0
+ */
+
+typedef NS_ENUM(NSInteger, PLPLayerRotationsMode) {
+    PLPlayerNoRotation, // 无旋转
+    PLPlayerRotateLeft, // 向左旋
+    PLPlayerRotateRight, // 向右旋
+    PLPlayerFlipVertical, // 垂直翻转
+    PLPlayerFlipHorizonal, // 水平翻转
+    PLPlayerRotate180 // 旋转 180 度
+};
+
+/**
  PLPlayer 的播放状态
  
  @since v1.0.0
@@ -42,7 +57,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
     /**
      @abstract PLPlayer 缓存数据为空状态。
      
-     @discussion 特别需要注意的是当推流端停止推流之后，PLPlayer 将出现 caching 状态直到 timeout 后抛出 timeout 的 error 而不是出现 PLPlayerStatusStopped 状态，因此推流停止之后需要开发者实用业务服务器告知播放器停止播放。
+     @discussion 特别需要注意的是当推流端停止推流之后，PLPlayer 将出现 caching 状态直到 timeout 后抛出 timeout 的 error 而不是出现 PLPlayerStatusStopped 状态，因此在直播场景中，当流停止之后一般做法是使用 IM 服务告知播放器停止播放，以达到即时响应主播断流的目的。
      
      @since v1.0.0
      */
@@ -254,11 +269,87 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 @property (nonatomic, assign, readonly) CMTime  totalDuration;
 
 /**
- *  是否开启重连，默认为 NO
- *
- * @since v2.2.2
+ 是否开启重连，默认为 NO
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.2.2
  */
-@property (nonatomic,assign,getter = isAutoReconnectEnable) BOOL autoReconnectEnable;
+@property (nonatomic, assign, getter = isAutoReconnectEnable) BOOL autoReconnectEnable;
+
+/**
+ 设置画面旋转模式
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign) PLPLayerRotationsMode rotationMode;
+
+/**
+ 是否渲染画面，默认为 YES
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign) BOOL enableRender;
+
+#pragma mark -- play info
+
+/**
+ 视频流的宽
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int width;
+
+/**
+ 视频流的高
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int height;
+
+/**
+ 视频流的帧率
+ 
+ @warning 该属性仅 rtmp/flv 直播有效。
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int videoFPS;
+
+/**
+ 播放渲染帧率
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int renderFPS;
+
+/**
+ 视频流的码率，单位 kb/s
+ 
+ @warning 该属性仅 rtmp/flv 直播有效。
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) double bitrate;
+
+/**
+ 下载速率，单位 kb/s
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) double downSpeed;
 
 /**
  使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
@@ -280,7 +371,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  
  @return 生成的PLPlayer 对象
  
- @since v2.1.0
+ @since v2.2.3
  */
 + (nullable instancetype)playerWithURL:(nullable NSURL *)URL option:(nullable PLPlayerOption *)option;
 
