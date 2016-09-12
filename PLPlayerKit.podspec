@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "PLPlayerKit"
-  s.version          = "2.2.4"
+  s.version          = "2.3.0"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
 
   s.public_header_files = "Pod/Library/include/PLPlayerKit/*.h"
-  s.source_files = 'Pod/Library/include/**/*.h'
+  s.source_files = 'Pod/Library/include/**/*.[h|m]'
 
   s.dependency 'pili-librtmp', '= 1.0.4'
   s.dependency 'HappyDNS', '~> 0.3.10'
@@ -30,6 +30,14 @@ Pod::Spec.new do |s|
   s.default_subspec = "precompiled"
 
   s.subspec "precompiled" do |ss|
+    ss.preserve_paths         = "Pod/Library/include/PLPlayerKit/*.[h|m]", 'Pod/Library/lib/*.a'
+    ss.vendored_libraries   = 'Pod/Library/lib/*.a'
+    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
+    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include" }
+    ss.dependency 'pili-ffmpeg', '~> 3.1.0'
+  end
+
+  s.subspec "PLPlayerKit" do |ss|
     ss.preserve_paths         = "Pod/Library/include/PLPlayerKit/*.h", 'Pod/Library/lib/*.a'
     ss.vendored_libraries   = 'Pod/Library/lib/*.a'
     ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
