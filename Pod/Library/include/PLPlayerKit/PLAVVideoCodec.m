@@ -33,6 +33,8 @@
 }
 
 - (BOOL)open {
+    [self close];
+    
     _avCodec = avcodec_find_decoder(AV_CODEC_ID_H264);
     if(_avCodec) {
         _avCodecContext = avcodec_alloc_context3(_avCodec);
@@ -56,6 +58,8 @@
 
 
 - (BOOL)openWithContext:(void *)context stream:(void *)stream {
+    [self close];
+    
     _avStream = stream;
     _avCodecContext = context;
     self.needFreeContext = NO;

@@ -39,6 +39,7 @@ void adjustAudioFramePTS(AVFrame *frame, AVCodecContext *avctx) {
 @implementation PLAVAudioCodec
 
 - (BOOL)openWithContext:(void *)context {
+    [self close];
     _avCodecContext = context;
     if (_avCodecContext) {
         _needFreeContext = NO;
@@ -56,6 +57,7 @@ void adjustAudioFramePTS(AVFrame *frame, AVCodecContext *avctx) {
 }
 
 - (BOOL)openWithAudioStreamBasicDescription:(AudioStreamBasicDescription)asbd {
+    [self close];
     _avCodec = avcodec_find_decoder(AV_CODEC_ID_AAC);
     if (_avCodec) {
         _avCodecContext = avcodec_alloc_context3(_avCodec);
