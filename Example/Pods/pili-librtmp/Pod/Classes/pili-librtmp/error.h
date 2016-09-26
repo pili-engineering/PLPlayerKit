@@ -8,39 +8,39 @@ typedef struct RTMPError {
     char *message;
 } RTMPError;
 
-void RTMPError_Alloc(RTMPError *error, size_t msg_size);
-void RTMPError_Free(RTMPError *error);
-void RTMPError_Message(RTMPError *error, int code, const char *message);
+void PILI_RTMPError_Alloc(RTMPError *error, size_t msg_size);
+void PILI_RTMPError_Free(RTMPError *error);
+void PILI_RTMPError_Message(RTMPError *error, int code, const char *message);
 
 // error defines
 enum {
-    RTMPErrorUnknow = -1, //	"Unknow error"
-    RTMPErrorUnknowOption = -999, //	"Unknown option %s"
-    RTMPErrorAccessDNSFailed = -1000, //	"Failed to access the DNS. (addr: %s)"
-    RTMPErrorFailedToConnectSocket =
+    PILI_RTMPErrorUnknow = -1, //	"Unknow error"
+    PILI_RTMPErrorUnknowOption = -999, //	"Unknown option %s"
+    PILI_RTMPErrorAccessDNSFailed = -1000, //	"Failed to access the DNS. (addr: %s)"
+    PILI_RTMPErrorFailedToConnectSocket =
         -1001, //	"Failed to connect socket. %d (%s)"
-    RTMPErrorSocksNegotiationFailed = -1002, //	"Socks negotiation failed"
-    RTMPErrorFailedToCreateSocket =
+    PILI_RTMPErrorSocksNegotiationFailed = -1002, //	"Socks negotiation failed"
+    PILI_RTMPErrorFailedToCreateSocket =
         -1003, //	"Failed to create socket. %d (%s)"
-    RTMPErrorHandshakeFailed = -1004, //	"Handshake failed"
-    RTMPErrorRTMPConnectFailed = -1005, //	"RTMP connect failed"
-    RTMPErrorSendFailed = -1006, //	"Send error %d (%s), (%d bytes)"
-    RTMPErrorServerRequestedClose = -1007, //	"RTMP server requested close"
-    RTMPErrorNetStreamFailed = -1008, //	"NetStream failed"
-    RTMPErrorNetStreamPlayFailed = -1009, //	"NetStream play failed"
-    RTMPErrorNetStreamPlayStreamNotFound =
+    PILI_RTMPErrorHandshakeFailed = -1004, //	"Handshake failed"
+    PILI_RTMPErrorRTMPConnectFailed = -1005, //	"RTMP connect failed"
+    PILI_RTMPErrorSendFailed = -1006, //	"Send error %d (%s), (%d bytes)"
+    PILI_RTMPErrorServerRequestedClose = -1007, //	"RTMP server requested close"
+    PILI_RTMPErrorNetStreamFailed = -1008, //	"NetStream failed"
+    PILI_RTMPErrorNetStreamPlayFailed = -1009, //	"NetStream play failed"
+    PILI_RTMPErrorNetStreamPlayStreamNotFound =
         -1010, //	"NetStream play stream not found"
-    RTMPErrorNetConnectionConnectInvalidApp =
+    PILI_RTMPErrorNetConnectionConnectInvalidApp =
         -1011, //	"NetConnection connect invalip app"
-    RTMPErrorSanityFailed =
+    PILI_RTMPErrorSanityFailed =
         -1012, //	"Sanity failed. Trying to send header of type: 0x%02X"
-    RTMPErrorSocketClosedByPeer = -1013, // "RTMP socket closed by peer"
-    RTMPErrorRTMPConnectStreamFailed = -1014, // "RTMP connect stream failed"
-    RTMPErrorSocketTimeout = -1015, // "RTMP socket timeout"
+    PILI_RTMPErrorSocketClosedByPeer = -1013, // "RTMP socket closed by peer"
+    PILI_RTMPErrorRTMPConnectStreamFailed = -1014, // "RTMP connect stream failed"
+    PILI_RTMPErrorSocketTimeout = -1015, // "RTMP socket timeout"
 
     // SSL errors
-    RTMPErrorTLSConnectFailed = -1200, //	"TLS_Connect failed"
-    RTMPErrorNoSSLOrTLSSupport = -1201, //	"No SSL/TLS support"
+    PILI_RTMPErrorTLSConnectFailed = -1200, //	"TLS_Connect failed"
+    PILI_RTMPErrorNoSSLOrTLSSupport = -1201, //	"No SSL/TLS support"
 };
 
 #endif

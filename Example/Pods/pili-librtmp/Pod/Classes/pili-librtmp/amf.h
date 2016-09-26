@@ -37,141 +37,141 @@ extern "C" {
 #endif
 
 typedef enum {
-    AMF_NUMBER = 0,
-    AMF_BOOLEAN,
-    AMF_STRING,
-    AMF_OBJECT,
-    AMF_MOVIECLIP, /* reserved, not used */
-    AMF_NULL,
-    AMF_UNDEFINED,
-    AMF_REFERENCE,
-    AMF_ECMA_ARRAY,
-    AMF_OBJECT_END,
-    AMF_STRICT_ARRAY,
-    AMF_DATE,
-    AMF_LONG_STRING,
-    AMF_UNSUPPORTED,
-    AMF_RECORDSET, /* reserved, not used */
-    AMF_XML_DOC,
-    AMF_TYPED_OBJECT,
-    AMF_AVMPLUS, /* switch to AMF3 */
-    AMF_INVALID = 0xff
-} AMFDataType;
+    PILI_AMF_NUMBER = 0,
+    PILI_AMF_BOOLEAN,
+    PILI_AMF_STRING,
+    PILI_AMF_OBJECT,
+    PILI_AMF_MOVIECLIP, /* reserved, not used */
+    PILI_AMF_NULL,
+    PILI_AMF_UNDEFINED,
+    PILI_AMF_REFERENCE,
+    PILI_AMF_ECMA_ARRAY,
+    PILI_AMF_OBJECT_END,
+    PILI_AMF_STRICT_ARRAY,
+    PILI_AMF_DATE,
+    PILI_AMF_LONG_STRING,
+    PILI_AMF_UNSUPPORTED,
+    PILI_AMF_RECORDSET, /* reserved, not used */
+    PILI_AMF_XML_DOC,
+    PILI_AMF_TYPED_OBJECT,
+    PILI_AMF_AVMPLUS, /* switch to AMF3 */
+    PILI_AMF_INVALID = 0xff
+} PILI_AMFDataType;
 
 typedef enum {
-    AMF3_UNDEFINED = 0,
-    AMF3_NULL,
-    AMF3_FALSE,
-    AMF3_TRUE,
-    AMF3_INTEGER,
-    AMF3_DOUBLE,
-    AMF3_STRING,
-    AMF3_XML_DOC,
-    AMF3_DATE,
-    AMF3_ARRAY,
-    AMF3_OBJECT,
-    AMF3_XML,
-    AMF3_BYTE_ARRAY
-} AMF3DataType;
+    PILI_AMF3_UNDEFINED = 0,
+    PILI_AMF3_NULL,
+    PILI_AMF3_FALSE,
+    PILI_AMF3_TRUE,
+    PILI_AMF3_INTEGER,
+    PILI_AMF3_DOUBLE,
+    PILI_AMF3_STRING,
+    PILI_AMF3_XML_DOC,
+    PILI_AMF3_DATE,
+    PILI_AMF3_ARRAY,
+    PILI_AMF3_OBJECT,
+    PILI_AMF3_XML,
+    PILI_AMF3_BYTE_ARRAY
+} PILI_AMF3DataType;
 
-typedef struct AVal {
+typedef struct PILI_AVal {
     char *av_val;
     int av_len;
-} AVal;
+} PILI_AVal;
 #define AVC(str) \
     { str, sizeof(str) - 1 }
 #define AVMATCH(a1, a2)              \
     ((a1)->av_len == (a2)->av_len && \
      !memcmp((a1)->av_val, (a2)->av_val, (a1)->av_len))
 
-struct AMFObjectProperty;
+struct PILI_AMFObjectProperty;
 
-typedef struct AMFObject {
+typedef struct PILI_AMFObject {
     int o_num;
-    struct AMFObjectProperty *o_props;
-} AMFObject;
+    struct PILI_AMFObjectProperty *o_props;
+} PILI_AMFObject;
 
-typedef struct AMFObjectProperty {
-    AVal p_name;
-    AMFDataType p_type;
+typedef struct PILI_AMFObjectProperty {
+    PILI_AVal p_name;
+    PILI_AMFDataType p_type;
     union {
         double p_number;
-        AVal p_aval;
-        AMFObject p_object;
+        PILI_AVal p_aval;
+        PILI_AMFObject p_object;
     } p_vu;
     int16_t p_UTCoffset;
-} AMFObjectProperty;
+} PILI_AMFObjectProperty;
 
-char *AMF_EncodeString(char *output, char *outend, const AVal *str);
-char *AMF_EncodeNumber(char *output, char *outend, double dVal);
-char *AMF_EncodeInt16(char *output, char *outend, short nVal);
-char *AMF_EncodeInt24(char *output, char *outend, int nVal);
-char *AMF_EncodeInt32(char *output, char *outend, int nVal);
-char *AMF_EncodeBoolean(char *output, char *outend, int bVal);
+char *PILI_AMF_EncodeString(char *output, char *outend, const PILI_AVal *str);
+char *PILI_AMF_EncodeNumber(char *output, char *outend, double dVal);
+char *PILI_AMF_EncodeInt16(char *output, char *outend, short nVal);
+char *PILI_AMF_EncodeInt24(char *output, char *outend, int nVal);
+char *PILI_AMF_EncodeInt32(char *output, char *outend, int nVal);
+char *PILI_AMF_EncodeBoolean(char *output, char *outend, int bVal);
 
-/* Shortcuts for AMFProp_Encode */
-char *AMF_EncodeNamedString(char *output, char *outend, const AVal *name,
-                            const AVal *value);
-char *AMF_EncodeNamedNumber(char *output, char *outend, const AVal *name,
+/* Shortcuts for PILI_AMFProp_Encode */
+char *PILI_AMF_EncodeNamedString(char *output, char *outend, const PILI_AVal *name,
+                            const PILI_AVal *value);
+char *PILI_AMF_EncodeNamedNumber(char *output, char *outend, const PILI_AVal *name,
                             double dVal);
-char *AMF_EncodeNamedBoolean(char *output, char *outend, const AVal *name,
+char *PILI_AMF_EncodeNamedBoolean(char *output, char *outend, const PILI_AVal *name,
                              int bVal);
 
-unsigned short AMF_DecodeInt16(const char *data);
-unsigned int AMF_DecodeInt24(const char *data);
-unsigned int AMF_DecodeInt32(const char *data);
-void AMF_DecodeString(const char *data, AVal *str);
-void AMF_DecodeLongString(const char *data, AVal *str);
-int AMF_DecodeBoolean(const char *data);
-double AMF_DecodeNumber(const char *data);
+unsigned short PILI_AMF_DecodeInt16(const char *data);
+unsigned int PILI_AMF_DecodeInt24(const char *data);
+unsigned int PILI_AMF_DecodeInt32(const char *data);
+void PILI_AMF_DecodeString(const char *data, PILI_AVal *str);
+void PILI_AMF_DecodeLongString(const char *data, PILI_AVal *str);
+int PILI_AMF_DecodeBoolean(const char *data);
+double PILI_AMF_DecodeNumber(const char *data);
 
-char *AMF_Encode(AMFObject *obj, char *pBuffer, char *pBufEnd);
-int AMF_Decode(AMFObject *obj, const char *pBuffer, int nSize, int bDecodeName);
-int AMF_DecodeArray(AMFObject *obj, const char *pBuffer, int nSize,
+char *PILI_AMF_Encode(PILI_AMFObject *obj, char *pBuffer, char *pBufEnd);
+int PILI_AMF_Decode(PILI_AMFObject *obj, const char *pBuffer, int nSize, int bDecodeName);
+int PILI_AMF_DecodeArray(PILI_AMFObject *obj, const char *pBuffer, int nSize,
                     int nArrayLen, int bDecodeName);
-int AMF3_Decode(AMFObject *obj, const char *pBuffer, int nSize,
+int PILI_AMF3_Decode(PILI_AMFObject *obj, const char *pBuffer, int nSize,
                 int bDecodeName);
-void AMF_Dump(AMFObject *obj);
-void AMF_Reset(AMFObject *obj);
+void PILI_AMF_Dump(PILI_AMFObject *obj);
+void PILI_AMF_Reset(PILI_AMFObject *obj);
 
-void AMF_AddProp(AMFObject *obj, const AMFObjectProperty *prop);
-int AMF_CountProp(AMFObject *obj);
-AMFObjectProperty *AMF_GetProp(AMFObject *obj, const AVal *name, int nIndex);
+void PILI_AMF_AddProp(PILI_AMFObject *obj, const PILI_AMFObjectProperty *prop);
+int PILI_AMF_CountProp(PILI_AMFObject *obj);
+PILI_AMFObjectProperty *PILI_AMF_GetProp(PILI_AMFObject *obj, const PILI_AVal *name, int nIndex);
 
-AMFDataType AMFProp_GetType(AMFObjectProperty *prop);
-void AMFProp_SetNumber(AMFObjectProperty *prop, double dval);
-void AMFProp_SetBoolean(AMFObjectProperty *prop, int bflag);
-void AMFProp_SetString(AMFObjectProperty *prop, AVal *str);
-void AMFProp_SetObject(AMFObjectProperty *prop, AMFObject *obj);
+PILI_AMFDataType PILI_AMFProp_GetType(PILI_AMFObjectProperty *prop);
+void PILI_AMFProp_SetNumber(PILI_AMFObjectProperty *prop, double dval);
+void PILI_AMFProp_SetBoolean(PILI_AMFObjectProperty *prop, int bflag);
+void PILI_AMFProp_SetString(PILI_AMFObjectProperty *prop, PILI_AVal *str);
+void PILI_AMFProp_SetObject(PILI_AMFObjectProperty *prop, PILI_AMFObject *obj);
 
-void AMFProp_GetName(AMFObjectProperty *prop, AVal *name);
-void AMFProp_SetName(AMFObjectProperty *prop, AVal *name);
-double AMFProp_GetNumber(AMFObjectProperty *prop);
-int AMFProp_GetBoolean(AMFObjectProperty *prop);
-void AMFProp_GetString(AMFObjectProperty *prop, AVal *str);
-void AMFProp_GetObject(AMFObjectProperty *prop, AMFObject *obj);
+void PILI_AMFProp_GetName(PILI_AMFObjectProperty *prop, PILI_AVal *name);
+void PILI_AMFProp_SetName(PILI_AMFObjectProperty *prop, PILI_AVal *name);
+double PILI_AMFProp_GetNumber(PILI_AMFObjectProperty *prop);
+int PILI_AMFProp_GetBoolean(PILI_AMFObjectProperty *prop);
+void PILI_AMFProp_GetString(PILI_AMFObjectProperty *prop, PILI_AVal *str);
+void PILI_AMFProp_GetObject(PILI_AMFObjectProperty *prop, PILI_AMFObject *obj);
 
-int AMFProp_IsValid(AMFObjectProperty *prop);
+int PILI_AMFProp_IsValid(PILI_AMFObjectProperty *prop);
 
-char *AMFProp_Encode(AMFObjectProperty *prop, char *pBuffer, char *pBufEnd);
-int AMF3Prop_Decode(AMFObjectProperty *prop, const char *pBuffer, int nSize,
+char *PILI_AMFProp_Encode(PILI_AMFObjectProperty *prop, char *pBuffer, char *pBufEnd);
+int PILI_AMF3Prop_Decode(PILI_AMFObjectProperty *prop, const char *pBuffer, int nSize,
                     int bDecodeName);
-int AMFProp_Decode(AMFObjectProperty *prop, const char *pBuffer, int nSize,
+int PILI_AMFProp_Decode(PILI_AMFObjectProperty *prop, const char *pBuffer, int nSize,
                    int bDecodeName);
 
-void AMFProp_Dump(AMFObjectProperty *prop);
-void AMFProp_Reset(AMFObjectProperty *prop);
+void PILI_AMFProp_Dump(PILI_AMFObjectProperty *prop);
+void PILI_AMFProp_Reset(PILI_AMFObjectProperty *prop);
 
-typedef struct AMF3ClassDef {
-    AVal cd_name;
+typedef struct PILI_AMF3ClassDef {
+    PILI_AVal cd_name;
     char cd_externalizable;
     char cd_dynamic;
     int cd_num;
-    AVal *cd_props;
-} AMF3ClassDef;
+    PILI_AVal *cd_props;
+} PILI_AMF3ClassDef;
 
-void AMF3CD_AddProp(AMF3ClassDef *cd, AVal *prop);
-AVal *AMF3CD_GetProp(AMF3ClassDef *cd, int idx);
+void PILI_AMF3CD_AddProp(PILI_AMF3ClassDef *cd, PILI_AVal *prop);
+PILI_AVal *PILI_AMF3CD_GetProp(PILI_AMF3ClassDef *cd, int idx);
 
 #ifdef __cplusplus
 }

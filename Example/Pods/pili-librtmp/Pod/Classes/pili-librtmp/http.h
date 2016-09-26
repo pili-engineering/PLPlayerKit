@@ -40,10 +40,10 @@ struct HTTP_ctx {
     void *data;
 };
 
-typedef size_t(HTTP_read_callback)(void *ptr, size_t size, size_t nmemb,
+typedef size_t(PILI_HTTP_read_callback)(void *ptr, size_t size, size_t nmemb,
                                    void *stream);
 
-HTTPResult HTTP_get(struct HTTP_ctx *http, const char *url,
-                    HTTP_read_callback *cb);
+HTTPResult PILI_HTTP_get(struct HTTP_ctx *http, const char *url,
+                    PILI_HTTP_read_callback *cb);
 
 #endif

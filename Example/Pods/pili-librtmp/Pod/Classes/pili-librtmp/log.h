@@ -39,27 +39,27 @@ extern "C" {
 #endif
 
 typedef enum {
-    RTMP_LOGCRIT = 0,
-    RTMP_LOGERROR,
-    RTMP_LOGWARNING,
-    RTMP_LOGINFO,
-    RTMP_LOGDEBUG,
-    RTMP_LOGDEBUG2,
-    RTMP_LOGALL
-} RTMP_LogLevel;
+    PILI_RTMP_LOGCRIT = 0,
+    PILI_RTMP_LOGERROR,
+    PILI_RTMP_LOGWARNING,
+    PILI_RTMP_LOGINFO,
+    PILI_RTMP_LOGDEBUG,
+    PILI_RTMP_LOGDEBUG2,
+    PILI_RTMP_LOGALL
+} PILI_RTMP_LogLevel;
 
-extern RTMP_LogLevel RTMP_debuglevel;
+extern PILI_RTMP_LogLevel PILI_RTMP_debuglevel;
 
-typedef void(RTMP_LogCallback)(int level, const char *fmt, va_list);
-void RTMP_LogSetCallback(RTMP_LogCallback *cb);
-void RTMP_LogSetOutput(FILE *file);
-void RTMP_LogPrintf(const char *format, ...);
-void RTMP_LogStatus(const char *format, ...);
-void RTMP_Log(int level, const char *format, ...);
-void RTMP_LogHex(int level, const uint8_t *data, unsigned long len);
-void RTMP_LogHexString(int level, const uint8_t *data, unsigned long len);
-void RTMP_LogSetLevel(RTMP_LogLevel lvl);
-RTMP_LogLevel RTMP_LogGetLevel(void);
+typedef void(PILI_RTMP_LogCallback)(int level, const char *fmt, va_list);
+void PILI_RTMP_LogSetCallback(PILI_RTMP_LogCallback *cb);
+void PILI_RTMP_LogSetOutput(FILE *file);
+void PILI_RTMP_LogPrintf(const char *format, ...);
+void PILI_RTMP_LogStatus(const char *format, ...);
+void PILI_RTMP_Log(int level, const char *format, ...);
+void PILI_RTMP_LogHex(int level, const uint8_t *data, unsigned long len);
+void PILI_RTMP_LogHexString(int level, const uint8_t *data, unsigned long len);
+void PILI_RTMP_LogSetLevel(PILI_RTMP_LogLevel lvl);
+PILI_RTMP_LogLevel PILI_RTMP_LogGetLevel(void);
 
 #ifdef __cplusplus
 }

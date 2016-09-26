@@ -30,11 +30,11 @@
 #include "log.h"
 #include "rtmp_sys.h"
 
-int PILI_RTMP_ParseURL2(const char *url, int *protocol, AVal *host, unsigned int *port,
-                        AVal *playpath, AVal *app, AVal *domainName) {
+int PILI_RTMP_ParseURL2(const char *url, int *protocol, PILI_AVal *host, unsigned int *port,
+                        PILI_AVal *playpath, PILI_AVal *app, PILI_AVal *domainName) {
     char *p, *end, *col, *ques, *slash;
 
-    RTMP_Log(RTMP_LOGDEBUG, "Parsing...");
+    PILI_RTMP_Log(PILI_RTMP_LOGDEBUG, "Parsing...");
 
     *protocol = RTMP_PROTOCOL_RTMP;
     *port = 0;
@@ -48,7 +48,7 @@ int PILI_RTMP_ParseURL2(const char *url, int *protocol, AVal *host, unsigned int
     /* look for usual :// pattern */
     p = strstr(url, "://");
     if (!p) {
-        RTMP_Log(RTMP_LOGERROR, "RTMP URL: No :// in url!");
+        PILI_RTMP_Log(PILI_RTMP_LOGERROR, "RTMP URL: No :// in url!");
         return FALSE;
     }
     {
@@ -69,12 +69,12 @@ int PILI_RTMP_ParseURL2(const char *url, int *protocol, AVal *host, unsigned int
         else if (len == 6 && strncasecmp(url, "rtmpts", 6) == 0)
             *protocol = RTMP_PROTOCOL_RTMPTS;
         else {
-            RTMP_Log(RTMP_LOGWARNING, "Unknown protocol!\n");
+            PILI_RTMP_Log(PILI_RTMP_LOGWARNING, "Unknown protocol!\n");
             goto parsehost;
         }
     }
 
-    RTMP_Log(RTMP_LOGDEBUG, "Parsed protocol: %d", *protocol);
+    PILI_RTMP_Log(PILI_RTMP_LOGDEBUG, "Parsed protocol: %d", *protocol);
 
 parsehost:
     /* let's get the hostname */
@@ -82,7 +82,7 @@ parsehost:
 
     /* check for sudden death */
     if (*p == 0) {
-        RTMP_Log(RTMP_LOGWARNING, "No hostname in URL!");
+        PILI_RTMP_Log(PILI_RTMP_LOGWARNING, "No hostname in URL!");
         return FALSE;
     }
 
@@ -103,9 +103,9 @@ parsehost:
         if (hostlen < 256) {
             host->av_val = p;
             host->av_len = hostlen;
-            RTMP_Log(RTMP_LOGDEBUG, "Parsed host    : %.*s", hostlen, host->av_val);
+            PILI_RTMP_Log(PILI_RTMP_LOGDEBUG, "Parsed host    : %.*s", hostlen, host->av_val);
         } else {
-            RTMP_Log(RTMP_LOGWARNING, "Hostname exceeds 255 characters!");
+            PILI_RTMP_Log(PILI_RTMP_LOGWARNING, "Hostname exceeds 255 characters!");
         }
 
         p += hostlen;
@@ -117,14 +117,14 @@ parsehost:
         p++;
         p2 = atoi(p);
         if (p2 > 65535) {
-            RTMP_Log(RTMP_LOGWARNING, "Invalid port number!");
+            PILI_RTMP_Log(PILI_RTMP_LOGWARNING, "Invalid port number!");
         } else {
             *port = p2;
         }
     }
 
     if (!slash) {
-        RTMP_Log(RTMP_LOGWARNING, "No application or playpath in URL!");
+        PILI_RTMP_Log(PILI_RTMP_LOGWARNING, "No application or playpath in URL!");
         return TRUE;
     }
     p = slash + 1;
@@ -149,7 +149,7 @@ parsehost:
             if (host_len < 256) {
                 domainName->av_val = domain;
                 domainName->av_len = host_len;
-                RTMP_Log(RTMP_LOGDEBUG, "Parsed host  and domain  : %.*s", host_len, host->av_val);
+                PILI_RTMP_Log(PILI_RTMP_LOGDEBUG, "Parsed host  and domain  : %.*s", host_len, host->av_val);
             }
         }
     }
@@ -188,7 +188,7 @@ parsehost:
 
         app->av_val = p;
         app->av_len = applen;
-        RTMP_Log(RTMP_LOGDEBUG, "Parsed app     : %.*s", applen, p);
+        PILI_RTMP_Log(PILI_RTMP_LOGDEBUG, "Parsed app     : %.*s", applen, p);
 
         p += appnamelen;
     }
@@ -197,7 +197,7 @@ parsehost:
         p++;
 
     if (end - p) {
-        AVal av = {p, end - p};
+        PILI_AVal av = {p, end - p};
         PILI_RTMP_ParsePlaypath(&av, playpath);
     }
 
@@ -216,7 +216,7 @@ parsehost:
  * mp3 streams: prepend "mp3:", remove extension
  * flv streams: remove extension
  */
-void PILI_RTMP_ParsePlaypath(AVal *in, AVal *out) {
+void PILI_RTMP_ParsePlaypath(PILI_AVal *in, PILI_AVal *out) {
     int addMP4 = 0;
     int addMP3 = 0;
     int subExt = 0;
@@ -306,7 +306,7 @@ void PILI_RTMP_ParsePlaypath(AVal *in, AVal *out) {
     out->av_len = destptr - streamname;
 }
 
-int PILI_RTMP_ParseURL(const char *url, int *protocol, AVal *host,
-                       unsigned int *port, AVal *playpath, AVal *app) {
+int PILI_RTMP_ParseURL(const char *url, int *protocol, PILI_AVal *host,
+                       unsigned int *port, PILI_AVal *playpath, PILI_AVal *app) {
     return PILI_RTMP_ParseURL2(url, protocol, host, port, playpath, app, NULL);
 }

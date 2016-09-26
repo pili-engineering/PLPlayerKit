@@ -72,11 +72,10 @@ PLPlayerOption *option = [PLPlayerOption defaultOption];
 
 // 更改需要修改的 option 属性键所对应的值
 [option setOptionValue:@15 forKey:PLPlayerOptionKeyTimeoutIntervalForMediaPackets];
-[option setOptionValue:@1000 forKey:PLPlayerOptionKeyMaxL1BufferDuration];
+[option setOptionValue:@2000 forKey:PLPlayerOptionKeyMaxL1BufferDuration];
 [option setOptionValue:@1000 forKey:PLPlayerOptionKeyMaxL2BufferDuration];
-[option setOptionValue:@(YES) forKey:PLPlayerOptionKeyVideoToolbox];
-[option setOptionValue:@(kPLLogInfo) forKey:PLPlayerOptionKeyLogLevel];
-[option setOptionValue:[QNDnsManager new] forKey:PLPlayerOptionKeyDNSManager];
+[option setOptionValue:@(NO) forKey:PLPlayerOptionKeyVideoToolbox];
+[option setOptionValue:@(kPLLogNone) forKey:PLPlayerOptionKeyLogLevel];
 
 ```
 
@@ -151,6 +150,16 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 版本历史
+- 2.3.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.3.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.3.0.md))
+- 功能
+  - 新增直播流画面旋转模式
+  - 新增直播流分辨率信息
+  - 新增停止渲染的选项
+  - 新增基于 FFMPEG 的点播
+- 缺陷
+  - 修复一些偶现的 crash
+- 优化
+  - 优化开始播放的快进时间
 - 2.2.4 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.4.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.4.md))
 - 缺陷
   - 修复与 CocoaLumberjack 符号冲突的问题

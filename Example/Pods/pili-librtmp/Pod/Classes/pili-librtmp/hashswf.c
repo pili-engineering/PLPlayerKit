@@ -71,7 +71,7 @@
 #define HMAC_close(ctx) HMAC_CTX_cleanup(&ctx)
 #endif
 
-extern void RTMP_TLS_Init();
+extern void PILI_RTMP_TLS_Init();
 extern TLS_CTX RTMP_TLS_ctx;
 
 #endif /* CRYPTO */
@@ -81,7 +81,7 @@ extern TLS_CTX RTMP_TLS_ctx;
 #define AGENT "Mozilla/5.0"
 
 HTTPResult
-    HTTP_get(struct HTTP_ctx *http, const char *url, HTTP_read_callback *cb) {
+    PILI_HTTP_get(struct HTTP_ctx *http, const char *url, PILI_HTTP_read_callback *cb) {
     char *host, *path;
     char *p1, *p2;
     char hbuf[256];
@@ -110,7 +110,7 @@ HTTPResult
         ssl = 1;
         port = 443;
         if (!RTMP_TLS_ctx)
-            RTMP_TLS_Init();
+            PILI_RTMP_TLS_Init();
 #else
         return HTTPRES_BAD_REQUEST;
 #endif
@@ -180,14 +180,14 @@ HTTPResult
 #ifdef CRYPTO
     if (ssl) {
 #ifdef NO_SSL
-        RTMP_Log(RTMP_LOGERROR, "%s, No SSL/TLS support", __FUNCTION__);
+        PILI_RTMP_Log(PILI_RTMP_LOGERROR, "%s, No SSL/TLS support", __FUNCTION__);
         ret = HTTPRES_BAD_REQUEST;
         goto leave;
 #else
         TLS_client(RTMP_TLS_ctx, sb.sb_ssl);
         TLS_setfd(sb.sb_ssl, sb.sb_socket);
         if ((i = TLS_connect(sb.sb_ssl)) < 0) {
-            RTMP_Log(RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
+            PILI_RTMP_Log(PILI_RTMP_LOGERROR, "%s, TLS_Connect failed", __FUNCTION__);
             ret = HTTPRES_LOST_CONNECTION;
             goto leave;
         }
@@ -201,7 +201,7 @@ HTTPResult
     {
         SET_RCVTIMEO(tv, HTTP_TIMEOUT);
         if (setsockopt(sb.sb_socket, SOL_SOCKET, SO_RCVTIMEO, (char *)&tv, sizeof(tv))) {
-            RTMP_Log(RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
+            PILI_RTMP_Log(PILI_RTMP_LOGERROR, "%s, Setting socket timeout to %ds failed!",
                      __FUNCTION__, HTTP_TIMEOUT);
         }
     }
@@ -288,7 +288,7 @@ leave:
 
 #define CHUNK 16384
 
-struct info {
+struct PILI_info {
     z_stream *zs;
     HMAC_CTX ctx;
     int first;
@@ -297,7 +297,7 @@ struct info {
 };
 
 static size_t
-    swfcrunch(void *ptr, size_t size, size_t nmemb, void *stream) {
+    PILI_swfcrunch(void *ptr, size_t size, size_t nmemb, void *stream) {
     struct info *i = stream;
     char *p = ptr;
     size_t len = size * nmemb;
@@ -348,7 +348,7 @@ static const char *days[] =
 
 /* Parse an HTTP datestamp into Unix time */
 static time_t
-    make_unix_time(char *s) {
+    PILI_make_unix_time(char *s) {
     struct tm time;
     int i, ysub = 1900, fmt = 0;
     char *month;
@@ -420,7 +420,7 @@ static time_t
 /* Convert a Unix time to a network time string
  * Weekday, DD-MMM-YYYY HH:MM:SS GMT
  */
-void strtime(time_t *t, char *s) {
+void PILI_strtime(time_t *t, char *s) {
     struct tm *tm;
 
     tm = gmtime((time_t *)t);
@@ -431,7 +431,7 @@ void strtime(time_t *t, char *s) {
 
 #define HEX2BIN(a) (((a)&0x40) ? ((a)&0xf) + 9 : ((a)&0xf))
 
-int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
+int PILI_RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
                  int age) {
     FILE *f = NULL;
     char *path, date[64], cctim[64];
@@ -443,7 +443,7 @@ int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
     struct HTTP_ctx http = {0};
     HTTPResult httpres;
     z_stream zs = {0};
-    AVal home, hpre;
+    PILI_AVal home, hpre;
 
     date[0] = '\0';
 #ifdef _WIN32
@@ -531,7 +531,7 @@ int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
                     got++;
                 } else if (!strncmp(buf, "ctim: ", 6)) {
                     buf[strlen(buf) - 1] = '\0';
-                    ctim = make_unix_time(buf + 6);
+                    ctim = PILI_make_unix_time(buf + 6);
                     got++;
                 } else if (!strncmp(buf, "url: ", 5))
                     break;
@@ -558,19 +558,19 @@ int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
     http.date = date;
     http.data = &in;
 
-    httpres = HTTP_get(&http, url, swfcrunch);
+    httpres = PILI_HTTP_get(&http, url, PILI_swfcrunch);
 
     inflateEnd(&zs);
 
     if (httpres != HTTPRES_OK && httpres != HTTPRES_OK_NOT_MODIFIED) {
         ret = -1;
         if (httpres == HTTPRES_LOST_CONNECTION)
-            RTMP_Log(RTMP_LOGERROR, "%s: connection lost while downloading swfurl %s",
+            PILI_RTMP_Log(PILI_RTMP_LOGERROR, "%s: connection lost while downloading swfurl %s",
                      __FUNCTION__, url);
         else if (httpres == HTTPRES_NOT_FOUND)
-            RTMP_Log(RTMP_LOGERROR, "%s: swfurl %s not found", __FUNCTION__, url);
+            PILI_RTMP_Log(PILI_RTMP_LOGERROR, "%s: swfurl %s not found", __FUNCTION__, url);
         else
-            RTMP_Log(RTMP_LOGERROR, "%s: couldn't contact swfurl %s (HTTP error %d)",
+            PILI_RTMP_Log(PILI_RTMP_LOGERROR, "%s: couldn't contact swfurl %s (HTTP error %d)",
                      __FUNCTION__, url, http.status);
     } else {
         if (got && pos)
@@ -581,7 +581,7 @@ int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
                 f = fopen(path, "w");
             if (!f) {
                 int err = errno;
-                RTMP_Log(RTMP_LOGERROR,
+                PILI_RTMP_Log(PILI_RTMP_LOGERROR,
                          "%s: couldn't open %s for writing, errno %d (%s)",
                          __FUNCTION__, path, err, strerror(err));
                 ret = -1;
@@ -596,7 +596,7 @@ int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
 
             fprintf(f, "url: %.*s\n", i, url);
         }
-        strtime(&cnow, cctim);
+        PILI_strtime(&cnow, cctim);
         fprintf(f, "ctim: %s\n", cctim);
 
         if (!in.first) {
@@ -619,7 +619,7 @@ out:
     return ret;
 }
 #else
-int RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
+int PILI_RTMP_HashSWF(const char *url, unsigned int *size, unsigned char *hash,
                  int age) {
     return -1;
 }

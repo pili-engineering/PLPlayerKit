@@ -31,4 +31,22 @@
  */
 +(void)enableQos:(BOOL)flag;
 
+/**
+ @brief 设置 librtmp 的版本号
+ 
+ @param version int
+ */
++ (void)setLibRTMPVersion:(int)version;
+
++ (int)getLibRTMPVersion;
+
+/**
+ @brief 设置 ffmpeg 的版本号
+ 
+ @param version const char *
+ */
++ (void)setFFmpegVersion:(const char *)version;
+
++ (NSString *)getFFmpegVersion;
+
 @end
