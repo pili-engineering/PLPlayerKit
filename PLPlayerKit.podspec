@@ -36,13 +36,4 @@ Pod::Spec.new do |s|
     ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include" }
     ss.dependency 'pili-ffmpeg', '~> 3.1.0'
   end
-
-  s.subspec "noffmpeg" do |ss|
-    ss.public_header_files  = "Pod/Library/include/PLPlayerKit/*.h"
-    ss.source_files         = 'Pod/Library/include/**/*.[h|m]'
-    ss.preserve_paths       = "Pod/Library/include/PLPlayerKit/*.[h|m]", 'Pod/Library/lib/*.a'
-    ss.vendored_libraries   = 'Pod/Library/lib/*.a'
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/include", 'LIBRARY_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/lib" }
-  end
 end
