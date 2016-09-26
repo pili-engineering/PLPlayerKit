@@ -69,7 +69,7 @@ extern "C" {
 #define RTMP_CHANNELS 65600
 
 extern const char PILI_RTMPProtocolStringsLower[][7];
-extern const AVal PILI_RTMP_DefaultFlashVer;
+extern const PILI_AVal PILI_RTMP_DefaultFlashVer;
 extern int PILI_RTMP_ctrlC;
 
 uint32_t PILI_RTMP_GetTime(void);
@@ -123,21 +123,21 @@ void PILI_RTMPPacket_Free(PILI_RTMPPacket *p);
 #define RTMPPacket_IsReady(a) ((a)->m_nBytesRead == (a)->m_nBodySize)
 
 typedef struct PILI_RTMP_LNK {
-    AVal hostname;
-    AVal domain;
-    AVal sockshost;
+    PILI_AVal hostname;
+    PILI_AVal domain;
+    PILI_AVal sockshost;
 
-    AVal playpath0; /* parsed from URL */
-    AVal playpath; /* passed in explicitly */
-    AVal tcUrl;
-    AVal swfUrl;
-    AVal pageUrl;
-    AVal app;
-    AVal auth;
-    AVal flashVer;
-    AVal subscribepath;
-    AVal token;
-    AMFObject extras;
+    PILI_AVal playpath0; /* parsed from URL */
+    PILI_AVal playpath; /* passed in explicitly */
+    PILI_AVal tcUrl;
+    PILI_AVal swfUrl;
+    PILI_AVal pageUrl;
+    PILI_AVal app;
+    PILI_AVal auth;
+    PILI_AVal flashVer;
+    PILI_AVal subscribepath;
+    PILI_AVal token;
+    PILI_AMFObject extras;
     int edepth;
 
     int seekTime;
@@ -204,7 +204,7 @@ typedef struct PILI_RTMP_READ {
 } PILI_RTMP_READ;
 
 typedef struct PILI_RTMP_METHOD {
-    AVal name;
+    PILI_AVal name;
     int num;
 } PILI_RTMP_METHOD;
 
@@ -255,7 +255,7 @@ typedef struct PILI_RTMP {
     int m_polling;
     int m_resplen;
     int m_unackd;
-    AVal m_clientID;
+    PILI_AVal m_clientID;
 
     PILI_RTMP_READ m_read;
     PILI_RTMPPacket m_write;
@@ -271,24 +271,24 @@ typedef struct PILI_RTMP {
     uint32_t ip;
 } PILI_RTMP;
 
-int PILI_RTMP_ParseURL(const char *url, int *protocol, AVal *host,
-                       unsigned int *port, AVal *playpath, AVal *app);
+int PILI_RTMP_ParseURL(const char *url, int *protocol, PILI_AVal *host,
+                       unsigned int *port, PILI_AVal *playpath, PILI_AVal *app);
 
-int PILI_RTMP_ParseURL2(const char *url, int *protocol, AVal *host,
-                        unsigned int *port, AVal *playpath, AVal *app, AVal *domain);
+int PILI_RTMP_ParseURL2(const char *url, int *protocol, PILI_AVal *host,
+                        unsigned int *port, PILI_AVal *playpath, PILI_AVal *app, PILI_AVal *domain);
 
-void PILI_RTMP_ParsePlaypath(AVal *in, AVal *out);
+void PILI_RTMP_ParsePlaypath(PILI_AVal *in, PILI_AVal *out);
 void PILI_RTMP_SetBufferMS(PILI_RTMP *r, int size);
 void PILI_RTMP_UpdateBufferMS(PILI_RTMP *r, RTMPError *error);
 
-int PILI_RTMP_SetOpt(PILI_RTMP *r, const AVal *opt, AVal *arg,
+int PILI_RTMP_SetOpt(PILI_RTMP *r, const PILI_AVal *opt, PILI_AVal *arg,
                      RTMPError *error);
 int PILI_RTMP_SetupURL(PILI_RTMP *r, const char *url, RTMPError *error);
-void PILI_RTMP_SetupStream(PILI_RTMP *r, int protocol, AVal *hostname,
-                           unsigned int port, AVal *sockshost, AVal *playpath,
-                           AVal *tcUrl, AVal *swfUrl, AVal *pageUrl, AVal *app,
-                           AVal *auth, AVal *swfSHA256Hash, uint32_t swfSize,
-                           AVal *flashVer, AVal *subscribepath, int dStart,
+void PILI_RTMP_SetupStream(PILI_RTMP *r, int protocol, PILI_AVal *hostname,
+                           unsigned int port, PILI_AVal *sockshost, PILI_AVal *playpath,
+                           PILI_AVal *tcUrl, PILI_AVal *swfUrl, PILI_AVal *pageUrl, PILI_AVal *app,
+                           PILI_AVal *auth, PILI_AVal *swfSHA256Hash, uint32_t swfSize,
+                           PILI_AVal *flashVer, PILI_AVal *subscribepath, int dStart,
                            int dStop, int bLiveStream, long int timeout);
 
 int PILI_RTMP_Connect(PILI_RTMP *r, PILI_RTMPPacket *cp, RTMPError *error);
@@ -332,8 +332,8 @@ int PILI_RTMP_SendCtrl(PILI_RTMP *r, short nType, unsigned int nObject,
 int PILI_RTMP_SendPause(PILI_RTMP *r, int DoPause, int dTime, RTMPError *error);
 int PILI_RTMP_Pause(PILI_RTMP *r, int DoPause, RTMPError *error);
 
-int PILI_RTMP_FindFirstMatchingProperty(AMFObject *obj, const AVal *name,
-                                        AMFObjectProperty *p);
+int PILI_RTMP_FindFirstMatchingProperty(PILI_AMFObject *obj, const PILI_AVal *name,
+                                        PILI_AMFObjectProperty *p);
 
 int PILI_RTMPSockBuf_Fill(PILI_RTMPSockBuf *sb, int timeout);
 int PILI_RTMPSockBuf_Send(PILI_RTMPSockBuf *sb, const char *buf, int len);

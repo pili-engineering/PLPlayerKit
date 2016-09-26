@@ -32,30 +32,30 @@
 
 #define MAX_PRINT_LEN 2048
 
-RTMP_LogLevel RTMP_debuglevel = RTMP_LOGERROR;
+PILI_RTMP_LogLevel PILI_RTMP_debuglevel = PILI_RTMP_LOGERROR;
 
 static int neednl;
 
 static FILE *fmsg;
 
-static RTMP_LogCallback rtmp_log_default, *cb = rtmp_log_default;
+static PILI_RTMP_LogCallback PILI_rtmp_log_default, *cb = PILI_rtmp_log_default;
 
 static const char *levels[] = {
     "CRIT", "ERROR", "WARNING", "INFO",
     "DEBUG", "DEBUG2"};
 
-static void rtmp_log_default(int level, const char *format, va_list vl) {
+static void PILI_rtmp_log_default(int level, const char *format, va_list vl) {
     char str[MAX_PRINT_LEN] = "";
 
     vsnprintf(str, MAX_PRINT_LEN - 1, format, vl);
 
     /* Filter out 'no-name' */
-    if (RTMP_debuglevel < RTMP_LOGALL && strstr(str, "no-name") != NULL)
+    if (PILI_RTMP_debuglevel < PILI_RTMP_LOGALL && strstr(str, "no-name") != NULL)
         return;
 
     if (!fmsg) fmsg = stderr;
 
-    if (level <= RTMP_debuglevel) {
+    if (level <= PILI_RTMP_debuglevel) {
         if (neednl) {
             putc('\n', fmsg);
             neednl = 0;
@@ -67,23 +67,23 @@ static void rtmp_log_default(int level, const char *format, va_list vl) {
     }
 }
 
-void RTMP_LogSetOutput(FILE *file) {
+void PILI_RTMP_LogSetOutput(FILE *file) {
     fmsg = file;
 }
 
-void RTMP_LogSetLevel(RTMP_LogLevel level) {
-    RTMP_debuglevel = level;
+void PILI_RTMP_LogSetLevel(PILI_RTMP_LogLevel level) {
+    PILI_RTMP_debuglevel = level;
 }
 
-void RTMP_LogSetCallback(RTMP_LogCallback *cbp) {
+void PILI_RTMP_LogSetCallback(PILI_RTMP_LogCallback *cbp) {
     cb = cbp;
 }
 
-RTMP_LogLevel RTMP_LogGetLevel() {
-    return RTMP_debuglevel;
+PILI_RTMP_LogLevel PILI_RTMP_LogGetLevel() {
+    return PILI_RTMP_debuglevel;
 }
 
-void RTMP_Log(int level, const char *format, ...) {
+void PILI_RTMP_Log(int level, const char *format, ...) {
     va_list args;
     va_start(args, format);
     cb(level, format, args);
@@ -92,11 +92,11 @@ void RTMP_Log(int level, const char *format, ...) {
 
 static const char hexdig[] = "0123456789abcdef";
 
-void RTMP_LogHex(int level, const uint8_t *data, unsigned long len) {
+void PILI_RTMP_LogHex(int level, const uint8_t *data, unsigned long len) {
     unsigned long i;
     char line[50], *ptr;
 
-    if (level > RTMP_debuglevel)
+    if (level > PILI_RTMP_debuglevel)
         return;
 
     ptr = line;
@@ -107,25 +107,25 @@ void RTMP_LogHex(int level, const uint8_t *data, unsigned long len) {
         if ((i & 0x0f) == 0x0f) {
             *ptr = '\0';
             ptr = line;
-            RTMP_Log(level, "%s", line);
+            PILI_RTMP_Log(level, "%s", line);
         } else {
             *ptr++ = ' ';
         }
     }
     if (i & 0x0f) {
         *ptr = '\0';
-        RTMP_Log(level, "%s", line);
+        PILI_RTMP_Log(level, "%s", line);
     }
 }
 
-void RTMP_LogHexString(int level, const uint8_t *data, unsigned long len) {
+void PILI_RTMP_LogHexString(int level, const uint8_t *data, unsigned long len) {
 #define BP_OFFSET 9
 #define BP_GRAPH 60
 #define BP_LEN 80
     char line[BP_LEN];
     unsigned long i;
 
-    if (!data || level > RTMP_debuglevel)
+    if (!data || level > PILI_RTMP_debuglevel)
         return;
 
     /* in case len is zero */
@@ -136,7 +136,7 @@ void RTMP_LogHexString(int level, const uint8_t *data, unsigned long len) {
         unsigned off;
 
         if (!n) {
-            if (i) RTMP_Log(level, "%s", line);
+            if (i) PILI_RTMP_Log(level, "%s", line);
             memset(line, ' ', sizeof(line) - 2);
             line[sizeof(line) - 2] = '\0';
 
@@ -162,11 +162,11 @@ void RTMP_LogHexString(int level, const uint8_t *data, unsigned long len) {
         }
     }
 
-    RTMP_Log(level, "%s", line);
+    PILI_RTMP_Log(level, "%s", line);
 }
 
 /* These should only be used by apps, never by the library itself */
-void RTMP_LogPrintf(const char *format, ...) {
+void PILI_RTMP_LogPrintf(const char *format, ...) {
     char str[MAX_PRINT_LEN] = "";
     int len;
     va_list args;
@@ -174,7 +174,7 @@ void RTMP_LogPrintf(const char *format, ...) {
     len = vsnprintf(str, MAX_PRINT_LEN - 1, format, args);
     va_end(args);
 
-    if (RTMP_debuglevel == RTMP_LOGCRIT)
+    if (PILI_RTMP_debuglevel == PILI_RTMP_LOGCRIT)
         return;
 
     if (!fmsg) fmsg = stderr;
@@ -191,14 +191,14 @@ void RTMP_LogPrintf(const char *format, ...) {
         fflush(fmsg);
 }
 
-void RTMP_LogStatus(const char *format, ...) {
+void PILI_RTMP_LogStatus(const char *format, ...) {
     char str[MAX_PRINT_LEN] = "";
     va_list args;
     va_start(args, format);
     vsnprintf(str, MAX_PRINT_LEN - 1, format, args);
     va_end(args);
 
-    if (RTMP_debuglevel == RTMP_LOGCRIT)
+    if (PILI_RTMP_debuglevel == PILI_RTMP_LOGCRIT)
         return;
 
     if (!fmsg) fmsg = stderr;
