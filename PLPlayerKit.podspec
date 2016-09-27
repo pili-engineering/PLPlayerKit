@@ -21,28 +21,14 @@ Pod::Spec.new do |s|
 
   s.public_header_files = "Pod/Library/include/PLPlayerKit/*.h"
   s.source_files = 'Pod/Library/include/**/*.[h|m]'
+  s.vendored_libraries   = 'Pod/Library/lib/*.a'
 
   s.dependency 'pili-librtmp', '~> 1.0.5'
   s.dependency 'HappyDNS', '~> 0.3.10'
+  s.dependency 'pili-ffmpeg', '~> 3.1.0'
   s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
   s.libraries = "c++", "z", "bz2", "iconv"
 
-  s.default_subspec = "precompiled"
+  s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/include ${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include", 'LIBRARY_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/lib" }
 
-  s.subspec "precompiled" do |ss|
-    ss.preserve_paths         = "Pod/Library/include/PLPlayerKit/*.[h|m]", 'Pod/Library/lib/*.a'
-    ss.vendored_libraries   = 'Pod/Library/lib/*.a'
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include" }
-    ss.dependency 'pili-ffmpeg', '~> 3.1.0'
-  end
-
-  s.subspec "noffmpeg" do |ss|
-    ss.public_header_files  = "Pod/Library/include/PLPlayerKit/*.h"
-    ss.source_files         = 'Pod/Library/include/**/*.[h|m]'
-    ss.preserve_paths       = "Pod/Library/include/PLPlayerKit/*.[h|m]", 'Pod/Library/lib/*.a'
-    ss.vendored_libraries   = 'Pod/Library/lib/*.a'
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/#{s.name}/PLPlayerKit/lib/include" }
-    ss.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/include", 'LIBRARY_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/lib" }
-  end
 end

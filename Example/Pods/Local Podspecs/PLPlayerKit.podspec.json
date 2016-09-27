@@ -17,12 +17,16 @@
   "requires_arc": true,
   "public_header_files": "Pod/Library/include/PLPlayerKit/*.h",
   "source_files": "Pod/Library/include/**/*.[h|m]",
+  "vendored_libraries": "Pod/Library/lib/*.a",
   "dependencies": {
     "pili-librtmp": [
       "~> 1.0.5"
     ],
     "HappyDNS": [
       "~> 0.3.10"
+    ],
+    "pili-ffmpeg": [
+      "~> 3.1.0"
     ]
   },
   "frameworks": [
@@ -43,37 +47,8 @@
     "bz2",
     "iconv"
   ],
-  "default_subspecs": "precompiled",
-  "subspecs": [
-    {
-      "name": "precompiled",
-      "preserve_paths": [
-        "Pod/Library/include/PLPlayerKit/*.[h|m]",
-        "Pod/Library/lib/*.a"
-      ],
-      "vendored_libraries": "Pod/Library/lib/*.a",
-      "xcconfig": {
-        "HEADER_SEARCH_PATHS": "${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include"
-      },
-      "dependencies": {
-        "pili-ffmpeg": [
-          "~> 3.1.0"
-        ]
-      }
-    },
-    {
-      "name": "noffmpeg",
-      "public_header_files": "Pod/Library/include/PLPlayerKit/*.h",
-      "source_files": "Pod/Library/include/**/*.[h|m]",
-      "preserve_paths": [
-        "Pod/Library/include/PLPlayerKit/*.[h|m]",
-        "Pod/Library/lib/*.a"
-      ],
-      "vendored_libraries": "Pod/Library/lib/*.a",
-      "xcconfig": {
-        "HEADER_SEARCH_PATHS": "${PODS_ROOT}/../ffmpeg/include",
-        "LIBRARY_SEARCH_PATHS": "${PODS_ROOT}/../ffmpeg/lib"
-      }
-    }
-  ]
+  "xcconfig": {
+    "HEADER_SEARCH_PATHS": "${PODS_ROOT}/../ffmpeg/include ${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include",
+    "LIBRARY_SEARCH_PATHS": "${PODS_ROOT}/../ffmpeg/lib"
+  }
 }
