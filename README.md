@@ -148,6 +148,10 @@ self.player.delegate = self;
 
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
+## 其它依赖库版本号
+- OpenSSL: OpenSSL_1_0_2h
+- Speex: 1.2rc1
+
 ## 版本历史
 - 2.4.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.0.md))
 - 功能
