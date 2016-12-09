@@ -45,19 +45,6 @@ pod install
 
 ### 示例代码
 
-在 `AppDelegate.m` 中进行 SDK 初始化
-
-```Objective-C
-#import <PLPlayerKit/PLPlayerEnv.h>
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [PLPlayerEnv initEnv];
-    // Override point for customization after application launch.
-    return YES;
-}
-```
-
 在需要的地方添加
 
 ```Objective-C
@@ -119,10 +106,22 @@ self.player.delegate = self;
 - (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
 	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
 	// 除了 Error 状态，其他状态都会回调这个方法
+  // 开始播放，当连接成功后，将收到第一个 PLPlayerStatusCaching 状态
+  // 第一帧渲染后，将收到第一个 PLPlayerStatusPlaying 状态
+  // 播放过程中出现卡顿时，将收到 PLPlayerStatusCaching 状态
+  // 卡顿结束后，将收到 PLPlayerStatusPlaying 状态
+  // 卡顿结束后，将收到 PLPlayerStatusPlaying 状态
 }
 
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
-	// 当发生错误时，会回调这个方法
+	// 当发生错误，停止播放时，会回调这个方法
+}
+
+- (void)player:(nonnull PLPlayer *)player codecError:(nonnull NSError *)error {
+  // 当解码器发生错误时，会回调这个方法
+  // 当 videotoolbox 硬解初始化或解码出错时
+  // error.code 值为 PLPlayerErrorHWCodecInitFailed/PLPlayerErrorHWDecodeFailed
+  // 播发器也将自动切换成软解，继续播放
 }
 ```
 
@@ -150,6 +149,16 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 版本历史
+- 2.4.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.0.md))
+- 功能
+  - 新增 https 支持
+  - 新增文件播放
+  - 新增 speex, ogg 等音视频格式， avi, m4a 等封装格式支持。
+  - 新增 display aspect ratio 信息
+  - 新增 DNS 预解析接口
+  - 新增开播前封面图
+- 缺陷
+  - 修复一些偶发的 crash
 - 2.3.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.3.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.3.0.md))
 - 功能
   - 新增直播流画面旋转模式
