@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "PLPlayerKit"
-  s.version          = "2.3.0"
+  s.version          = "2.4.0"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
@@ -23,12 +23,8 @@ Pod::Spec.new do |s|
   s.source_files = 'Pod/Library/include/**/*.[h|m]'
   s.vendored_libraries   = 'Pod/Library/lib/*.a'
 
-  s.dependency 'pili-librtmp', '~> 1.0.5'
   s.dependency 'HappyDNS', '~> 0.3.10'
-  s.dependency 'pili-ffmpeg', '~> 3.1.0'
   s.frameworks = ["UIKit", "Foundation", "CoreGraphics", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation"]
   s.libraries = "c++", "z", "bz2", "iconv"
-
-  s.xcconfig = { 'HEADER_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/include ${PODS_ROOT}/pili-ffmpeg/pili-ffmpeg/include", 'LIBRARY_SEARCH_PATHS' => "${PODS_ROOT}/../ffmpeg/lib" }
 
 end
