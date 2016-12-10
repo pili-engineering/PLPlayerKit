@@ -11,6 +11,7 @@
 #import "PLPlayerOption.h"
 
 @class UIView;
+@class UIImageView;
 
 /**
  @brief 播放画面旋转模式 
@@ -169,8 +170,20 @@ extern NSString * _Nonnull playerVersion();
  */
 - (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame;
 
-@end
+- (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList;
 
+/**
+ 解码器错误
+ 
+ @discussion 解码器错误主要包括 video toolbox 硬解码器初始化失败和解码失败等。
+ 
+ @waring 收到解码器错误不代表播放已经停止。
+ 
+ @since v2.4.0
+ */
+- (void)player:(nonnull PLPlayer *)player codecError:(nonnull NSError *)error;
+
+@end
 
 /**
  getScreenShotWithCompletionHandler 截图操作为异步，
@@ -248,6 +261,15 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 @property (nonatomic, strong, nullable, readonly) UIView *  playerView;
 
 /**
+ PLPlayer 的启动图
+ 
+ @discussion 播放开始前显示的图片。
+ 
+ @since v2.4.0
+ */
+@property (nonatomic, strong, nullable, readonly) UIImageView *launchView;
+
+/**
  是否需要静音 PLPlayer，默认值为NO
  
  @since v2.1.2
@@ -297,6 +319,13 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 
 #pragma mark -- play info
 
+/** 
+ meta data
+ 
+ @since v2.4.0
+ */
+@property (nonatomic, strong, readonly) NSDictionary * _Nullable metadata;
+
 /**
  视频流的宽
  
@@ -314,6 +343,16 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  @since v2.3.0
  */
 @property (nonatomic, assign, readonly) int height;
+
+/**
+ 视频流的显示比例
+ 
+ @discussion displayRatioWidth = 0 表示该参数无效
+ 
+ @since v2.4.0
+ */
+@property (nonatomic, assign, readonly) int displayRatioWidth;
+@property (nonatomic, assign, readonly) int displayRatioHeight;
 
 /**
  视频流的帧率
@@ -350,6 +389,15 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  @since v2.3.0
  */
 @property (nonatomic, assign, readonly) double downSpeed;
+
+/**
+ 提前使用 HppayDNS 解析 URL 中的域名。
+ 
+ @discussion 在播放前调用该方法，预解析播放地址的域名。
+ 
+ @since v2.4.0
+ */
++ (void)preDNSHost:(nullable NSURL *)URL;
 
 /**
  使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
