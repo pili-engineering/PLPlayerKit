@@ -24,7 +24,6 @@
 		426D104B0972B24B958B15F0C1CF0CF0 /* QNResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 42AFE378665BE7B1D1F0F0C381206D03 /* QNResolver.m */; };
 		4334D7694959E92DF001DAE26DAA7F51 /* QNDes.m in Sources */ = {isa = PBXBuildFile; fileRef = 60D5D146DA7BB7A0D82BEF61854D7E56 /* QNDes.m */; };
 		4A79B8A7B6A88AAC80F82A6515020F99 /* QNHijackingDetectWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 281A280769298308698D04A3E3393F5D /* QNHijackingDetectWrapper.m */; };
-		5088479E3FA227320353499D7F1324E6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		544109A51CDD64A6F8AC7820D0383707 /* QNResolver.h in Headers */ = {isa = PBXBuildFile; fileRef = 8F25ABF796A9D08C3D39775578B2D66A /* QNResolver.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		6DB0679652CDB744FD4670AE73F0EA32 /* HappyDNS-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FF90F39F289B8E86DE4C1436E66F29A /* HappyDNS-dummy.m */; };
 		703080050561A77F07DAFB8B6D697BF7 /* QNAssessment.h in Headers */ = {isa = PBXBuildFile; fileRef = A74999B31B3740826235362AB202394A /* QNAssessment.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -36,6 +35,7 @@
 		976CE25D7F45DCAD10BCF1FB63807124 /* QNNetworkInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 158E1871189EEEC611D838CF4913E2F4 /* QNNetworkInfo.m */; };
 		97F7770FEDADFDBFA6ACD9D57A8033B5 /* QNHijackingDetectWrapper.h in Headers */ = {isa = PBXBuildFile; fileRef = 3A7EA6BD68E7EBA2F8591BE25A0CA289 /* QNHijackingDetectWrapper.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		993FE475C073DAC4A4262E023A463BA9 /* QNLruCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F3A79DC4F28EB582C11BFA909FFAF2F7 /* QNLruCache.m */; };
+		A074C8AE18CAE810ECABD0B3EC80A0E8 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		A97C2E0AF987237179F2E2DA76CFF703 /* HappyDNS.h in Headers */ = {isa = PBXBuildFile; fileRef = B5C486BDB45C1DFE55BF29C5F63CCE69 /* HappyDNS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		AF19688BF991B094DAEB7AF8B699B7E5 /* QNIpModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 345BED198684DC6149869F942DD567A6 /* QNIpModel.m */; };
 		B593E1A528707667F3DF13F57FD205BD /* QNTxtResolver.m in Sources */ = {isa = PBXBuildFile; fileRef = 5AF7EF7701C30D675BC8B3AC0100FF6A /* QNTxtResolver.m */; };
@@ -44,11 +44,11 @@
 		BB3FBE145CC2953B7A1E5F505C491D4D /* QNRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = CEEC29E3723D3B35EBBE11E28455C9F9 /* QNRecord.m */; };
 		BC54578C581E41FD246DE75D82049C7D /* QNAssessment.m in Sources */ = {isa = PBXBuildFile; fileRef = 52E132946F1A11F8B13523F2A67D42A3 /* QNAssessment.m */; };
 		C3580AFBA56D1C7E895407E492829CBC /* QNIP.h in Headers */ = {isa = PBXBuildFile; fileRef = F65466C30759691E4F346E2AF1CCB26C /* QNIP.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CAD918F4CCB97DAED96DF01A35C4F267 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */; };
 		D09D10AB5788A1DA9FA85CEDFB4013CC /* QNDomain.m in Sources */ = {isa = PBXBuildFile; fileRef = 8739AF36C4CC380F751013A8E9EAAB35 /* QNDomain.m */; };
 		D5ECD6E91AC66A990120679D90482B3C /* QNNetworkInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 2B0BDE6B422B8DEE8DF905B66D8497AF /* QNNetworkInfo.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		D9733A7217A90E43CFE6FE0A45F1F43C /* QNRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = A2DAC282BCCD8A40B4D88CAC243E0391 /* QNRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DA440F9CB171FE17C754E745DC98AC96 /* QNDnsManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 72C28460FE17DF45964164F95F04BCD1 /* QNDnsManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		F67504B4CC5FCED85C3EDB543183D8EC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */; };
 		F91423909334D78E1F5D8041005529BA /* QNIpModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 92DEE12B3F3E8E8402E7CB95E0644365 /* QNIpModel.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9A157697BEA0FB38078B18B9DFF5C61 /* QNHosts.h in Headers */ = {isa = PBXBuildFile; fileRef = B0BEDC8B804C54E03B7E5027117F7693 /* QNHosts.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
@@ -121,8 +121,8 @@
 		B5C486BDB45C1DFE55BF29C5F63CCE69 /* HappyDNS.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HappyDNS.h; path = HappyDNS/HappyDNS.h; sourceTree = "<group>"; };
 		B6E2102F4D088E203C3FC8096BFE84FA /* QNDnsManager.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QNDnsManager.m; path = HappyDNS/Common/QNDnsManager.m; sourceTree = "<group>"; };
 		BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-PLPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
+		CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CCF7FA116D2E4DDDC60A5C5289B62F50 /* QNGetAddrInfo.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QNGetAddrInfo.m; path = HappyDNS/Util/QNGetAddrInfo.m; sourceTree = "<group>"; };
-		CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		CEEC29E3723D3B35EBBE11E28455C9F9 /* QNRecord.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = QNRecord.m; path = HappyDNS/Common/QNRecord.m; sourceTree = "<group>"; };
 		D6D9DE9FAF073250B7184F159B10DD24 /* libspeexdsp.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libspeexdsp.a; path = Pod/Library/lib/libspeexdsp.a; sourceTree = "<group>"; };
 		DA01CFBF9130186F8F4D7ABEADAB4B2A /* libssl.a */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = archive.ar; name = libssl.a; path = Pod/Library/lib/libssl.a; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAD918F4CCB97DAED96DF01A35C4F267 /* Foundation.framework in Frameworks */,
+				F67504B4CC5FCED85C3EDB543183D8EC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,7 +147,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5088479E3FA227320353499D7F1324E6 /* Foundation.framework in Frameworks */,
+				A074C8AE18CAE810ECABD0B3EC80A0E8 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,14 +226,6 @@
 			path = Library;
 			sourceTree = "<group>";
 		};
-		3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				CEC22C73C1608DFA5D5D78BDCB218219 /* Foundation.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
 		3DEFB95BEE9BFE4C88586B58C3BBE052 /* include */ = {
 			isa = PBXGroup;
 			children = (
@@ -263,6 +255,14 @@
 			);
 			name = "Pods-PLPlayerKit";
 			path = "Target Support Files/Pods-PLPlayerKit";
+			sourceTree = "<group>";
+		};
+		7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				CBB3DE36805AF21409EC968A9691732F /* Foundation.framework */,
+			);
+			name = iOS;
 			sourceTree = "<group>";
 		};
 		77BF1EC6BF746273082F80CA483F3BB4 /* Products */ = {
@@ -324,7 +324,7 @@
 		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3DCAB2B7CDE207B3958B6CB957FCC758 /* iOS */,
+				7531C8F8DE19F1AA3C8A7AC97A91DC29 /* iOS */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -494,11 +494,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		36487C2763E377E25F3522AEF2305C85 /* Release */ = {
+		0731350A8D4ADC397D86DF1BB37A35B1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 822A408AA93DEF7B96DF1E663E77A49C /* HappyDNS.xcconfig */;
 			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -515,7 +517,53 @@
 			};
 			name = Release;
 		};
-		3FA2475660FFC880302AD18E29B2E5FC /* Debug */ = {
+		48EDB785EC4089BC6DB600FDA762818F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		740FAA9D6B7843825354154A6BDCFA24 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		79B0C2E66EFA9917ED6EDDB8FC6A7684 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -533,6 +581,70 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8F516BEFCA80F985C0E24545AB7E4AC8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 822A408AA93DEF7B96DF1E663E77A49C /* HappyDNS.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HappyDNS/HappyDNS-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		CF7953F66E785E8876EB4D370D777D50 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -552,111 +664,11 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
 				STRIP_INSTALLED_PRODUCT = NO;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
-		};
-		83C2D74175563C9A9910407F5505DB30 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = BDD1FF9AF7F6A22B37C979901B91C02B /* Pods-PLPlayerKit.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		D017180E7E153641708F5C11F7A4271F /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3591DFE78E3526A594F41EC2234726D7 /* Pods-PLPlayerKit.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		D4755527B917810CBB847F5D90266C18 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 822A408AA93DEF7B96DF1E663E77A49C /* HappyDNS.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HappyDNS/HappyDNS-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		F325026B55060D3B22BEC0BAB5FA7344 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
@@ -664,8 +676,8 @@
 		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3FA2475660FFC880302AD18E29B2E5FC /* Debug */,
-				F325026B55060D3B22BEC0BAB5FA7344 /* Release */,
+				CF7953F66E785E8876EB4D370D777D50 /* Debug */,
+				79B0C2E66EFA9917ED6EDDB8FC6A7684 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -673,8 +685,8 @@
 		5CACB58AE3BC51A40DBD652B2C136FF3 /* Build configuration list for PBXNativeTarget "HappyDNS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				D4755527B917810CBB847F5D90266C18 /* Debug */,
-				36487C2763E377E25F3522AEF2305C85 /* Release */,
+				8F516BEFCA80F985C0E24545AB7E4AC8 /* Debug */,
+				0731350A8D4ADC397D86DF1BB37A35B1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -682,8 +694,8 @@
 		8725DEEF995DB81F7C34240378A565D2 /* Build configuration list for PBXNativeTarget "Pods-PLPlayerKit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				83C2D74175563C9A9910407F5505DB30 /* Debug */,
-				D017180E7E153641708F5C11F7A4271F /* Release */,
+				48EDB785EC4089BC6DB600FDA762818F /* Debug */,
+				740FAA9D6B7843825354154A6BDCFA24 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

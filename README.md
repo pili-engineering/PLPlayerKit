@@ -4,14 +4,20 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 
 功能特性
 
-- [x] RTMP 直播流播放
-- [x] HTTP-FLV 直播流播放
-- [x] HLS 播放
 - [x] 高可定制
-- [x] 音频播放
-- [x] RTMP 直播首屏秒开支持
-- [x] RTMP 直播累积延迟消除技术
-
+- [x] 直播累积延迟消除技术
+- [x] 支持首屏秒开
+- [x] 支持 RTMP 直播流播放
+- [x] 支持 HTTP-FLV 直播流播放
+- [x] 支持 HLS 播放
+- [x] 支持 HTTPS 播放
+- [x] 支持多种画面预览模式
+- [x] 支持画面旋转与镜像
+- [x] 支持播放器音量设置
+- [x] 支持纯音频播放
+- [x] 支持后台播放
+- [x] 支持使用 IP 地址的 URL 
+- [x] 支持软硬解自动切换
 
 ## 内容摘要
 
@@ -62,7 +68,7 @@ PLPlayerOption *option = [PLPlayerOption defaultOption];
 [option setOptionValue:@2000 forKey:PLPlayerOptionKeyMaxL1BufferDuration];
 [option setOptionValue:@1000 forKey:PLPlayerOptionKeyMaxL2BufferDuration];
 [option setOptionValue:@(NO) forKey:PLPlayerOptionKeyVideoToolbox];
-[option setOptionValue:@(kPLLogNone) forKey:PLPlayerOptionKeyLogLevel];
+[option setOptionValue:@(kPLLogInfo) forKey:PLPlayerOptionKeyLogLevel];
 
 ```
 
@@ -110,7 +116,6 @@ self.player.delegate = self;
   // 第一帧渲染后，将收到第一个 PLPlayerStatusPlaying 状态
   // 播放过程中出现卡顿时，将收到 PLPlayerStatusCaching 状态
   // 卡顿结束后，将收到 PLPlayerStatusPlaying 状态
-  // 卡顿结束后，将收到 PLPlayerStatusPlaying 状态
 }
 
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
@@ -149,10 +154,20 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 其它依赖库版本号
+- FFmpeg : n3.1-dev
 - OpenSSL: OpenSSL_1_0_2h
 - Speex: 1.2rc1
 
 ## 版本历史
+- 2.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.1.md))
+- 功能
+  - 新增 probesize 参数配置
+  - 新增播放器初始化后更新 URL 的接口
+  - 新增 AVPlayer 点播的缓冲进度接口
+  - 增加 http header 中 referer 自定义接口
+- 缺陷
+  - 修复锁屏且屏幕黑后，播放没有声音的问题
+  - 修复播放器释放时偶发的 crash
 - 2.4.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.0.md))
 - 功能
   - 新增 https 支持
