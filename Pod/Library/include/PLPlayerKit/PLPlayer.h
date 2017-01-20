@@ -238,7 +238,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  @abstract      需要播放的 URL
  
- @discussion    目前支持 HLS (URL 以 http:// 开头) 与 rtmp (URL 以 rtmp:// 开头) 协议。
+ @discussion    目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (URL 以 rtmp:// 开头) 协议。
  
  @since v1.0.0
  */
@@ -437,7 +437,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
  
- @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param url    需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
  
  @return 生成的PLPlayer 对象
@@ -449,7 +449,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  使用 url 和 option 生成一个 PLPlayer 对象，点播使用此接口
  
- @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param url    需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
  
  @return 生成的PLPlayer 对象
@@ -461,7 +461,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  使用 url 和 option 初始化一个 PLPlayer 对象
  
- @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param url    需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
  
  @return 初始化后的 PLPlayer 对象
@@ -483,7 +483,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 /**
  开始播放新的 url
  
- @param url 需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param url 需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  
  @since v2.4.1
  */
