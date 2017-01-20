@@ -183,6 +183,18 @@ extern NSString * _Nonnull playerVersion();
  */
 - (void)player:(nonnull PLPlayer *)player codecError:(nonnull NSError *)error;
 
+
+/**
+ 点播已缓冲区域
+ 
+ @param timeRange  CMTimeRange , 表示当前缓冲区域，单位秒。
+ 
+ @waring 仅对 AVPlayer 点播有效
+ 
+ @since v2.4.1
+ */
+- (void)player:(nonnull PLPlayer *)player loadedTimeRange:(CMTimeRange)timeRange;
+
 @end
 
 /**
@@ -317,6 +329,13 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  */
 @property (nonatomic, assign) BOOL enableRender;
 
+/**
+ 设置 http header referer 值
+ 
+ @since v2.4.1
+ */
+@property (nonatomic, strong) NSString * _Nonnull referer;
+
 #pragma mark -- play info
 
 /** 
@@ -390,6 +409,22 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  */
 @property (nonatomic, assign, readonly) double downSpeed;
 
+#pragma mark AVPlayer
+
+/**
+ AVPlayer 
+ 
+ @since v2.4.1
+ */
+@property (nonatomic, strong) AVPlayer  * _Nullable avplayer;
+
+/**
+ AVPlayerItem
+ 
+ @since v2.4.1
+ */
+@property (nonatomic, strong) AVPlayerItem * _Nullable avplayerItem;
+
 /**
  提前使用 HppayDNS 解析 URL 中的域名。
  
@@ -429,7 +464,9 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
  
- @return 初始化后的PLPlayer 对象
+ @return 初始化后的 PLPlayer 对象
+ 
+ @waring 不支持使用 init, new 初始化 PLPlayer 对象。
  
  @since v2.1.0
  */
@@ -442,6 +479,15 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  @since v1.0.0
  */
 - (void)play;
+
+/**
+ 开始播放新的 url
+ 
+ @param url 需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ 
+ @since v2.4.1
+ */
+- (void)playWithURL:(nullable NSURL *)URL;
 
 /**
  当播放器处于暂停状态时调用该方法可以使播放器继续播放
