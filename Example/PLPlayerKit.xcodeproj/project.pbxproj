@@ -206,7 +206,7 @@
 			attributes = {
 				CLASSPREFIX = PL;
 				LastUpgradeCheck = 0710;
-				ORGANIZATIONNAME = 0dayZh;
+				ORGANIZATIONNAME = qiniu;
 				TargetAttributes = {
 					6003F589195388D20070C39A = {
 						DevelopmentTeam = GDFHW66V92;
