@@ -159,6 +159,10 @@ self.player.delegate = self;
 - Speex: 1.2rc1
 
 ## 版本历史
+- 2.4.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.2.md))
+- 缺陷
+  - 修复 AVPlayer 播放时调用 pause 和设置 frame 无效的问题
+  - 修复解码器释放时线程并发导致的偶发 crash
 - 2.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.1.md))
 - 功能
   - 新增 probesize 参数配置
