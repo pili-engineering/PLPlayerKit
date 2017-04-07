@@ -13,6 +13,29 @@
 @class UIView;
 @class UIImageView;
 
+
+/**
+ @brief 音频采样格式
+ 
+ @since 2.4.3
+ */
+typedef NS_ENUM(NSInteger, PLPlayerAVSampleFormat) {
+    PLPlayerAV_SAMPLE_FMT_NONE = -1,
+    PLPlayerAV_SAMPLE_FMT_U8,          ///< unsigned 8 bits
+    PLPlayerAV_SAMPLE_FMT_S16,         ///< signed 16 bits
+    PLPlayerAV_SAMPLE_FMT_S32,         ///< signed 32 bits
+    PLPlayerAV_SAMPLE_FMT_FLT,         ///< float
+    PLPlayerAV_SAMPLE_FMT_DBL,         ///< double
+    
+    PLPlayerAV_SAMPLE_FMT_U8P,         ///< unsigned 8 bits, planar
+    PLPlayerAV_SAMPLE_FMT_S16P,        ///< signed 16 bits, planar
+    PLPlayerAV_SAMPLE_FMT_S32P,        ///< signed 32 bits, planar
+    PLPlayerAV_SAMPLE_FMT_FLTP,        ///< float, planar
+    PLPlayerAV_SAMPLE_FMT_DBLP,        ///< double, planar
+    
+    PLPlayerAV_SAMPLE_FMT_NB           ///< Number of sample formats. DO NOT USE if linking dynamically
+};
+
 /**
  @brief 播放画面旋转模式 
  
@@ -166,11 +189,51 @@ extern NSString * _Nonnull playerVersion();
  软解为 kCVPixelFormatType_420YpCbCr8Planar.
  硬解为 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.
  
+ @deprecated Use - (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame pts:(int64_t)pts sarNumerator:(int)sarNumerator sarDenominator:(int)sarDenominator;;
+ 
  @since v2.2.3
  */
 - (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame;
 
+/**
+ @deprecated Use - (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat;
+ */
+
 - (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList;
+
+/**
+ 回调将要渲染的帧数据
+ 该功能只支持直播
+
+ @param player 调用该方法的 PLPlayer 对象
+ @param frame 将要渲染帧 YUV 数据。
+ CVPixelBufferGetPixelFormatType 获取 YUV 的类型。
+ 软解为 kCVPixelFormatType_420YpCbCr8Planar.
+ 硬解为 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.
+ @param pts 显示时间戳 单位ms
+ @param sarNumerator
+ @param sarDenominator
+ 其中sar 表示 storage aspect ratio
+ 视频流的显示比例 sarNumerator sarDenominator
+ @discussion sarNumerator = 0 表示该参数无效
+ 
+ @since v2.4.3
+ */
+- (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame pts:(int64_t)pts sarNumerator:(int)sarNumerator sarDenominator:(int)sarDenominator;
+
+/**
+ 回调音频数据
+
+ @param player 调用该方法的 PLPlayer 对象
+ @param audioBufferList 音频数据
+ @param audioStreamDescription 音频格式信息
+ @param pts 显示时间戳 是解码器进行显示帧时相对于SCR（系统参考）的时间戳。SCR可以理解为解码器应该开始从磁盘读取数据时的时间
+ @param sampleFormat 采样位数 枚举：PLPlayerAVSampleFormat
+ @return audioBufferList 音频数据
+ 
+ @since v2.4.3
+ */
+- (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat;
 
 /**
  解码器错误
@@ -182,7 +245,6 @@ extern NSString * _Nonnull playerVersion();
  @since v2.4.0
  */
 - (void)player:(nonnull PLPlayer *)player codecError:(nonnull NSError *)error;
-
 
 /**
  点播已缓冲区域
@@ -344,6 +406,24 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  @since v2.4.0
  */
 @property (nonatomic, strong, readonly) NSDictionary * _Nullable metadata;
+
+/**
+ 连接时间
+ 从触发播放到建立连接的耗时
+ 
+ @since v2.4.3
+ */
+
+@property (nonatomic, assign, readonly) NSTimeInterval connectTime;
+
+/**
+ 首开时间
+ 从触发播放到第一帧视频渲染的耗时
+ 
+ @since v2.4.3
+ */
+
+@property (nonatomic, assign, readonly) NSTimeInterval firstVideoTime;
 
 /**
  视频流的宽

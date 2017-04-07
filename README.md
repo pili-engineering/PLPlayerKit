@@ -159,6 +159,16 @@ self.player.delegate = self;
 - Speex: 1.2rc1
 
 ## 版本历史
+- 2.4.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.3.md))
+- 功能
+  - 新增流分辨率变化的通知
+  - 新增提供更多音视频信息的回调接口
+  - 新增首开耗时接口
+  - 增强 FFmpeg 点播硬解兼容性
+- 缺陷
+  - 修复 AVPlayer 点播 pause 状态切换时播放器状态异常的问题
+  - 修复 FFmpeg 点播纯音频流时 seek 失败的问题
+  - 修复硬解在某些场景下出现绿屏的问题
 - 2.4.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.2.md))
 - 缺陷
   - 修复 AVPlayer 播放时调用 pause 和设置 frame 无效的问题
