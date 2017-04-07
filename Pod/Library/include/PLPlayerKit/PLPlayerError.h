@@ -42,6 +42,8 @@ typedef NS_ENUM(NSInteger, PLPlayerError) {
     
     PLPlayerErrorDecodeNoFrame = -2205, // "decode no frame."
     
+    PLPlayerErrorVideoSizeChange = -2206, // "video size change, should stop and replay."
+    
     // RTMP error
     PLPlayerErrorRTMPErrorUnknowOption = -999, // "Unknown option %s"
     
