@@ -20,7 +20,8 @@ static NSString *status[] = {
     @"PLPlayerStatusPlaying",
     @"PLPlayerStatusPaused",
     @"PLPlayerStatusStopped",
-    @"PLPlayerStatusError"
+    @"PLPlayerStatusError",
+    @"PLPlayerStatusCompleted"
 };
 
 @interface PLPlayerViewController ()

@@ -18,18 +18,38 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] 支持后台播放
 - [x] 支持使用 IP 地址的 URL 
 - [x] 支持软硬解自动切换
+- [x] 支持 H.265 格式播放
+- [x] 支持 HLS 七牛私有 DRM
+- [x] 支持点播倍速播放
+- [x] 支持点播 mp4 视频本地缓存播放
+
+## 说明
+
+从 **v3.0.0** 开始，SDK 全面升级为七牛完全自研的播放器内核，拥有更加优异的性能，升级内容如下：
+
+- [x] 新增倍数播放功能（0.5x，1x，2x，4x 等）
+- [x] 新增 mp4 本地缓存功能
+- [x] 新增 HLS 七牛私有 DRM 的支持 
+- [x] 新增 H.265 格式播放的支持
+- [x] 优化 CPU、内存和功耗
+- [x] 优化首开效果，首开速度有大幅提升
+- [x] 优化重连逻辑，不用销毁播放器，网络断开后内部自动重连
+- [x] 优化 mp4 点播，使用双 IO 技术更高效地播放 moov 在尾部的 mp4 文件
+- [x] 支持播放过程中变速不变调，可实现更平滑的追帧效果，更少的卡顿率
 
 ## 内容摘要
 
 - [快速开始](#1-快速开始)
 	- [配置工程](#配置工程)
 	- [示例代码](#示例代码)
-- [关于 2.0 版本](#关于2.0版本)
+- [关于 3.0 版本](#关于3.0版本)
 - [版本历史](#版本历史)
 
 ## 快速开始
 
 ### 配置工程
+
+#### CocoaPods 导入
 
 - 配置你的 Podfile 文件，添加如下配置信息
 
@@ -48,6 +68,14 @@ pod install
 ```
 
 - Done! 运行你工程的 workspace
+
+#### 手动导入  
+
+- 将 Pod 目录下的所有文件加入到工程中；
+- 添加 HappyDNS 库，把 [链接](https://github.com/qiniu/happy-dns-objc) 中的 HappyDNS 目录下的所有文件加入到工程中  
+- Build Setting 下 Other Linker Flags 中添加 -ObjC
+- Build Phases 下 Link Binary With Libraries 中添加如图所示
+![](http://7xne1c.com1.z0.glb.clouddn.com/plplayer3.0.0%20%E6%89%8B%E5%8A%A8%20build%20phases.png)
 
 ### 示例代码
 
@@ -154,11 +182,24 @@ self.player.delegate = self;
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
 ## 其它依赖库版本号
-- FFmpeg : n3.1-dev
-- OpenSSL: OpenSSL_1_0_2h
-- Speex: 1.2rc1
+- FFmpeg : v3.3.x
+- OpenSSL: OpenSSL_1_1_0f
+- Speex: v1.2.0
 
 ## 版本历史
+- 3.0.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.0.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.0.0.md))
+- 全面升级为七牛自研的播放器内核，拥有更优异的性能
+- 功能
+  - 新增 HLS 七牛私有 DRM 的支持
+  - 新增 H.265 格式的播放
+  - 新增点播倍速播放
+  - 新增点播 mp4 视频缓存播放
+- 优化
+  - 优化包体大小
+  - 优化 CPU、内存和功耗
+  - 优化直播模式下的追帧策略，效果更加平滑
+  - 优化重连逻辑，不用销毁播放器，网络断开后内部自动重连
+  - 优化 mp4 点播，使用双 IO 技术更高效地播放 moov 在尾部的 mp4 文件
 - 2.4.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.3.md))
 - 功能
   - 新增流分辨率变化的通知

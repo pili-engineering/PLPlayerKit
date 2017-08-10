@@ -1,6 +1,6 @@
 PODS:
   - HappyDNS (0.3.10)
-  - PLPlayerKit (2.4.3):
+  - PLPlayerKit (3.0.0):
     - HappyDNS (~> 0.3.10)
 
 DEPENDENCIES:
@@ -8,12 +8,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   PLPlayerKit:
-    :path: "../"
+    :path: ../
 
 SPEC CHECKSUMS:
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
-  PLPlayerKit: 6575f900d3a1c3680e3fd8907338683d0eedcd79
+  PLPlayerKit: 6b7a3ec7e70ed493edf52184794d04b6b95dbf98
 
 PODFILE CHECKSUM: d20fd3c1a75d3d4f8346b3b33f0b42e59b6ab3ab
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.0.1
