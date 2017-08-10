@@ -1,0 +1,1 @@
+../../../HappyDNS/HappyDNS/Common/QNResolverDelegate.h

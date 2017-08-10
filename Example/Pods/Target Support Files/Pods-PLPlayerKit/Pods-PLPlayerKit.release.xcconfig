@@ -1,6 +1,9 @@
+ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = ${PODS_ROOT}/PLPlayerKit/PLPlayerKit/lib/include $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/PLPlayerKit" "${PODS_ROOT}/Headers/Public/pili-librtmp"
-LIBRARY_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/../../Pod/Library/lib"
-OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/PLPlayerKit" -isystem "${PODS_ROOT}/Headers/Public/pili-librtmp"
-OTHER_LDFLAGS = $(inherited) -ObjC -l"PLPlayerKit" -l"bz2" -l"c++" -l"iconv" -l"pili-librtmp" -l"z" -framework "AVFoundation" -framework "Accelerate" -framework "AudioToolbox" -framework "CoreAudio" -framework "CoreGraphics" -framework "Foundation" -framework "MediaPlayer" -framework "OpenGLES" -framework "QuartzCore" -framework "UIKit"
+HEADER_SEARCH_PATHS = $(inherited) "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HappyDNS" "${PODS_ROOT}/Headers/Public/PLPlayerKit"
+LIBRARY_SEARCH_PATHS = $(inherited) "$PODS_CONFIGURATION_BUILD_DIR/HappyDNS" $(inherited) "${PODS_ROOT}/../../Pod/Library/lib"
+OTHER_CFLAGS = $(inherited) -isystem "${PODS_ROOT}/Headers/Public" -isystem "${PODS_ROOT}/Headers/Public/HappyDNS" -isystem "${PODS_ROOT}/Headers/Public/PLPlayerKit"
+OTHER_LDFLAGS = $(inherited) -ObjC -l"HappyDNS" -l"PLPlayerKit" -l"avcodec" -l"avformat" -l"avutil" -l"bz2" -l"c++" -l"crypto" -l"iconv" -l"resolv" -l"speex" -l"speexdsp" -l"ssl" -l"swresample" -l"z" -framework "AVFoundation" -framework "Accelerate" -framework "AudioToolbox" -framework "CoreAudio" -framework "CoreGraphics" -framework "Foundation" -framework "MediaPlayer" -framework "OpenGLES" -framework "QuartzCore" -framework "UIKit"
+PODS_BUILD_DIR = $BUILD_DIR
+PODS_CONFIGURATION_BUILD_DIR = $PODS_BUILD_DIR/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)
 PODS_ROOT = ${SRCROOT}/Pods

@@ -1,16 +1,23 @@
 # PLPlayerKit
 
-PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP 和 HLS 直播流媒体播放。
+PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP, HTTP-FLV 和 HLS 直播流媒体播放。
 
 功能特性
 
-- [x] RTMP 直播流播放
-- [x] HLS 播放
 - [x] 高可定制
-- [x] 音频后台播放
-- [x] RTMP 直播首屏秒开支持
-- [x] RTMP 直播累积延迟消除技术
-
+- [x] 直播累积延迟消除技术
+- [x] 支持首屏秒开
+- [x] 支持 RTMP 直播流播放
+- [x] 支持 HTTP-FLV 直播流播放
+- [x] 支持 HLS 播放
+- [x] 支持 HTTPS 播放
+- [x] 支持多种画面预览模式
+- [x] 支持画面旋转与镜像
+- [x] 支持播放器音量设置
+- [x] 支持纯音频播放
+- [x] 支持后台播放
+- [x] 支持使用 IP 地址的 URL 
+- [x] 支持软硬解自动切换
 
 ## 内容摘要
 
@@ -47,7 +54,7 @@ pod install
 在需要的地方添加
 
 ```Objective-C
-#import <PLPlayerKit/PLPlayer.h>
+#import <PLPlayerKit/PLPlayerKit.h>
 ```
 
 初始化 PLPlayerOption
@@ -58,6 +65,10 @@ PLPlayerOption *option = [PLPlayerOption defaultOption];
 
 // 更改需要修改的 option 属性键所对应的值
 [option setOptionValue:@15 forKey:PLPlayerOptionKeyTimeoutIntervalForMediaPackets];
+[option setOptionValue:@2000 forKey:PLPlayerOptionKeyMaxL1BufferDuration];
+[option setOptionValue:@1000 forKey:PLPlayerOptionKeyMaxL2BufferDuration];
+[option setOptionValue:@(NO) forKey:PLPlayerOptionKeyVideoToolbox];
+[option setOptionValue:@(kPLLogInfo) forKey:PLPlayerOptionKeyLogLevel];
 
 ```
 
@@ -101,10 +112,21 @@ self.player.delegate = self;
 - (void)player:(nonnull PLPlayer *)player statusDidChange:(PLPlayerStatus)state {
 	// 这里会返回流的各种状态，你可以根据状态做 UI 定制及各类其他业务操作
 	// 除了 Error 状态，其他状态都会回调这个方法
+  // 开始播放，当连接成功后，将收到第一个 PLPlayerStatusCaching 状态
+  // 第一帧渲染后，将收到第一个 PLPlayerStatusPlaying 状态
+  // 播放过程中出现卡顿时，将收到 PLPlayerStatusCaching 状态
+  // 卡顿结束后，将收到 PLPlayerStatusPlaying 状态
 }
 
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
-	// 当发生错误时，会回调这个方法
+	// 当发生错误，停止播放时，会回调这个方法
+}
+
+- (void)player:(nonnull PLPlayer *)player codecError:(nonnull NSError *)error {
+  // 当解码器发生错误时，会回调这个方法
+  // 当 videotoolbox 硬解初始化或解码出错时
+  // error.code 值为 PLPlayerErrorHWCodecInitFailed/PLPlayerErrorHWDecodeFailed
+  // 播发器也将自动切换成软解，继续播放
 }
 ```
 
@@ -131,16 +153,96 @@ self.player.delegate = self;
 
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
+## 其它依赖库版本号
+- FFmpeg : n3.1-dev
+- OpenSSL: OpenSSL_1_0_2h
+- Speex: 1.2rc1
+
 ## 版本历史
+- 2.4.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.3.md))
+- 功能
+  - 新增流分辨率变化的通知
+  - 新增提供更多音视频信息的回调接口
+  - 新增首开耗时接口
+  - 增强 FFmpeg 点播硬解兼容性
+- 缺陷
+  - 修复 AVPlayer 点播 pause 状态切换时播放器状态异常的问题
+  - 修复 FFmpeg 点播纯音频流时 seek 失败的问题
+  - 修复硬解在某些场景下出现绿屏的问题
+- 2.4.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.2.md))
+- 缺陷
+  - 修复 AVPlayer 播放时调用 pause 和设置 frame 无效的问题
+  - 修复解码器释放时线程并发导致的偶发 crash
+- 2.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.1.md))
+- 功能
+  - 新增 probesize 参数配置
+  - 新增播放器初始化后更新 URL 的接口
+  - 新增 AVPlayer 点播的缓冲进度接口
+  - 增加 http header 中 referer 自定义接口
+- 缺陷
+  - 修复锁屏且屏幕黑后，播放没有声音的问题
+  - 修复播放器释放时偶发的 crash
+- 2.4.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.4.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.4.0.md))
+- 功能
+  - 新增 https 支持
+  - 新增文件播放
+  - 新增 speex, ogg 等音视频格式， avi, m4a 等封装格式支持。
+  - 新增 display aspect ratio 信息
+  - 新增 DNS 预解析接口
+  - 新增开播前封面图
+- 缺陷
+  - 修复一些偶发的 crash
+- 2.3.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.3.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.3.0.md))
+- 功能
+  - 新增直播流画面旋转模式
+  - 新增直播流分辨率信息
+  - 新增停止渲染的选项
+  - 新增基于 FFMPEG 的点播
+- 缺陷
+  - 修复一些偶现的 crash
+- 优化
+  - 优化开始播放的快进时间
+- 2.2.4 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.4.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.4.md))
+- 缺陷
+  - 修复与 CocoaLumberjack 符号冲突的问题
+- 2.2.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.3.md))
+- 功能
+  - 新增 QoS 功能
+  - 新增渲染数据回调
+  - 新增截图功能
+  - 新增 MP3 后台播放
+- 缺陷
+  - 修复后台播放时，触发超时重连，丢失 sps/pps，回到前台画面停住，声音正常的问题
+  - 修复 RTMP 扩展时间戳的问题
+  - 修复播放器释放阻塞主线程的问题
+  - 优化音视频同步机制
+  - 优化 caching 状态检查
+- 2.2.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.2.md))
+- 功能
+  - 新增 AAC HEV2 音频支持
+  - 新增 SDK 自动重连功能，默认不开启
+- 缺陷
+  - 修复长时间播放偶发解码 crash
+  - 修复 pause/resmue 快速调用导致 crash
+  - 修复重连未更换服务器 IP
+  - 修复 rtmp 硬解播放视频抖动
+  - 修复 flv 开始播放偶发黑屏
+  - 修复 flv 超时机制失效
+- 2.2.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.1.md))
+- 功能
+  - 支持 SDK 日志级别设置
+  - 新增 HappyDNS 支持
+- 缺陷
+  - 修复回看状态不准确问题
+  - 修复跳转第三方应用，出现内存增加
+  - 修复播放卡住 caching 状态
 - 2.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-2.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-2.2.0.md))
 - 功能
 	- 新增硬解功能
 	- 新增 http-flv 支持
 	- 新增 iOS9 下的纯 IPV6 环境支持
-
 - 缺陷
 	- 修复快速进入退出黑屏
-
 - 优化
 	- 追帧策略优化
 	- 退出后台停止视频解码

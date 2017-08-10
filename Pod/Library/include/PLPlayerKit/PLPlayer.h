@@ -11,6 +11,45 @@
 #import "PLPlayerOption.h"
 
 @class UIView;
+@class UIImageView;
+
+
+/**
+ @brief 音频采样格式
+ 
+ @since 2.4.3
+ */
+typedef NS_ENUM(NSInteger, PLPlayerAVSampleFormat) {
+    PLPlayerAV_SAMPLE_FMT_NONE = -1,
+    PLPlayerAV_SAMPLE_FMT_U8,          ///< unsigned 8 bits
+    PLPlayerAV_SAMPLE_FMT_S16,         ///< signed 16 bits
+    PLPlayerAV_SAMPLE_FMT_S32,         ///< signed 32 bits
+    PLPlayerAV_SAMPLE_FMT_FLT,         ///< float
+    PLPlayerAV_SAMPLE_FMT_DBL,         ///< double
+    
+    PLPlayerAV_SAMPLE_FMT_U8P,         ///< unsigned 8 bits, planar
+    PLPlayerAV_SAMPLE_FMT_S16P,        ///< signed 16 bits, planar
+    PLPlayerAV_SAMPLE_FMT_S32P,        ///< signed 32 bits, planar
+    PLPlayerAV_SAMPLE_FMT_FLTP,        ///< float, planar
+    PLPlayerAV_SAMPLE_FMT_DBLP,        ///< double, planar
+    
+    PLPlayerAV_SAMPLE_FMT_NB           ///< Number of sample formats. DO NOT USE if linking dynamically
+};
+
+/**
+ @brief 播放画面旋转模式 
+ 
+ @since v2.3.0
+ */
+
+typedef NS_ENUM(NSInteger, PLPLayerRotationsMode) {
+    PLPlayerNoRotation, // 无旋转
+    PLPlayerRotateLeft, // 向左旋
+    PLPlayerRotateRight, // 向右旋
+    PLPlayerFlipVertical, // 垂直翻转
+    PLPlayerFlipHorizonal, // 水平翻转
+    PLPlayerRotate180 // 旋转 180 度
+};
 
 /**
  PLPlayer 的播放状态
@@ -42,7 +81,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
     /**
      @abstract PLPlayer 缓存数据为空状态。
      
-     @discussion 特别需要注意的是当推流端停止推流之后，PLPlayer 将出现 caching 状态直到 timeout 后抛出 timeout 的 error 而不是出现 PLPlayerStatusStopped 状态，因此推流停止之后需要开发者实用业务服务器告知播放器停止播放。
+     @discussion 特别需要注意的是当推流端停止推流之后，PLPlayer 将出现 caching 状态直到 timeout 后抛出 timeout 的 error 而不是出现 PLPlayerStatusStopped 状态，因此在直播场景中，当流停止之后一般做法是使用 IM 服务告知播放器停止播放，以达到即时响应主播断流的目的。
      
      @since v1.0.0
      */
@@ -75,8 +114,21 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
      
      @since v1.0.0
      */
-    PLPlayerStatusError
+    PLPlayerStatusError,
+    
+    /**
+     *  PLPlayer 自动重连的状态
+     */
+    PLPlayerStateAutoReconnecting
+    
 };
+
+/**
+ 返回播放器 SDK 的版本信息的字符串。
+ 
+ @since     v2.2.3
+ */
+extern NSString * _Nonnull playerVersion();
 
 @class PLPlayer;
 
@@ -127,7 +179,95 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  */
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error;
 
+/**
+ 回调将要渲染的帧数据
+ 该功能只支持直播
+ 
+ @param player 调用该方法的 PLPlayer 对象
+ @param frame  将要渲染帧 YUV 数据。
+ CVPixelBufferGetPixelFormatType 获取 YUV 的类型。
+ 软解为 kCVPixelFormatType_420YpCbCr8Planar.
+ 硬解为 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.
+ 
+ @deprecated Use - (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame pts:(int64_t)pts sarNumerator:(int)sarNumerator sarDenominator:(int)sarDenominator;;
+ 
+ @since v2.2.3
+ */
+- (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame;
+
+/**
+ @deprecated Use - (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat;
+ */
+
+- (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList;
+
+/**
+ 回调将要渲染的帧数据
+ 该功能只支持直播
+
+ @param player 调用该方法的 PLPlayer 对象
+ @param frame 将要渲染帧 YUV 数据。
+ CVPixelBufferGetPixelFormatType 获取 YUV 的类型。
+ 软解为 kCVPixelFormatType_420YpCbCr8Planar.
+ 硬解为 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.
+ @param pts 显示时间戳 单位ms
+ @param sarNumerator
+ @param sarDenominator
+ 其中sar 表示 storage aspect ratio
+ 视频流的显示比例 sarNumerator sarDenominator
+ @discussion sarNumerator = 0 表示该参数无效
+ 
+ @since v2.4.3
+ */
+- (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame pts:(int64_t)pts sarNumerator:(int)sarNumerator sarDenominator:(int)sarDenominator;
+
+/**
+ 回调音频数据
+
+ @param player 调用该方法的 PLPlayer 对象
+ @param audioBufferList 音频数据
+ @param audioStreamDescription 音频格式信息
+ @param pts 显示时间戳 是解码器进行显示帧时相对于SCR（系统参考）的时间戳。SCR可以理解为解码器应该开始从磁盘读取数据时的时间
+ @param sampleFormat 采样位数 枚举：PLPlayerAVSampleFormat
+ @return audioBufferList 音频数据
+ 
+ @since v2.4.3
+ */
+- (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat;
+
+/**
+ 解码器错误
+ 
+ @discussion 解码器错误主要包括 video toolbox 硬解码器初始化失败和解码失败等。
+ 
+ @waring 收到解码器错误不代表播放已经停止。
+ 
+ @since v2.4.0
+ */
+- (void)player:(nonnull PLPlayer *)player codecError:(nonnull NSError *)error;
+
+/**
+ 点播已缓冲区域
+ 
+ @param timeRange  CMTimeRange , 表示当前缓冲区域，单位秒。
+ 
+ @waring 仅对 AVPlayer 点播有效
+ 
+ @since v2.4.1
+ */
+- (void)player:(nonnull PLPlayer *)player loadedTimeRange:(CMTimeRange)timeRange;
+
 @end
+
+/**
+ getScreenShotWithCompletionHandler 截图操作为异步，
+ 完成后将通过 ScreenShotWithCompletionHandler 类型的 block 回调返回 UIImage 类型图片数据。
+ 
+ @since v2.2.3
+ */
+
+typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
+
 
 /**
  PLPlayer 是 PLPlayerKit 中负责播放控制的核心类
@@ -160,7 +300,7 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 /**
  @abstract      需要播放的 URL
  
- @discussion    目前支持 HLS (URL 以 http:// 开头) 与 rtmp (URL 以 rtmp:// 开头) 协议。
+ @discussion    目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (URL 以 rtmp:// 开头) 协议。
  
  @since v1.0.0
  */
@@ -195,6 +335,15 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 @property (nonatomic, strong, nullable, readonly) UIView *  playerView;
 
 /**
+ PLPlayer 的启动图
+ 
+ @discussion 播放开始前显示的图片。
+ 
+ @since v2.4.0
+ */
+@property (nonatomic, strong, nullable, readonly) UIImageView *launchView;
+
+/**
  是否需要静音 PLPlayer，默认值为NO
  
  @since v2.1.2
@@ -216,28 +365,193 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
 @property (nonatomic, assign, readonly) CMTime  totalDuration;
 
 /**
- 使用 url 和 option 生成一个 PLPlayer 对象
+ 是否开启重连，默认为 NO
  
- @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.2.2
+ */
+@property (nonatomic, assign, getter = isAutoReconnectEnable) BOOL autoReconnectEnable;
+
+/**
+ 设置画面旋转模式
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign) PLPLayerRotationsMode rotationMode;
+
+/**
+ 是否渲染画面，默认为 YES
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign) BOOL enableRender;
+
+/**
+ 设置 http header referer 值
+ 
+ @since v2.4.1
+ */
+@property (nonatomic, strong) NSString * _Nonnull referer;
+
+#pragma mark -- play info
+
+/** 
+ meta data
+ 
+ @since v2.4.0
+ */
+@property (nonatomic, strong, readonly) NSDictionary * _Nullable metadata;
+
+/**
+ 连接时间
+ 从触发播放到建立连接的耗时
+ 
+ @since v2.4.3
+ */
+
+@property (nonatomic, assign, readonly) NSTimeInterval connectTime;
+
+/**
+ 首开时间
+ 从触发播放到第一帧视频渲染的耗时
+ 
+ @since v2.4.3
+ */
+
+@property (nonatomic, assign, readonly) NSTimeInterval firstVideoTime;
+
+/**
+ 视频流的宽
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int width;
+
+/**
+ 视频流的高
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int height;
+
+/**
+ 视频流的显示比例
+ 
+ @discussion displayRatioWidth = 0 表示该参数无效
+ 
+ @since v2.4.0
+ */
+@property (nonatomic, assign, readonly) int displayRatioWidth;
+@property (nonatomic, assign, readonly) int displayRatioHeight;
+
+/**
+ 视频流的帧率
+ 
+ @warning 该属性仅 rtmp/flv 直播有效。
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int videoFPS;
+
+/**
+ 播放渲染帧率
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) int renderFPS;
+
+/**
+ 视频流的码率，单位 kb/s
+ 
+ @warning 该属性仅 rtmp/flv 直播有效。
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) double bitrate;
+
+/**
+ 下载速率，单位 kb/s
+ 
+ @waring 该属性仅对 rtmp/flv 直播与 ffmpeg 点播有效
+ 
+ @since v2.3.0
+ */
+@property (nonatomic, assign, readonly) double downSpeed;
+
+#pragma mark AVPlayer
+
+/**
+ AVPlayer 
+ 
+ @since v2.4.1
+ */
+@property (nonatomic, strong) AVPlayer  * _Nullable avplayer;
+
+/**
+ AVPlayerItem
+ 
+ @since v2.4.1
+ */
+@property (nonatomic, strong) AVPlayerItem * _Nullable avplayerItem;
+
+/**
+ 提前使用 HppayDNS 解析 URL 中的域名。
+ 
+ @discussion 在播放前调用该方法，预解析播放地址的域名。
+ 
+ @since v2.4.0
+ */
++ (void)preDNSHost:(nullable NSURL *)URL;
+
+/**
+ 使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
+ 
+ @param url    需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
  
  @return 生成的PLPlayer 对象
  
- @since v2.1.0
+ @since v2.2.3
+ */
++ (nullable instancetype)playerLiveWithURL:(nullable NSURL *)URL option:(nullable PLPlayerOption *)option;
+
+/**
+ 使用 url 和 option 生成一个 PLPlayer 对象，点播使用此接口
+ 
+ @param url    需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
+ 
+ @return 生成的PLPlayer 对象
+ 
+ @since v2.2.3
  */
 + (nullable instancetype)playerWithURL:(nullable NSURL *)URL option:(nullable PLPlayerOption *)option;
 
 /**
  使用 url 和 option 初始化一个 PLPlayer 对象
  
- @param url    需要播放的 url ，目前支持 http (url 以 http:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param url    需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
  @param option 播放器初始化选项，传入 nil 值将按照默认选项进行初始化
  
- @return 初始化后的PLPlayer 对象
+ @return 初始化后的 PLPlayer 对象
+ 
+ @waring 不支持使用 init, new 初始化 PLPlayer 对象。
  
  @since v2.1.0
  */
 - (nullable instancetype)initWithURL:(nullable NSURL *)URL option:(nullable PLPlayerOption *)option;
+
 
 /**
  开始播放
@@ -245,6 +559,15 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  @since v1.0.0
  */
 - (void)play;
+
+/**
+ 开始播放新的 url
+ 
+ @param url 需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ 
+ @since v2.4.1
+ */
+- (void)playWithURL:(nullable NSURL *)URL;
 
 /**
  当播放器处于暂停状态时调用该方法可以使播放器继续播放
@@ -275,6 +598,36 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
  @since v2.1.2
  */
 - (void)seekTo:(CMTime)time;
+
+/**
+ *  设置音量，范围是0-1.0，默认是1.0
+ *
+ *  @param volume 音量
+ *
+ *  @since v2.2.3
+ */
+- (void)setVolume:(float)volume;
+
+/**
+ *  获取音量
+ *
+ *  @since v2.2.3
+ *
+ *  @return 音量
+ */
+- (float)getVolume;
+
+/**
+ *  截图
+ *  @param handle 类型 ScreenShotWithCompletionHandler block 。
+ *  
+ *  @discussion 截图操作为异步，完成后将通过 handle 回调返回 UIImage 类型图片数据。
+ *              该功能只支持直播
+ *
+ *  @since v2.2.3
+ *
+ */
+- (void)getScreenShotWithCompletionHandler:(nullable ScreenShotWithCompletionHandler)handle;
 
 @end
 
