@@ -83,6 +83,8 @@ typedef NS_ENUM(NSInteger, PLPlayerError) {
     PLPlayerErrorRTMPErrorTLSConnectFailed = -1200,	//	"TLS_Connect failed"
     
     PLPlayerErrorRTMPErrorNoSSLOrTLSSupport = -1201,	//	"No SSL/TLS support"
+    
+    PLPlayerErrorHTTPErrorHTTPConnectFailed = -1202, // "HTTP connect failed"
 };
 
 
