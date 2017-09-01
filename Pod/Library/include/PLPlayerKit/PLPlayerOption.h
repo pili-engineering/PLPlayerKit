@@ -41,6 +41,28 @@ typedef enum : NSUInteger {
 } PLLogLevel;
 
 /**
+ 预设置播放器播放 URL 类型
+ */
+typedef enum : NSUInteger {
+    /**
+     * 未知类型
+     */
+    kPLPLAY_FORMAT_UnKnown,
+    /**
+     * M3U8 类型
+     */
+    kPLPLAY_FORMAT_M3U8,
+    /**
+     * MP4 类型
+     */
+    kPLPLAY_FORMAT_MP4,
+    /**
+     *  FLV 类型
+     */
+    kPLPLAY_FORMAT_FLV,
+} PLPlayFormat;
+
+/**
  @abstract 接收/发送数据包超时时间间隔所对应的键值，单位为 s ，默认配置为 10s
  
  @warning 建议设置正数。设置的值小于等于 0 时，表示禁用超时，播放卡住时，将无超时回调。
@@ -118,13 +140,24 @@ extern NSString * _Nonnull PLPlayerOptionKeyDNSManager;
 extern NSString * _Nonnull PLPlayerOptionKeyHappyDNSEnable;
 
 /**
- 视频缓存目录, 默认为 nil
+ @abstract 视频缓存目录, 默认为 nil
  
  @waring 该属性仅对点播 mp4 有效,当 PLPlayerOptionKeyVideoCacheFolderPath 有值时，默认关闭 DNS  解析
  
  @since v3.0.0
  */
 extern NSString * _Nullable PLPlayerOptionKeyVideoCacheFolderPath;
+
+/**
+ @abstract 视频预设值播放 URL 格式类型
+ 
+ @discussion 该参数用于加快首开，提前告知播放器流类型，默认 kPLPLAY_FORMAT_UnKnown
+ 
+ @waring 取值范围: PLPlayFormat
+ 
+ @since v3.0.1
+ */
+extern NSString * _Nullable PLPlayerOptionKeyVideoPreferFormat;
 
 /**
  PLPlayer 的可选配置类，在初始化 PLPlayer 对象的时候传入其实例进行 PLPlayer 的可选项配置

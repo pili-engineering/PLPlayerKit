@@ -1,6 +1,6 @@
 PODS:
   - HappyDNS (0.3.10)
-  - PLPlayerKit (3.0.0):
+  - PLPlayerKit (3.0.1):
     - HappyDNS (~> 0.3.10)
 
 DEPENDENCIES:
@@ -12,7 +12,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
-  PLPlayerKit: 6b7a3ec7e70ed493edf52184794d04b6b95dbf98
+  PLPlayerKit: 18497c84e9453dcc26244ae346ca6eaed3ae2a90
 
 PODFILE CHECKSUM: d20fd3c1a75d3d4f8346b3b33f0b42e59b6ab3ab
 

@@ -22,6 +22,7 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] 支持 HLS 七牛私有 DRM
 - [x] 支持点播倍速播放
 - [x] 支持点播 mp4 视频本地缓存播放
+- [x] 支持 SEI 数据回调 
 
 ## 说明
 
@@ -36,6 +37,7 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] 优化重连逻辑，不用销毁播放器，网络断开后内部自动重连
 - [x] 优化 mp4 点播，使用双 IO 技术更高效地播放 moov 在尾部的 mp4 文件
 - [x] 支持播放过程中变速不变调，可实现更平滑的追帧效果，更少的卡顿率
+- [x] 新增支持 SEI 数据回调，更多数据交互
 
 ## 内容摘要
 
@@ -75,7 +77,7 @@ pod install
 - 添加 HappyDNS 库，把 [链接](https://github.com/qiniu/happy-dns-objc) 中的 HappyDNS 目录下的所有文件加入到工程中  
 - Build Setting 下 Other Linker Flags 中添加 -ObjC
 - Build Phases 下 Link Binary With Libraries 中添加如图所示
-![](http://7xne1c.com1.z0.glb.clouddn.com/plplayer3.0.0%20%E6%89%8B%E5%8A%A8%20build%20phases.png)
+![](http://7xne1c.com1.z0.glb.clouddn.com/plplayer3.0.1%20%E6%89%8B%E5%8A%A8%20build%20phases.png)
 
 ### 示例代码
 
@@ -187,6 +189,15 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.0.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.0.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.0.1.md))
+- 功能
+  - 新增 SEI 数据回调
+  - 新增播放格式预设置
+  - 新增同格式快速播放接口
+- 缺陷
+  - 修复播放器错误时收不到 error 状态回调的问题
+  - 修复某些 mp4 无法播放的问题 
+  - 修复多次 stop 时 crash 的问题
 - 3.0.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.0.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.0.0.md))
 - 全面升级为七牛自研的播放器内核，拥有更优异的性能
 - 功能
