@@ -227,6 +227,16 @@ extern NSString * _Nonnull playerVersion();
  */
 - (nonnull AudioBufferList *)player:(nonnull PLPlayer *)player willAudioRenderBuffer:(nonnull AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat;
 
+/**
+ 回调 SEI 数据
+ 
+ @param player 调用该方法的 PLPlayer 对象
+ @param SEIData SEI数据
+ 
+ @since v3.0.1
+ */
+- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData;
+
 @end
 
 /**
@@ -528,7 +538,18 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  
  @since v2.4.1
  */
-- (void)playWithURL:(nullable NSURL *)URL;
+- (void)playWithURL:(nullable NSURL *)URL __deprecated;
+
+/**
+ 开始播放新的 url
+ 
+ @param URL 需要播放的 url ，目前支持 http(s) (url 以 http:// https:// 开头) 与 rtmp (url 以 rtmp:// 开头) 协议。
+ @param sameSource 是否是同种格式播放，同格式切换打开更快
+ @waring  当sameSource 为 YES 时，视频格式与切换前视频格式不同时，会导致视频打开失败
+ 
+ @since v3.0.1
+ */
+- (void)playWithURL:(nullable NSURL *)URL sameSource:(BOOL)sameSource;
 
 /**
  当播放器处于暂停状态时调用该方法可以使播放器继续播放
