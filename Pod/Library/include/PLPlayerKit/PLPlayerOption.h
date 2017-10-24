@@ -159,6 +159,16 @@ extern NSString * _Nullable PLPlayerOptionKeyVideoCacheFolderPath;
  */
 extern NSString * _Nullable PLPlayerOptionKeyVideoPreferFormat;
 
+
+/**
+ SDK 设备 ID
+ 
+ @discussion 该参数用于标记 SDK 设备 ID, 默认为 UUID
+ 
+ @since v3.0.2
+ */
+extern NSString * _Nullable PLPlayerOptionKeySDKID;
+
 /**
  PLPlayer 的可选配置类，在初始化 PLPlayer 对象的时候传入其实例进行 PLPlayer 的可选项配置
  
