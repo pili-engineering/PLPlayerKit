@@ -77,7 +77,7 @@ pod install
 - 添加 HappyDNS 库，把 [链接](https://github.com/qiniu/happy-dns-objc) 中的 HappyDNS 目录下的所有文件加入到工程中  
 - Build Setting 下 Other Linker Flags 中添加 -ObjC
 - Build Phases 下 Link Binary With Libraries 中添加如图所示
-![](http://7xne1c.com1.z0.glb.clouddn.com/plplayer3.0.1%20%E6%89%8B%E5%8A%A8%20build%20phases.png)
+![](http://sdk-release.qnsdk.com/PLPLayerKit.jpg)
 
 ### 示例代码
 

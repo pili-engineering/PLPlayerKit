@@ -24,7 +24,7 @@ Pod::Spec.new do |s|
   s.vendored_libraries   = 'Pod/Library/lib/*.a'
 
   s.dependency 'HappyDNS', '~> 0.3.10'
-  s.frameworks = ["UIKit", "Foundation", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation","CoreVideo","AVKit","CoreMedia","VideoToolbox"]
+  s.frameworks = ["UIKit", "Foundation", "MediaPlayer", "CoreAudio", "AudioToolbox", "Accelerate", "QuartzCore", "OpenGLES", "AVFoundation","CoreVideo","AVKit","CoreMedia","VideoToolbox","CoreTelephony"]
   s.libraries = "c++", "z", "bz2", "iconv", "resolv"
 
 end
