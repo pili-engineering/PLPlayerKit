@@ -478,6 +478,33 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 @property (nonatomic, assign) double playSpeed;
 
 /**
+  rtmp 流中的视频时间戳信息
+ 
+ @waring 该属性仅对 rtmp 有效
+ 
+ @since v3.1.0
+ */
+@property (nonatomic, assign, readonly) CMTime rtmpVideoTimeStamp;
+
+/**
+ rtmp 流中的音频时间戳信息
+ 
+ @waring 该属性仅对 rtmp 有效
+ 
+ @since v3.1.0
+ */
+@property (nonatomic, assign, readonly) CMTime rtmpAudioTimeStamp;
+
+/**
+ 视频旋转角度
+ 
+ @waring 该属性属于视频本身旋转角度
+ 
+ @since v3.1.0
+ */
+@property (nonatomic, assign, readonly) int rotate;
+
+/**
  提前使用 HppayDNS 解析 URL 中的域名。
  
  @discussion 在播放前调用该方法，预解析播放地址的域名。

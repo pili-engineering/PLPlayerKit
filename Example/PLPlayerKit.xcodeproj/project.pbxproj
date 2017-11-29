@@ -16,6 +16,7 @@
 		767C20511AFA847B0026FFDB /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 767C204E1AFA847B0026FFDB /* MasterViewController.m */; };
 		767C20571AFA84940026FFDB /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 767C20531AFA84940026FFDB /* LaunchScreen.xib */; };
 		767C20581AFA84940026FFDB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 767C20551AFA84940026FFDB /* Main.storyboard */; };
+		9397045A1FB9401D002EAA15 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 939704591FB9401D002EAA15 /* image.jpg */; };
 		B624E68E1C85A2FE009B2F4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B624E68D1C85A2FE009B2F4B /* AppDelegate.m */; };
 		BE6FE6225BD651EBAA87A484 /* libPods-PLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EF8D883609A872B55DF324 /* libPods-PLPlayerKit.a */; };
 		E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */; };
@@ -46,6 +47,7 @@
 		767C20561AFA84940026FFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		76833868582AFAFB2F2D10C3 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		9301C5B51F3C44520020FDC2 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
+		939704591FB9401D002EAA15 /* image.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = image.jpg; sourceTree = "<group>"; };
 		93A7E0081F9F41DD004A8AF1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		93EF8D883609A872B55DF324 /* libPods-PLPlayerKit.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PLPlayerKit.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B624E68C1C85A2FE009B2F4B /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 		6003F593195388D20070C39A /* PLPlayerKit */ = {
 			isa = PBXGroup;
 			children = (
+				939704591FB9401D002EAA15 /* image.jpg */,
 				B6C2447A1C85A657006E233F /* MacroDefines.h */,
 				B624E68C1C85A2FE009B2F4B /* AppDelegate.h */,
 				B624E68D1C85A2FE009B2F4B /* AppDelegate.m */,
@@ -250,6 +253,7 @@
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				E9A58B741BC8B264004780C5 /* Launch Screen.storyboard in Resources */,
 				767C20581AFA84940026FFDB /* Main.storyboard in Resources */,
+				9397045A1FB9401D002EAA15 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
