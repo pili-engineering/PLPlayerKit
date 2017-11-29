@@ -60,6 +60,15 @@ typedef enum : NSUInteger {
      *  FLV 类型
      */
     kPLPLAY_FORMAT_FLV,
+    /**
+     *  MP3 类型,此类型需要提前设置，才可播放
+     */
+    kPLPLAY_FORMAT_MP3,
+    /**
+     *  AAC 类型,此类型需要提前设置，才可播放
+     */
+    kPLPLAY_FORMAT_AAC
+    
 } PLPlayFormat;
 
 /**
