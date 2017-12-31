@@ -6,9 +6,9 @@
 //  Copyright (c) 2015年 Qiniu Cloud Storage. All rights reserved.
 //
 
-#import "QNDes.h"
-
 #import <CommonCrypto/CommonCryptor.h>
+
+#import "QNDes.h"
 
 @interface QNDes ()
 @property (nonatomic, strong) NSData *key;

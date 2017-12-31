@@ -23,7 +23,10 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] 支持点播倍速播放
 - [x] 支持点播 mp4 视频本地缓存播放
 - [x] 支持 SEI 数据回调
-
+- [x] 支持 rtmp 原始时间戳 
+- [x] 支持 flv 使用 mp3 音频格式
+- [x] 支持 http 的 DNS 异步解析
+- [x] 支持视频根据旋转角度自动旋转
 ## 说明
 
 从 **v3.0.0** 开始，SDK 全面升级为七牛完全自研的播放器内核，拥有更加优异的性能，升级内容如下：
@@ -189,6 +192,33 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.2.0.md))
+- 功能
+  - 支持 flv 使用 mp3 音频格式
+  - 支持 http 的 DNS 异步解析
+  - 支持视频根据旋转角度自动旋转
+- 缺陷
+  - 修复失去音频第一帧渲染问题
+  - 修复 OpenGL crash 的问题
+  - 修复部分视频音画不同步的问题
+  - 修复部分视频花屏、马赛克的问题
+  - 修复弱网播放偶现快速切换卡顿的问题
+  - 修复进入后台切换第三方应用 crash 的问题
+  - 解决由第三方引起的 ffmpeg 冲突问题
+  - 修复直播 url 中含有 ?domain= 无法播放的问题
+  - 修复音频视频时长不匹配 resume 播放失败的问题
+- 3.1.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.1.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.1.0.md))
+- 功能
+  - 支持读取 mp3, aac 格式
+  - 支持读取 rtmp 流中的音视频时间戳信息
+  - 支持读取视频旋转角度参数
+  - 支持 mpeg 格式播放
+- 缺陷
+  - 修复 Stop 时偶现的 Crash 及卡住的问题
+  - 修复 ipv6 rtmp 无法播放的问题
+  - 修复播放纯音频/纯视频流时得不到 playing 状态的问题
+  - 修复特定 flv 流重复播放的问题
+  - 修复偶现 OpenGL crash 的问题
 - 3.0.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.0.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.0.2.md))
 - 功能
   - 加长 URL 设置长度
