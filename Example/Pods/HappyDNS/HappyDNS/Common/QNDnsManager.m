@@ -124,11 +124,14 @@ static NSArray *records2Ips(NSArray *records) {
         }
     }
     NSMutableArray *result;
-    @synchronized(_cache) {
-        if ([_curNetwork isEqualToInfo:[QNNetworkInfo normal]] && [QNNetworkInfo isNetworkChanged]) {
+
+    if ([_curNetwork isEqualToInfo:[QNNetworkInfo normal]] && [QNNetworkInfo isNetworkChanged]) {
+        @synchronized(_cache) {
             [_cache removeAllObjects];
-            _resolverStatus = 0;
-        } else {
+        }
+        _resolverStatus = 0;
+    } else {
+        @synchronized(_cache) {
             result = [_cache objectForKey:domain.domain];
             if (result != nil && result.count > 1) {
                 QNRecord *first = [result firstObject];
@@ -137,13 +140,15 @@ static NSArray *records2Ips(NSArray *records) {
             }
         }
     }
-
-    if (result != nil && result.count > 0) {
-        QNRecord *record = [result objectAtIndex:0];
-        if (![record expired:[[NSDate date] timeIntervalSince1970]]) {
-            return records2Ips(result);
+    @synchronized(_cache) {
+        if (result != nil && result.count > 0) {
+            QNRecord *record = [result objectAtIndex:0];
+            if (![record expired:[[NSDate date] timeIntervalSince1970]]) {
+                return records2Ips(result);
+            }
         }
     }
+
     NSArray *records = nil;
     NSError *error = nil;
     int firstOk = 32 - bits_leadingZeros(_resolverStatus);

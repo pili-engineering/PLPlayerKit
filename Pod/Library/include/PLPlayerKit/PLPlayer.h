@@ -41,7 +41,7 @@ typedef NS_ENUM(NSInteger, PLPlayerAVSampleFormat) {
  @since v2.3.0
  */
 
-typedef NS_ENUM(NSInteger, PLPLayerRotationsMode) {
+typedef NS_ENUM(NSInteger, PLPlayerRotationsMode) {
     PLPlayerNoRotation, // 无旋转
     PLPlayerRotateLeft, // 向左旋
     PLPlayerRotateRight, // 向右旋
@@ -185,6 +185,7 @@ extern NSString * _Nonnull playerVersion();
 /**
  点播已缓冲区域
  
+ @param player 调用该方法的 PLPlayer 对象
  @param timeRange  CMTimeRange , 表示当前缓冲区域，单位秒。
  
  @waring 仅对点播有效
@@ -360,7 +361,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  
  @since v2.3.0
  */
-@property (nonatomic, assign) PLPLayerRotationsMode rotationMode;
+@property (nonatomic, assign) PLPlayerRotationsMode rotationMode;
 
 /**
  是否渲染画面，默认为 YES

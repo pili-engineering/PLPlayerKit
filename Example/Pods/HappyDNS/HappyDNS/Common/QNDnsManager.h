@@ -132,7 +132,7 @@ typedef void (^QNIpStatusCallback)(NSString *ip, int code, int ms);
 /**
  *    设置底层 业务统计 如connect 回调使用的Callback
  *
- *    @param dns 回调用的dnsmanager
+ *    @param block 回调返回该IP状态
  */
 + (void)setIpStatusCallback:(QNIpStatusCallback)block;
 

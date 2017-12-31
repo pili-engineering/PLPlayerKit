@@ -34,7 +34,7 @@
 @end
 
 static NSArray *query_ip_v4(res_state res, const char *host) {
-    u_char answer[1500];
+    u_char answer[2000];
     int len = res_nquery(res, host, ns_c_in, ns_t_a, answer, sizeof(answer));
 
     ns_msg handle;
