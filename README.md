@@ -2,6 +2,8 @@
 
 PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制化和二次开发，特色是支持 RTMP, HTTP-FLV 和 HLS 直播流媒体播放。
 
+SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
+
 功能特性
 
 - [x] 高可定制
@@ -27,6 +29,12 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] 支持 flv 使用 mp3 音频格式
 - [x] 支持 http 的 DNS 异步解析
 - [x] 支持视频根据旋转角度自动旋转
+- [x] 支持视频裁剪播放
+- [x] 支持自定义缓存地址扩展名
+- [x] 支持播放音量放大
+- [x] 支持播放预加载
+- [x] 支持点播循环播放
+
 ## 说明
 
 从 **v3.0.0** 开始，SDK 全面升级为七牛完全自研的播放器内核，拥有更加优异的性能，升级内容如下：
@@ -41,6 +49,8 @@ PLPlayerKit 是一个适用于 iOS 的音视频播放器 SDK，可高度定制�
 - [x] 优化 mp4 点播，使用双 IO 技术更高效地播放 moov 在尾部的 mp4 文件
 - [x] 支持播放过程中变速不变调，可实现更平滑的追帧效果，更少的卡顿率
 - [x] 新增支持 SEI 数据回调，更多数据交互
+- [x] 新增音视频渲染首帧回调，更便捷
+- [X] 新增预加载切换 URL 功能
 
 ## 内容摘要
 
@@ -192,6 +202,24 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.2.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.2.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.2.1.md))
+- 功能
+   - 支持视频裁剪播放
+   - 支持自定义缓存地址扩展名
+   - 支持播放音量放大
+   - 支持播放预加载
+   - 支持点播循环播放
+- 缺陷
+  - 修复播放断网 crash 的问题
+  - 修复 mp4 开始缓存时重连失败的问题
+  - 修复快速切换打开链接的 crash 问题
+  - 完善视频画面渲染色彩度
+  - 修复变速后声调发生改变的问题
+  - 修复 seek 后跳转不精确的问题
+  - 修复视频未依据 DAR 比例显示的问题
+  - 修复退后台偶现 SIGPIPE 的问题
+  - 修复部分 flv 直播流卡住的问题
+  - 修复 SEI 数据丢失的问题
 - 3.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.2.0.md))
 - 功能
   - 支持 flv 使用 mp3 音频格式
