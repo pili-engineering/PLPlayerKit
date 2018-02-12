@@ -16,6 +16,7 @@ static NSString *status[] = {
     @"PLPlayerStatusUnknow",
     @"PLPlayerStatusPreparing",
     @"PLPlayerStatusReady",
+    @"PLPlayerStatusOpen",
     @"PLPlayerStatusCaching",
     @"PLPlayerStatusPlaying",
     @"PLPlayerStatusPaused",
