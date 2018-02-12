@@ -66,10 +66,15 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 
 #### CocoaPods 导入
 
-- 配置你的 Podfile 文件，添加如下配置信息
+- 配置你的 Podfile 文件，默认真机，添加如下配置信息
 
 ```
 pod 'PLPlayerKit'
+```
+- 若需要使用模拟器 + 真机，则改用如下配置
+
+```
+pod "PLPlayerKit", :podspec => 'https://raw.githubusercontent.com/pili-engineering/PLPlayerKit/master/PLPlayerKit-Universal.podspec'
 ```
 
 - 安装 CocoaPods 依赖
@@ -84,9 +89,12 @@ pod install
 
 - Done! 运行你工程的 workspace
 
+**注意:
+ 鉴于目前 iOS 上架，只支持动态库真机，请在 App 上架前，更换至真机版本**
+
 #### 手动导入  
 
-- 将 Pod 目录下的所有文件加入到工程中；
+- 根据需要，将 Pod 目录下的 Library（真机版本）或 Library-Universal（真机 + 模拟器版本）文件中的 framework 加入到工程中
 - 添加 HappyDNS 库，把 [链接](https://github.com/qiniu/happy-dns-objc) 中的 HappyDNS 目录下的所有文件加入到工程中  
 - Build Setting 下 Other Linker Flags 中添加 -ObjC
 - Build Phases 下 Link Binary With Libraries 中添加如图所示
@@ -221,6 +229,8 @@ self.player.delegate = self;
   - 修复部分 flv 直播流卡住的问题
   - 修复 SEI 数据丢失的问题
   - 修复 videoToolbox 硬解码视频角度未矫正的问题
+- 其他
+  - 以动态库的方式发布，仅支持 iOS 8.0 及以上系统
 - 3.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.2.0.md))
 - 功能
   - 支持 flv 使用 mp3 音频格式
