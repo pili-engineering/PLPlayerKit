@@ -37,3 +37,4 @@ PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
   - 修复退后台偶现 SIGPIPE 的问题
   - 修复部分 flv 直播流卡住的问题
   - 修复 SEI 数据丢失的问题
+  - 修复 videoToolbox 硬解码视频角度未矫正的问题

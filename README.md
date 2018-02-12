@@ -220,6 +220,7 @@ self.player.delegate = self;
   - 修复退后台偶现 SIGPIPE 的问题
   - 修复部分 flv 直播流卡住的问题
   - 修复 SEI 数据丢失的问题
+  - 修复 videoToolbox 硬解码视频角度未矫正的问题
 - 3.2.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.2.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.2.0.md))
 - 功能
   - 支持 flv 使用 mp3 音频格式
