@@ -19,6 +19,7 @@
 		9397045A1FB9401D002EAA15 /* image.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 939704591FB9401D002EAA15 /* image.jpg */; };
 		B624E68E1C85A2FE009B2F4B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B624E68D1C85A2FE009B2F4B /* AppDelegate.m */; };
 		BE6FE6225BD651EBAA87A484 /* libPods-PLPlayerKit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93EF8D883609A872B55DF324 /* libPods-PLPlayerKit.a */; };
+		C3682ABC2031A0F5003908F9 /* PLPlayerKit-Universal.podspec in Resources */ = {isa = PBXBuildFile; fileRef = C3682ABB2031A0F5003908F9 /* PLPlayerKit-Universal.podspec */; };
 		E94A8F7A1BDE8A7A00129A70 /* PLPlayerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */; };
 		E9A58B741BC8B264004780C5 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E9A58B731BC8B264004780C5 /* Launch Screen.storyboard */; };
 		ECF0A28A1D702F6F00D13DA6 /* PLScanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ECF0A2891D702F6F00D13DA6 /* PLScanViewController.m */; };
@@ -54,6 +55,7 @@
 		B624E68D1C85A2FE009B2F4B /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B6C2447A1C85A657006E233F /* MacroDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MacroDefines.h; sourceTree = "<group>"; };
 		BE9CFB21C78FFC854A5D47CB /* Pods-PLPlayerKit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PLPlayerKit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit.debug.xcconfig"; sourceTree = "<group>"; };
+		C3682ABB2031A0F5003908F9 /* PLPlayerKit-Universal.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "PLPlayerKit-Universal.podspec"; path = "../PLPlayerKit-Universal.podspec"; sourceTree = "<group>"; };
 		E7CF2F2A076018BA14EB641C /* PLPlayerKit.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = PLPlayerKit.podspec; path = ../PLPlayerKit.podspec; sourceTree = "<group>"; };
 		E94A8F781BDE8A7A00129A70 /* PLPlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLPlayerViewController.h; sourceTree = "<group>"; };
 		E94A8F791BDE8A7A00129A70 /* PLPlayerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLPlayerViewController.m; sourceTree = "<group>"; };
@@ -166,6 +168,7 @@
 		60FF7A9C1954A5C5007DD14C /* Podspec Metadata */ = {
 			isa = PBXGroup;
 			children = (
+				C3682ABB2031A0F5003908F9 /* PLPlayerKit-Universal.podspec */,
 				E7CF2F2A076018BA14EB641C /* PLPlayerKit.podspec */,
 				76833868582AFAFB2F2D10C3 /* README.md */,
 				19E193B7EEEF437A13FE5F5E /* LICENSE */,
@@ -253,6 +256,7 @@
 				6003F598195388D20070C39A /* InfoPlist.strings in Resources */,
 				E9A58B741BC8B264004780C5 /* Launch Screen.storyboard in Resources */,
 				767C20581AFA84940026FFDB /* Main.storyboard in Resources */,
+				C3682ABC2031A0F5003908F9 /* PLPlayerKit-Universal.podspec in Resources */,
 				9397045A1FB9401D002EAA15 /* image.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,9 +288,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-frameworks.sh",
+				"${PODS_ROOT}/../../Pod/Library/PLPlayerKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PLPlayerKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -441,14 +448,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLPlayerKit/PLPlayerKit-Prefix.pch";
 				INFOPLIST_FILE = "PLPlayerKit/PLPlayerKit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PODS_ROOT)/../../Pod/Library/lib\"",
+					"\"$(PODS_ROOT)/../../Pod/Library/PLPlayerKit.framework\"",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
@@ -490,14 +497,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLPlayerKit/PLPlayerKit-Prefix.pch";
 				INFOPLIST_FILE = "PLPlayerKit/PLPlayerKit-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(PODS_ROOT)/../../Pod/Library/lib\"",
+					"\"$(PODS_ROOT)/../../Pod/Library/PLPlayerKit.framework\"",
 				);
 				OTHER_LDFLAGS = (
 					"-ObjC",
