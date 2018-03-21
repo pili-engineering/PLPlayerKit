@@ -35,7 +35,7 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 - [x] 支持播放预加载
 - [x] 支持点播循环播放
 
-## 说明
+## 升级说明
 
 从 **v3.0.0** 开始，SDK 全面升级为七牛完全自研的播放器内核，拥有更加优异的性能，升级内容如下：
 
@@ -52,12 +52,13 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 - [x] 新增音视频渲染首帧回调，更便捷
 - [X] 新增预加载切换 URL 功能
 
+如果从旧版本升级，建议参考[升级指南](https://github.com/pili-engineering/PLPlayerKit/blob/master/v3.x.x-UpgradeGuide.md)以及[ReleaseNotes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes)文件夹下的各个版本说明，查看注意事项
+
 ## 内容摘要
 
 - [快速开始](#1-快速开始)
 	- [配置工程](#配置工程)
 	- [示例代码](#示例代码)
-- [关于 3.0 版本](#关于3.0版本)
 - [版本历史](#版本历史)
 
 ## 快速开始
