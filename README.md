@@ -52,7 +52,8 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 - [x] 新增音视频渲染首帧回调，更便捷
 - [X] 新增预加载切换 URL 功能
 
-如果从旧版本升级，建议参考[升级指南](https://github.com/pili-engineering/PLPlayerKit/blob/master/v3.x.x-UpgradeGuide.md)以及后续的 [ReleaseNote](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.0.0.md) ，查看注意事项
+如果从旧版本升级，建议参考[升级指南](https://github.com/pili-engineering/PLPlayerKit/blob/master/v3.x.x-UpgradeGuide.md)以及[ReleaseNotes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes)文件夹下的各个版本说明，查看注意事项
+
 ## 内容摘要
 
 - [快速开始](#1-快速开始)
