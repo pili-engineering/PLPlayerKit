@@ -34,8 +34,11 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 - [x] 支持播放音量放大
 - [x] 支持播放预加载
 - [x] 支持点播循环播放
+- [x] 支持下载暂停功能
+- [x] 支持获取缓冲文件的长度
+- [x] 支持 seekTo 完成的回调
 
-## 升级说明
+## 说明
 
 从 **v3.0.0** 开始，SDK 全面升级为七牛完全自研的播放器内核，拥有更加优异的性能，升级内容如下：
 
@@ -95,8 +98,7 @@ pod install
 
 #### 手动导入  
 
-- 根据需要，将 Pod 目录下的 Library（真机版本）或 Library-Universal（真机 + 模拟器版本）文件中的 framework 加入到工程中
-- 添加 HappyDNS 库，把 [链接](https://github.com/qiniu/happy-dns-objc) 中的 HappyDNS 目录下的所有文件加入到工程中  
+- 根据需要，将 Pod 目录下真机或真机 + 模拟器版本的 framework 文件加入到工程中；
 - Build Setting 下 Other Linker Flags 中添加 -ObjC
 - Build Phases 下 Link Binary With Libraries 中添加如图所示
 ![](http://sdk-release.qnsdk.com/PLPLayerKit.jpg)
@@ -127,17 +129,22 @@ PLPlayerOption *option = [PLPlayerOption defaultOption];
 初始化 PLPlayer
 
 ```Objective-C
+
 // 初始化 PLPlayer
 self.player = [PLPlayer playerWithURL:self.URL option:option];
 
 // 设定代理 (optional)
 self.player.delegate = self;
+
 ```
 
 获取播放器的视频输出的 UIView 对象并添加为到当前 UIView 对象的 Subview
+
 ```Objective-C
+
 //获取视频输出视图并添加为到当前 UIView 对象的 Subview
 [self.view addSubview:player.playerView];
+
 ```
 
 开始／暂停操作
@@ -211,6 +218,26 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.3.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.0.md))
+- 功能
+   - 支持视频流宽高的回调
+   - 支持下载暂停功能
+   - 支持获取缓冲文件的长度
+   - 支持 seekTo 完成的回调
+- 缺陷
+  - 修复内存泄漏的问题
+  - 修复获取音量值不够精确的问题
+  - 修复循环播放回退及失败的问题
+  - 修复特定流打开时间较长的问题
+  - 修复特定链接播放有声音没画面的问题
+  - 修复设备拍摄视频未修正宽高的问题 
+  - 修复纯音频 seekTo 失败的问题
+  - 修复重连成功后状态未改变的问题
+  - 修复暂停后 PLPlayerStatus 状态错误的问题
+  - 修复视频播放后设置 playerView 的 contentMode 无效的问题
+- 其他
+  - 大幅降低 MP4 长视频首开时间，20M 网络下，2 小时 MP4 文件首开只需 0.6 - 1秒
+  - 去除 HappyDNS，使用内置的 DNS 解析
 - 3.2.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.2.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.2.1.md))
 - 功能
    - 支持视频裁剪播放

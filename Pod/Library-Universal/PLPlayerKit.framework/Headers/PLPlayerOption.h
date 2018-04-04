@@ -126,12 +126,11 @@ extern NSString  * _Nonnull PLPlayerOptionKeyVideoToolbox;
 extern NSString * _Nonnull PLPlayerOptionKeyLogLevel;
 
 /**
- @abstract 自定义 dns dnsmanager 查询，使用 HappyDNS
+ @abstract dns 查询，使用内置 DNS 解析
  
- @discussion 使用 HappyDNS 做 DNS 解析，如果你期望自己配置 DNS 解析的规则，可以通过传递自己定义的 dns manager 来做 dns 查询。
- 如果你对 dns 解析部分不清楚，建议使用默认规则。
+ @discussion NSString 类型，开启 DNS 解析，默认使用系统 API 解析
  
- @waring 值类型为 QNDnsManager，该参数仅对 rtmp/flv 直播生效
+ @waring 该参数仅对 rtmp/flv 直播生效
  
  @since v2.2.1
  */
@@ -146,7 +145,7 @@ extern NSString * _Nonnull PLPlayerOptionKeyDNSManager;
  
  @since v2.3.0
  */
-extern NSString * _Nonnull PLPlayerOptionKeyHappyDNSEnable;
+extern NSString * _Nonnull PLPlayerOptionKeyHappyDNSEnable __deprecated_msg("Method deprecated in v3.3.0. No support HappyDNS");
 
 /**
  @abstract 视频缓存目录, 默认为 nil
