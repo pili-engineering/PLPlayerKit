@@ -132,7 +132,25 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
     /**
      *  PLPlayer 播放完成（该状态只针对点播有效）
      */
-    PLPlayerStatusCompleted
+    PLPlayerStatusCompleted,
+    
+    /**
+     @abstract PLPlayer seek 状态中。
+     
+     @discussion 该状态会在调用 seekTo 后触发，seekTo 操作完成后会转至 PLPlayerStatusPlaying 状态。
+     
+     @since v3.3.0
+     */
+    PLPlayerStatusSeeking,
+    
+    /**
+     @abstract PLPlayer seek 完成状态。
+     
+     @discussion 该状态会在调用 seekTo 失败后触发。
+     
+     @since v3.3.0
+     */
+    PLPlayerStatusSeekFailed
     
 };
 
@@ -267,6 +285,26 @@ extern NSString * _Nonnull playerVersion();
  @since v3.2.1
  */
 - (void)player:(nonnull PLPlayer *)player firstRender:(PLPlayerFirstRenderType)firstRenderType;
+
+/**
+ 视频宽高数据回调通知
+
+ @param player 调用该方法的 PLPlayer 对象
+ @param width 视频流宽
+ @param height 视频流高
+ 
+ @since v3.3.0
+ */
+- (void)player:(nonnull PLPlayer *)player width:(int)width height:(int)height;
+
+/**
+ seekTo 完成的回调通知
+ 
+ @param player 调用该方法的 PLPlayer 对象
+ 
+ @since v3.3.0
+ */
+- (void)playerSeekToCompleted:(nonnull PLPlayer *)player;
 
 @end
 
@@ -706,6 +744,35 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  */
 - (void)getScreenShotWithCompletionHandler:(nullable ScreenShotWithCompletionHandler)handle;
 
+/**
+ *  获取缓冲的文件字节数，已缓冲还未播放的值
+ *
+ *  @since v3.3.0
+ *
+ *  @return 文件字节数 long long 类型
+ *
+ */
+- (long long)getHttpBufferSize;
+
+/**
+ *  是否缓存下载
+ *  @param bufferingEnabled 是否允许，默认为 YES，允许缓存下载
+ *
+ *  @discussion 当 bufferingEnabled 为 YES 时，文件正常下载。若下载中，修改 bufferingEnabled 为 NO，则下载暂停
+ *
+ *  @since v3.3.0
+ *
+ */
+- (void)setBufferingEnabled:(BOOL)bufferingEnabled;
+
+/**
+ *  获取是否允许缓存下载
+ *
+ *  @since v3.3.0
+ *
+ *  @return 是否允许缓存下载
+ */
+- (BOOL)getBufferingEnabled;
 @end
 
 /**
