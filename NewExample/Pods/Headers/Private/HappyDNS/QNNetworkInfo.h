@@ -1,0 +1,1 @@
+../../../HappyDNS/HappyDNS/Common/QNNetworkInfo.h

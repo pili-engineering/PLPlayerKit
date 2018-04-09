@@ -1,0 +1,1 @@
+../../../HappyDNS/HappyDNS/Local/QNTxtResolver.h
