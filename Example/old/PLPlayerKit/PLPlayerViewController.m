@@ -22,7 +22,9 @@ static NSString *status[] = {
     @"PLPlayerStatusPaused",
     @"PLPlayerStatusStopped",
     @"PLPlayerStatusError",
-    @"PLPlayerStatusCompleted"
+    @"PLPlayerStatusCompleted",
+    @"PLPlayerStatusSeeking",
+    @"PLPlayerStatusSeekFailed"
 };
 
 @interface PLPlayerViewController ()
@@ -145,6 +147,22 @@ UITextViewDelegate
 - (void)player:(nonnull PLPlayer *)player stoppedWithError:(nullable NSError *)error {
     [self.activityIndicatorView stopAnimating];
     [self tryReconnect:error];
+}
+
+- (void)playerWillBeginBackgroundTask:(PLPlayer *)player {
+    NSLog(@"player will begin background task");
+}
+
+- (void)playerWillEndBackgroundTask:(PLPlayer *)player {
+    NSLog(@"player will end background task");
+}
+
+- (void)player:(PLPlayer *)player width:(int)width height:(int)height {
+    NSLog(@"width: %d  height:%d",width,height);
+}
+
+- (void)playerSeekToCompleted:(PLPlayer *)player {
+    NSLog(@"player seek to completed");
 }
 
 - (void)tryReconnect:(nullable NSError *)error {
