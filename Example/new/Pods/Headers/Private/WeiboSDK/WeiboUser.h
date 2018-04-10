@@ -1,0 +1,1 @@
+../../../WeiboSDK/libWeiboSDK/WeiboUser.h

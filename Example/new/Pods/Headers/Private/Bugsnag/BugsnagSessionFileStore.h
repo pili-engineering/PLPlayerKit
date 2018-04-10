@@ -1,0 +1,1 @@
+../../../Bugsnag/Source/BugsnagSessionFileStore.h

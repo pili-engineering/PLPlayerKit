@@ -1,3 +1,0 @@
-target 'PLPlayerKit' do
-  pod "PLPlayerKit", :path => "../"
-end
