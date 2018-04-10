@@ -1,0 +1,21 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'NiuPlayer' do
+  # Uncomment the next line if you're using Swift or would like to use dynamic frameworks
+  # use_frameworks!
+
+  # Pods for NiuPlayer
+  pod "PLPlayerKit", :path => "../../"
+  pod 'HappyDNS', '>= 0.3.10'
+  pod 'Fabric', '>= 1.6.7'
+  pod 'Crashlytics', '>= 3.7.2'
+  pod 'BlocksKit', '>= 2.2.5'
+  pod 'Masonry', '>= 1.0.1'
+  pod 'WeiboSDK', '>= 3.1.3'
+  pod 'MMMaterialDesignSpinner'
+  pod 'JGProgressHUD'
+  pod 'Masonry'
+  pod 'SDWebImage'
+  pod 'Bugsnag'
+end

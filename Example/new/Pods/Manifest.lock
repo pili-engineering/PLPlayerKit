@@ -1,0 +1,79 @@
+PODS:
+  - BlocksKit (2.2.5):
+    - BlocksKit/All (= 2.2.5)
+  - BlocksKit/All (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+    - BlocksKit/MessageUI
+    - BlocksKit/UIKit
+  - BlocksKit/Core (2.2.5)
+  - BlocksKit/DynamicDelegate (2.2.5)
+  - BlocksKit/MessageUI (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - BlocksKit/UIKit (2.2.5):
+    - BlocksKit/Core
+    - BlocksKit/DynamicDelegate
+  - Bugsnag (5.15.4)
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.6)
+  - HappyDNS (0.3.13)
+  - JGProgressHUD (2.0.2)
+  - Masonry (1.1.0)
+  - MMMaterialDesignSpinner (0.2.5)
+  - PLPlayerKit (3.3.0):
+    - PLPlayerKit/iphoneos (= 3.3.0)
+  - PLPlayerKit/iphoneos (3.3.0)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
+  - WeiboSDK (3.1.3)
+
+DEPENDENCIES:
+  - BlocksKit (>= 2.2.5)
+  - Bugsnag
+  - Crashlytics (>= 3.7.2)
+  - Fabric (>= 1.6.7)
+  - HappyDNS (>= 0.3.10)
+  - JGProgressHUD
+  - Masonry
+  - Masonry (>= 1.0.1)
+  - MMMaterialDesignSpinner
+  - PLPlayerKit (from `../../`)
+  - SDWebImage
+  - WeiboSDK (>= 3.1.3)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - BlocksKit
+    - Bugsnag
+    - Crashlytics
+    - Fabric
+    - HappyDNS
+    - JGProgressHUD
+    - Masonry
+    - MMMaterialDesignSpinner
+    - SDWebImage
+    - WeiboSDK
+
+EXTERNAL SOURCES:
+  PLPlayerKit:
+    :path: "../../"
+
+SPEC CHECKSUMS:
+  BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
+  Bugsnag: df1d395695ddf795aa35c23ef4eaef4a04ddcffd
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  HappyDNS: 17732b07a75bb9756bd6fe04452609e8da8c663e
+  JGProgressHUD: bf75da151936cfd3c9b674afb17e8a5df2e14a7d
+  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  MMMaterialDesignSpinner: a548042720c2e5f04212048483085d7942ac3e81
+  PLPlayerKit: 6208e141d5b658dec11e2a0149fd05dd8834a137
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  WeiboSDK: acb067053668102cf07d01aa7604350162c2e466
+
+PODFILE CHECKSUM: 125580bee4fbaff98cc481a161fc9d6987859318
+
+COCOAPODS: 1.5.0

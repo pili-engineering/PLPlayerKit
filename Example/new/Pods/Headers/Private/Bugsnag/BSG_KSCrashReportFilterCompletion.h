@@ -1,0 +1,1 @@
+../../../Bugsnag/Source/KSCrash/Source/KSCrash/Reporting/Filters/BSG_KSCrashReportFilterCompletion.h

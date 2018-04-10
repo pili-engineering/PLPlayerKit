@@ -1,0 +1,1 @@
+../../../Bugsnag/Source/BSG_KSCrashReportWriter.h
