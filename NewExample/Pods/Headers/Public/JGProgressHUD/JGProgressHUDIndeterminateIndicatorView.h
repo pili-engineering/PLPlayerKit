@@ -1,1 +1,0 @@
-../../../JGProgressHUD/JGProgressHUD/JGProgressHUD/JGProgressHUDIndeterminateIndicatorView.h

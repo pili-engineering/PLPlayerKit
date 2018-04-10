@@ -1,1 +1,0 @@
-../../../Bugsnag/Source/BugsnagConfiguration.h

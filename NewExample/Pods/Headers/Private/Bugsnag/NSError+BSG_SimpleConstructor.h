@@ -1,1 +1,0 @@
-../../../Bugsnag/Source/KSCrash/Source/KSCrash/Recording/Tools/NSError+BSG_SimpleConstructor.h

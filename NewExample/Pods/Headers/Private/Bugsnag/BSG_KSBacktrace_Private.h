@@ -1,1 +1,0 @@
-../../../Bugsnag/Source/KSCrash/Source/KSCrash/Recording/Tools/BSG_KSBacktrace_Private.h

@@ -1,1 +1,0 @@
-../../../HappyDNS/HappyDNS/Common/QNDnsManager.h

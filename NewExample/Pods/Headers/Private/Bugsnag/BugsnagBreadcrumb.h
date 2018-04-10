@@ -1,1 +1,0 @@
-../../../Bugsnag/Source/BugsnagBreadcrumb.h
