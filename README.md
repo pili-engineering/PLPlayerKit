@@ -248,28 +248,27 @@ self.player.delegate = self;
    - 支持调用 seekTo 后回调结果
    - 支持提前设置 mp4 解析时间
    - 支持提前设置点播从记忆点开始播放
-   - 支持 seekTo 完成的回调
    - 支持内部自动检查格式的功能
 - 缺陷
-   - 修复 pause 后调整预览size，画面拉伸或压缩的问题
+   - 修复 pause 后调整预览 size 导致画面拉伸或压缩的问题
    - 修复开启离线缓存后，偶现无法循环播放的问题
    - 修复 4G 网下 iPv6 解析错误的问题
-   - 修复特殊情况下多次创建释放崩溃的问题
+   - 修复特殊情况下多次创建释放 player 对象导致崩溃的问题
    - 修复截图功能失效的问题
    - 修复弱网环境调用 stop 卡主线程的问题
    - 修复重连崩溃或失败的问题
    - 解决系统 DNS 部分不可用的问题
    - 修复本地 m3u8 文件无法正常播放的问题
-   - 修复 open fail 之后 destroy player 的 ANR问题
+   - 修复 open fail 之后 destroy player 的 crash 问题
    - 修复未获取总时长，回调 loadTimeRange 一直为 0 的问题
-   - 某长视频seek操作存在异常
-   - 修复点播播放完成后，resume 或 seek 至开头状态错误的问题
+   - 修复某些长视频 seek 操作异常的问题
+   - 修复点播播放完成后，resume 或 seek 至文件开头，播放状态错误的问题
    - 修复优化 mp4 快开带来的一些问题
 - 其他
    - 优化下载数据时内存的使用
    - 去除 `PLPlayerStatus`的两个值`PLPlayerStatusSeeking` 及 `PLPlayerStatusSeekFailed`
    - 修改缓冲回调参数`CMTimeRange`为`CMTime`
-   - 修改 `preDNSHost` 类方法为示例方法
+   - 修改 `preDNSHost` 类方法为实例方法
 - 3.3.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.0.md))
 - 功能
    - 支持视频流宽高的回调
