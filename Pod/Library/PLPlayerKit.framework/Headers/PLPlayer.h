@@ -134,24 +134,6 @@ typedef NS_ENUM(NSInteger, PLPlayerStatus) {
      */
     PLPlayerStatusCompleted,
     
-    /**
-     @abstract PLPlayer seek 状态中。
-     
-     @discussion 该状态会在调用 seekTo 后触发，seekTo 操作完成后会转至 PLPlayerStatusPlaying 状态。
-     
-     @since v3.3.0
-     */
-    PLPlayerStatusSeeking,
-    
-    /**
-     @abstract PLPlayer seek 完成状态。
-     
-     @discussion 该状态会在调用 seekTo 失败后触发。
-     
-     @since v3.3.0
-     */
-    PLPlayerStatusSeekFailed
-    
 };
 
 /**
@@ -224,13 +206,13 @@ extern NSString * _Nonnull playerVersion();
  点播已缓冲区域
  
  @param player 调用该方法的 PLPlayer 对象
- @param timeRange  CMTimeRange , 表示当前缓冲区域，单位秒。
+ @param timeRange  CMTime , 表示从0时开始至当前缓冲区域，单位秒。
  
  @waring 仅对点播有效
  
  @since v2.4.1
  */
-- (void)player:(nonnull PLPlayer *)player loadedTimeRange:(CMTimeRange)timeRange;
+- (void)player:(nonnull PLPlayer *)player loadedTimeRange:(CMTime)timeRange;
 
 /**
  回调将要渲染的帧数据
@@ -304,7 +286,7 @@ extern NSString * _Nonnull playerVersion();
  
  @since v3.3.0
  */
-- (void)playerSeekToCompleted:(nonnull PLPlayer *)player;
+- (void)player:(nonnull PLPlayer *)player seekToCompleted:(BOOL)isCompleted;
 
 @end
 
@@ -340,7 +322,7 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 @property (nonatomic, strong, nullable) dispatch_queue_t    delegateQueue;
 
 /**
- 支持音频后台播放的开关, 默认为 YES. 当 [AVAudioSession canPlayInBackground] 为 NO 时, 该值无效。
+ 支持音频后台播放的开关, 默认为 YES. 请确认 [AVAudioSession canPlayInBackground] 为 YES。
  
  @since v1.0.0
  */
@@ -592,13 +574,30 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
 @property (nonatomic, assign) BOOL loopPlay;
 
 /**
- 提前使用 HppayDNS 解析 URL 中的域名。
+ 提前使用 DNS 解析 URL 中的域名。
  
- @discussion 在播放前调用该方法，预解析播放地址的域名。
+ @discussion 在初始化后，播放前调用该方法，预解析播放地址的域名。
  
- @since v2.4.0
+ @since v3.3.1
  */
-+ (void)preDNSHost:(nullable NSURL *)URL;
+- (void)preDNSHost:(nullable NSURL *)URL;
+
+
+/**
+ 提前设置 mp4 解析时间。
+ 
+ @since v3.3.1
+ */
+- (void)mp4PreLoadTime:(CMTime)loadTime;
+
+
+/**
+ 提前设置点播从某记忆点开始播放。
+ 
+ @since v3.3.1
+ */
+- (void)preStartPosTime:(CMTime)startTime;
+
 
 /**
  使用 url 和 option 生成一个 PLPlayer 对象, 直播使用此接口
