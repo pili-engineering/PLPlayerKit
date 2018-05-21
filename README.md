@@ -37,6 +37,8 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 - [x] 支持下载暂停功能
 - [x] 支持获取缓冲文件的长度
 - [x] 支持 seekTo 完成的回调
+- [x] 支持提前设置 mp4 解析时间
+- [x] 支持提前设置点播从记忆点播放
 
 ## 说明
 
@@ -93,8 +95,7 @@ pod install
 
 - Done! 运行你工程的 workspace
 
-**注意:
- 鉴于目前 iOS 上架，只支持动态库真机，请在 App 上架前，更换至真机版本**
+**注意：鉴于目前 iOS 上架，只支持动态库真机，请在 App 上架前，更换至真机版本**
 
 #### 手动导入  
 
@@ -102,6 +103,21 @@ pod install
 - Build Setting 下 Other Linker Flags 中添加 -ObjC
 - Build Phases 下 Link Binary With Libraries 中添加如图所示
 ![](http://sdk-release.qnsdk.com/PLPLayerKit.jpg)
+
+### 添加相关配置
+
+添加 App Transport Security Setting
+
+* 如图所示
+
+![](http://7xuil4.com1.z0.glb.clouddn.com/permession.jpg)
+
+
+配置 Required background modes
+
+* 如图所示
+
+![](http://7xuil4.com1.z0.glb.clouddn.com/AllowBackground-4.png)
 
 ### 示例代码
 
@@ -212,12 +228,47 @@ self.player.delegate = self;
 
 分辨可以检查是否可以播放以及当前 category 的设置是否可以后台播放。
 
+**注意：请确保 `isPlayable` 为 YES，即可以播放；`canPlayInBackground` 为 YES，即可以后台播放。**
+
+达到 `isPlayable` 以及 `canPlayInBackground` 两者为 YES，示例设置代码如下：
+
+```Objective-C
+[[AVAudioSession sharedInstance] setCategory:AVAudioSessionCategoryPlayback error:nil];
+[[AVAudioSession sharedInstance] setActive:YES error:nil];
+```
+
 ## 其它依赖库版本号
 - FFmpeg : v3.3.x
 - OpenSSL: OpenSSL_1_1_0f
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.3.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.1.md))
+- 功能
+   - 支持调用 seekTo 后回调结果
+   - 支持提前设置 mp4 解析时间
+   - 支持提前设置点播从记忆点开始播放
+   - 支持内部自动检查格式的功能
+- 缺陷
+   - 修复 pause 后调整预览 size 导致画面拉伸或压缩的问题
+   - 修复开启离线缓存后，偶现无法循环播放的问题
+   - 修复 4G 网下 iPv6 解析错误的问题
+   - 修复特殊情况下多次创建释放 player 对象导致崩溃的问题
+   - 修复截图功能失效的问题
+   - 修复弱网环境调用 stop 卡主线程的问题
+   - 修复重连崩溃或失败的问题
+   - 解决系统 DNS 部分不可用的问题
+   - 修复本地 m3u8 文件无法正常播放的问题
+   - 修复 open fail 之后 destroy player 的 crash 问题
+   - 修复未获取总时长，回调 loadTimeRange 一直为 0 的问题
+   - 修复某些长视频 seek 操作异常的问题
+   - 修复点播播放完成后，resume 或 seek 至文件开头，播放状态错误的问题
+   - 修复优化 mp4 快开带来的一些问题
+- 其他
+   - 优化下载数据时内存的使用
+   - 去除 `PLPlayerStatus`的两个值`PLPlayerStatusSeeking` 及 `PLPlayerStatusSeekFailed`
+   - 修改缓冲回调参数`CMTimeRange`为`CMTime`
+   - 修改 `preDNSHost` 类方法为实例方法
 - 3.3.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.0.md))
 - 功能
    - 支持视频流宽高的回调

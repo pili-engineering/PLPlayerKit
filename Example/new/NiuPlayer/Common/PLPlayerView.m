@@ -679,13 +679,13 @@ UIGestureRecognizerDelegate
     self.playerOption = [PLPlayerOption defaultOption];
     PLPlayFormat format = kPLPLAY_FORMAT_UnKnown;
     NSString *urlString = _media.videoURL.lowercaseString;
-    if ([urlString containsString:@"mp4"]) {
+    if ([urlString hasSuffix:@"mp4"]) {
         format = kPLPLAY_FORMAT_MP4;
     } else if ([urlString hasPrefix:@"rtmp:"]) {
         format = kPLPLAY_FORMAT_FLV;
-    } else if ([urlString containsString:@".mp3"]) {
+    } else if ([urlString hasSuffix:@".mp3"]) {
         format = kPLPLAY_FORMAT_MP3;
-    } else if ([urlString containsString:@".m3u8"]) {
+    } else if ([urlString hasSuffix:@".m3u8"]) {
         format = kPLPLAY_FORMAT_M3U8;
     }
     [self.playerOption setOptionValue:@(format) forKey:PLPlayerOptionKeyVideoPreferFormat];
@@ -777,6 +777,7 @@ UIGestureRecognizerDelegate
     [self resetUI];
     [self.controlView resetStatus];
     self.isStop = YES;
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (void)resetUI {
@@ -980,12 +981,18 @@ UIGestureRecognizerDelegate
 
 - (void)player:(PLPlayer *)player stoppedWithError:(NSError *)error
 {
-    [self showTip:error.description];
+    NSString *info = error.userInfo[@"NSLocalizedDescription"];
+    [self showTip:info];
     
     [self stop];
 }
 
 - (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame pts:(int64_t)pts sarNumerator:(int)sarNumerator sarDenominator:(int)sarDenominator {
+    dispatch_main_async_safe(^{
+        if (![UIApplication sharedApplication].isIdleTimerDisabled) {
+            [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        }
+    });
 }
 
 - (AudioBufferList *)player:(PLPlayer *)player willAudioRenderBuffer:(AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat{
@@ -1012,15 +1019,16 @@ UIGestureRecognizerDelegate
 }
 
 - (void)player:(PLPlayer *)player codecError:(NSError *)error {
-    [self showTip:error.description];
+    NSString *info = error.userInfo[@"NSLocalizedDescription"];
+    [self showTip:info];
     
     [self stop];
 }
 
-- (void)player:(PLPlayer *)player loadedTimeRange:(CMTimeRange)timeRange {
+- (void)player:(PLPlayer *)player loadedTimeRange:(CMTime)timeRange {
     
-    float startSeconds = CMTimeGetSeconds(timeRange.start);
-    float durationSeconds = CMTimeGetSeconds(timeRange.duration);
+    float startSeconds = 0;
+    float durationSeconds = CMTimeGetSeconds(timeRange);
     CGFloat totalDuration = CMTimeGetSeconds(self.player.totalDuration);
     self.bufferingView.progress = (durationSeconds - startSeconds) / totalDuration;
     self.bottomBufferingProgressView.progress = self.bufferingView.progress;

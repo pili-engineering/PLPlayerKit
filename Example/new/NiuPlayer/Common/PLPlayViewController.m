@@ -101,7 +101,7 @@
     _url = url;
     
     if (self.player) {
-        [self.player stop];
+        [self stop];
         [self setupPlayer];
         [self.player play];
     }
@@ -114,15 +114,14 @@
     PLPlayerOption *option = [PLPlayerOption defaultOption];
     PLPlayFormat format = kPLPLAY_FORMAT_UnKnown;
     NSString *urlString = _url.absoluteString.lowercaseString;
-    if ([urlString containsString:@"mp4"]) {
+    if ([urlString hasSuffix:@"mp4"]) {
         format = kPLPLAY_FORMAT_MP4;
     } else if ([urlString hasPrefix:@"rtmp:"]) {
         format = kPLPLAY_FORMAT_FLV;
-    } else if ([urlString containsString:@".mp3"]) {
+    } else if ([urlString hasSuffix:@".mp3"]) {
         format = kPLPLAY_FORMAT_MP3;
-    } else if ([urlString containsString:@".m3u8"]) {
+    } else if ([urlString hasSuffix:@".m3u8"]) {
         format = kPLPLAY_FORMAT_M3U8;
-    
     }
     [option setOptionValue:@(format) forKey:PLPlayerOptionKeyVideoPreferFormat];
     [option setOptionValue:@(kPLLogNone) forKey:PLPlayerOptionKeyLogLevel];
@@ -144,7 +143,7 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
     self.isDisapper = YES;
-    [self.player stop];
+    [self stop];
     [super viewDidDisappear:animated];
 }
 
@@ -166,6 +165,11 @@
 
 - (void)clickPlayButton:(UIButton *)button {
     [self.player resume];
+}
+
+- (void)stop {
+    [self.player stop];
+    [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
 }
 
 - (void)showWaiting {
@@ -240,7 +244,7 @@
 - (void)player:(PLPlayer *)player statusDidChange:(PLPlayerStatus)state
 {
     if (self.isDisapper) {
-        [self.player stop];
+        [self stop];
         [self hideWaiting];
         return;
     }
@@ -264,11 +268,17 @@
 - (void)player:(PLPlayer *)player stoppedWithError:(NSError *)error
 {
     [self hideWaiting];
-    NSString *info = [NSString stringWithFormat:@"发生错误,error = %@, code = %ld", error.description, (long)error.code];
+    NSString *info = error.userInfo[@"NSLocalizedDescription"];
     [self.view showTip:info];
 }
 
 - (void)player:(nonnull PLPlayer *)player willRenderFrame:(nullable CVPixelBufferRef)frame pts:(int64_t)pts sarNumerator:(int)sarNumerator sarDenominator:(int)sarDenominator {
+    dispatch_main_async_safe(^{
+        if (![UIApplication sharedApplication].isIdleTimerDisabled) {
+            [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
+        }
+    });
+    
 }
 
 - (AudioBufferList *)player:(PLPlayer *)player willAudioRenderBuffer:(AudioBufferList *)audioBufferList asbd:(AudioStreamBasicDescription)audioStreamDescription pts:(int64_t)pts sampleFormat:(PLPlayerAVSampleFormat)sampleFormat{
@@ -287,7 +297,7 @@
 
 - (void)player:(PLPlayer *)player codecError:(NSError *)error {
     
-    NSString *info = [NSString stringWithFormat:@"播放发生错误,error = %@, code = %ld", error.description, (long)error.code];
+    NSString *info = error.userInfo[@"NSLocalizedDescription"];
     [self.view showTip:info];
     
     [self hideWaiting];

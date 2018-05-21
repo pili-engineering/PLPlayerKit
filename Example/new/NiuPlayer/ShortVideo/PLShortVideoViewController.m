@@ -27,19 +27,6 @@
     
     [super viewDidLoad];
     
-    if ([PLPLAYER_BUNDLEID isEqual:PLPLAYER_ENTERPRISE_BUNDLEID]) {
-        // 企业版
-        [self requestUpgradeURLWithCompleted:^(NSError *error, NSDictionary *upgradeDic) {
-            if ([[upgradeDic objectForKey:@"Version"] integerValue] > PLPLAYER_UPGRADE) {
-                [self showAlertWithMessage:@"有新版本更新" completion:^{
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:upgradeDic[@"DownloadURL"]]];
-                    });
-                }];
-            }
-        }];
-    }
-    
     self.mediaArray = [[NSMutableArray alloc] init];
     
     for (UIView *subView in self.view.subviews ) {
@@ -54,53 +41,6 @@
     self.emptyController = [[PLBaseViewController alloc] init];
     
     [self getPlayList];
-}
-
-- (void)requestUpgradeURLWithCompleted:(void (^)(NSError *error, NSDictionary *upgradeDic))handler
-{
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@/v1/upgrade/app?appId=%@", PLPLAYER_URL_DOMAIN, PLPLAYER_ENTERPRISE_BUNDLEID]];
-    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
-    request.HTTPMethod = @"GET";
-    request.timeoutInterval = 10;
-    
-    NSURLSessionDataTask *task = [[NSURLSession sharedSession] dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
-        if (error) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                handler(error, nil);
-            });
-            return;
-        }
-        NSDictionary *upgradeDic = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableLeaves error:&error];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            handler(nil, upgradeDic);
-        });
-    }];
-    [task resume];
-}
-
-- (void)showAlertWithMessage:(NSString *)message completion:(void (^)(void))completion
-{
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] < 8.0) {
-        UIAlertView *alertView = [UIAlertView bk_showAlertViewWithTitle:@"版本更新" message:message cancelButtonTitle:@"更新" otherButtonTitles:@[@"取消"] handler:^(UIAlertView *alertView, NSInteger buttonIndex) {
-            if (buttonIndex == 0) {
-                if (completion) {
-                    completion();
-                }
-            }
-        }];
-        [alertView show];
-    }
-    else {
-        UIAlertController *controller = [UIAlertController alertControllerWithTitle:@"版本更新" message:message preferredStyle:UIAlertControllerStyleAlert];
-        [controller addAction:[UIAlertAction actionWithTitle:@"更新" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-            if (completion) {
-                completion();
-            }
-        }]];
-        [controller addAction:[UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        }]];
-        [self presentViewController:controller animated:YES completion:nil];
-    }
 }
 
 - (void)didReceiveMemoryWarning {

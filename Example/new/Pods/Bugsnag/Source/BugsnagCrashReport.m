@@ -483,7 +483,10 @@ initWithErrorName:(NSString *_Nonnull)name
     
     NSMutableDictionary *appObj = [NSMutableDictionary new];
     [appObj addEntriesFromDictionary:self.app];
-    [appObj addEntriesFromDictionary:self.appState];
+    
+    for (NSString *key in self.appState) {
+        BSGDictInsertIfNotNil(appObj, self.appState[key], key);
+    }
     
     if (self.dsymUUID) {
         BSGDictInsertIfNotNil(appObj, @[self.dsymUUID], @"dsymUUIDs");
