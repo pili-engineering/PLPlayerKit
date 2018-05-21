@@ -38,8 +38,5 @@
 
 #define PLPLAYER_URL_DOMAIN @"https://api-demo.qnsdk.com"
 #define PLPLAYER_ENTERPRISE_BUNDLEID @"com.qbox.niuplayer"
-#define PLPLAYER_UPGRADE 3
-#define PLPLAYER_BUNDLEID  [[NSBundle mainBundle] bundleIdentifier]
-#define PLPLAYER_IS_PUBLISH ([PLPLAYER_BUNDLEID isEqual:PLPLAYER_ENTERPRISE_BUNDLEID] ? NO:YES)
 
 #endif /* NiuPlayer_pch */

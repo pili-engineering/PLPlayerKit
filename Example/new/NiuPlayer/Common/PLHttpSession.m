@@ -111,20 +111,9 @@
             media.videoURL = [media.videoURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             media.thumbURL = [media.thumbURL stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
             
-            if (PLPLAYER_IS_PUBLISH) {
-                media.headerImg = @"qiniu";
-                media.name = @"七牛云 简单·可信赖";
-            } else {
-                if ([key containsString:@"qiniu"]) {
-                    media.headerImg = @"qiniu";
-                } else if ([key containsString:@"hkstv"]){
-                    media.headerImg = @"hks_logo";
-                } else {
-                    int index = arc4random() % ARRAY_SIZE(headerImage);
-                    media.headerImg = headerImage[index];
-                }
-                media.name = name;
-            }
+            media.headerImg = @"qiniu";
+            media.name = @"七牛云 简单·可信赖";
+            
             media.detailDesc = [NSDate yyyyMMddStringWithSecond:media.putTime / 10000000];
             
             [mediaArray addObject:media];

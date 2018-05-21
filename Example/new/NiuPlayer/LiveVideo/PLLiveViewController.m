@@ -53,20 +53,18 @@ PLCodeViewControllerDelegate
     
     [self reloadPlayList];
     
-    if (PLPLAYER_IS_PUBLISH) {
-        self.reloadButton.hidden = YES;
-        self.alertLabel = [[UILabel alloc] init];
-        self.alertLabel.font = [UIFont systemFontOfSize:12];
-        self.alertLabel.textColor = [UIColor grayColor];
-        self.alertLabel.textAlignment = NSTextAlignmentCenter;
-        self.alertLabel.numberOfLines = 0;
-        self.alertLabel.text = @"暂无直播列表，您可以点击左上角的按钮扫描二维码观看直播、或者点击右上角手动输入直播地址播放";
-        [self.view addSubview:self.alertLabel];
-        [self.alertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.center.equalTo(self.view);
-            make.width.equalTo(self.view).offset(-50);
-        }];
-    }
+    self.reloadButton.hidden = YES;
+    self.alertLabel = [[UILabel alloc] init];
+    self.alertLabel.font = [UIFont systemFontOfSize:12];
+    self.alertLabel.textColor = [UIColor grayColor];
+    self.alertLabel.textAlignment = NSTextAlignmentCenter;
+    self.alertLabel.numberOfLines = 0;
+    self.alertLabel.text = @"暂无直播列表，您可以点击左上角的按钮扫描二维码观看直播、或者点击右上角手动输入直播地址播放";
+    [self.view addSubview:self.alertLabel];
+    [self.alertLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.center.equalTo(self.view);
+        make.width.equalTo(self.view).offset(-50);
+    }];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -121,23 +119,7 @@ PLCodeViewControllerDelegate
     [self.view showLoadingHUD];
     [PLHttpSession requestLiveMediaList:^(NSArray *list, NSError *error) {
         [wself.view hideLoadingHUD];
-        
-        if (0 == list.count) {
-            if (!PLPLAYER_IS_PUBLISH) {
-                PLMediaInfo *media = [[PLMediaInfo alloc] init];
-                media.mediaHash = @"hash";
-                media.videoURL = @"rtmp://live.hkstv.hk.lxdns.com/live/hks";
-                media.thumbURL = [[NSBundle mainBundle] URLForResource:@"hks" withExtension:@"png"].absoluteString;
-                media.headerImg = @"hks_logo";
-                media.name = @"香港卫视";
-                media.detailDesc = @"香港卫视直播流";
-                
-                wself.mediaArray = @[media];
-            }
-        } else {
-            wself.mediaArray = list;
-        }
-        
+        wself.mediaArray = list;
         [wself.tableView reloadData];
         
         if (0 == wself.mediaArray.count && error) {
@@ -148,18 +130,10 @@ PLCodeViewControllerDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     if (self.mediaArray.count) {
-        if (PLPLAYER_IS_PUBLISH) {
-             self.alertLabel.hidden = YES;
-        } else{
-            [self hideReloadButton];
-        }
+        self.alertLabel.hidden = YES;
         return 1;
     } else {
-        if (PLPLAYER_IS_PUBLISH) {
-            self.alertLabel.hidden = NO;
-        } else{
-            [self showReloadButton];
-        }
+        self.alertLabel.hidden = NO;
         return 0;
     }
 }
