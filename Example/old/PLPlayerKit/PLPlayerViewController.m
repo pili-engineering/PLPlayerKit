@@ -22,9 +22,7 @@ static NSString *status[] = {
     @"PLPlayerStatusPaused",
     @"PLPlayerStatusStopped",
     @"PLPlayerStatusError",
-    @"PLPlayerStatusCompleted",
-    @"PLPlayerStatusSeeking",
-    @"PLPlayerStatusSeekFailed"
+    @"PLPlayerStatusCompleted"
 };
 
 @interface PLPlayerViewController ()
@@ -161,7 +159,7 @@ UITextViewDelegate
     NSLog(@"width: %d  height:%d",width,height);
 }
 
-- (void)playerSeekToCompleted:(PLPlayer *)player {
+- (void)player:(PLPlayer *)player seekToCompleted:(BOOL)isCompleted{
     NSLog(@"player seek to completed");
 }
 

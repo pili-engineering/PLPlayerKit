@@ -24,7 +24,7 @@ NSDictionary *BSGParseDevice(NSDictionary *report) {
     BSGDictSetSafeObject(device, [[NSLocale currentLocale] localeIdentifier],
                          @"locale");
     
-    BSGDictSetSafeObject(device, report[@"time_zone"], @"timezone");
+    BSGDictSetSafeObject(device, [report valueForKeyPath:@"system.time_zone"], @"timezone");
     BSGDictSetSafeObject(device, [report valueForKeyPath:@"system.memory.usable"],
                          @"totalMemory");
     

@@ -200,6 +200,7 @@
 				6003F587195388D20070C39A /* Frameworks */,
 				6003F588195388D20070C39A /* Resources */,
 				8F710A7CD1AFF7A4CE7523C0 /* [CP] Embed Pods Frameworks */,
+				AEC06B342C9409F61EB36C9F /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,6 +304,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AEC06B342C9409F61EB36C9F /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

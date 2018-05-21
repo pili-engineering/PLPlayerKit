@@ -301,6 +301,7 @@
 				5F1392422F014A78D7D7D138 /* [CP] Copy Pods Resources */,
 				76E1E799204923AB00D02790 /* Copy Files */,
 				E484F59884E4B8023E4E32B3 /* [CP] Embed Pods Frameworks */,
+				87C27106053AD8212AE45676 /* Upload Bugsnag dSYM */,
 			);
 			buildRules = (
 			);
@@ -397,27 +398,32 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-resources.sh",
-				"${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error.png",
-				"${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error@2x.png",
-				"${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error@3x.png",
-				"${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success.png",
-				"${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success@2x.png",
-				"${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success@3x.png",
+				"${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD/JGProgressHUD.bundle",
 				"${PODS_ROOT}/WeiboSDK/libWeiboSDK/WeiboSDK.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/jg_hud_error.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/jg_hud_error@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/jg_hud_error@3x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/jg_hud_success.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/jg_hud_success@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/jg_hud_success@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/JGProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WeiboSDK.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		87C27106053AD8212AE45676 /* Upload Bugsnag dSYM */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Bugsnag dSYM";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "/usr/bin/env ruby";
+			shellScript = "fork do\n  Process.setsid\n  STDIN.reopen(\"/dev/null\")\n  STDOUT.reopen(\"/dev/null\", \"a\")\n  STDERR.reopen(\"/dev/null\", \"a\")\n\n  require 'shellwords'\n\n  Dir[\"#{ENV[\"DWARF_DSYM_FOLDER_PATH\"]}/*/Contents/Resources/DWARF/*\"].each do |dsym|\n    system(\"curl -F dsym=@#{Shellwords.escape(dsym)} -F projectRoot=#{Shellwords.escape(ENV[\"PROJECT_DIR\"])} https://upload.bugsnag.com/\")\n  end\nend\n";
 			showEnvVarsInLog = 0;
 		};
 		E484F59884E4B8023E4E32B3 /* [CP] Embed Pods Frameworks */ = {
