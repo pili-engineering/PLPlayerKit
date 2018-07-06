@@ -11,6 +11,7 @@
 #import "BSG_KSLogger.h"
 #import "BugsnagSessionTrackingPayload.h"
 #import "BugsnagSessionTrackingApiClient.h"
+#import "BugsnagLogger.h"
 
 @interface BugsnagSessionTracker ()
 @property BugsnagConfiguration *config;
@@ -43,6 +44,10 @@
 - (void)startNewSession:(NSDate *)date
                withUser:(BugsnagUser *)user
            autoCaptured:(BOOL)autoCaptured {
+    if (self.config.sessionURL == nil) {
+        bsg_log_err(@"The session tracking endpoint has not been set. Session tracking is disabled");
+        return;
+    }
 
     _currentSession = [[BugsnagSession alloc] initWithId:[[NSUUID UUID] UUIDString]
                                                 startDate:date
@@ -58,7 +63,7 @@
 - (void)trackSession {
     [self.sessionStore write:self.currentSession];
     self.trackedFirstSession = YES;
-    
+
     if (self.callback) {
         self.callback(self.currentSession);
     }
@@ -87,34 +92,41 @@
 }
 
 - (void)send {
-    @synchronized (self.sessionStore) {
-        NSMutableArray *sessions = [NSMutableArray new];
-        NSArray *fileIds = [self.sessionStore fileIds];
+    NSArray *fileIds = [self.sessionStore fileIds];
 
-        for (NSDictionary *dict in [self.sessionStore allFiles]) {
-            [sessions addObject:[[BugsnagSession alloc] initWithDictionary:dict]];
-        }
-        BugsnagSessionTrackingPayload *payload = [[BugsnagSessionTrackingPayload alloc] initWithSessions:sessions];
-
-        if (payload.sessions.count > 0) {
-            [self.apiClient sendData:payload
-                         withPayload:[payload toJson]
-                               toURL:self.config.sessionURL
-                             headers:self.config.sessionApiHeaders
-                        onCompletion:^(id data, BOOL success, NSError *error) {
-
-                            if (success && error == nil) {
-                                NSLog(@"Sent sessions to Bugsnag");
-
-                                for (NSString *fileId in fileIds) {
-                                    [self.sessionStore deleteFileWithId:fileId];
-                                }
-                            } else {
-                                NSLog(@"Failed to send sessions to Bugsnag: %@", error);
-                            }
-                        }];
-        }
+    if (fileIds.count <= 0) {
+        return;
     }
+
+    dispatch_semaphore_t requestSemaphore = dispatch_semaphore_create(0);
+    NSMutableArray *sessions = [NSMutableArray new];
+
+    for (NSDictionary *dict in [self.sessionStore allFiles]) {
+        [sessions addObject:[[BugsnagSession alloc] initWithDictionary:dict]];
+    }
+    BugsnagSessionTrackingPayload *payload = [[BugsnagSessionTrackingPayload alloc] initWithSessions:sessions];
+
+    if (payload.sessions.count > 0) {
+        [self.apiClient sendData:payload
+                     withPayload:[payload toJson]
+                           toURL:self.config.sessionURL
+                         headers:self.config.sessionApiHeaders
+                    onCompletion:^(id data, BOOL success, NSError *error) {
+                        if (success && error == nil) {
+                            NSLog(@"Sent sessions to Bugsnag");
+
+                            for (NSString *fileId in fileIds) {
+                                [self.sessionStore deleteFileWithId:fileId];
+                            }
+                        } else {
+                            NSLog(@"Failed to send sessions to Bugsnag: %@", error);
+                        }
+                        dispatch_semaphore_signal(requestSemaphore);
+                    }];
+    } else {
+        dispatch_semaphore_signal(requestSemaphore);
+    }
+    dispatch_semaphore_wait(requestSemaphore, DISPATCH_TIME_FOREVER);
 }
 
 @end

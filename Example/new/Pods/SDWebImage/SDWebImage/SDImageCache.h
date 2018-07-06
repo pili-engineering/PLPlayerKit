@@ -33,7 +33,12 @@ typedef NS_OPTIONS(NSUInteger, SDImageCacheOptions) {
     /**
      * By default, we query the memory cache synchronously, disk cache asynchronously. This mask can force to query disk cache synchronously.
      */
-    SDImageCacheQueryDiskSync = 1 << 1
+    SDImageCacheQueryDiskSync = 1 << 1,
+    /**
+     * By default, images are decoded respecting their original size. On iOS, this flag will scale down the
+     * images to a size compatible with the constrained memory of devices.
+     */
+    SDImageCacheScaleDownLargeImages = 1 << 2
 };
 
 typedef void(^SDCacheQueryCompletedBlock)(UIImage * _Nullable image, NSData * _Nullable data, SDImageCacheType cacheType);
@@ -149,7 +154,6 @@ typedef void(^SDWebImageCalculateSizeBlock)(NSUInteger fileCount, NSUInteger tot
 /**
  * Synchronously store image NSData into disk cache at the given key.
  *
- * @warning This method is synchronous, make sure to call it from the ioQueue
  *
  * @param imageData  The image data to store
  * @param key        The unique image cache key, usually it's image absolute URL

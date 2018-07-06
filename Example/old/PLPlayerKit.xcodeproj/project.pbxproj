@@ -48,7 +48,7 @@
 		767C204E1AFA847B0026FFDB /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
 		767C20541AFA84940026FFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		767C20561AFA84940026FFDB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		769205AB207C63CE008D6AD8 /* PLPlayerKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PLPlayerKit.podspec; path = ../../PLPlayerKit.podspec; sourceTree = "<group>"; };
+		769205AB207C63CE008D6AD8 /* PLPlayerKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = PLPlayerKit.podspec; path = ../../PLPlayerKit.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		769205AC207C63CE008D6AD8 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../../README.md; sourceTree = "<group>"; };
 		769205AD207C63CE008D6AD8 /* PLPlayerKit-Universal.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = "PLPlayerKit-Universal.podspec"; path = "../../PLPlayerKit-Universal.podspec"; sourceTree = "<group>"; };
 		769205AE207C63CE008D6AD8 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../LICENSE; sourceTree = "<group>"; };

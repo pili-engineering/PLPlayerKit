@@ -16,9 +16,10 @@
 #define PLATFORM_WORD_SIZE sizeof(void*)*8
 
 NSDictionary *BSGParseDevice(NSDictionary *report) {
-    NSMutableDictionary *device =
-    [[report valueForKeyPath:@"user.state.deviceState"] mutableCopy];
-    
+    NSMutableDictionary *device = [NSMutableDictionary new];
+    NSDictionary *state = [report valueForKeyPath:@"user.state.deviceState"];
+    [device addEntriesFromDictionary:state];
+
     [device addEntriesFromDictionary:BSGParseDeviceState(report[@"system"])];
     
     BSGDictSetSafeObject(device, [[NSLocale currentLocale] localeIdentifier],

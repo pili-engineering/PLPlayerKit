@@ -14,19 +14,19 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - Bugsnag (5.15.5)
-  - Crashlytics (3.10.1):
-    - Fabric (~> 1.7.5)
-  - Fabric (1.7.6)
+  - Bugsnag (5.16.0)
+  - Crashlytics (3.10.3):
+    - Fabric (~> 1.7.8)
+  - Fabric (1.7.8)
   - JGProgressHUD (2.0.3)
   - Masonry (1.1.0)
   - MMMaterialDesignSpinner (0.2.5)
-  - PLPlayerKit (3.3.1):
-    - PLPlayerKit/iphoneos (= 3.3.1)
-  - PLPlayerKit/iphoneos (3.3.1)
-  - SDWebImage (4.3.3):
-    - SDWebImage/Core (= 4.3.3)
-  - SDWebImage/Core (4.3.3)
+  - PLPlayerKit (3.3.2):
+    - PLPlayerKit/iphoneos (= 3.3.2)
+  - PLPlayerKit/iphoneos (3.3.2)
+  - SDWebImage (4.4.1):
+    - SDWebImage/Core (= 4.4.1)
+  - SDWebImage/Core (4.4.1)
   - WeiboSDK (3.1.3)
 
 DEPENDENCIES:
@@ -48,14 +48,14 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
-  Bugsnag: 82788750cec86630828bb7dd250943f8356c53ea
-  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
-  Fabric: f8d42c893bb187326a7968b62abe55c36a987a46
+  Bugsnag: e195a21dae67e32a37567689ff8e0863e4a17e09
+  Crashlytics: 2aea305161a2122492698c75af27f2b98aa49a25
+  Fabric: fba4684a95df789565b0b27fc5b6e68f1755af32
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MMMaterialDesignSpinner: a548042720c2e5f04212048483085d7942ac3e81
-  PLPlayerKit: 38a3ad1c687b9eaa88032acb853e1ae366ed7a07
-  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
+  PLPlayerKit: 233a71c4dc5ec9047e58536d693842d1b260fc60
+  SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   WeiboSDK: acb067053668102cf07d01aa7604350162c2e466
 
 PODFILE CHECKSUM: b8e4d3011adae7250551d6868e265422bdfbe1c0
