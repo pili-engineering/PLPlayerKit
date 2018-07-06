@@ -39,6 +39,7 @@ SDK 的 Github 地址：https://github.com/pili-engineering/PLPlayerKit
 - [x] 支持 seekTo 完成的回调
 - [x] 支持提前设置 mp4 解析时间
 - [x] 支持提前设置点播从记忆点播放
+- [x] 支持 ffconcat
 
 ## 说明
 
@@ -243,6 +244,21 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.3.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.2.md))
+- 功能
+   - 支持 ffconcat 文件
+- 缺陷
+   - 修复弱网下重新打开链接的 crash 问题
+   - 修复特殊场景下调用 pause 偶现卡死的问题
+   - 修复特殊场景下缓存 mp4 失败的问题
+   - 修复部分直播视频偶现经常 caching 的问题
+   - 修复部分长视频 mp4 调用 seekTo 后一直 buffering 问题
+   - 修复从 YUV 到 RGB 的颜色差别问题
+- 其他
+   - 增加硬解保护
+   - 提高首帧的打开速度
+   - 内部支持分析 DNS 服务器设置
+   - 改进点播音频文件不从 0 开始播放的问题
 - 3.3.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.1.md))
 - 功能
    - 支持调用 seekTo 后回调结果
