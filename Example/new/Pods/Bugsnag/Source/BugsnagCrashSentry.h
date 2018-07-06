@@ -16,7 +16,7 @@
 
 - (void)install:(BugsnagConfiguration *)config
       apiClient:(BugsnagErrorReportApiClient *)apiClient
-        onCrash:(BSG_KSReportWriteCallback)onCrash;
+        onCrash:(BSGReportCallback)onCrash;
 
 - (void)reportUserException:(NSString *)reportName
                      reason:(NSString *)reportMessage;

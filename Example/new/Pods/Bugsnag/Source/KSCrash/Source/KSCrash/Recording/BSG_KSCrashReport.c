@@ -40,6 +40,7 @@
 
 //#define BSG_kSLogger_LocalLevel TRACE
 #include "BSG_KSLogger.h"
+#include "BSG_KSCrashContext.h"
 
 #ifdef __arm64__
 #include <sys/_types/_ucontext64.h>
@@ -1963,7 +1964,8 @@ void bsg_kscrw_i_updateStackOverflowStatus(
 
 void bsg_kscrw_i_callUserCrashHandler(BSG_KSCrash_Context *const crashContext,
                                       BSG_KSCrashReportWriter *writer) {
-    crashContext->config.onCrashNotify(writer);
+    BSG_KSCrashType type = crashContext->crash.crashType;
+    crashContext->config.onCrashNotify(writer, type);
 }
 
 // ============================================================================

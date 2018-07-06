@@ -236,7 +236,7 @@ void bsg_kscrash_setDoNotIntrospectClasses(const char **doNotIntrospectClasses,
 }
 
 void bsg_kscrash_setCrashNotifyCallback(
-    const BSG_KSReportWriteCallback onCrashNotify) {
+    const BSGReportCallback onCrashNotify) {
     BSG_KSLOG_TRACE("Set onCrashNotify to %p", onCrashNotify);
     crashContext()->config.onCrashNotify = onCrashNotify;
 }

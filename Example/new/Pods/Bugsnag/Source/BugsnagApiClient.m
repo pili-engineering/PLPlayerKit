@@ -59,7 +59,7 @@
         NSError *error = nil;
         NSData *jsonData =
                 [NSJSONSerialization dataWithJSONObject:payload
-                                                options:NSJSONWritingPrettyPrinted
+                                                options:0
                                                   error:&error];
 
         if (jsonData == nil) {
