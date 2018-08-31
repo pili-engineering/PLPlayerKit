@@ -244,6 +244,16 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.3.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.3.md))
+- 功能
+   - 支持真机 bitcode
+- 缺陷
+   - 修复清理缓存的资源后播放 open failed 的问题
+   - 修复部分视频播放卡顿或卡顿兼加速播放的问题
+   - 修复特殊视频播放只有声音没有图像的问题
+   - 修复 flv 格式下播放内存增长较快 
+   - 修复 COpenGLRnd Render 渲染的 crash 问题
+   - 修复裁剪画面并旋转后画面错位的问题 
 - 3.3.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.2.md))
 - 功能
    - 支持 ffconcat 文件
