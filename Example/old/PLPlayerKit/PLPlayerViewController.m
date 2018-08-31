@@ -38,6 +38,10 @@ UITextViewDelegate
 
 @implementation PLPlayerViewController
 
+- (void)onUIApplication:(BOOL)active{
+    self.player.enableRender = active;
+}
+
 - (instancetype)initWithURL:(NSURL *)URL {
     self = [super init];
     if (self) {

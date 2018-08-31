@@ -10,4 +10,5 @@
 
 @interface PLLiveViewController : PLBaseViewController
 
+- (void)onUIApplication:(BOOL)active;
 @end

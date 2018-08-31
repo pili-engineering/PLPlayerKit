@@ -10,4 +10,5 @@
 
 @interface PLLongVideoViewController : PLBaseViewController
 
+- (void)onUIApplication:(BOOL)active;
 @end

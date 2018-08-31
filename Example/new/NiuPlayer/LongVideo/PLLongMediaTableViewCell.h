@@ -30,6 +30,9 @@
 
 - (void)stop;
 
+- (void)configureVideo:(BOOL)enableRender;
+
+
 + (CGFloat)headerViewHeight;
 
 @end

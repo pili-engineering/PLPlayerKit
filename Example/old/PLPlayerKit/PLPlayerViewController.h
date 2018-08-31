@@ -13,5 +13,6 @@
 @property (nonatomic, strong) NSURL *URL;
 
 - (instancetype)initWithURL:(NSURL *)URL;
+- (void)onUIApplication:(BOOL)active;
 
 @end

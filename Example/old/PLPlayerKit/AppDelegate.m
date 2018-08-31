@@ -21,9 +21,19 @@
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
+    UINavigationController *nav = (UINavigationController*)self.window.rootViewController;
+    if ([nav.visibleViewController isKindOfClass:[PLPlayerViewController class]]) {
+        PLPlayerViewController *playerVC = (PLPlayerViewController *)nav.visibleViewController;
+        [playerVC onUIApplication:NO];
+    }
     NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 - (void)applicationWillResignActive:(UIApplication *)application {
+    UINavigationController *nav = (UINavigationController*)self.window.rootViewController;
+    if ([nav.visibleViewController isKindOfClass:[PLPlayerViewController class]]) {
+        PLPlayerViewController *playerVC = (PLPlayerViewController *)nav.visibleViewController;
+        [playerVC onUIApplication:YES];
+    }
     NSLog(@"%@", NSStringFromSelector(_cmd));
 }
 

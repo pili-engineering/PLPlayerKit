@@ -33,6 +33,7 @@
 
 - (void)resume;
 
+- (void)configureVideo:(BOOL)enableRender;
 @end
 
 

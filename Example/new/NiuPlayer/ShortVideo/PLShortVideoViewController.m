@@ -18,10 +18,16 @@
 @property (nonatomic, strong) NSArray *mediaArray;
 @property (nonatomic, assign) NSInteger index;
 @property (nonatomic, strong) PLBaseViewController *emptyController;
-
+@property (nonatomic, strong) PLShortPlayerViewController *shortPlayerVC;
 @end
 
 @implementation PLShortVideoViewController
+
+- (void)onUIApplication:(BOOL)active {
+    if (self.shortPlayerVC) {
+        self.shortPlayerVC.player.enableRender = active;
+    }
+}
 
 - (void)viewDidLoad {
     
@@ -85,6 +91,7 @@
             self.index = 0;
         }
         
+        self.shortPlayerVC = playerController;
         [self setViewControllers:@[playerController] direction:(UIPageViewControllerNavigationDirectionForward) animated:NO completion:^(BOOL finished) {
         }];
     } else {
