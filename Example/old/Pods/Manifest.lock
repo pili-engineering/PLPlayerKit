@@ -1,18 +1,18 @@
 PODS:
-  - PLPlayerKit (3.3.2):
-    - PLPlayerKit/iphoneos (= 3.3.2)
-  - PLPlayerKit/iphoneos (3.3.2)
+  - PLPlayerKit (3.3.3):
+    - PLPlayerKit/iphoneos (= 3.3.3)
+  - PLPlayerKit/iphoneos (3.3.3)
 
 DEPENDENCIES:
   - PLPlayerKit (from `../../`)
 
 EXTERNAL SOURCES:
   PLPlayerKit:
-    :path: ../../
+    :path: "../../"
 
 SPEC CHECKSUMS:
-  PLPlayerKit: 233a71c4dc5ec9047e58536d693842d1b260fc60
+  PLPlayerKit: 296fe6c77c5d0b6d649ceeee9fab73485cb4c78f
 
 PODFILE CHECKSUM: 1a2f5e8e504ffc736a6296985f7e7edd892f7196
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.3
