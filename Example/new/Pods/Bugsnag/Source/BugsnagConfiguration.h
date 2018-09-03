@@ -139,6 +139,8 @@ BugsnagBreadcrumbs *breadcrumbs;
 
 /**
  * Determines whether app sessions should be tracked automatically. By default this value is true.
+ * If this value is updated after +[Bugsnag start] is called, only subsequent automatic sessions
+ * will be captured.
  */
 @property BOOL shouldAutoCaptureSessions;
 

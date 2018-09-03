@@ -218,23 +218,6 @@ static NSString *const kHeaderApiSentAt = @"Bugsnag-Sent-At";
     }
 }
 
-@synthesize shouldAutoCaptureSessions = _shouldAutoCaptureSessions;
-
-- (BOOL)shouldAutoCaptureSessions {
-    return _shouldAutoCaptureSessions;
-}
-
-- (void)setShouldAutoCaptureSessions:(BOOL)shouldAutoCaptureSessions {
-    @synchronized (self) {
-        _shouldAutoCaptureSessions = shouldAutoCaptureSessions;
-
-        if (shouldAutoCaptureSessions) { // track any existing sessions
-            BugsnagSessionTracker *sessionTracker = [Bugsnag notifier].sessionTracker;
-            [sessionTracker onAutoCaptureEnabled];
-        }
-    }
-}
-
 - (NSDictionary *)errorApiHeaders {
     return @{
              kHeaderApiPayloadVersion: @"4.0",

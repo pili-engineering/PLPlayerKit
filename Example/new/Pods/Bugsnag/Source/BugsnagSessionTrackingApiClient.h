@@ -6,12 +6,16 @@
 #import <Foundation/Foundation.h>
 #import "BugsnagApiClient.h"
 
-@class BugsnagConfiguration;
-@class BugsnagSessionTrackingPayload;
-@class BugsnagSession;
-@class BugsnagSession;
+@class BugsnagSessionFileStore;
 
 
 @interface BugsnagSessionTrackingApiClient : BugsnagApiClient
 
+
+/**
+ Asynchronously delivers sessions written to the store
+
+ @param store The store containing the sessions to deliver
+ */
+- (void)deliverSessionsInStore:(BugsnagSessionFileStore *)store;
 @end
