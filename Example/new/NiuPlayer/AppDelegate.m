@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "PLRootTabBarViewController.h"
+#import "PLShortVideoViewController.h"
+#import "PLLongVideoViewController.h"
+#import "PLLiveViewController.h"
 
 @interface AppDelegate ()
 
@@ -37,6 +40,36 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    PLRootTabBarViewController *rootVC = (PLRootTabBarViewController*)self.window.rootViewController;
+    NSInteger index = rootVC.selectedIndex;
+    if(rootVC.selectedViewController){
+        switch (index) {
+            case 0:{
+                PLShortVideoViewController *shortVC = (PLShortVideoViewController *)rootVC.selectedViewController;
+                [shortVC onUIApplication:NO];
+            }
+                break;
+            case 1:{
+                UINavigationController *navVC = rootVC.selectedViewController;
+                PLLongVideoViewController *longVideoVC = (PLLongVideoViewController *)navVC.topViewController;
+                [longVideoVC onUIApplication:NO];
+            }
+                break;
+            case 2:{
+                UINavigationController *navVC = rootVC.selectedViewController;
+                PLLiveViewController *liveVideoVC = (PLLiveViewController *)navVC.topViewController;
+                if (liveVideoVC.presentedViewController) {
+                    PLPlayViewController *playerVC = (PLPlayViewController *)liveVideoVC.presentedViewController;
+                    playerVC.player.enableRender = NO;
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    NSLog(@"------ applicationWillResignActive ------");
 }
 
 
@@ -53,6 +86,36 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    PLRootTabBarViewController *rootVC = (PLRootTabBarViewController*)self.window.rootViewController;
+    NSInteger index = rootVC.selectedIndex;
+    if(rootVC.selectedViewController){
+        switch (index) {
+            case 0:{
+                PLShortVideoViewController *shortVC = (PLShortVideoViewController *)rootVC.selectedViewController;
+                [shortVC onUIApplication:YES];
+            }
+                break;
+            case 1:{
+                UINavigationController *navVC = rootVC.selectedViewController;
+                PLLongVideoViewController *longVideoVC = (PLLongVideoViewController *)navVC.topViewController;
+                [longVideoVC onUIApplication:YES];
+            }
+                break;
+            case 2:{
+                UINavigationController *navVC = rootVC.selectedViewController;
+                PLLiveViewController *liveVideoVC = (PLLiveViewController *)navVC.topViewController;
+                if (liveVideoVC.presentedViewController) {
+                    PLPlayViewController *playerVC = (PLPlayViewController *)liveVideoVC.presentedViewController;
+                    playerVC.player.enableRender = YES;
+                }
+            }
+                break;
+                
+            default:
+                break;
+        }
+    }
+    NSLog(@"------ applicationDidBecomeActive ------");
 }
 
 

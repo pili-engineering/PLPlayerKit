@@ -138,6 +138,10 @@ PLPlayerViewDelegate
     [self.playerView stop];
 }
 
+- (void)configureVideo:(BOOL)enableRender {
+    [self.playerView configureVideo:enableRender];
+}
+
 - (void)playerViewEnterFullScreen:(PLPlayerView *)playerView {
     
     UIView *superView = [UIApplication sharedApplication].delegate.window.rootViewController.view;

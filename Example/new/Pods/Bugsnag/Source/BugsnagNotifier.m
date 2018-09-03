@@ -32,7 +32,6 @@
 #import "BugsnagLogger.h"
 #import "BugsnagKeys.h"
 #import "BugsnagSessionTracker.h"
-#import "BugsnagSessionTrackingApiClient.h"
 #import "BSG_RFC3339DateTool.h"
 #import "BSG_KSCrashType.h"
 
@@ -42,7 +41,7 @@
 #import <AppKit/AppKit.h>
 #endif
 
-NSString *const NOTIFIER_VERSION = @"5.16.0";
+NSString *const NOTIFIER_VERSION = @"5.16.3";
 NSString *const NOTIFIER_URL = @"https://github.com/bugsnag/bugsnag-cocoa";
 NSString *const BSTabCrash = @"crash";
 NSString *const BSAttributeDepth = @"depth";
@@ -164,12 +163,36 @@ void BSSerializeJSONDictionary(NSDictionary *dictionary, char **destination) {
     }
 }
 
+/**
+ Save info about the current session to crash data. Ensures that session
+ data is written to unhandled error reports.
+
+ @param session The current session
+ */
+void BSGWriteSessionCrashData(BugsnagSession *session) {
+    if (session == nil) {
+        return;
+    }
+    // copy session id
+    const char *newSessionId = [session.sessionId UTF8String];
+    size_t idSize = strlen(newSessionId);
+    strncpy((char *)sessionId, newSessionId, idSize);
+    sessionId[idSize - 1] = NULL;
+
+    const char *newSessionDate = [[BSG_RFC3339DateTool stringFromDate:session.startedAt] UTF8String];
+    size_t dateSize = strlen(newSessionDate);
+    strncpy((char *)sessionStartDate, newSessionDate, dateSize);
+    sessionStartDate[dateSize - 1] = NULL;
+
+    // record info for C JSON serialiser
+    handledCount = session.handledCount;
+    hasRecordedSessions = true;
+}
+
 @interface BugsnagNotifier ()
 @property(nonatomic) BugsnagCrashSentry *crashSentry;
 @property(nonatomic) BugsnagErrorReportApiClient *errorReportApiClient;
-@property(nonatomic) BugsnagSessionTrackingApiClient *sessionTrackingApiClient;
 @property(nonatomic) BugsnagSessionTracker *sessionTracker;
-@property(nonatomic) NSTimer *sessionTimer;
 @end
 
 @implementation BugsnagNotifier
@@ -193,39 +216,21 @@ void BSSerializeJSONDictionary(NSDictionary *dictionary, char **destination) {
         self.crashSentry = [BugsnagCrashSentry new];
         self.errorReportApiClient = [[BugsnagErrorReportApiClient alloc] initWithConfig:configuration
                                                                               queueName:@"Error API queue"];
-        self.sessionTrackingApiClient = [[BugsnagSessionTrackingApiClient alloc] initWithConfig:configuration
-                                                                                      queueName:@"Session API queue"];
+        bsg_g_bugsnag_data.onCrash = (void (*)(const BSG_KSCrashReportWriter *))self.configuration.onCrashHandler;
+
+        static dispatch_once_t once_t;
+        dispatch_once(&once_t, ^{
+            [self initializeNotificationNameMap];
+        });
 
         self.sessionTracker = [[BugsnagSessionTracker alloc] initWithConfig:initConfiguration
-                                                                  apiClient:self.sessionTrackingApiClient
-                                                                   callback:^(BugsnagSession *session) {
-
-                                                                       // copy session id
-                                                                       const char *newSessionId = [session.sessionId UTF8String];
-                                                                       size_t idSize = strlen(newSessionId);
-                                                                       strncpy((char *)sessionId, newSessionId, idSize);
-                                                                       sessionId[idSize - 1] = NULL;
-
-                                                                       const char *newSessionDate = [[BSG_RFC3339DateTool stringFromDate:session.startedAt] UTF8String];
-                                                                       size_t dateSize = strlen(newSessionDate);
-                                                                       strncpy((char *)sessionStartDate, newSessionDate, dateSize);
-                                                                       sessionStartDate[dateSize - 1] = NULL;
-
-                                                                       // record info for C JSON serialiser
-                                                                       handledCount = session.handledCount;
-                                                                       hasRecordedSessions = true;
-                                                                   }];
+                                                         postRecordCallback:^(BugsnagSession *session) {
+                                                             BSGWriteSessionCrashData(session);
+                                                         }];
 
         [self metaDataChanged:self.configuration.metaData];
         [self metaDataChanged:self.configuration.config];
         [self metaDataChanged:self.state];
-        bsg_g_bugsnag_data.onCrash = (void (*)(
-            const BSG_KSCrashReportWriter *))self.configuration.onCrashHandler;
-
-        static dispatch_once_t once_t;
-        dispatch_once(&once_t, ^{
-          [self initializeNotificationNameMap];
-        });
     }
     return self;
 }
@@ -301,15 +306,15 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
     [self.crashSentry install:self.configuration
                     apiClient:self.errorReportApiClient
                       onCrash:&BSSerializeDataCrashHandler];
-
     [self setupConnectivityListener];
     [self updateAutomaticBreadcrumbDetectionSettings];
-    
+
     NSNotificationCenter *center = [NSNotificationCenter defaultCenter];
     [self watchLifecycleEvents:center];
 
 #if TARGET_OS_TV
     [self.details setValue:@"tvOS Bugsnag Notifier" forKey:BSGKeyName];
+    [self addTerminationObserver:UIApplicationWillTerminateNotification];
 
 #elif TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
     [self.details setValue:@"iOS Bugsnag Notifier" forKey:BSGKeyName];
@@ -339,6 +344,8 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
 
     [self batteryChanged:nil];
     [self orientationChanged:nil];
+    [self addTerminationObserver:UIApplicationWillTerminateNotification];
+
 #elif TARGET_OS_MAC
     [self.details setValue:@"OSX Bugsnag Notifier" forKey:BSGKeyName];
 
@@ -351,18 +358,42 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
                selector:@selector(willEnterBackground:)
                    name:NSApplicationDidResignActiveNotification
                  object:nil];
+
+    [self addTerminationObserver:NSApplicationWillTerminateNotification];
 #endif
 
     _started = YES;
+    [self.sessionTracker startNewSessionIfAutoCaptureEnabled];
 
     // notification not received in time on initial startup, so trigger manually
     [self willEnterForeground:self];
 }
 
+- (void)addTerminationObserver:(NSString *)name {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(unsubscribeFromNotifications:)
+                                                 name:name
+                                               object:nil];
+}
+
+/**
+ * Removes observers and listeners to prevent allocations when the app is terminated
+ */
+- (void)unsubscribeFromNotifications:(id)sender {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [self.networkReachable stopWatchingConnectivity];
+
+#if TARGET_OS_TV || TARGET_OS_MAC
+#elif TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
+    [UIDevice currentDevice].batteryMonitoringEnabled = NO;
+    [[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
+#endif
+}
+
 - (void)watchLifecycleEvents:(NSNotificationCenter *)center {
     NSString *foregroundName;
     NSString *backgroundName;
-    
+
     #if TARGET_OS_TV || TARGET_IPHONE_SIMULATOR || TARGET_OS_IPHONE
     foregroundName = UIApplicationWillEnterForegroundNotification;
     backgroundName = UIApplicationWillEnterForegroundNotification;
@@ -370,7 +401,7 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
     foregroundName = NSApplicationWillBecomeActiveNotification;
     backgroundName = NSApplicationDidFinishLaunchingNotification;
     #endif
-    
+
     [center addObserver:self
                selector:@selector(willEnterForeground:)
                    name:foregroundName
@@ -383,34 +414,15 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
 }
 
 - (void)willEnterForeground:(id)sender {
-    [self.sessionTracker startNewSession:[NSDate date]
-                                withUser:self.configuration.currentUser
-                            autoCaptured:YES];
-
-    NSTimeInterval sessionTickSeconds = 60;
-
-    if (!self.sessionTimer) {
-        _sessionTimer = [NSTimer scheduledTimerWithTimeInterval:sessionTickSeconds
-                                                         target:self
-                                                       selector:@selector(sessionTick:)
-                                                       userInfo:nil
-                                                        repeats:YES];
-        [self sessionTick:self];
-    }
+    [self.sessionTracker handleAppForegroundEvent];
 }
 
 - (void)willEnterBackground:(id)sender {
-    [self.sessionTracker suspendCurrentSession:[NSDate date]];
-
-    if (self.sessionTimer) {
-        [self.sessionTimer invalidate];
-        self.sessionTimer = nil;
-    }
-
+    [self.sessionTracker handleAppBackgroundEvent];
 }
 
-- (void)sessionTick:(id)sender {
-    [self.sessionTracker send];
+- (void)startSession {
+    [self.sessionTracker startNewSession];
 }
 
 - (void)flushPendingReports {
@@ -429,11 +441,6 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
     [self.networkReachable startWatchingConnectivity];
 }
 
-- (void)startSession {
-    [self.sessionTracker startNewSession:[NSDate date]
-                                withUser:self.configuration.currentUser
-                            autoCaptured:NO];
-}
 
 - (void)notifyError:(NSError *)error
               block:(void (^)(BugsnagCrashReport *))block {
@@ -518,8 +525,7 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
          message:(NSString *)message
     handledState:(BugsnagHandledState *_Nonnull)handledState
            block:(void (^)(BugsnagCrashReport *))block {
-
-    [self.sessionTracker incrementHandledError];
+    [self.sessionTracker handleHandledErrorEvent];
 
     BugsnagCrashReport *report = [[BugsnagCrashReport alloc]
         initWithErrorName:exceptionName

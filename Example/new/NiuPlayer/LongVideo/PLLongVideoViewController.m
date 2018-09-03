@@ -29,6 +29,12 @@ PLCodeViewControllerDelegate
 
 @implementation PLLongVideoViewController
 
+- (void)onUIApplication:(BOOL)active {
+    if (self.playingCell) {
+        [self.playingCell configureVideo:active];
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     

@@ -10,5 +10,5 @@
 
 NSDictionary *_Nonnull BSGParseDevice(NSDictionary *_Nonnull report);
 NSDictionary *_Nonnull BSGParseApp(NSDictionary *_Nonnull report);
-NSDictionary *_Nonnull BSGParseAppState(NSDictionary *_Nonnull report);
+NSDictionary *_Nonnull BSGParseAppState(NSDictionary *_Nonnull report, NSString *_Nullable preferredVersion);
 NSDictionary *_Nonnull BSGParseDeviceState(NSDictionary *_Nonnull report);

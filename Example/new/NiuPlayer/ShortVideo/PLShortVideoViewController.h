@@ -14,4 +14,6 @@ UIPageViewControllerDataSource
 >
 
 - (void)reloadController;
+- (void)onUIApplication:(BOOL)active;
+
 @end

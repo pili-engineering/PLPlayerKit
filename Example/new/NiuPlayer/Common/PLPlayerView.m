@@ -71,6 +71,10 @@ UIGestureRecognizerDelegate
     [self unsetupPlayer];
 }
 
+- (void)configureVideo:(BOOL)enableRender {
+    self.player.enableRender = enableRender;
+}
+
 - (instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
