@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
   s.author           = { "pili" => "pili-coresdk@qiniu.com" }
-  s.source           = { :http => "http://sdk-release.qnsdk.com/PLPlayerKit-universal-v3.4.0.zip" }
+  s.source           = { :http => "https://sdk-release.qnsdk.com/PLPlayerKit-universal-v3.4.0.zip" }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
