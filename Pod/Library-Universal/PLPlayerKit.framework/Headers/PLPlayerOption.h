@@ -188,6 +188,17 @@ extern NSString * _Nullable PLPlayerOptionKeyVideoCacheExtensionName;
 extern NSString * _Nullable PLPlayerOptionKeySDKID;
 
 /**
+ http 的 header
+ 
+ @discussion 该参数用于设置 http 的 header
+ 
+ @warning 不可包含 "\n" 或 "\r"，包含"\n" 或 "\r" 则设置无效
+ 
+ @since v3.4.0
+ */
+extern NSString * _Nullable PLPlayerOptionKeyHeadUserAgent;
+
+/**
  PLPlayer 的可选配置类，在初始化 PLPlayer 对象的时候传入其实例进行 PLPlayer 的可选项配置
  
  @since v1.0.0

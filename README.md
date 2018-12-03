@@ -244,6 +244,22 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.4.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.0.md))
+
+- 功能
+	- 支持用户代理设置
+	- 支持 FMP4 格式 
+	- 添加 IO 缓存功能
+
+- 缺陷
+	- 修复使用硬解码的时候截图崩溃问题
+	- 修复使用硬解码的时候 seek 错误的问题
+	- 修复播放 HTTP-FLV 直播流重连失败的问题 
+	- 修复播放 FLV 时间戳错误问题
+	- 修复部分 MP4 文件循环播放失败的问题
+- 优化
+	- 去掉对 i386 模拟器的支持，减小 SDK 体积
+
 - 3.3.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.3.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.3.3.md))
 - 功能
    - 支持真机 bitcode

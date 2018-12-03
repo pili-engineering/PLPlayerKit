@@ -253,10 +253,19 @@ extern NSString * _Nonnull playerVersion();
  
  @param player 调用该方法的 PLPlayer 对象
  @param SEIData SEI数据
- 
  @since v3.0.1
  */
-- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData;
+- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData __deprecated_msg("Use player:SEIData:ts: instead");
+
+/**
+ 回调 SEI 数据
+ 
+ @param player 调用该方法的 PLPlayer 对象
+ @param SEIData SEI数据
+ @param ts 含有SEI数据的视频帧对应的时间戳
+ @since v3.4.0
+ */
+- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData ts:(int64_t)ts;
 
 /**
  音视频渲染首帧回调通知
