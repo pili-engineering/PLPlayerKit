@@ -5,8 +5,11 @@
 ```
 PLPlayer.h
 ```
-- *Modified* `PLPlayer`
-    - *Added* `- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData __deprecated_msg("Use player:SEIData:ts: instead");`
+- *Deprecated* `- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData __deprecated_msg("Use player:SEIData:ts: instead");`
 
 
-None
+```
+PLPlayerOption.h
+```
+- *Added* `extern NSString * _Nullable PLPlayerOptionKeyHeadUserAgent;
+`
