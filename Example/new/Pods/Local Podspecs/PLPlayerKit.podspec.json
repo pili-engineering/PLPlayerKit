@@ -8,7 +8,7 @@
     "pili": "pili-coresdk@qiniu.com"
   },
   "source": {
-    "http": "http://sdk-release.qnsdk.com/PLPlayerKit-iphoneos-v3.4.0.zip"
+    "http": "https://sdk-release.qnsdk.com/PLPlayerKit-iphoneos-v3.4.0.zip"
   },
   "platforms": {
     "ios": "8.0"
