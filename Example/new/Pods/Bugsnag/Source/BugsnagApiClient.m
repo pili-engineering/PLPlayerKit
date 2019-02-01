@@ -135,6 +135,10 @@
     return request;
 }
 
+- (void)dealloc {
+    [self.sendQueue cancelAllOperations];
+}
+
 @end
 
 @implementation BSGDelayOperation

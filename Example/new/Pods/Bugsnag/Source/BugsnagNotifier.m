@@ -41,7 +41,7 @@
 #import <AppKit/AppKit.h>
 #endif
 
-NSString *const NOTIFIER_VERSION = @"5.16.3";
+NSString *const NOTIFIER_VERSION = @"5.17.3";
 NSString *const NOTIFIER_URL = @"https://github.com/bugsnag/bugsnag-cocoa";
 NSString *const BSTabCrash = @"crash";
 NSString *const BSAttributeDepth = @"depth";
@@ -82,37 +82,23 @@ static bool hasRecordedSessions;
  *  @param writer report writer which will receive updated metadata
  */
 void BSSerializeDataCrashHandler(const BSG_KSCrashReportWriter *writer, int type) {
-    BOOL userReported = BSG_KSCrashTypeUserReported == type;
-
+    BOOL isCrash = BSG_KSCrashTypeUserReported != type;
     if (hasRecordedSessions) { // a session is available
         // persist session info
         writer->addStringElement(writer, "id", (const char *) sessionId);
         writer->addStringElement(writer, "startedAt", (const char *) sessionStartDate);
         writer->addUIntegerElement(writer, "handledCount", handledCount);
-
-        if (!userReported) {
-            writer->addUIntegerElement(writer, "unhandledCount", 1);
-        } else {
-            writer->addUIntegerElement(writer, "unhandledCount", 0);
+        writer->addUIntegerElement(writer, "unhandledCount", isCrash ? 1 : 0);
+    }
+    if (isCrash) {
+        if (bsg_g_bugsnag_data.configJSON) {
+            writer->addJSONElement(writer, "config", bsg_g_bugsnag_data.configJSON);
         }
-    }
-    if (bsg_g_bugsnag_data.configJSON) {
-        writer->addJSONElement(writer, "config", bsg_g_bugsnag_data.configJSON);
-    }
-    if (bsg_g_bugsnag_data.stateJSON) {
-        writer->addJSONElement(writer, "state", bsg_g_bugsnag_data.stateJSON);
-    }
-    if (bsg_g_bugsnag_data.metaDataJSON) {
-        writer->addJSONElement(writer, "metaData", bsg_g_bugsnag_data.metaDataJSON);
-    }
-
-    // write additional user-supplied metadata
-    if (userReported) {
-        if (bsg_g_bugsnag_data.handledState) {
-            writer->addJSONElement(writer, "handledState", bsg_g_bugsnag_data.handledState);
+        if (bsg_g_bugsnag_data.stateJSON) {
+            writer->addJSONElement(writer, "state", bsg_g_bugsnag_data.stateJSON);
         }
-        if (bsg_g_bugsnag_data.userOverridesJSON) {
-            writer->addJSONElement(writer, "overrides", bsg_g_bugsnag_data.userOverridesJSON);
+        if (bsg_g_bugsnag_data.metaDataJSON) {
+            writer->addJSONElement(writer, "metaData", bsg_g_bugsnag_data.metaDataJSON);
         }
     }
 
@@ -537,19 +523,6 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
     if (block) {
         block(report);
     }
-
-    [self.metaDataLock lock];
-    BSSerializeJSONDictionary([report.handledState toJson],
-                              &bsg_g_bugsnag_data.handledState);
-    BSSerializeJSONDictionary(report.metaData,
-                              &bsg_g_bugsnag_data.metaDataJSON);
-    BSSerializeJSONDictionary(report.overrides,
-                              &bsg_g_bugsnag_data.userOverridesJSON);
-
-    [self.state addAttribute:BSGKeySeverity
-                   withValue:BSGFormatSeverity(report.severity)
-               toTabWithName:BSTabCrash];
-
     //    We discard 5 stack frames (including this one) by default,
     //    and sum that with the number specified by report.depth:
     //
@@ -560,23 +533,21 @@ NSString *const kAppWillTerminate = @"App Will Terminate";
     //    3 -[BugsnagCrashSentry reportUserException:reason:]
     //    4 -[BugsnagNotifier notify:message:block:]
 
-    NSNumber *depth = @(BSGNotifierStackFrameCount + report.depth);
-    [self.state addAttribute:BSAttributeDepth
-                   withValue:depth
-               toTabWithName:BSTabCrash];
+    int depth = (int)(BSGNotifierStackFrameCount + report.depth);
 
     NSString *reportName =
         report.errorClass ?: NSStringFromClass([NSException class]);
     NSString *reportMessage = report.errorMessage ?: @"";
 
-    [self.crashSentry reportUserException:reportName reason:reportMessage];
-    bsg_g_bugsnag_data.userOverridesJSON = NULL;
-    bsg_g_bugsnag_data.handledState = NULL;
+    [self.crashSentry reportUserException:reportName
+                                   reason:reportMessage
+                             handledState:[handledState toJson]
+                                 appState:[self.state toDictionary]
+                        callbackOverrides:report.overrides
+                                 metadata:[report.metaData copy]
+                                   config:[self.configuration.config toDictionary]
+                             discardDepth:depth];
 
-    // Restore metaData to pre-crash state.
-    [self.metaDataLock unlock];
-    [self metaDataChanged:self.configuration.metaData];
-    [[self state] clearTab:BSTabCrash];
     [self addBreadcrumbWithBlock:^(BugsnagBreadcrumb *_Nonnull crumb) {
       crumb.type = BSGBreadcrumbTypeError;
       crumb.name = reportName;

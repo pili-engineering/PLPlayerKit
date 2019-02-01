@@ -347,30 +347,23 @@ IMPLEMENT_EXCLUSIVE_SHARED_INSTANCE(BSG_KSCrash)
 
 - (void)reportUserException:(NSString *)name
                      reason:(NSString *)reason
-                   language:(NSString *)language
-                 lineOfCode:(NSString *)lineOfCode
-                 stackTrace:(NSArray *)stackTrace
+               handledState:(NSDictionary *)handledState
+                   appState:(NSDictionary *)appState
+          callbackOverrides:(NSDictionary *)overrides
+                   metadata:(NSDictionary *)metadata
+                     config:(NSDictionary *)config
+               discardDepth:(int)depth
            terminateProgram:(BOOL)terminateProgram {
     const char *cName = [name cStringUsingEncoding:NSUTF8StringEncoding];
     const char *cReason = [reason cStringUsingEncoding:NSUTF8StringEncoding];
-    const char *cLanguage =
-        [language cStringUsingEncoding:NSUTF8StringEncoding];
-    const char *cLineOfCode =
-        [lineOfCode cStringUsingEncoding:NSUTF8StringEncoding];
-    NSError *error = nil;
-    NSData *jsonData =
-        [BSG_KSJSONCodec encode:stackTrace options:0 error:&error];
-    if (jsonData == nil || error != nil) {
-        BSG_KSLOG_ERROR(@"Error encoding stack trace to JSON: %@", error);
-        // Don't return, since we can still record other useful information.
-    }
-    NSString *jsonString =
-        [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    const char *cStackTrace =
-        [jsonString cStringUsingEncoding:NSUTF8StringEncoding];
-
-    bsg_kscrash_reportUserException(cName, cReason, cLanguage, cLineOfCode,
-                                    cStackTrace, terminateProgram);
+    bsg_kscrash_reportUserException(cName, cReason,
+                                    [self encodeAsJSONString:handledState],
+                                    [self encodeAsJSONString:overrides],
+                                    [self encodeAsJSONString:metadata],
+                                    [self encodeAsJSONString:appState],
+                                    [self encodeAsJSONString:config],
+                                    depth,
+                                    terminateProgram);
 
     // If bsg_kscrash_reportUserException() returns, we did not terminate.
     // Set up IDs and paths for the next crash.
@@ -472,6 +465,19 @@ BSG_SYNTHESIZE_CRASH_STATE_PROPERTY(BOOL, crashedLastLaunch)
     NSMutableData *mutable = [NSMutableData dataWithData:data];
     [mutable appendBytes:"\0" length:1];
     return mutable;
+}
+
+- (const char *)encodeAsJSONString:(id)object {
+    NSError *error = nil;
+    NSData *jsonData = [BSG_KSJSONCodec encode:object options:0 error:&error];
+    if (jsonData == nil || error != nil) {
+        BSG_KSLOG_ERROR(@"Error encoding object to JSON: %@", error);
+        // we can still record other useful information from the report
+        return NULL;
+    }
+    NSString *jsonString =
+    [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return [jsonString cStringUsingEncoding:NSUTF8StringEncoding];
 }
 
 // ============================================================================
