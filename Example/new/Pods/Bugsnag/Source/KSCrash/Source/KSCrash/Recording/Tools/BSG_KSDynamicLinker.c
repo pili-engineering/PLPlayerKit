@@ -37,7 +37,9 @@ uint32_t bsg_ksdlimageNamed(const char *const imageName, bool exactMatch) {
 
         for (uint32_t iImg = 0; iImg < imageCount; iImg++) {
             const char *name = _dyld_get_image_name(iImg);
-            if (exactMatch) {
+            if (name == NULL) {
+                continue; // name is null if the index is out of range per dyld(3)
+            } else if (exactMatch) {
                 if (strcmp(name, imageName) == 0) {
                     return iImg;
                 }
@@ -77,6 +79,9 @@ const uint8_t *bsg_ksdlimageUUID(const char *const imageName, bool exactMatch) {
 }
 
 uintptr_t bsg_ksdlfirstCmdAfterHeader(const struct mach_header *const header) {
+    if (header == NULL) {
+      return 0;
+    }
     switch (header->magic) {
     case MH_MAGIC:
     case MH_CIGAM:
@@ -131,6 +136,9 @@ uint32_t bsg_ksdlimageIndexContainingAddress(const uintptr_t address) {
 
 uintptr_t bsg_ksdlsegmentBaseOfImageIndex(const uint32_t idx) {
     const struct mach_header *header = _dyld_get_image_header(idx);
+    if (header == NULL) {
+        return 0;
+    }
 
     // Look for a segment command and return the file image address.
     uintptr_t cmdPtr = bsg_ksdlfirstCmdAfterHeader(header);
@@ -169,6 +177,9 @@ bool bsg_ksdldladdr(const uintptr_t address, Dl_info *const info) {
         return false;
     }
     const struct mach_header *header = _dyld_get_image_header(idx);
+    if (header == NULL) {
+        return false;
+    }
     const uintptr_t imageVMAddrSlide =
         (uintptr_t)_dyld_get_image_vmaddr_slide(idx);
     const uintptr_t addressWithSlide = address - imageVMAddrSlide;

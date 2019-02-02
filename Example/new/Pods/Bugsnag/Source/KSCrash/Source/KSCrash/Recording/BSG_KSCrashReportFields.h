@@ -129,6 +129,12 @@
 #define BSG_KSCrashField_Signal "signal"
 #define BSG_KSCrashField_Subcode "subcode"
 #define BSG_KSCrashField_UserReported "user_reported"
+#define BSG_KSCrashField_Overrides "overrides"
+#define BSG_KSCrashField_HandledState "handledState"
+#define BSG_KSCrashField_Metadata "metaData"
+#define BSG_KSCrashField_State "state"
+#define BSG_KSCrashField_Config "config"
+#define BSG_KSCrashField_DiscardDepth "depth"
 
 #pragma mark - Process State -
 

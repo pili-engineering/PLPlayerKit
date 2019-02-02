@@ -242,12 +242,16 @@ void bsg_kscrash_setCrashNotifyCallback(
 }
 
 void bsg_kscrash_reportUserException(const char *name, const char *reason,
-                                     const char *language,
-                                     const char *lineOfCode,
-                                     const char *stackTrace,
+                                     const char *handledState,
+                                     const char *overrides,
+                                     const char *metadata,
+                                     const char *appState,
+                                     const char *config,
+                                     int discardDepth,
                                      bool terminateProgram) {
-    bsg_kscrashsentry_reportUserException(name, reason, language, lineOfCode,
-                                          stackTrace, terminateProgram);
+    bsg_kscrashsentry_reportUserException(name, reason, handledState, overrides,
+                                          metadata, appState, config, discardDepth,
+                                          terminateProgram);
 }
 
 void bsg_kscrash_setSuspendThreadsForUserReported(

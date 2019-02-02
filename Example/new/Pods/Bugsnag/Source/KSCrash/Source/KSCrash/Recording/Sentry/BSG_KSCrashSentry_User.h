@@ -55,22 +55,25 @@ void bsg_kscrashsentry_uninstallUserExceptionHandler(void);
  *
  * @param reason A description of why the exception occurred.
  *
- * @param language A unique language identifier.
- *
- * @param lineOfCode A copy of the offending line of code (NULL = ignore).
- *
- * @param stackTrace JSON encoded array containing stack trace information (one
- * frame per array entry). The frame structure can be anything you want,
- * including bare strings.
+ * @param handledState The severity, reason, and handled-ness of the report
+ * @param appState breadcrumbs and other app environmental info
+ * @param overrides Report fields overridden by callbacks, collated in the
+ *                  final report
+ * @param metadata additional information to attach to the report
+ * @param discardDepth The number of frames to discard from the top of the
+ *                     stacktrace
  *
  * @param terminateProgram If true, do not return from this function call.
  * Terminate the program instead.
  */
-void bsg_kscrashsentry_reportUserException(const char *name, const char *reason,
-                                           const char *language,
-                                           const char *lineOfCode,
-                                           const char *stackTrace,
-                                           bool terminateProgram);
+    void bsg_kscrashsentry_reportUserException(const char *name, const char *reason,
+                                               const char *handledState,
+                                               const char *overrides,
+                                               const char *metadata,
+                                               const char *appState,
+                                               const char *config,
+                                               int discardDepth,
+                                               bool terminateProgram);
 
 #ifdef __cplusplus
 }

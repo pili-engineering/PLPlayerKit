@@ -26,6 +26,7 @@
 
 #import <Foundation/Foundation.h>
 
+#import "BSG_KSSystemCapabilities.h"
 #import "BSG_KSCrashReportFilterCompletion.h"
 #import "BSG_KSCrashReportWriter.h"
 #import "BSG_KSCrashType.h"
@@ -171,24 +172,25 @@ typedef enum {
  * application will terminate with an abort().
  *
  * @param name The exception name (for namespacing exception types).
- *
- * @param reason A description of why the exception occurred.
- *
- * @param language A unique language identifier.
- *
- * @param lineOfCode A copy of the offending line of code (nil = ignore).
- *
- * @param stackTrace An array of frames (dictionaries or strings) representing
- * the call stack leading to the exception (nil = ignore).
- *
+ * @param reason A description of why the exception occurred
+ * @param handledState The severity, reason, and handled-ness of the report
+ * @param appState breadcrumbs and other app environmental info
+ * @param overrides Report fields overridden by callbacks, collated in the
+ *        final report
+ * @param metadata additional information to attach to the report
+ * @param config delivery options
+ * @param depth The number of frames to discard from the top of the stacktrace
  * @param terminateProgram If true, do not return from this function call.
  * Terminate the program instead.
  */
 - (void)reportUserException:(NSString *)name
                      reason:(NSString *)reason
-                   language:(NSString *)language
-                 lineOfCode:(NSString *)lineOfCode
-                 stackTrace:(NSArray *)stackTrace
+               handledState:(NSDictionary *)handledState
+                   appState:(NSDictionary *)appState
+          callbackOverrides:(NSDictionary *)overrides
+                   metadata:(NSDictionary *)metadata
+                     config:(NSDictionary *)config
+               discardDepth:(int)depth
            terminateProgram:(BOOL)terminateProgram;
 
 /** If YES, user reported exceptions will suspend all threads during report

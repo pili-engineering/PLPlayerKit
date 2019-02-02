@@ -33,6 +33,7 @@ NSDictionary *BSGParseDevice(NSDictionary *report) {
                          [report valueForKeyPath:@"system.memory.free"],
                          @"freeMemory");
     
+    BSGDictSetSafeObject(device, [report valueForKeyPath:@"report.timestamp"], @"time");
     
     NSFileManager *fileManager = [NSFileManager defaultManager];
     NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(

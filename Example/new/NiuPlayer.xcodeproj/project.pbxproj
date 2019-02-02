@@ -397,7 +397,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD/JGProgressHUD.bundle",
 				"${PODS_ROOT}/WeiboSDK/libWeiboSDK/WeiboSDK.bundle",
 			);
@@ -408,7 +408,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		87C27106053AD8212AE45676 /* Upload Bugsnag dSYM */ = {
@@ -432,7 +432,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-frameworks.sh",
 				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -441,7 +441,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

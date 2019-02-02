@@ -25,13 +25,17 @@
 //
 
 #include "BSG_KSCrashSentry_MachException.h"
+#include "BSG_KSSystemCapabilities.h"
 
 //#define BSG_KSLogger_LocalLevel TRACE
 #include "BSG_KSLogger.h"
 
 #if BSG_KSCRASH_HAS_MACH
 
+#include "BSG_KSMach.h"
+#include "BSG_KSCrashSentry_Private.h"
 #include <pthread.h>
+#include <mach/mach.h>
 
 // ============================================================================
 #pragma mark - Constants -
@@ -144,13 +148,13 @@ static BSG_KSCrash_SentryContext *bsg_g_context;
  *
  * @param machineContext The machine context to fill out.
  */
-bool ksmachexc_i_fetchMachineState(
+bool bsg_ksmachexc_i_fetchMachineState(
     const thread_t thread, BSG_STRUCT_MCONTEXT_L *const machineContext) {
-    if (!ksmach_threadState(thread, machineContext)) {
+    if (!bsg_ksmachthreadState(thread, machineContext)) {
         return false;
     }
 
-    if (!ksmach_exceptionState(thread, machineContext)) {
+    if (!bsg_ksmachexceptionState(thread, machineContext)) {
         return false;
     }
 
@@ -161,7 +165,7 @@ bool ksmachexc_i_fetchMachineState(
  */
 void bsg_ksmachexc_i_restoreExceptionPorts(void) {
     BSG_KSLOG_DEBUG("Restoring original exception ports.");
-    if (g_previousExceptionPorts.count == 0) {
+    if (bsg_g_previousExceptionPorts.count == 0) {
         BSG_KSLOG_DEBUG("Original exception ports were already restored.");
         return;
     }
@@ -203,7 +207,7 @@ void *ksmachexc_i_handleExceptions(void *const userData) {
     pthread_setname_np(threadName);
     if (threadName == kThreadSecondary) {
         BSG_KSLOG_DEBUG("This is the secondary thread. Suspending.");
-        thread_suspend(bsg_ksmach_thread_self());
+        thread_suspend(bsg_ksmachthread_self());
     }
 
     for (;;) {
@@ -235,18 +239,18 @@ void *ksmachexc_i_handleExceptions(void *const userData) {
 
         // Switch to the secondary thread if necessary, or uninstall the handler
         // to avoid a death loop.
-        if (bsg_ksmach_thread_self() == bsg_g_primaryMachThread) {
+        if (bsg_ksmachthread_self() == bsg_g_primaryMachThread) {
             BSG_KSLOG_DEBUG("This is the primary exception thread. Activating "
                             "secondary thread.");
-            if (thread_resume(g_secondaryMachThread) != KERN_SUCCESS) {
+            if (thread_resume(bsg_g_secondaryMachThread) != KERN_SUCCESS) {
                 BSG_KSLOG_DEBUG("Could not activate secondary thread. "
                                 "Restoring original exception ports.");
-                ksmachexc_i_restoreExceptionPorts();
+                bsg_ksmachexc_i_restoreExceptionPorts();
             }
         } else {
             BSG_KSLOG_DEBUG("This is the secondary exception thread. Restoring "
                             "original exception ports.");
-            ksmachexc_i_restoreExceptionPorts();
+            bsg_ksmachexc_i_restoreExceptionPorts();
         }
 
         if (wasHandlingCrash) {
@@ -326,7 +330,7 @@ bool bsg_kscrashsentry_installMachHandler(
     }
     bsg_g_installed = 1;
 
-    if (bsg_ksmach_isBeingTraced()) {
+    if (bsg_ksmachisBeingTraced()) {
         // Different debuggers hook into different exception types.
         // For example, GDB uses EXC_BAD_ACCESS for single stepping,
         // and LLDB uses EXC_SOFTWARE to stop a debug session.
@@ -341,7 +345,7 @@ bool bsg_kscrashsentry_installMachHandler(
     BSG_KSLOG_DEBUG("Backing up original exception ports.");
     kr = task_get_exception_ports(
         thisTask, mask, bsg_g_previousExceptionPorts.masks,
-        &g_previousExceptionPorts.count, bsg_g_previousExceptionPorts.ports,
+        &bsg_g_previousExceptionPorts.count, bsg_g_previousExceptionPorts.ports,
         bsg_g_previousExceptionPorts.behaviors,
         bsg_g_previousExceptionPorts.flavors);
     if (kr != KERN_SUCCESS) {
@@ -349,10 +353,10 @@ bool bsg_kscrashsentry_installMachHandler(
         goto failed;
     }
 
-    if (g_exceptionPort == MACH_PORT_NULL) {
+    if (bsg_g_exceptionPort == MACH_PORT_NULL) {
         BSG_KSLOG_DEBUG("Allocating new port with receive rights.");
         kr = mach_port_allocate(thisTask, MACH_PORT_RIGHT_RECEIVE,
-                                &g_exceptionPort);
+                                &bsg_g_exceptionPort);
         if (kr != KERN_SUCCESS) {
             BSG_KSLOG_ERROR("mach_port_allocate: %s", mach_error_string(kr));
             goto failed;
@@ -381,26 +385,26 @@ bool bsg_kscrashsentry_installMachHandler(
     pthread_attr_init(&attr);
     attributes_created = true;
     pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-    error = pthread_create(&g_secondaryPThread, &attr,
+    error = pthread_create(&bsg_g_secondaryPThread, &attr,
                            &ksmachexc_i_handleExceptions, kThreadSecondary);
     if (error != 0) {
         BSG_KSLOG_ERROR("pthread_create_suspended_np: %s", strerror(error));
         goto failed;
     }
-    bsg_g_secondaryMachThread = pthread_mach_thread_np(g_secondaryPThread);
-    context->reservedThreads[KSCrashReservedThreadTypeMachSecondary] =
+    bsg_g_secondaryMachThread = pthread_mach_thread_np(bsg_g_secondaryPThread);
+    context->reservedThreads[BSG_KSCrashReservedThreadTypeMachSecondary] =
         bsg_g_secondaryMachThread;
 
     BSG_KSLOG_DEBUG("Creating primary exception thread.");
-    error = pthread_create(&g_primaryPThread, &attr,
+    error = pthread_create(&bsg_g_primaryPThread, &attr,
                            &ksmachexc_i_handleExceptions, kThreadPrimary);
     if (error != 0) {
         BSG_KSLOG_ERROR("pthread_create: %s", strerror(error));
         goto failed;
     }
     pthread_attr_destroy(&attr);
-    bsg_g_primaryMachThread = pthread_mach_thread_np(g_primaryPThread);
-    context->reservedThreads[KSCrashReservedThreadTypeMachPrimary] =
+    bsg_g_primaryMachThread = pthread_mach_thread_np(bsg_g_primaryPThread);
+    context->reservedThreads[BSG_KSCrashReservedThreadTypeMachPrimary] =
         bsg_g_primaryMachThread;
 
     BSG_KSLOG_DEBUG("Mach exception handler installed.");
@@ -426,26 +430,26 @@ void bsg_kscrashsentry_uninstallMachHandler(void) {
     // NOTE: Do not deallocate the exception port. If a secondary crash occurs
     // it will hang the process.
 
-    ksmachexc_i_restoreExceptionPorts();
+    bsg_ksmachexc_i_restoreExceptionPorts();
 
     thread_t thread_self = bsg_ksmachthread_self();
 
-    if (g_primaryPThread != 0 && bsg_g_primaryMachThread != thread_self) {
+    if (bsg_g_primaryPThread != 0 && bsg_g_primaryMachThread != thread_self) {
         BSG_KSLOG_DEBUG("Cancelling primary exception thread.");
         if (bsg_g_context->handlingCrash) {
-            thread_terminate(g_primaryMachThread);
+            thread_terminate(bsg_g_primaryMachThread);
         } else {
-            pthread_cancel(g_primaryPThread);
+            pthread_cancel(bsg_g_primaryPThread);
         }
         bsg_g_primaryMachThread = 0;
         bsg_g_primaryPThread = 0;
     }
-    if (g_secondaryPThread != 0 && bsg_g_secondaryMachThread != thread_self) {
+    if (bsg_g_secondaryPThread != 0 && bsg_g_secondaryMachThread != thread_self) {
         BSG_KSLOG_DEBUG("Cancelling secondary exception thread.");
         if (bsg_g_context->handlingCrash) {
-            thread_terminate(g_secondaryMachThread);
+            thread_terminate(bsg_g_secondaryMachThread);
         } else {
-            pthread_cancel(g_secondaryPThread);
+            pthread_cancel(bsg_g_secondaryPThread);
         }
         bsg_g_secondaryMachThread = 0;
         bsg_g_secondaryPThread = 0;

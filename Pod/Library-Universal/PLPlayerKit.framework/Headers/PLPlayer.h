@@ -152,7 +152,7 @@ typedef NS_ENUM(NSInteger, PLPlayerFirstRenderType) {
  
  @since     v2.2.3
  */
-extern NSString * _Nonnull playerVersion();
+extern NSString * _Nonnull playerVersion(void);
 
 @class PLPlayer;
 /**
@@ -529,6 +529,15 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  @since v3.0.0
  */
 @property (nonatomic, strong) NSString * _Nullable DRMKey;
+
+/**
+ 用户秘钥
+ 
+ @warning 该属性仅对使用 七牛转码 加密的 MP4 点播有效
+ 
+ @since v3.4.1
+ */
+@property (nonatomic, strong) NSString * _Nullable DrmCompanyKey;
 
 /**
  变速播放，范围是 0.2-32，默认是 1.0

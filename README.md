@@ -244,6 +244,22 @@ self.player.delegate = self;
 - Speex: v1.2.0
 
 ## 版本历史
+- 3.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.1.md))
+
+- 功能 
+	- HLS 支持 G711
+	- 支持 HTTPS 异步连接 
+	- 支持 DRM 解密
+
+- 缺陷
+	- 修复重连时间过长的问题
+	- 修复硬解码的 crash 问题 
+	- 修复偶现 dealloc 调用 weak self 的 crash 问题
+
+- 优化
+	- 改善 RTMP 的重连速度
+	- 改善快速切换 URL 时 API 的调用耗时
+
 - 3.4.0 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.0.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.0.md))
 
 - 功能
