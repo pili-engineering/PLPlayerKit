@@ -252,7 +252,7 @@ self.player.delegate = self;
 	- 修复偶现 4G 网络下打开链接失败的问题
 	- 修复在后台时直播流分辨率变化，回到前台播放显示异常的问题
 	- 解决直播流分辨率变化，回调宽高不准确的问题
-	- 解决转推后部分 flv 流播放容易发生频繁缓冲的问题 
+	- 解决部分 flv 流转推后，播放过程中频繁缓冲的问题 
     
 - 3.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.1.md))
 
