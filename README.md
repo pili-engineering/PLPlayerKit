@@ -245,6 +245,11 @@ self.player.delegate = self;
 
 ## 版本历史
 
+- 3.4.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.3.md))
+
+- 缺陷
+    - 修复 iOS13 下，playerView 修改 contentMode 崩溃的问题
+
 - 3.4.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.2.md))
 
 - 缺陷

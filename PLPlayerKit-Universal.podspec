@@ -9,12 +9,12 @@
 
 Pod::Spec.new do |s|
   s.name             = "PLPlayerKit"
-  s.version          = "3.4.2"
+  s.version          = "3.4.3"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
   s.author           = { "pili" => "pili-coresdk@qiniu.com" }
-  s.source           = { :http => "https://sdk-release.qnsdk.com/PLPlayerKit-universal-v3.4.2.zip" }
+  s.source           = { :http => "https://sdk-release.qnsdk.com/PLPlayerKit-universal-v3.4.3.zip" }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
