@@ -146,12 +146,12 @@ didOutputMetadataObjects:(NSArray *)metadataObjects
             self.scanResult = [metadataObj stringValue];
             [self performSelectorOnMainThread:@selector(stopReading) withObject:nil waitUntilDone:NO];
             
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
                                                                 message:self.scanResult
                                                                delegate:self
                                                       cancelButtonTitle:@"cancel"
                                                       otherButtonTitles:@"OK", nil];
-            dispatch_async(dispatch_get_main_queue(), ^{
                 [alertView show];
             });
         }
