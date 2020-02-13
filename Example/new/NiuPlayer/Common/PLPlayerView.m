@@ -73,6 +73,13 @@ UIGestureRecognizerDelegate
 
 - (void)configureVideo:(BOOL)enableRender {
     self.player.enableRender = enableRender;
+    
+    // 避免在未更新画面渲染的情况下，动态翻转移动画布 2020-02-13 hera
+    if (!enableRender) {
+        [self removeFullStreenNotify];
+    } else{
+        [self addFullStreenNotify];
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame {
