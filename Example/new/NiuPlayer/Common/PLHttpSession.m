@@ -8,12 +8,12 @@
 
 #import "PLHttpSession.h"
 
-#define REQUEST_HOST    @"http://api-demo.qnsdk.com"
-#define PLAY_HOST       @"http://demo-videos.qnsdk.com"
+#define REQUEST_HOST    @"https://api-demo.qnsdk.com"
+#define PLAY_HOST       @"https://demo-videos.qnsdk.com"
 
 @implementation PLHttpSession
 
-//    @"http://api-demo.qnsdk.com/v1/kodo/bucket/demo-videos?prefix=shortvideo"
+//    @"https://api-demo.qnsdk.com/v1/kodo/bucket/demo-videos?prefix=shortvideo"
 + (void)requestShortMediaList:(void (^)(NSArray *, NSError *))completeBlock {
     
     NSString *urlString = [REQUEST_HOST stringByAppendingPathComponent:@"v1/kodo/bucket/demo-videos?prefix=shortvideo"];
@@ -32,7 +32,7 @@
     }];
 }
 
-//    @"http://api-demo.qnsdk.com/v1/kodo/bucket/demo-videos?prefix=movies"
+//    @"https://api-demo.qnsdk.com/v1/kodo/bucket/demo-videos?prefix=movies"
 + (void)requestLongMediaList:(void (^)(NSArray *, NSError *))completeBlock {
     
     NSString *urlString = [REQUEST_HOST stringByAppendingPathComponent:@"v1/kodo/bucket/demo-videos?prefix=movies"];
