@@ -245,6 +245,18 @@ self.player.delegate = self;
 
 ## 版本历史
 
+- 3.4.4 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.4.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.4.md))
+
+- 缺陷
+    - 修复硬解码画面比例有概率错误的问题
+    - 修复硬解码特定视频内存上涨的问题
+    - 修复带端口号的 hls 播放失败的问题
+    - 修复开启缓存特定视频打开失败的问题
+    - 修复开启缓存特定视频没有声音的问题
+    - 修复纯音频播放偶现 crash 的问题
+    - 修复弱网下特定视频卡死的问题
+    - 修复特定视频 seek 内存泄漏的问题
+    
 - 3.4.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.3.md))
 
 - 缺陷
