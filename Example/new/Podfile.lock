@@ -21,9 +21,9 @@ PODS:
   - JGProgressHUD (2.0.3)
   - Masonry (1.1.0)
   - MMMaterialDesignSpinner (0.2.5)
-  - PLPlayerKit (3.4.3):
-    - PLPlayerKit/iphoneos (= 3.4.3)
-  - PLPlayerKit/iphoneos (3.4.3)
+  - PLPlayerKit (3.4.5):
+    - PLPlayerKit/iphoneos (= 3.4.5)
+  - PLPlayerKit/iphoneos (3.4.5)
   - SDWebImage (4.4.5):
     - SDWebImage/Core (= 4.4.5)
   - SDWebImage/Core (4.4.5)
@@ -61,12 +61,12 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
   Bugsnag: a56a5204ebd35e44e56c1f703824705b1d4b5b97
-  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
-  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
+  Crashlytics: a33af323773f73904037dc2e684cd2f0d29f4fe2
+  Fabric: 09ef2d9b99b104702bede1acaf469fb8f20a9146
   JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
   Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
   MMMaterialDesignSpinner: a548042720c2e5f04212048483085d7942ac3e81
-  PLPlayerKit: 668eee5a8da8fece45f3df6d62b955f812483f1d
+  PLPlayerKit: 808684cd063f695f91ef07ec0b1237523b0f111d
   SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
   WeiboSDK: acb067053668102cf07d01aa7604350162c2e466
 

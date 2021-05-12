@@ -434,10 +434,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-NiuPlayer/Pods-NiuPlayer-frameworks.sh",
 				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework",
+				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PLPlayerKit.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/PLPlayerKit.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -618,7 +620,7 @@
 				);
 				INFOPLIST_FILE = NiuPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.4.4;
+				MARKETING_VERSION = 3.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qbox.niuplayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -648,7 +650,7 @@
 				);
 				INFOPLIST_FILE = NiuPlayer/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.4.4;
+				MARKETING_VERSION = 3.4.5;
 				PRODUCT_BUNDLE_IDENTIFIER = com.qbox.niuplayer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";

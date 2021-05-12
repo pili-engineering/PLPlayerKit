@@ -296,10 +296,12 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-frameworks.sh",
 				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework",
+				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PLPlayerKit.framework",
+				"${DWARF_DSYM_FOLDER_PATH}/PLPlayerKit.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -439,7 +441,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3.4.3;
+				CURRENT_PROJECT_VERSION = 3.4.5;
 				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLPlayerKit/PLPlayerKit-Prefix.pch";
@@ -449,7 +451,7 @@
 					"$(inherited)",
 					"\"$(PODS_ROOT)/../../Pod/Library/PLPlayerKit.framework\"",
 				);
-				MARKETING_VERSION = 3.4.4;
+				MARKETING_VERSION = 3.4.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"-ObjC",
@@ -490,7 +492,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CURRENT_PROJECT_VERSION = 3.4.3;
+				CURRENT_PROJECT_VERSION = 3.4.5;
 				ENABLE_BITCODE = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "PLPlayerKit/PLPlayerKit-Prefix.pch";
@@ -500,7 +502,7 @@
 					"$(inherited)",
 					"\"$(PODS_ROOT)/../../Pod/Library/PLPlayerKit.framework\"",
 				);
-				MARKETING_VERSION = 3.4.4;
+				MARKETING_VERSION = 3.4.5;
 				OTHER_LDFLAGS = (
 					"-ObjC",
 					"-l\"iconv\"",
