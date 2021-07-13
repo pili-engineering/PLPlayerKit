@@ -245,6 +245,16 @@ self.player.delegate = self;
 
 ## 版本历史
 
+- 3.4.6 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.6.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.6.md))
+
+- 新增
+  - 视频预缓存功能
+  - 本地缓存目录加密功能 
+- 缺陷
+  - 修复 SEI 数据回调时，数组越界导致崩溃。
+  - 修复打开视频流数据回调时，视频流 fromat 改变导致概率性 crash 的问题
+  - 修复视频流的 NAL 头格式不一致时，SEI 数据没有回调 
+
 - 3.4.5 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.5.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.5.md))
 
 - 缺陷
@@ -285,7 +295,7 @@ self.player.delegate = self;
 	- 修复在后台时直播流分辨率变化，回到前台播放显示异常的问题
 	- 解决直播流分辨率变化，回调宽高不准确的问题
 	- 解决部分 flv 流转推后，播放过程中频繁缓冲的问题 
-    
+  
 - 3.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.1.md))
 
 - 功能 

@@ -219,10 +219,10 @@ extern NSString * _Nonnull playerVersion(void);
  该功能只支持直播
  
  @param player 调用该方法的 PLPlayer 对象
- @param frame 将要渲染帧 YUV 数据。
- CVPixelBufferGetPixelFormatType 获取 YUV 的类型。
- 软解为 kCVPixelFormatType_420YpCbCr8Planar.
- 硬解为 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange.
+ @param frame 将要渲染帧 数据,
+ 通过PLPlayerOptionKeyVideoOutputFormat【kPLPlayOutputFormatBGRA】，可修改输出格式
+ 默认输出格式 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
+ 
  @param pts 显示时间戳 单位ms
  @param sarNumerator
  @param sarDenominator
@@ -510,7 +510,28 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  
  @since v2.3.0
  */
-@property (nonatomic, assign, readonly) double bitrate;
+@property (nonatomic, assign, readonly) double videoBitrate;
+
+
+/**
+ 音频流的帧率
+ 
+ @warning 该属性仅 rtmp/flv 直播有效。
+ 
+ @since v3.4.6
+ */
+@property (nonatomic, assign, readonly) int audioFPS;
+
+
+
+/**
+ 视频流的码率，单位 kb/s
+ 
+ @warning 该属性仅 rtmp/flv 直播有效。
+ 
+ @since v3.4.6
+ */
+@property (nonatomic, assign, readonly) double audioBitrate;
 
 /**
  下载速率，单位 kb/s
@@ -792,6 +813,51 @@ typedef void (^ScreenShotWithCompletionHandler)(UIImage * _Nullable image);
  *  @return 是否允许缓存下载
  */
 - (BOOL)getBufferingEnabled;
+
+/**
+ *  添加预缓存下载
+ *
+ *  @since v3.4.6
+ *
+ */
+- (void)addCacheUrl:(NSString *_Nullable)url;
+
+
+/**
+ *  移除预缓存下载
+ *
+ *  @since v3.4.6
+ *
+ */
+- (void)deleteCacheUrl:(NSString *_Nullable)url;
+
+
+/**
+ *  addIOCache
+ *
+ *  @since v3.4.6
+ *
+ */
+- (void)addIOCache:(NSString *_Nullable)url;
+
+
+/**
+ *  deleteIOCache
+ *
+ *  @since v3.4.6
+ *
+ */
+- (void)deleteIOCache:(NSString *_Nullable)url;
+
+/**
+ *  Set IOCache size
+ *
+ *  @since v3.4.6
+ *
+ */
+- (void)setIOCacheSize:(NSInteger)size;
+
+
 @end
 
 /**
