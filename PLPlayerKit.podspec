@@ -9,15 +9,17 @@
 
 Pod::Spec.new do |s|
   s.name             = "PLPlayerKit"
-  s.version          = "3.4.5"
+  s.version          = "3.4.6"
   s.summary          = "Pili iOS video player SDK, RTMP, HLS video streaming supported."
   s.homepage         = "https://github.com/pili-engineering/PLPlayerKit"
   s.license          = 'Apache License, Version 2.0'
   s.author           = { "pili" => "pili-coresdk@qiniu.com" }
-  s.source           = { :http => "https://sdk-release.qnsdk.com/PLPlayerKit-iphoneos-v3.4.5.zip" }
+  s.source           = { :http => "https://sdk-release.qnsdk.com/PLPlayerKit-iphoneos-v3.4.6.zip" }
 
   s.platform     = :ios, '8.0'
   s.requires_arc = true
+  s.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+  s.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
   s.subspec "iphoneos" do |ss1|
     ss1.vendored_framework = "Pod/Library/PLPlayerKit.framework"

@@ -71,6 +71,24 @@ typedef enum : NSUInteger {
     
 } PLPlayFormat;
 
+
+/**
+   回调输出格式
+   仅支持iOS端常见视频模式
+ */
+typedef enum : NSUInteger {
+    /**
+     * 默认nv12  即 kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange
+     */
+    kPLPlayOutputFormatYUV420,
+
+    /**
+     * BGRA
+     */
+    kPLPlayOutputFormatBGRA,
+
+} PLPlayOutputFormat;
+
 /**
  @abstract 接收/发送数据包超时时间间隔所对应的键值，单位为 s ，默认配置为 10s
  
@@ -156,6 +174,16 @@ extern NSString * _Nonnull PLPlayerOptionKeyHappyDNSEnable __deprecated_msg("Met
  */
 extern NSString * _Nullable PLPlayerOptionKeyVideoCacheFolderPath;
 
+
+/**
+ @abstract 视频缓存目录名称是否加密，默认不加密
+ 
+ @waring 当 PLPlayerOptionKeyVideoCacheFolderPath 有值时，成效
+ 
+ @since v3.4.6
+ */
+extern NSString * _Nullable PLPlayerOptionKeyVideoFileNameEncode;
+
 /**
  @abstract 视频预设值播放 URL 格式类型
  
@@ -198,6 +226,14 @@ extern NSString * _Nullable PLPlayerOptionKeySDKID;
  */
 extern NSString * _Nullable PLPlayerOptionKeyHeadUserAgent;
 
+/**
+  视频回调格式
+ 
+ @discussion 该参数用于自定义渲染，设置播放器解码回调数据格式
+ 
+ @since v3.4.5
+ */
+extern NSString * _Nullable PLPlayerOptionKeyVideoOutputFormat;
 /**
  PLPlayer 的可选配置类，在初始化 PLPlayer 对象的时候传入其实例进行 PLPlayer 的可选项配置
  
