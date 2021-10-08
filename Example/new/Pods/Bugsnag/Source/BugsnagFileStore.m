@@ -180,9 +180,9 @@
     }
 }
 
-+ (NSString *)findReportStorePath:(NSString *)customDirectory  {
++ (NSString *)findReportStorePath:(NSString *)customDirectory
+                       bundleName:(NSString *)bundleName {
 
-    NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
     NSArray *directories = NSSearchPathForDirectoriesInDomains(
             NSCachesDirectory, NSUserDomainMask, YES);
     if ([directories count] == 0) {

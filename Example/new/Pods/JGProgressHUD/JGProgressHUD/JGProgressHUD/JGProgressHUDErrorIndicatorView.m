@@ -12,16 +12,12 @@
 @implementation JGProgressHUDErrorIndicatorView
 
 - (instancetype)initWithContentView:(UIView *__unused)contentView {
-    NSBundle *currentBundle = [NSBundle bundleForClass:[self class]];
-    NSURL *resourceBundleURL = [currentBundle URLForResource:@"JGProgressHUD" withExtension:@"bundle"];
-    NSBundle *resourceBundle = currentBundle;
-    if (resourceBundleURL) {
-        resourceBundle = [NSBundle bundleWithURL:resourceBundleURL] ?: currentBundle;
-    }
-
+    NSBundle *resourceBundle = [NSBundle bundleForClass:[self class]];
+    
     NSString *imgPath = [resourceBundle pathForResource:@"jg_hud_error" ofType:@"png"];
+    
     self = [super initWithImage:[[UIImage imageWithContentsOfFile:imgPath] imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate]];
-
+    
     return self;
 }
 
@@ -35,7 +31,7 @@
 
 - (void)setUpForHUDStyle:(JGProgressHUDStyle)style vibrancyEnabled:(BOOL)vibrancyEnabled {
     [super setUpForHUDStyle:style vibrancyEnabled:vibrancyEnabled];
-
+    
     if (style == JGProgressHUDStyleDark) {
         self.contentView.tintColor = [UIColor whiteColor];
     }

@@ -44,7 +44,6 @@ typedef NS_ENUM(NSUInteger, JGProgressHUDStyle) {
     JGProgressHUDStyleDark
 };
 
-#if TARGET_OS_IOS
 /**
  Interaction types.
  */
@@ -56,7 +55,6 @@ typedef NS_ENUM(NSUInteger, JGProgressHUDInteractionType) {
     /** Block no touches. */
     JGProgressHUDInteractionTypeBlockNoTouches
 };
-#endif
 
 /**
  Parallax Modes.

@@ -166,7 +166,7 @@ void bsg_kscrash_setDoNotIntrospectClasses(const char **doNotIntrospectClasses,
  * Default: NULL
  */
 void bsg_kscrash_setCrashNotifyCallback(
-    const BSGReportCallback onCrashNotify);
+    const BSG_KSReportWriteCallback onCrashNotify);
 
 /** Report a custom, user defined exception.
  * This can be useful when dealing with scripting languages.
@@ -175,24 +175,24 @@ void bsg_kscrash_setCrashNotifyCallback(
  * application will terminate with an abort().
  *
  * @param name The exception name (for namespacing exception types).
+ *
  * @param reason A description of why the exception occurred.
- * @param handledState The severity, reason, and handled-ness of the report
- * @param appState breadcrumbs and other app environmental info
- * @param overrides Report fields overridden by callbacks, collated in the
- *                  final report
- * @param metadata additional information to attach to the report
- * @param discardDepth The number of frames to discard from the top of the
- *                     stacktrace
+ *
+ * @param language A unique language identifier.
+ *
+ * @param lineOfCode A copy of the offending line of code (NULL = ignore).
+ *
+ * @param stackTrace JSON encoded array containing stack trace information (one
+ * frame per array entry). The frame structure can be anything you want,
+ * including bare strings.
+ *
  * @param terminateProgram If true, do not return from this function call.
  * Terminate the program instead.
  */
 void bsg_kscrash_reportUserException(const char *name, const char *reason,
-                                     const char *handledState,
-                                     const char *overrides,
-                                     const char *metadata,
-                                     const char *appState,
-                                     const char *config,
-                                     int discardDepth,
+                                     const char *language,
+                                     const char *lineOfCode,
+                                     const char *stackTrace,
                                      bool terminateProgram);
 
 /** If YES, user reported exceptions will suspend all threads during report

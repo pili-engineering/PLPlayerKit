@@ -112,7 +112,7 @@ typedef enum {
  * Note: If you use an installation, it will automatically set this property.
  *       Do not modify it in such a case.
  */
-@property(nonatomic, readwrite, assign) BSGReportCallback onCrash;
+@property(nonatomic, readwrite, assign) BSG_KSReportWriteCallback onCrash;
 
 /** Path where the log of BSG_KSCrash's activities will be written.
  * If nil, log entries will be printed to the console.

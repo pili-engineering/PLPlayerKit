@@ -9,9 +9,6 @@
 #import "JGProgressHUD-Defines.h"
 #import "JGProgressHUDIndicatorView.h"
 
-/**
- A ring shaped determinate progress indicator.
- */
 @interface JGProgressHUDRingIndicatorView : JGProgressHUDIndicatorView
 
 /**

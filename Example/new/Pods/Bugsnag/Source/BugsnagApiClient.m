@@ -59,7 +59,7 @@
         NSError *error = nil;
         NSData *jsonData =
                 [NSJSONSerialization dataWithJSONObject:payload
-                                                options:0
+                                                options:NSJSONWritingPrettyPrinted
                                                   error:&error];
 
         if (jsonData == nil) {
@@ -133,10 +133,6 @@
         [request setValue:headers[key] forHTTPHeaderField:key];
     }
     return request;
-}
-
-- (void)dealloc {
-    [self.sendQueue cancelAllOperations];
 }
 
 @end

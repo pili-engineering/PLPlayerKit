@@ -73,7 +73,7 @@ UIGestureRecognizerDelegate
 
 - (void)configureVideo:(BOOL)enableRender {
     self.player.enableRender = enableRender;
-    
+
     // 避免在未更新画面渲染的情况下，动态翻转移动画布 2020-02-13 hera
     if (!enableRender) {
         [self removeFullStreenNotify];
@@ -1025,7 +1025,7 @@ UIGestureRecognizerDelegate
     self.durationLabel.text = [NSString stringWithFormat:@"%d:%02d:%02d", hour, min, sec];
 }
 
-- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData {
+- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData ts:(int64_t)ts {
     
 }
 

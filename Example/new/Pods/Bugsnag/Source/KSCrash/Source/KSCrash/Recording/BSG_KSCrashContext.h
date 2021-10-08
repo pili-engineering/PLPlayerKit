@@ -88,7 +88,7 @@ typedef struct {
     /** Callback allowing the application the opportunity to add extra data to
      * the report file. Application MUST NOT call async-unsafe methods!
      */
-    BSGReportCallback onCrashNotify;
+    BSG_KSReportWriteCallback onCrashNotify;
 } BSG_KSCrash_Configuration;
 
 /** Contextual data used by the crash report writer.

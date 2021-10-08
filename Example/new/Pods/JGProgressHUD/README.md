@@ -154,21 +154,21 @@ See the <a href="Examples">Examples</a> project for an example implementation of
 Requirements
 ------------
 
-- Base SDK of iOS/tvOS 11.0 or higher.
-- Deployment target of iOS 8.0, tvOS 9.0 or higher.
+- Base SDK of iOS/tvOS 11 or higher.
+- Deployment target of iOS/tvOS 8.0 or higher.
 
 JGProgressHUD can also be used by projects written in Swift. See <a href="https://github.com/JonasGessner/JGProgressHUD#installation">Installation</a> for details.
 
 Documentation
 ----------------
-Detailed documentation can be found on <a href="http://jonasgessner.github.io/JGProgressHUD/">here</a>.<br/><br/>
-Each class and method is well documented, making it easy to quickly get a good overview. To start, see <a href="JGProgressHUD/JGProgressHUD/JGProgressHUD.h">JGProgressHUD.h</a>.
+Detailed documentation can be found on <a href="http://cocoadocs.org/docsets/JGProgressHUD">CocoaDocs</a>.<br/><br/>
+Each method is well documented, making it easy to quickly get a great overview of JGProgressHUD. To start, see <a href="JGProgressHUD/JGProgressHUD/JGProgressHUD.h">JGProgressHUD.h</a>.
 
 License
 ---------
 MIT License.<br/>
-© 2014-2018, Jonas Gessner.
+© 2014-2017, Jonas Gessner.
 
 Credits
 ----------
-Created and maintained by Jonas Gessner, © 2014-2018.<br/>
+Created and maintained by Jonas Gessner, © 2014-2017.<br/>

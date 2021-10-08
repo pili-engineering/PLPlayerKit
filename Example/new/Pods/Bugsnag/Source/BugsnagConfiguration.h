@@ -42,10 +42,7 @@
 typedef void (^BugsnagNotifyBlock)(BugsnagCrashReport *_Nonnull report);
 
 /**
- *  A handler for modifying data before sending it to Bugsnag.
- *
- * beforeSendBlocks will be invoked on a dedicated
- * background queue, which will be different from the queue where the block was originally added.
+ *  A handler for modifying data before sending it to Bugsnag
  *
  *  @param rawEventData The raw event data written at crash time. This
  *                      includes data added in onCrashHandler.
@@ -74,6 +71,10 @@ typedef NSDictionary *_Nullable (^BugsnagBeforeNotifyHook)(
  */
 @property(readwrite, retain, nullable) NSString *apiKey;
 /**
+ *  The URL used to notify Bugsnag
+ */
+@property(readwrite, retain, nullable) NSURL *notifyURL;
+/**
  *  The release stage of the application, such as production, development, beta
  *  et cetera
  */
@@ -99,7 +100,7 @@ typedef NSDictionary *_Nullable (^BugsnagBeforeNotifyHook)(
 /**
  * The current user
  */
-@property(retain, nullable) BugsnagUser *currentUser;
+@property(nullable) BugsnagUser *currentUser;
 
 /**
  *  Additional information about the state of the app or environment at the
@@ -131,54 +132,21 @@ BugsnagBreadcrumbs *breadcrumbs;
  */
 @property void (*_Nullable onCrashHandler)
     (const BSG_KSCrashReportWriter *_Nonnull writer);
-
 /**
  *  YES if uncaught exceptions should be reported automatically
  */
 @property BOOL autoNotify;
 
 /**
- * Determines whether app sessions should be tracked automatically. By default this value is true.
- * If this value is updated after +[Bugsnag start] is called, only subsequent automatic sessions
- * will be captured.
+ * Determines whether app sessions should be tracked automatically. By default this value is false.
  */
 @property BOOL shouldAutoCaptureSessions;
 
 /**
- * Retrieves the endpoint used to notify Bugsnag of errors
- *
- * NOTE: If you want to set this value, you should do so via setEndpointsForNotify:sessions: instead.
- *
- * @see setEndpointsForNotify:sessions:
+ * Set the endpoint to which tracked sessions reports are sent. This defaults to https://sessions.bugsnag.com,
+ * but should be overridden if you are using Bugsnag On-premise, to point to your own Bugsnag endpoint.
  */
-@property(readonly, retain, nullable) NSURL *notifyURL;
-
-/**
- * Retrieves the endpoint used to send tracked sessions to Bugsnag
- *
- * NOTE: If you want to set this value, you should do so via setEndpointsForNotify:sessions: instead.
- *
- * @see setEndpointsForNotify:sessions:
- */
-@property(readonly, retain, nullable) NSURL *sessionURL;
-
-/**
- * Set the endpoints to send data to. By default we'll send error reports to
- * https://notify.bugsnag.com, and sessions to https://sessions.bugsnag.com, but you can
- * override this if you are using Bugsnag Enterprise to point to your own Bugsnag endpoint.
- *
- * Please note that it is recommended that you set both endpoints. If the notify endpoint is
- * missing, an assertion will be thrown. If the session endpoint is missing, a warning will be
- * logged and sessions will not be sent automatically.
- *
- * @param notify the notify endpoint
- * @param sessions the sessions endpoint
- *
- * @throws an assertion if the notify endpoint is not a valid URL
- */
-
-- (void)setEndpointsForNotify:(NSString *_Nonnull)notify
-                     sessions:(NSString *_Nonnull)sessions NS_SWIFT_NAME(setEndpoints(notify:sessions:));
+@property(readwrite, retain, nullable) NSURL *sessionURL;
 
 /**
  *  Set user metadata
@@ -222,9 +190,7 @@ BugsnagBreadcrumbs *breadcrumbs;
 - (NSDictionary *_Nonnull)errorApiHeaders;
 - (NSDictionary *_Nonnull)sessionApiHeaders;
 
-@property(retain, nullable) NSString *codeBundleId;
-@property(retain, nullable) NSString *notifierType;
-
-- (BOOL)hasValidApiKey;
+@property(nullable) NSString *codeBundleId;
+@property(nullable) NSString *notifierType;
 
 @end

@@ -62,21 +62,21 @@
 
 #pragma mark - MASLayoutPriority proxies
 
-- (MASConstraint * (^)(void))priorityLow {
+- (MASConstraint * (^)())priorityLow {
     return ^id{
         self.priority(MASLayoutPriorityDefaultLow);
         return self;
     };
 }
 
-- (MASConstraint * (^)(void))priorityMedium {
+- (MASConstraint * (^)())priorityMedium {
     return ^id{
         self.priority(MASLayoutPriorityDefaultMedium);
         return self;
     };
 }
 
-- (MASConstraint * (^)(void))priorityHigh {
+- (MASConstraint * (^)())priorityHigh {
     return ^id{
         self.priority(MASLayoutPriorityDefaultHigh);
         return self;
@@ -88,13 +88,6 @@
 - (MASConstraint * (^)(MASEdgeInsets))insets {
     return ^id(MASEdgeInsets insets){
         self.insets = insets;
-        return self;
-    };
-}
-
-- (MASConstraint * (^)(CGFloat))inset {
-    return ^id(CGFloat inset){
-        self.inset = inset;
         return self;
     };
 }
@@ -226,7 +219,7 @@
 
 #endif
 
-#if (__IPHONE_OS_VERSION_MIN_REQUIRED >= 80000) || (__TV_OS_VERSION_MIN_REQUIRED >= 9000)
+#if TARGET_OS_IPHONE || TARGET_OS_TV
 
 - (MASConstraint *)leftMargin {
     return [self addConstraintWithLayoutAttribute:NSLayoutAttributeLeftMargin];
@@ -275,8 +268,6 @@
 - (MASConstraint * (^)(id key))key { MASMethodNotImplemented(); }
 
 - (void)setInsets:(MASEdgeInsets __unused)insets { MASMethodNotImplemented(); }
-
-- (void)setInset:(CGFloat __unused)inset { MASMethodNotImplemented(); }
 
 - (void)setSizeOffset:(CGSize __unused)sizeOffset { MASMethodNotImplemented(); }
 

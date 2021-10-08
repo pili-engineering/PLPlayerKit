@@ -243,7 +243,19 @@ self.player.delegate = self;
 - OpenSSL: OpenSSL_1_1_0f
 - Speex: v1.2.0
 
-## 版本历史
+## 版本历史  
+
+- 3.4.7 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.7.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.7.md))
+- 优化
+  - 支持图片色彩空间 BT709
+
+- 缺陷
+  - 修复边下边播没有全部缓存结束，断网。播放缓存不流畅 bug
+  - 修复精准 seek 后多次缓存回调 bug
+  - 修复弱网 h265 花屏 bug
+
+- 其他
+  - 更新三方依赖库
 
 - 3.4.6 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.6.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.6.md))
 
@@ -258,17 +270,18 @@ self.player.delegate = self;
 - 3.4.5 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.5.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.5.md))
 
 - 缺陷
-        - 修复播放器播放aac纯音频总时间不准确
+        - 修复播放器播放 AAC 纯音频总时间不准确
         - 修复快速切换播放地址一段时间后崩溃
-        - 修复h264 split 不正确, 硬解奔溃，软解花屏
-        - 修复sei 信息解析越界问题
+        - 修复 H.264 split 不正确, 硬解崩溃，软解花屏
+        - 修复 SEI 信息解析越界问题
         - 修复打点信息重复上传
         - 修复打点信息 dns 解析耗时计算不正确
         - 优化设置超时过短有可能导致的 rtsp 流打开失败的问题
         - 修复 FFmpeg 检测漏洞的问题
-        - 修复hls加密文件的秘钥前缀是//无法播放
+        - 修复 hls 加密文件的秘钥前缀是 // 无法播放
         - 修复播放未开播的直播资源，播放器无限制重试不符合预期
         - 播放完成后，切换后台再切到前台视频画面变黑屏
+
 
 - 3.4.4 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.4.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.4.md))
 
@@ -281,12 +294,12 @@ self.player.delegate = self;
     - 修复纯音频播放偶现 crash 的问题
     - 修复弱网下特定视频卡死的问题
     - 修复特定视频 seek 内存泄漏的问题
-    
+
 - 3.4.3 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.3.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.3.md))
 
 - 缺陷
-    - 修复 iOS13 下，playerView 修改 contentMode 崩溃的问题
-
+    - 修复 iOS13 下，playerView 修改 contentMode 崩溃的问题  
+    
 - 3.4.2 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.2.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.2.md))
 
 - 缺陷
@@ -294,7 +307,7 @@ self.player.delegate = self;
 	- 修复偶现 4G 网络下打开链接失败的问题
 	- 修复在后台时直播流分辨率变化，回到前台播放显示异常的问题
 	- 解决直播流分辨率变化，回调宽高不准确的问题
-	- 解决部分 flv 流转推后，播放过程中频繁缓冲的问题 
+	- 解决部分 flv 流转推后，播放过程中频繁缓冲的问题   
   
 - 3.4.1 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.1.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.1.md))
 

@@ -11,37 +11,27 @@
 #import "BSG_KSLogger.h"
 #import "BugsnagSessionTrackingPayload.h"
 #import "BugsnagSessionTrackingApiClient.h"
-#import "BugsnagLogger.h"
-
-/**
- Number of seconds in background required to make a new session
- */
-NSTimeInterval const BSGNewSessionBackgroundDuration = 60;
 
 @interface BugsnagSessionTracker ()
-@property (weak, nonatomic) BugsnagConfiguration *config;
-@property (strong, nonatomic) BugsnagSessionFileStore *sessionStore;
-@property (strong, nonatomic) BugsnagSessionTrackingApiClient *apiClient;
-@property (strong, nonatomic) NSDate *backgroundStartTime;
-
-@property (strong, readwrite) BugsnagSession *currentSession;
-
-/**
- * Called when a session is altered
- */
-@property (nonatomic, strong, readonly) SessionTrackerCallback callback;
+@property BugsnagConfiguration *config;
+@property BugsnagSessionFileStore *sessionStore;
+@property BugsnagSessionTrackingApiClient *apiClient;
+@property BOOL trackedFirstSession;
 @end
 
 @implementation BugsnagSessionTracker
 
 - (instancetype)initWithConfig:(BugsnagConfiguration *)config
-            postRecordCallback:(void(^)(BugsnagSession *))callback {
+                     apiClient:(BugsnagSessionTrackingApiClient *)apiClient
+                      callback:(void(^)(BugsnagSession *))callback {
     if (self = [super init]) {
         _config = config;
-        _apiClient = [[BugsnagSessionTrackingApiClient alloc] initWithConfig:config queueName:@"Session API queue"];
+        _apiClient = apiClient;
         _callback = callback;
 
-        NSString *storePath = [BugsnagFileStore findReportStorePath:@"Sessions"];
+        NSString *bundleName = [[NSBundle mainBundle] infoDictionary][@"CFBundleName"];
+        NSString *storePath = [BugsnagFileStore findReportStorePath:@"Sessions"
+                                                         bundleName:bundleName];
         if (!storePath) {
             BSG_KSLOG_ERROR(@"Failed to initialize session store.");
         }
@@ -50,59 +40,79 @@ NSTimeInterval const BSGNewSessionBackgroundDuration = 60;
     return self;
 }
 
-#pragma mark - Creating and sending a new session
+- (void)startNewSession:(NSDate *)date
+               withUser:(BugsnagUser *)user
+           autoCaptured:(BOOL)autoCaptured {
 
-- (void)startNewSession {
-    [self startNewSessionWithAutoCaptureValue:NO];
+    _currentSession = [[BugsnagSession alloc] initWithId:[[NSUUID UUID] UUIDString]
+                                                startDate:date
+                                                     user:user
+                                             autoCaptured:autoCaptured];
+
+    if ((self.config.shouldAutoCaptureSessions || !autoCaptured) && [self.config shouldSendReports]) {
+        [self trackSession];
+    }
+    _isInForeground = YES;
 }
 
-- (void)startNewSessionIfAutoCaptureEnabled {
-    if (self.config.shouldAutoCaptureSessions  && [self.config shouldSendReports]) {
-        [self startNewSessionWithAutoCaptureValue:YES];
-    }
-}
-
-- (void)startNewSessionWithAutoCaptureValue:(BOOL)isAutoCaptured {
-    if (self.config.sessionURL == nil) {
-        bsg_log_err(@"The session tracking endpoint has not been set. Session tracking is disabled");
-        return;
-    }
-    self.currentSession = [[BugsnagSession alloc] initWithId:[[NSUUID UUID] UUIDString]
-                                                   startDate:[NSDate date]
-                                                        user:self.config.currentUser
-                                                autoCaptured:isAutoCaptured];
-
+- (void)trackSession {
     [self.sessionStore write:self.currentSession];
-
+    self.trackedFirstSession = YES;
+    
     if (self.callback) {
         self.callback(self.currentSession);
     }
-    [self.apiClient deliverSessionsInStore:self.sessionStore];
 }
 
-#pragma mark - Handling events
-
-- (void)handleAppBackgroundEvent {
-    self.backgroundStartTime = [NSDate date];
-}
-
-- (void)handleAppForegroundEvent {
-    if (self.backgroundStartTime
-        && [[NSDate date] timeIntervalSinceDate:self.backgroundStartTime] >= BSGNewSessionBackgroundDuration) {
-        [self startNewSessionIfAutoCaptureEnabled];
+- (void)onAutoCaptureEnabled {
+    if (!self.trackedFirstSession) {
+        if (self.currentSession == nil) { // unlikely case, will be initialised later
+            return;
+        }
+        [self trackSession];
     }
-    self.backgroundStartTime = nil;
 }
 
-- (void)handleHandledErrorEvent {
-    if (self.currentSession == nil) {
-        return;
-    }
+- (void)suspendCurrentSession:(NSDate *)date {
+    _isInForeground = NO;
+}
 
+- (void)incrementHandledError {
     @synchronized (self.currentSession) {
         self.currentSession.handledCount++;
         if (self.callback && (self.config.shouldAutoCaptureSessions || !self.currentSession.autoCaptured)) {
             self.callback(self.currentSession);
+        }
+    }
+}
+
+- (void)send {
+    @synchronized (self.sessionStore) {
+        NSMutableArray *sessions = [NSMutableArray new];
+        NSArray *fileIds = [self.sessionStore fileIds];
+
+        for (NSDictionary *dict in [self.sessionStore allFiles]) {
+            [sessions addObject:[[BugsnagSession alloc] initWithDictionary:dict]];
+        }
+        BugsnagSessionTrackingPayload *payload = [[BugsnagSessionTrackingPayload alloc] initWithSessions:sessions];
+
+        if (payload.sessions.count > 0) {
+            [self.apiClient sendData:payload
+                         withPayload:[payload toJson]
+                               toURL:self.config.sessionURL
+                             headers:self.config.sessionApiHeaders
+                        onCompletion:^(id data, BOOL success, NSError *error) {
+
+                            if (success && error == nil) {
+                                NSLog(@"Sent sessions to Bugsnag");
+
+                                for (NSString *fileId in fileIds) {
+                                    [self.sessionStore deleteFileWithId:fileId];
+                                }
+                            } else {
+                                NSLog(@"Failed to send sessions to Bugsnag: %@", error);
+                            }
+                        }];
         }
     }
 }

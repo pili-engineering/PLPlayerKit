@@ -104,7 +104,6 @@ extern NSString  * _Nonnull PLPlayerOptionKeyTimeoutIntervalForMediaPackets;
  
  @discussion 该缓存存放的是网络层读取到的数据，为保证实时性，超过该缓存池大小的过期音频数据将被丢弃，视频将加速渲染追上音频
  
- @warning 该参数仅对 rtmp/flv 直播生效
  
  @since v2.1.3
  */
@@ -115,11 +114,21 @@ extern NSString  * _Nonnull PLPlayerOptionKeyMaxL1BufferDuration;
  
  @discussion 该缓存存放的是解码之后待渲染的数据，如果该缓存池满，则二级缓存将不再接收来自一级缓存的数据
  
- @warning 该参数仅对 rtmp/flv 直播生效
  
  @since v2.1.3
  */
 extern NSString  * _Nonnull PLPlayerOptionKeyMaxL2BufferDuration;
+
+
+/**
+ @abstract 用于是否根据最小缓冲时间和最大缓冲时间，使播放速度变慢或变快
+ 
+ @discussion 默认 YES ，即底层会自动根据缓存 buffer 调节速率。注意点播播放的时候，需关闭这个参数
+  
+ @since v3.4.7
+ */
+extern NSString  * _Nonnull PLPlayerOptionKeyCacheBufferDurationSpeedAdjust;
+
 
 /**
  @abstract 是否使用 video toolbox 硬解码。

@@ -7,6 +7,9 @@
  */
 
 #import "SDWebImageCompat.h"
+
+#if SD_UIKIT || SD_MAC
+
 #import "SDWebImageManager.h"
 #import "SDWebImageTransition.h"
 
@@ -24,7 +27,6 @@ FOUNDATION_EXPORT NSString * _Nonnull const SDWebImageExternalCustomManagerKey;
 FOUNDATION_EXPORT const int64_t SDWebImageProgressUnitCountUnknown; /* 1LL */
 
 typedef void(^SDSetImageBlock)(UIImage * _Nullable image, NSData * _Nullable imageData);
-typedef void(^SDInternalSetImageBlock)(UIImage * _Nullable image, NSData * _Nullable imageData, SDImageCacheType cacheType, NSURL * _Nullable imageURL);
 
 @interface UIView (WebCache)
 
@@ -103,8 +105,6 @@ typedef void(^SDInternalSetImageBlock)(UIImage * _Nullable image, NSData * _Null
  */
 - (void)sd_cancelCurrentImageLoad;
 
-#if SD_UIKIT || SD_MAC
-
 #pragma mark - Image Transition
 
 /**
@@ -135,6 +135,6 @@ typedef void(^SDInternalSetImageBlock)(UIImage * _Nullable image, NSData * _Null
 
 #endif
 
-#endif
-
 @end
+
+#endif

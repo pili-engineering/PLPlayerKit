@@ -40,7 +40,6 @@
 @property(nonatomic, readwrite, retain) NSLock *_Nonnull metaDataLock;
 
 @property(nonatomic) BSGConnectivity *_Nonnull networkReachable;
-@property(readonly) BOOL started;
 
 - (instancetype _Nonnull)initWithConfiguration:
     (BugsnagConfiguration *_Nonnull)configuration;

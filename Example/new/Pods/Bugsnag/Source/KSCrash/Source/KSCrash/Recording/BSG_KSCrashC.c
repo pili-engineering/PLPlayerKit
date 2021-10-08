@@ -236,22 +236,18 @@ void bsg_kscrash_setDoNotIntrospectClasses(const char **doNotIntrospectClasses,
 }
 
 void bsg_kscrash_setCrashNotifyCallback(
-    const BSGReportCallback onCrashNotify) {
+    const BSG_KSReportWriteCallback onCrashNotify) {
     BSG_KSLOG_TRACE("Set onCrashNotify to %p", onCrashNotify);
     crashContext()->config.onCrashNotify = onCrashNotify;
 }
 
 void bsg_kscrash_reportUserException(const char *name, const char *reason,
-                                     const char *handledState,
-                                     const char *overrides,
-                                     const char *metadata,
-                                     const char *appState,
-                                     const char *config,
-                                     int discardDepth,
+                                     const char *language,
+                                     const char *lineOfCode,
+                                     const char *stackTrace,
                                      bool terminateProgram) {
-    bsg_kscrashsentry_reportUserException(name, reason, handledState, overrides,
-                                          metadata, appState, config, discardDepth,
-                                          terminateProgram);
+    bsg_kscrashsentry_reportUserException(name, reason, language, lineOfCode,
+                                          stackTrace, terminateProgram);
 }
 
 void bsg_kscrash_setSuspendThreadsForUserReported(

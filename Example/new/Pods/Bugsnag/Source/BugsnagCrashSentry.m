@@ -19,7 +19,7 @@ NSUInteger const BSG_MAX_STORED_REPORTS = 12;
 
 - (void)install:(BugsnagConfiguration *)config
       apiClient:(BugsnagErrorReportApiClient *)apiClient
-        onCrash:(BSGReportCallback)onCrash {
+        onCrash:(BSG_KSReportWriteCallback)onCrash {
 
     BugsnagSink *sink = [[BugsnagSink alloc] initWithApiClient:apiClient];
     [BSG_KSCrash sharedInstance].sink = sink;
@@ -42,22 +42,13 @@ NSUInteger const BSG_MAX_STORED_REPORTS = 12;
 }
 
 - (void)reportUserException:(NSString *)reportName
-                     reason:(NSString *)reportMessage
-               handledState:(NSDictionary *)handledState
-                   appState:(NSDictionary *)appState
-          callbackOverrides:(NSDictionary *)overrides
-                   metadata:(NSDictionary *)metadata
-                     config:(NSDictionary *)config
-               discardDepth:(int)depth {
+                     reason:(NSString *)reportMessage {
 
     [[BSG_KSCrash sharedInstance] reportUserException:reportName
                                                reason:reportMessage
-                                         handledState:handledState
-                                             appState:appState
-                                    callbackOverrides:overrides
-                                             metadata:metadata
-                                               config:config
-                                         discardDepth:depth
+                                             language:NULL
+                                           lineOfCode:@""
+                                           stackTrace:@[]
                                      terminateProgram:NO];
 }
 
