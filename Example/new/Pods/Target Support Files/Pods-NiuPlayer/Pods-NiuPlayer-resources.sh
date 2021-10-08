@@ -97,11 +97,21 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD/JGProgressHUD.bundle"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error@2x.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error@3x.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success@2x.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success@3x.png"
   install_resource "${PODS_ROOT}/WeiboSDK/libWeiboSDK/WeiboSDK.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/JGProgressHUD/JGProgressHUD.bundle"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error@2x.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_error@3x.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success@2x.png"
+  install_resource "${PODS_ROOT}/JGProgressHUD/JGProgressHUD/Resources/jg_hud_success@3x.png"
   install_resource "${PODS_ROOT}/WeiboSDK/libWeiboSDK/WeiboSDK.bundle"
 fi
 

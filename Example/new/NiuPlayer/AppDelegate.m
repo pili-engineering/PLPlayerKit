@@ -45,23 +45,32 @@
     if(rootVC.selectedViewController){
         switch (index) {
             case 0:{
-                PLShortVideoViewController *shortVC = (PLShortVideoViewController *)rootVC.selectedViewController;
-                [shortVC onUIApplication:NO];
-            }
+                if ([rootVC.selectedViewController isKindOfClass:[PLShortVideoViewController class]]) {
+                    PLShortVideoViewController *shortVC = (PLShortVideoViewController *)rootVC.selectedViewController;
+                    [shortVC onUIApplication:NO];
+                }
                 break;
+            }
             case 1:{
                 UINavigationController *navVC = rootVC.selectedViewController;
-                PLLongVideoViewController *longVideoVC = (PLLongVideoViewController *)navVC.topViewController;
-                [longVideoVC onUIApplication:NO];
+                if ([navVC.topViewController isKindOfClass:[PLLongVideoViewController class]]) {
+                    PLLongVideoViewController *longVideoVC = (PLLongVideoViewController *)navVC.topViewController;
+                    [longVideoVC onUIApplication:NO];
+                }
+
             }
                 break;
             case 2:{
                 UINavigationController *navVC = rootVC.selectedViewController;
                 PLLiveViewController *liveVideoVC = (PLLiveViewController *)navVC.topViewController;
-                if (liveVideoVC.presentedViewController) {
-                    PLPlayViewController *playerVC = (PLPlayViewController *)liveVideoVC.presentedViewController;
-                    playerVC.player.enableRender = NO;
+                
+                if ([liveVideoVC.presentedViewController isKindOfClass:[PLPlayViewController class]]) {
+                    if (liveVideoVC.presentedViewController) {
+                        PLPlayViewController *playerVC = (PLPlayViewController *)liveVideoVC.presentedViewController;
+                        playerVC.player.enableRender = NO;
+                    }
                 }
+
             }
                 break;
                 
@@ -91,23 +100,32 @@
     if(rootVC.selectedViewController){
         switch (index) {
             case 0:{
-                PLShortVideoViewController *shortVC = (PLShortVideoViewController *)rootVC.selectedViewController;
-                [shortVC onUIApplication:YES];
-            }
+                if ([rootVC.selectedViewController isKindOfClass:[PLShortVideoViewController class]]) {
+                    PLShortVideoViewController *shortVC = (PLShortVideoViewController *)rootVC.selectedViewController;
+                    [shortVC onUIApplication:NO];
+                }
                 break;
+            }
             case 1:{
                 UINavigationController *navVC = rootVC.selectedViewController;
-                PLLongVideoViewController *longVideoVC = (PLLongVideoViewController *)navVC.topViewController;
-                [longVideoVC onUIApplication:YES];
+                if ([navVC.topViewController isKindOfClass:[PLLongVideoViewController class]]) {
+                    PLLongVideoViewController *longVideoVC = (PLLongVideoViewController *)navVC.topViewController;
+                    [longVideoVC onUIApplication:NO];
+                }
+
             }
                 break;
             case 2:{
                 UINavigationController *navVC = rootVC.selectedViewController;
                 PLLiveViewController *liveVideoVC = (PLLiveViewController *)navVC.topViewController;
-                if (liveVideoVC.presentedViewController) {
-                    PLPlayViewController *playerVC = (PLPlayViewController *)liveVideoVC.presentedViewController;
-                    playerVC.player.enableRender = YES;
+                
+                if ([liveVideoVC.presentedViewController isKindOfClass:[PLPlayViewController class]]) {
+                    if (liveVideoVC.presentedViewController) {
+                        PLPlayViewController *playerVC = (PLPlayViewController *)liveVideoVC.presentedViewController;
+                        playerVC.player.enableRender = NO;
+                    }
                 }
+
             }
                 break;
                 

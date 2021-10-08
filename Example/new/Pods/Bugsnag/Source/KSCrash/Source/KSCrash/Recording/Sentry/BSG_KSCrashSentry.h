@@ -138,13 +138,14 @@ typedef struct BSG_KSCrash_SentryContext {
         /** The exception name. */
         const char *name;
 
-        /** Handled exception report info: */
-        const char *overrides; // info set in callbacks
-        const char *handledState;
-        const char *metadata;
-        const char *state; // breadcrumbs, other shared app state
-        const char *config; // config options which affect report delivery
-        int discardDepth; // number of frames from the top to remove
+        /** The language the exception occured in. */
+        const char *language;
+
+        /** The line of code where the exception occurred. Can be NULL. */
+        const char *lineOfCode;
+
+        /** The user-supplied JSON encoded stack trace. */
+        const char *customStackTrace;
     } userException;
 
 } BSG_KSCrash_SentryContext;

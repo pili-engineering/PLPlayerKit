@@ -51,13 +51,9 @@ static BugsnagNotifier *bsg_g_bugsnag_notifier = NULL;
 
 + (void)startBugsnagWithConfiguration:(BugsnagConfiguration *)configuration {
     @synchronized(self) {
-        if ([configuration hasValidApiKey]) {
-            bsg_g_bugsnag_notifier =
-                    [[BugsnagNotifier alloc] initWithConfiguration:configuration];
-            [bsg_g_bugsnag_notifier start];
-        } else {
-            bsg_log_err(@"Bugsnag not initialized - a valid API key must be supplied.");
-        }
+        bsg_g_bugsnag_notifier =
+        [[BugsnagNotifier alloc] initWithConfiguration:configuration];
+        [bsg_g_bugsnag_notifier start];
     }
 }
 
@@ -77,87 +73,75 @@ static BugsnagNotifier *bsg_g_bugsnag_notifier = NULL;
 }
 
 + (void)notify:(NSException *)exception {
-    if ([self bugsnagStarted]) {
-        [self.notifier notifyException:exception
-                                 block:^(BugsnagCrashReport *_Nonnull report) {
-                                     report.depth += 2;
-                                 }];
-    }
+    [self.notifier notifyException:exception
+                             block:^(BugsnagCrashReport *_Nonnull report) {
+                               report.depth += 2;
+                             }];
 }
 
 + (void)notify:(NSException *)exception block:(BugsnagNotifyBlock)block {
-    if ([self bugsnagStarted]) {
-        [[self notifier] notifyException:exception
-                                   block:^(BugsnagCrashReport *_Nonnull report) {
-                                       report.depth += 2;
+    [[self notifier] notifyException:exception
+                               block:^(BugsnagCrashReport *_Nonnull report) {
+                                 report.depth += 2;
 
-                                       if (block) {
-                                           block(report);
-                                       }
-                                   }];
-    }
+                                 if (block) {
+                                     block(report);
+                                 }
+                               }];
 }
 
 + (void)notifyError:(NSError *)error {
-    if ([self bugsnagStarted]) {
-        [self.notifier notifyError:error
-                             block:^(BugsnagCrashReport *_Nonnull report) {
-                                 report.depth += 2;
-                             }];
-    }
+    [self.notifier notifyError:error
+                         block:^(BugsnagCrashReport *_Nonnull report) {
+                           report.depth += 2;
+                         }];
 }
 
 + (void)notifyError:(NSError *)error block:(BugsnagNotifyBlock)block {
-    if ([self bugsnagStarted]) {
-        [[self notifier] notifyError:error
-                               block:^(BugsnagCrashReport *_Nonnull report) {
-                                   report.depth += 2;
+    [[self notifier] notifyError:error
+                           block:^(BugsnagCrashReport *_Nonnull report) {
+                             report.depth += 2;
 
-                                   if (block) {
-                                       block(report);
-                                   }
-                               }];
-    }
+                             if (block) {
+                                 block(report);
+                             }
+                           }];
 }
 
 + (void)notify:(NSException *)exception withData:(NSDictionary *)metaData {
-    if ([self bugsnagStarted]) {
-        [[self notifier]
-                notifyException:exception
-                          block:^(BugsnagCrashReport *_Nonnull report) {
-                              report.depth += 2;
-                              report.metaData = [metaData
-                                      BSG_mergedInto:[self.notifier.configuration
-                                              .metaData toDictionary]];
-                          }];
-    }
+
+    [[self notifier]
+        notifyException:exception
+                  block:^(BugsnagCrashReport *_Nonnull report) {
+                    report.depth += 2;
+                    report.metaData = [metaData
+                        BSG_mergedInto:[self.notifier.configuration
+                                               .metaData toDictionary]];
+                  }];
 }
 
 + (void)notify:(NSException *)exception
       withData:(NSDictionary *)metaData
     atSeverity:(NSString *)severity {
-    if ([self bugsnagStarted]) {
-        [[self notifier]
-                notifyException:exception
-                     atSeverity:BSGParseSeverity(severity)
-                          block:^(BugsnagCrashReport *_Nonnull report) {
-                              report.depth += 2;
-                              report.metaData = [metaData
-                                      BSG_mergedInto:[self.notifier.configuration
-                                              .metaData toDictionary]];
-                              report.severity = BSGParseSeverity(severity);
-                          }];
-    }
+
+    [[self notifier]
+        notifyException:exception
+             atSeverity:BSGParseSeverity(severity)
+                  block:^(BugsnagCrashReport *_Nonnull report) {
+                    report.depth += 2;
+                    report.metaData = [metaData
+                        BSG_mergedInto:[self.notifier.configuration
+                                               .metaData toDictionary]];
+                    report.severity = BSGParseSeverity(severity);
+                  }];
 }
 
 + (void)internalClientNotify:(NSException *_Nonnull)exception
                     withData:(NSDictionary *_Nullable)metaData
                        block:(BugsnagNotifyBlock _Nullable)block {
-    if ([self bugsnagStarted]) {
-        [self.notifier internalClientNotify:exception
-                                   withData:metaData
-                                      block:block];
-    }
+    [self.notifier internalClientNotify:exception
+                               withData:metaData
+                                  block:block];
 }
 
 + (void)addAttribute:(NSString *)attributeName
@@ -177,7 +161,7 @@ static BugsnagNotifier *bsg_g_bugsnag_notifier = NULL;
 }
 
 + (BOOL)bugsnagStarted {
-    if (!self.notifier.started) {
+    if (self.notifier == nil) {
         bsg_log_err(@"Ensure you have started Bugsnag with startWithApiKey: "
                     @"before calling any other Bugsnag functions.");
 
@@ -187,43 +171,31 @@ static BugsnagNotifier *bsg_g_bugsnag_notifier = NULL;
 }
 
 + (void)leaveBreadcrumbWithMessage:(NSString *)message {
-    if ([self bugsnagStarted]) {
-        [self leaveBreadcrumbWithBlock:^(BugsnagBreadcrumb *_Nonnull crumbs) {
-            crumbs.metadata = @{BSGKeyMessage: message};
-        }];
-    }
+    [self leaveBreadcrumbWithBlock:^(BugsnagBreadcrumb *_Nonnull crumbs) {
+      crumbs.metadata = @{BSGKeyMessage : message};
+    }];
 }
 
 + (void)leaveBreadcrumbWithBlock:
     (void (^_Nonnull)(BugsnagBreadcrumb *_Nonnull))block {
-    if ([self bugsnagStarted]) {
-        [self.notifier addBreadcrumbWithBlock:block];
-    }
+    [self.notifier addBreadcrumbWithBlock:block];
 }
 
 + (void)leaveBreadcrumbForNotificationName:
     (NSString *_Nonnull)notificationName {
-    if ([self bugsnagStarted]) {
-        [self.notifier crumbleNotification:notificationName];
-    }
+    [self.notifier crumbleNotification:notificationName];
 }
 
 + (void)setBreadcrumbCapacity:(NSUInteger)capacity {
-    if ([self bugsnagStarted]) {
-        self.notifier.configuration.breadcrumbs.capacity = capacity;
-    }
+    self.notifier.configuration.breadcrumbs.capacity = capacity;
 }
 
 + (void)clearBreadcrumbs {
-    if ([self bugsnagStarted]) {
-        [self.notifier clearBreadcrumbs];
-    }
+    [self.notifier clearBreadcrumbs];
 }
 
 + (void)startSession {
-    if ([self bugsnagStarted]) {
-        [self.notifier startSession];
-    }
+    [self.notifier startSession];
 }
 
 + (NSDateFormatter *)payloadDateFormatter {
@@ -237,31 +209,23 @@ static BugsnagNotifier *bsg_g_bugsnag_notifier = NULL;
 }
 
 + (void)setSuspendThreadsForUserReported:(BOOL)suspendThreadsForUserReported {
-    if ([self bugsnagStarted]) {
-        [[BSG_KSCrash sharedInstance]
-                setSuspendThreadsForUserReported:suspendThreadsForUserReported];
-    }
+    [[BSG_KSCrash sharedInstance]
+        setSuspendThreadsForUserReported:suspendThreadsForUserReported];
 }
 
 + (void)setReportWhenDebuggerIsAttached:(BOOL)reportWhenDebuggerIsAttached {
-    if ([self bugsnagStarted]) {
-        [[BSG_KSCrash sharedInstance]
-                setReportWhenDebuggerIsAttached:reportWhenDebuggerIsAttached];
-    }
+    [[BSG_KSCrash sharedInstance]
+        setReportWhenDebuggerIsAttached:reportWhenDebuggerIsAttached];
 }
 
 + (void)setThreadTracingEnabled:(BOOL)threadTracingEnabled {
-    if ([self bugsnagStarted]) {
-        [[BSG_KSCrash sharedInstance] setThreadTracingEnabled:threadTracingEnabled];
-    }
+    [[BSG_KSCrash sharedInstance] setThreadTracingEnabled:threadTracingEnabled];
 }
 
 + (void)setWriteBinaryImagesForUserReported:
     (BOOL)writeBinaryImagesForUserReported {
-    if ([self bugsnagStarted]) {
-        [[BSG_KSCrash sharedInstance]
-                setWriteBinaryImagesForUserReported:writeBinaryImagesForUserReported];
-    }
+    [[BSG_KSCrash sharedInstance]
+        setWriteBinaryImagesForUserReported:writeBinaryImagesForUserReported];
 }
 
 @end

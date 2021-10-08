@@ -35,7 +35,6 @@ inline UIImage *SDScaledImageForKey(NSString * _Nullable key, UIImage * _Nullabl
         UIImage *animatedImage = [UIImage animatedImageWithImages:scaledImages duration:image.duration];
         if (animatedImage) {
             animatedImage.sd_imageLoopCount = image.sd_imageLoopCount;
-            animatedImage.sd_imageFormat = image.sd_imageFormat;
         }
         return animatedImage;
     } else {
@@ -56,12 +55,9 @@ inline UIImage *SDScaledImageForKey(NSString * _Nullable key, UIImage * _Nullabl
                     scale = 3.0;
                 }
             }
-            
-            if (scale != image.scale) {
-                UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:scale orientation:image.imageOrientation];
-                scaledImage.sd_imageFormat = image.sd_imageFormat;
-                image = scaledImage;
-            }
+
+            UIImage *scaledImage = [[UIImage alloc] initWithCGImage:image.CGImage scale:scale orientation:image.imageOrientation];
+            image = scaledImage;
         }
         return image;
     }

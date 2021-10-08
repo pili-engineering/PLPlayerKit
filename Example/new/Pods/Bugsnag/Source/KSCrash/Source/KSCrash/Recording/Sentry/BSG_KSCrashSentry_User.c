@@ -48,12 +48,9 @@ void bsg_kscrashsentry_uninstallUserExceptionHandler(void) {
 }
 
 void bsg_kscrashsentry_reportUserException(const char *name, const char *reason,
-                                           const char *handledState,
-                                           const char *overrides,
-                                           const char *metadata,
-                                           const char *appState,
-                                           const char *config,
-                                           int discardDepth,
+                                           const char *language,
+                                           const char *lineOfCode,
+                                           const char *stackTrace,
                                            bool terminateProgram) {
     if (bsg_g_context == NULL) {
         BSG_KSLOG_WARN("User-reported exception sentry is not installed. "
@@ -84,12 +81,9 @@ void bsg_kscrashsentry_reportUserException(const char *name, const char *reason,
         bsg_g_context->stackTrace = callstack;
         bsg_g_context->stackTraceLength = callstackCount;
         bsg_g_context->userException.name = name;
-        bsg_g_context->userException.handledState = handledState;
-        bsg_g_context->userException.overrides = overrides;
-        bsg_g_context->userException.config = config;
-        bsg_g_context->userException.discardDepth = discardDepth;
-        bsg_g_context->userException.metadata = metadata;
-        bsg_g_context->userException.state = appState;
+        bsg_g_context->userException.language = language;
+        bsg_g_context->userException.lineOfCode = lineOfCode;
+        bsg_g_context->userException.customStackTrace = stackTrace;
 
         BSG_KSLOG_DEBUG("Calling main crash handler.");
         bsg_g_context->onCrash();

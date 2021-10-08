@@ -44,15 +44,6 @@
 #define likely_if(x) if (__builtin_expect(x, 1))
 #define unlikely_if(x) if (__builtin_expect(x, 0))
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-// Internal NSException recorder
-void bsg_recordException(NSException *exception);
-#ifdef __cplusplus
-}
-#endif
-
 // ============================================================================
 #pragma mark - Globals -
 // ============================================================================
@@ -123,11 +114,9 @@ static void CPPExceptionTerminate(void) {
     try {
         throw;
     } catch (NSException *exception) {
-        BSG_KSLOG_DEBUG(@"Detected NSException. Recording details "
-                        @"and letting the current "
+        BSG_KSLOG_DEBUG(@"Detected NSException. Letting the current "
                         @"NSException handler deal with it.");
         isNSException = true;
-        bsg_recordException(exception);
     } catch (std::exception &exc) {
         strncpy(descriptionBuff, exc.what(), sizeof(descriptionBuff));
     }
@@ -187,9 +176,7 @@ static void CPPExceptionTerminate(void) {
         bsg_kscrashsentry_resumeThreads();
     }
 
-    if (bsg_g_originalTerminateHandler != NULL) {
-        bsg_g_originalTerminateHandler();
-    }
+    bsg_g_originalTerminateHandler();
 }
 
 // ============================================================================

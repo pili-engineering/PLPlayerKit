@@ -8,9 +8,6 @@
 
 #import "JGProgressHUDImageIndicatorView.h"
 
-/**
- An image indicator showing a checkmark, representing a failed operation.
- */
 @interface JGProgressHUDSuccessIndicatorView : JGProgressHUDImageIndicatorView
 
 /**

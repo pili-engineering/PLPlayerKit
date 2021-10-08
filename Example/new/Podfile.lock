@@ -14,19 +14,20 @@ PODS:
   - BlocksKit/UIKit (2.2.5):
     - BlocksKit/Core
     - BlocksKit/DynamicDelegate
-  - Bugsnag (5.17.3)
-  - Crashlytics (3.12.0):
-    - Fabric (~> 1.9.0)
-  - Fabric (1.9.0)
-  - JGProgressHUD (2.0.3)
-  - Masonry (1.1.0)
+  - Bugsnag (5.15.4)
+  - Crashlytics (3.7.2):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.7)
+  - HappyDNS (0.3.10)
+  - JGProgressHUD (2.0)
+  - Masonry (1.0.1)
   - MMMaterialDesignSpinner (0.2.5)
-  - PLPlayerKit (3.4.6):
-    - PLPlayerKit/iphoneos (= 3.4.6)
-  - PLPlayerKit/iphoneos (3.4.6)
-  - SDWebImage (4.4.5):
-    - SDWebImage/Core (= 4.4.5)
-  - SDWebImage/Core (4.4.5)
+  - PLPlayerKit (3.4.7):
+    - PLPlayerKit/iphoneos (= 3.4.7)
+  - PLPlayerKit/iphoneos (3.4.7)
+  - SDWebImage (4.3.2):
+    - SDWebImage/Core (= 4.3.2)
+  - SDWebImage/Core (4.3.2)
   - WeiboSDK (3.1.3)
 
 DEPENDENCIES:
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - Bugsnag
   - Crashlytics (>= 3.7.2)
   - Fabric (>= 1.6.7)
+  - HappyDNS (>= 0.3.10)
   - JGProgressHUD
   - Masonry
   - Masonry (>= 1.0.1)
@@ -43,11 +45,12 @@ DEPENDENCIES:
   - WeiboSDK (>= 3.1.3)
 
 SPEC REPOS:
-  https://github.com/CocoaPods/Specs.git:
+  trunk:
     - BlocksKit
     - Bugsnag
     - Crashlytics
     - Fabric
+    - HappyDNS
     - JGProgressHUD
     - Masonry
     - MMMaterialDesignSpinner
@@ -60,16 +63,17 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   BlocksKit: 7f422b971407001178d181a43b99014ea2591fe6
-  Bugsnag: a56a5204ebd35e44e56c1f703824705b1d4b5b97
-  Crashlytics: a33af323773f73904037dc2e684cd2f0d29f4fe2
-  Fabric: 09ef2d9b99b104702bede1acaf469fb8f20a9146
-  JGProgressHUD: 12b20a8f4ffe05258f8635c1ab92816e451f904d
-  Masonry: 678fab65091a9290e40e2832a55e7ab731aad201
+  Bugsnag: df1d395695ddf795aa35c23ef4eaef4a04ddcffd
+  Crashlytics: 2580a9a091e265da4a7a89d2c442aa1c0ea4712c
+  Fabric: 30e7baf1bb775e776e2e5975a630c173022d7611
+  HappyDNS: 06a9fed2796663fd87626dbf02552933265bf059
+  JGProgressHUD: c402c0f41fc291ca7e33bba2f999118d9682dd9c
+  Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MMMaterialDesignSpinner: a548042720c2e5f04212048483085d7942ac3e81
-  PLPlayerKit: 25795e0605b6ba1c19afb2e913e36ad6bca3bc98
-  SDWebImage: ecc03494e973b93b80213649d32175f8d2d17d4d
+  PLPlayerKit: a4c6da506dc4ae368ae71a95b49e2256f33c0de7
+  SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
   WeiboSDK: acb067053668102cf07d01aa7604350162c2e466
 
-PODFILE CHECKSUM: b8e4d3011adae7250551d6868e265422bdfbe1c0
+PODFILE CHECKSUM: 125580bee4fbaff98cc481a161fc9d6987859318
 
 COCOAPODS: 1.10.1

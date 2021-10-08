@@ -8,9 +8,6 @@
 
 #import "JGProgressHUDImageIndicatorView.h"
 
-/**
- An image indicator showing a cross, representing a failed operation.
- */
 @interface JGProgressHUDErrorIndicatorView : JGProgressHUDImageIndicatorView
 
 /**

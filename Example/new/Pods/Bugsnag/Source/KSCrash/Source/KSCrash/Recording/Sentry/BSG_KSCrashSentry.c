@@ -24,14 +24,12 @@
 // THE SOFTWARE.
 //
 
-#include "BSG_KSSystemCapabilities.h"
 #include "BSG_KSCrashSentry.h"
 #include "BSG_KSCrashSentry_Private.h"
 
 #include "BSG_KSCrashSentry_CPPException.h"
 #include "BSG_KSCrashSentry_Deadlock.h"
 #include "BSG_KSCrashSentry_NSException.h"
-#include "BSG_KSCrashSentry_MachException.h"
 #include "BSG_KSCrashSentry_Signal.h"
 #include "BSG_KSCrashSentry_User.h"
 #include "BSG_KSLogger.h"

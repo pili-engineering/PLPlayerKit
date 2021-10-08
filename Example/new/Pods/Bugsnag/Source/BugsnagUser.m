@@ -14,7 +14,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict {
     if (self = [super init]) {
         _userId = dict[@"id"];
-        _emailAddress = dict[@"email"];
+        _emailAddress = dict[@"emailAddress"];
         _name = dict[@"name"];
     }
     return self;
@@ -34,12 +34,12 @@
     return [[self alloc] initWithUserId:userId name:name emailAddress:emailAddress];
 }
 
+
 - (NSDictionary *)toJson {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     BSGDictInsertIfNotNil(dict, self.userId, @"id");
-    BSGDictInsertIfNotNil(dict, self.emailAddress, @"email");
+    BSGDictInsertIfNotNil(dict, self.emailAddress, @"emailAddress");
     BSGDictInsertIfNotNil(dict, self.name, @"name");
     return [NSDictionary dictionaryWithDictionary:dict];
 }
-
 @end

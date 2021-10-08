@@ -29,13 +29,6 @@
 #include "BSG_KSDynamicLinker.h"
 #include "BSG_KSMach.h"
 
-/**
- * Mask to strip pointer authentication codes from pointers on Arm64e
- * devices. Example usage, assuming the usage is guarded for __arm64__:
- *     uintptr_t ptr_address = ptr & BSG_PACStrippingMaskArm64e;
- */
-#define BSG_PACStrippingMaskArm64e 0x0000000fffffffff
-
 /** Remove any pointer tagging from an instruction address
  * On armv7 the least significant bit of the pointer distinguishes
  * between thumb mode (2-byte instructions) and normal mode (4-byte
@@ -177,13 +170,7 @@ int bsg_ksbt_backtraceThreadState(
     }
 
     for (; i < maxEntries; i++) {
-#if defined(__arm64__)
-        // Strip program auth code from address prior to storing address.
-        // Intended for Arm64e but is a no-op on other Arm64 archs.
-        backtraceBuffer[i] = frame.return_address & BSG_PACStrippingMaskArm64e;
-#else
         backtraceBuffer[i] = frame.return_address;
-#endif
         if (backtraceBuffer[i] == 0 || frame.previous == 0 ||
             bsg_ksmachcopyMem(frame.previous, &frame, sizeof(frame)) !=
                 KERN_SUCCESS) {

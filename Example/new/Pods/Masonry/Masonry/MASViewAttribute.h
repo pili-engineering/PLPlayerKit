@@ -1,5 +1,5 @@
 //
-//  MASViewAttribute.h
+//  MASAttribute.h
 //  Masonry
 //
 //  Created by Jonas Budelmann on 21/07/13.

@@ -291,7 +291,7 @@
     }
 }
 
-- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData {
+- (void)player:(nonnull PLPlayer *)player SEIData:(nullable NSData *)SEIData ts:(int64_t)ts {
     
 }
 
