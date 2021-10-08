@@ -20,12 +20,21 @@ PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
 
 ### Player
 
-- 3.4.7 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.7.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.7.md)
+- 3.4.7 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.7.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.7.md)）
+
+- 优化
+
+     - 支持图片色彩空间 BT709
 
 - 缺陷
      - 边下边播没有全部缓存结束情况，断网会多次进入缓存。
      - 精准 seek 后进入多次缓存回调
      - 弱网 h265 花屏 bug
-- 更新第三方依赖库
      
+- 其他
+
+     - 更新第三方依赖库
+
      
+
+        
