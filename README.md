@@ -111,14 +111,14 @@ pod install
 
 * 如图所示
 
-![](http://7xuil4.com1.z0.glb.clouddn.com/permession.jpg)
+![](./screensnap/qiniu_doc_App_Transport Security_Setting.png)
 
 
 配置 Required background modes
 
 * 如图所示
 
-![](http://7xuil4.com1.z0.glb.clouddn.com/AllowBackground-4.png)
+![](./screensnap/qiniu_doc_Required_background_modes.png)
 
 ### 示例代码
 
