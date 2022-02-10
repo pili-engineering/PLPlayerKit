@@ -296,12 +296,10 @@
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-PLPlayerKit/Pods-PLPlayerKit-frameworks.sh",
 				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework",
-				"${PODS_ROOT}/../../../Pod/Library/PLPlayerKit.framework.dSYM",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PLPlayerKit.framework",
-				"${DWARF_DSYM_FOLDER_PATH}/PLPlayerKit.framework.dSYM",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;

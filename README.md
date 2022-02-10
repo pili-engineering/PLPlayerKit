@@ -245,6 +245,16 @@ self.player.delegate = self;
 
 ## 版本历史  
 
+- 3.4.8 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.8.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.8.md)）
+
+- 优化
+  - 底层异步回调导致 crash，添加代码保护
+  - MP3,MP4 混合使用场景，支持接口 enableRender 正常使用  
+
+- 缺陷
+  - 修复 iPad 播放音频卡住 bug
+  - 修复分辨率切换花屏 bug
+
 - 3.4.7 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.7.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.7.md))
 - 优化
   - 支持图片色彩空间 BT709
@@ -270,17 +280,17 @@ self.player.delegate = self;
 - 3.4.5 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.5.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.5.md))
 
 - 缺陷
-        - 修复播放器播放 AAC 纯音频总时间不准确
-        - 修复快速切换播放地址一段时间后崩溃
-        - 修复 H.264 split 不正确, 硬解崩溃，软解花屏
-        - 修复 SEI 信息解析越界问题
-        - 修复打点信息重复上传
-        - 修复打点信息 dns 解析耗时计算不正确
-        - 优化设置超时过短有可能导致的 rtsp 流打开失败的问题
-        - 修复 FFmpeg 检测漏洞的问题
-        - 修复 hls 加密文件的秘钥前缀是 // 无法播放
-        - 修复播放未开播的直播资源，播放器无限制重试不符合预期
-        - 播放完成后，切换后台再切到前台视频画面变黑屏
+  - 修复播放器播放 AAC 纯音频总时间不准确
+  - 修复快速切换播放地址一段时间后崩溃
+  - 修复 H.264 split 不正确, 硬解崩溃，软解花屏
+  - 修复 SEI 信息解析越界问题
+  - 修复打点信息重复上传
+  - 修复打点信息 dns 解析耗时计算不正确
+  - 优化设置超时过短有可能导致的 rtsp 流打开失败的问题
+  - 修复 FFmpeg 检测漏洞的问题
+  - 修复 hls 加密文件的秘钥前缀是 // 无法播放
+  - 修复播放未开播的直播资源，播放器无限制重试不符合预期
+  - 播放完成后，切换后台再切到前台视频画面变黑屏
 
 
 - 3.4.4 ([Release Notes](https://github.com/pili-engineering/PLPlayerKit/blob/master/ReleaseNotes/release-notes-3.4.4.md) && [API Diffs](https://github.com/pili-engineering/PLPlayerKit/blob/master/APIDiffs/api-diffs-3.4.4.md))
