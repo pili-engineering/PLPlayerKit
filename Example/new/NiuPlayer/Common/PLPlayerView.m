@@ -68,7 +68,7 @@ UIGestureRecognizerDelegate
 @implementation PLPlayerView
 
 -(void)dealloc {
-    [self unsetupPlayer];
+//    [self unsetupPlayer];
 }
 
 - (void)configureVideo:(BOOL)enableRender {
