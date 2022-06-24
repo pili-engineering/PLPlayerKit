@@ -24,7 +24,7 @@ PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
 
 - 优化
      - 更新 Openssl，优化部分视频打开失败
-     - 移除播放器监控模块
+     - 移除播放器 qos 模块
 
 - 缺陷
      - 修复精准 seek 不准确问题
@@ -32,4 +32,3 @@ PLPlayerKit 为 iOS 开发者提供直播播放 SDK。
      
      
      
-        
