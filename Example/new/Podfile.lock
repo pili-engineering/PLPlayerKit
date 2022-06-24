@@ -22,9 +22,9 @@ PODS:
   - JGProgressHUD (2.0)
   - Masonry (1.0.1)
   - MMMaterialDesignSpinner (0.2.5)
-  - PLPlayerKit (3.4.8):
-    - PLPlayerKit/iphoneos (= 3.4.8)
-  - PLPlayerKit/iphoneos (3.4.8)
+  - PLPlayerKit (3.4.9):
+    - PLPlayerKit/iphoneos (= 3.4.9)
+  - PLPlayerKit/iphoneos (3.4.9)
   - SDWebImage (4.3.2):
     - SDWebImage/Core (= 4.3.2)
   - SDWebImage/Core (4.3.2)
@@ -70,7 +70,7 @@ SPEC CHECKSUMS:
   JGProgressHUD: c402c0f41fc291ca7e33bba2f999118d9682dd9c
   Masonry: a1a931a0d08870ed8ae415a2ea5ea68ebcac77df
   MMMaterialDesignSpinner: a548042720c2e5f04212048483085d7942ac3e81
-  PLPlayerKit: 3b303b17c2d8abd6f9d8c92f9894143677937b4d
+  PLPlayerKit: 6d377f241918be3737c811b84f8366de385c1f91
   SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
   WeiboSDK: acb067053668102cf07d01aa7604350162c2e466
 
