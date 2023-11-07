@@ -1,6 +1,0 @@
-framework module PLPlayerKit {
-  umbrella header "PLPlayerKit.h"
-
-  export *
-  module * { export * }
-}
